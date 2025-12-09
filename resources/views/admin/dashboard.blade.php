@@ -120,23 +120,23 @@
                 </div>
                 <div class="p-6">
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                        <a href="{{ route('admin.users.create') }}" class="flex items-center space-x-3 p-4 bg-gray-50 dark:bg-gray-900/50 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors group">
+                        <button onclick="openModal('createUserModal')" class="flex items-center space-x-3 p-4 bg-gray-50 dark:bg-gray-900/50 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors group">
                             <div class="w-8 h-8 bg-indigo-500/10 rounded-lg flex items-center justify-center group-hover:bg-indigo-500/20 transition-colors">
                                 <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                                 </svg>
                             </div>
                             <span class="text-sm font-medium text-gray-800 dark:text-gray-100">Nuevo Usuario</span>
-                        </a>
+                        </button>
                         
-                        <a href="{{ route('admin.tasks.create') }}" class="flex items-center space-x-3 p-4 bg-gray-50 dark:bg-gray-900/50 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors group">
+                        <button onclick="openModal('createTaskModal')" class="flex items-center space-x-3 p-4 bg-gray-50 dark:bg-gray-900/50 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors group">
                             <div class="w-8 h-8 bg-green-500/10 rounded-lg flex items-center justify-center group-hover:bg-green-500/20 transition-colors">
                                 <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                                 </svg>
                             </div>
                             <span class="text-sm font-medium text-gray-800 dark:text-gray-100">Nueva Tarea</span>
-                        </a>
+                        </button>
                         
                         <a href="{{ route('admin.incidents.index') }}" class="flex items-center space-x-3 p-4 bg-gray-50 dark:bg-gray-900/50 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors group">
                             <div class="w-8 h-8 bg-yellow-500/10 rounded-lg flex items-center justify-center group-hover:bg-yellow-500/20 transition-colors">
@@ -162,13 +162,353 @@
         </div>
     </div>
 
+    <!-- Scripts para Modales (deben estar disponibles inmediatamente) -->
+    <script>
+        // Funciones para controlar los modales
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cerrar modal al presionar ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal('createUserModal');
+                closeModal('createTaskModal');
+            }
+        });
+
+        // Preview de imagen para usuario
+        function previewUserImage(input) {
+            const preview = document.getElementById('userPreviewImg');
+            const placeholder = document.getElementById('userInitialsPlaceholder');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.classList.remove('hidden');
+                    placeholder.classList.add('hidden');
+                };
+                
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.classList.add('hidden');
+                placeholder.classList.remove('hidden');
+            }
+        }
+
+        function updateUserInitials(name) {
+            const placeholder = document.getElementById('userInitialsPlaceholder');
+            const preview = document.getElementById('userPreviewImg');
+            
+            if (preview.classList.contains('hidden')) {
+                if (name.trim()) {
+                    const names = name.trim().split(' ');
+                    let initials = '';
+                    names.forEach(n => {
+                        if (n) initials += n.charAt(0).toUpperCase();
+                    });
+                    placeholder.textContent = initials.substring(0, 2) || '?';
+                } else {
+                    placeholder.textContent = '?';
+                }
+            }
+        }
+    </script>
+
+    <!-- Modal: Crear Nuevo Usuario -->
+    <div id="createUserModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Overlay -->
+            <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75 dark:bg-gray-900 dark:bg-opacity-75" onclick="closeModal('createUserModal')"></div>
+
+            <!-- Modal Content -->
+            <div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+                <div class="bg-white dark:bg-gray-800 px-6 pt-6 pb-4">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="p-2 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Crear Nuevo Usuario</h3>
+                        </div>
+                        <button onclick="closeModal('createUserModal')" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <form method="POST" action="{{ route('admin.users.store') }}" enctype="multipart/form-data" class="space-y-4">
+                        @csrf
+
+                        <!-- Foto de perfil -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">
+                                Foto de Perfil (Opcional)
+                            </label>
+                            <div class="flex items-center space-x-4">
+                                <div id="userImagePreview" class="h-16 w-16 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold shadow-lg overflow-hidden">
+                                    <span id="userInitialsPlaceholder">?</span>
+                                    <img id="userPreviewImg" class="h-full w-full object-cover hidden" alt="Preview">
+                                </div>
+                                <div class="flex-1">
+                                    <input type="file" id="user_profile_photo" name="profile_photo" accept="image/*" class="hidden" onchange="previewUserImage(this)">
+                                    <label for="user_profile_photo" class="inline-flex items-center px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                        </svg>
+                                        Seleccionar
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Nombre -->
+                            <div>
+                                <label for="user_name" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                    Nombre Completo *
+                                </label>
+                                <input id="user_name" name="name" type="text" required oninput="updateUserInitials(this.value)"
+                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                    placeholder="Nombre completo">
+                            </div>
+
+                            <!-- Email -->
+                            <div>
+                                <label for="user_email" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                    Correo Electrónico *
+                                </label>
+                                <input id="user_email" name="email" type="email" required
+                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                    placeholder="usuario@ejemplo.com">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Contraseña -->
+                            <div>
+                                <label for="user_password" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                    Contraseña *
+                                </label>
+                                <input id="user_password" name="password" type="password" required
+                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                    placeholder="••••••••">
+                            </div>
+
+                            <!-- Confirmar Contraseña -->
+                            <div>
+                                <label for="user_password_confirmation" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                    Confirmar Contraseña *
+                                </label>
+                                <input id="user_password_confirmation" name="password_confirmation" type="password" required
+                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                    placeholder="••••••••">
+                            </div>
+                        </div>
+
+                        <!-- Rol -->
+                        <div>
+                            <label for="user_role" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                Rol del Usuario *
+                            </label>
+                            <select id="user_role" name="role" required
+                                class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="">Selecciona un rol</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role }}">{{ ucfirst($role) }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Botones -->
+                        <div class="flex items-center justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                            <button type="button" onclick="closeModal('createUserModal')"
+                                class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg font-medium transition-colors">
+                                Cancelar
+                            </button>
+                            <button type="submit"
+                                class="px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all shadow-lg">
+                                Crear Usuario
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Crear Nueva Tarea -->
+    <div id="createTaskModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Overlay -->
+            <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75 dark:bg-gray-900 dark:bg-opacity-75" onclick="closeModal('createTaskModal')"></div>
+
+            <!-- Modal Content -->
+            <div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
+                <div class="bg-white dark:bg-gray-800 px-6 pt-6 pb-4">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="p-2 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Crear Nueva Tarea</h3>
+                        </div>
+                        <button onclick="closeModal('createTaskModal')" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <form method="POST" action="{{ route('admin.tasks.store') }}" enctype="multipart/form-data" class="space-y-4">
+                        @csrf
+
+                        <!-- Título -->
+                        <div>
+                            <label for="task_title" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                Título *
+                            </label>
+                            <input id="task_title" name="title" type="text" required
+                                class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                                placeholder="Título de la tarea">
+                        </div>
+
+                        <!-- Descripción -->
+                        <div>
+                            <label for="task_description" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                Descripción
+                            </label>
+                            <textarea id="task_description" name="description" rows="3"
+                                class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                                placeholder="Descripción de la tarea"></textarea>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Fecha Límite -->
+                            <div>
+                                <label for="task_deadline" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                    Fecha Límite *
+                                </label>
+                                <input id="task_deadline" name="deadline_at" type="date" required
+                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                            </div>
+
+                            <!-- Ubicación -->
+                            <div>
+                                <label for="task_location" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                    Ubicación *
+                                </label>
+                                <input id="task_location" name="location" type="text" required
+                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                                    placeholder="Ubicación de la tarea">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Prioridad -->
+                            <div>
+                                <label for="task_priority" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                    Prioridad *
+                                </label>
+                                <select id="task_priority" name="priority" required
+                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                                    @foreach ($priorities as $priority)
+                                        <option value="{{ $priority }}">{{ ucfirst($priority) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <!-- Asignar a -->
+                            <div>
+                                <label for="task_assigned_to" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                    Asignar a
+                                </label>
+                                <select id="task_assigned_to" name="assigned_to"
+                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                                    <option value="">Selecciona un trabajador</option>
+                                    @foreach ($workers as $worker)
+                                        <option value="{{ $worker->id }}">{{ $worker->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Imágenes de Referencia -->
+                        <div>
+                            <label for="task_reference_images" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                Imágenes de Referencia (Opcional)
+                            </label>
+                            <input id="task_reference_images" name="reference_images[]" type="file" accept="image/*" multiple
+                                class="block w-full text-sm text-gray-900 dark:text-gray-400 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 focus:outline-none">
+                            <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">PNG, JPG, GIF hasta 2MB cada una.</p>
+                        </div>
+
+                        <!-- Botones -->
+                        <div class="flex items-center justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                            <button type="button" onclick="closeModal('createTaskModal')"
+                                class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg font-medium transition-colors">
+                                Cancelar
+                            </button>
+                            <button type="submit"
+                                class="px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-lg transition-all shadow-lg">
+                                Crear Tarea
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @push('scripts')
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
+        
+        {{-- Datos del servidor en formato JSON --}}
+        <script id="dashboard-tasks-status-data" type="application/json">
+            {!! json_encode($tasksByStatus) !!}
+        </script>
+        <script id="dashboard-tasks-priority-data" type="application/json">
+            {!! json_encode($tasksByPriority) !!}
+        </script>
+        <script id="dashboard-incidents-status-data" type="application/json">
+            {!! json_encode($incidentsByStatus) !!}
+        </script>
+        <script id="dashboard-users-data" type="application/json">
+            {
+                "admin": {{ $adminUsers }},
+                "worker": {{ $workerUsers }},
+                "instructor": {{ $instructorUsers }}
+            }
+        </script>
+
+        {{-- Script principal de gráficos --}}
+        <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function() {
+                // Leer datos del servidor desde los elementos JSON
+                const tasksByStatusData = JSON.parse(document.getElementById('dashboard-tasks-status-data').textContent);
+                const tasksByPriorityData = JSON.parse(document.getElementById('dashboard-tasks-priority-data').textContent);
+                const incidentsByStatusData = JSON.parse(document.getElementById('dashboard-incidents-status-data').textContent);
+                const usersData = JSON.parse(document.getElementById('dashboard-users-data').textContent);
+                // Detectar modo oscuro
+                const isDarkMode = document.documentElement.classList.contains('dark');
+                const labelColor = isDarkMode ? '#d1d5db' : '#4b5563';
+                const gridColor = isDarkMode ? '#374151' : '#e5e7eb';
+
                 // --- Tareas por Estado Chart (Doughnut) ---
                 const tasksByStatusCtx = document.getElementById('tasksByStatusChart').getContext('2d');
-                const tasksByStatusData = @json($tasksByStatus);
                 const tasksByStatusLabels = Object.keys(tasksByStatusData);
                 const tasksByStatusValues = Object.values(tasksByStatusData);
 
@@ -197,7 +537,7 @@
                             legend: {
                                 position: 'bottom',
                                 labels: {
-                                    color: '{{ auth()->user()->darkMode ? '#d1d5db' : '#4b5563' }}' // Tailwind gray-300 or gray-700
+                                    color: labelColor
                                 }
                             },
                             title: {
@@ -210,7 +550,11 @@
                 // --- Usuarios por Rol Chart (Bar) ---
                 const usersByRoleCtx = document.getElementById('usersByRoleChart').getContext('2d');
                 const usersByRoleLabels = ['Administradores', 'Trabajadores', 'Instructores'];
-                const usersByRoleValues = [{{ $adminUsers }}, {{ $workerUsers }}, {{ $instructorUsers }}];
+                const usersByRoleValues = [
+                    usersData.admin,
+                    usersData.worker,
+                    usersData.instructor
+                ];
 
                 new Chart(usersByRoleCtx, {
                     type: 'bar',
@@ -246,12 +590,18 @@
                             y: {
                                 beginAtZero: true,
                                 ticks: {
-                                    color: '{{ auth()->user()->darkMode ? '#d1d5db' : '#4b5563' }}' // Tailwind gray-300 or gray-700
+                                    color: labelColor
+                                },
+                                grid: {
+                                    color: gridColor
                                 }
                             },
                             x: {
                                 ticks: {
-                                    color: '{{ auth()->user()->darkMode ? '#d1d5db' : '#4b5563' }}' // Tailwind gray-300 or gray-700
+                                    color: labelColor
+                                },
+                                grid: {
+                                    color: gridColor
                                 }
                             }
                         }
@@ -260,7 +610,6 @@
 
                 // --- Tareas por Prioridad Chart (Pie) ---
                 const tasksByPriorityCtx = document.getElementById('tasksByPriorityChart').getContext('2d');
-                const tasksByPriorityData = @json($tasksByPriority);
                 const tasksByPriorityLabels = Object.keys(tasksByPriorityData);
                 const tasksByPriorityValues = Object.values(tasksByPriorityData);
 
@@ -284,7 +633,7 @@
                             legend: {
                                 position: 'bottom',
                                 labels: {
-                                    color: '{{ auth()->user()->darkMode ? '#d1d5db' : '#4b5563' }}'
+                                    color: labelColor
                                 }
                             },
                             title: {
@@ -296,7 +645,6 @@
 
                 // --- Incidentes por Estado Chart (Doughnut) ---
                 const incidentsByStatusCtx = document.getElementById('incidentsByStatusChart').getContext('2d');
-                const incidentsByStatusData = @json($incidentsByStatus);
                 const incidentsByStatusLabels = Object.keys(incidentsByStatusData);
                 const incidentsByStatusValues = Object.values(incidentsByStatusData);
 
@@ -320,7 +668,7 @@
                             legend: {
                                 position: 'bottom',
                                 labels: {
-                                    color: '{{ auth()->user()->darkMode ? '#d1d5db' : '#4b5563' }}'
+                                    color: labelColor
                                 }
                             },
                             title: {

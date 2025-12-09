@@ -53,11 +53,17 @@ class DashboardController extends Controller
         $pendingReviewIncidents = Incident::where('status', 'pendiente de revisión')->count();
         $assignedIncidents = Incident::where('status', 'asignado')->count();
 
+        // Datos para los modales de creación
+        $roles = ['administrador', 'trabajador', 'instructor'];
+        $workers = User::where('role', 'trabajador')->get();
+        $priorities = ['baja', 'media', 'alta'];
+
         return view('admin.dashboard', compact(
             'totalUsers', 'adminUsers', 'workerUsers', 'instructorUsers',
             'totalTasks', 'tasksByStatus', 'tasksByPriority', 'pendingTasks', 'inProgressTasks', 'completedTasks', 'realizedTasks', 'cancelledTasks', 'incompleteTasks', 'delayedTasks', 'assignedTasksCount',
             'upcomingDeadlineTasks', 'overdueTasks',
-            'totalIncidents', 'incidentsByStatus', 'pendingReviewIncidents', 'assignedIncidents'
+            'totalIncidents', 'incidentsByStatus', 'pendingReviewIncidents', 'assignedIncidents',
+            'roles', 'workers', 'priorities'
         ));
     }
 }
