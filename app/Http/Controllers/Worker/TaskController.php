@@ -65,14 +65,48 @@ class TaskController extends Controller
         $task = Task::where('assigned_to', Auth::id())->findOrFail($id);
 
         $request->validate([
-            'status' => ['required', 'string', 'in:pendiente,en progreso,finalizada,cancelada'],
+            'status' => ['nullable', 'string', 'in:asignado,en progreso,finalizada,cancelada,incompleta,realizada,retraso en proceso'],
+            'initial_evidence_images' => ['nullable', 'array'],
+            'initial_evidence_images.*' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'final_evidence_images' => ['nullable', 'array'],
+            'final_evidence_images.*' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'final_description' => ['nullable', 'string', 'max:1000'],
         ]);
 
-        $task->update([
-            'status' => $request->status,
-        ]);
+        $updateData = ['status' => $request->status];
 
-        return redirect()->route('worker.tasks.index')->with('success', 'Estado de la tarea actualizado exitosamente.');
+        // Manejar la subida de imágenes de evidencia inicial
+        if ($request->hasFile('initial_evidence_images')) {
+            $initialEvidenceImagePaths = [];
+            foreach ($request->file('initial_evidence_images') as $image) {
+                $initialEvidenceImagePaths[] = $image->store('tasks-evidence', 'public');
+            }
+            $updateData['initial_evidence_images'] = array_merge((array)$task->initial_evidence_images, $initialEvidenceImagePaths);
+
+            // Si se sube evidencia inicial y la tarea está asignada, cambiar a "en progreso"
+            if ($task->status === 'asignado') {
+                $updateData['status'] = 'en progreso';
+            }
+        }
+        
+        // Manejar la subida de imágenes de evidencia final y descripción final
+        if ($request->hasFile('final_evidence_images') && $request->filled('final_description')) {
+            $finalEvidenceImagePaths = [];
+            foreach ($request->file('final_evidence_images') as $image) {
+                $finalEvidenceImagePaths[] = $image->store('tasks-evidence', 'public');
+            }
+            $updateData['final_evidence_images'] = array_merge((array)$task->final_evidence_images, $finalEvidenceImagePaths);
+            $updateData['final_description'] = $request->final_description;
+
+            // Si se sube evidencia final y descripción, y la tarea está en progreso, cambiar a "realizada"
+            if ($task->status === 'en progreso') {
+                $updateData['status'] = 'realizada';
+            }
+        }
+
+        $task->update($updateData);
+
+        return redirect()->route('worker.tasks.index')->with('success', 'Tarea actualizada exitosamente.');
     }
 
     /**

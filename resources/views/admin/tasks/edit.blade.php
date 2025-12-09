@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form method="POST" action="{{ route('admin.tasks.update', $task->id) }}">
+                    <form method="POST" action="{{ route('admin.tasks.update', $task->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -25,6 +25,39 @@
                             <x-input-label for="description" :value="__('Descripción')" />
                             <textarea id="description" name="description" class="block mt-1 w-full border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">{{ old('description', $task->description) }}</textarea>
                             <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                        </div>
+
+                        <!-- Deadline At -->
+                        <div class="mt-4">
+                            <x-input-label for="deadline_at" :value="__('Fecha Límite')" />
+                            <x-text-input id="deadline_at" class="block mt-1 w-full" type="date" name="deadline_at" :value="old('deadline_at', $task->deadline_at ? $task->deadline_at->format('Y-m-d') : '')" required />
+                            <x-input-error :messages="$errors->get('deadline_at')" class="mt-2" />
+                        </div>
+
+                        <!-- Location -->
+                        <div class="mt-4">
+                            <x-input-label for="location" :value="__('Ubicación')" />
+                            <x-text-input id="location" class="block mt-1 w-full" type="text" name="location" :value="old('location', $task->location)" required />
+                            <x-input-error :messages="$errors->get('location')" class="mt-2" />
+                        </div>
+
+                        <!-- Reference Images -->
+                        @if ($task->reference_images && count($task->reference_images) > 0)
+                            <div class="mt-4">
+                                <p class="text-lg font-semibold">Imágenes de Referencia Actuales:</p>
+                                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-2">
+                                    @foreach ($task->reference_images as $imagePath)
+                                        <img src="{{ asset('storage/' . $imagePath) }}" alt="Imagen de Referencia" class="w-full h-32 object-cover rounded-lg shadow-md">
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+
+                        <div class="mt-4">
+                            <x-input-label for="reference_images" :value="__('Añadir/Actualizar Imágenes de Referencia (Opcional)')" />
+                            <input id="reference_images" class="block mt-1 w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" name="reference_images[]" accept="image/*" multiple />
+                            <x-input-error :messages="$errors->get('reference_images')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('reference_images.*')" class="mt-2" />
                         </div>
 
                         <!-- Priority -->

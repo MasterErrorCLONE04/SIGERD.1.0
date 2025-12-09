@@ -53,25 +53,46 @@ class TaskController extends Controller
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
-            'deadline_at' => ['required', 'date', 'after_or_equal:today'],
+            'deadline_at' => ['required', 'date'],
             'location' => ['required', 'string', 'max:255'],
             'priority' => ['required', 'string', 'in:baja,media,alta'],
+            'status' => ['nullable', 'string', 'in:pendiente,asignado,en progreso,realizada,finalizada,cancelada,incompleta,retraso en proceso'],
             'assigned_to' => ['nullable', 'exists:users,id'],
+            'initial_evidence_images' => ['nullable', 'array'],
+            'initial_evidence_images.*' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'final_evidence_images' => ['nullable', 'array'],
+            'final_evidence_images.*' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'final_description' => ['nullable', 'string'],
+            'reference_images' => ['nullable', 'array'],
+            'reference_images.*' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ]);
 
-        $task = Task::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'deadline_at' => $request->deadline_at,
-            'location' => $request->location,
-            'priority' => $request->priority,
-            'status' => 'pendiente',
-            'assigned_to' => $request->assigned_to,
-            'created_by' => auth()->id(),
-        ]);
+        $data = $request->except(['initial_evidence_images', 'final_evidence_images', 'reference_images']);
+        $data['created_by'] = auth()->id();
+        $data['status'] = 'asignado'; // Default status for direct creation
+
+        // Handle initial evidence images
+        $initialEvidenceImagePaths = [];
+        if ($request->hasFile('initial_evidence_images')) {
+            foreach ($request->file('initial_evidence_images') as $image) {
+                $initialEvidenceImagePaths[] = $image->store('tasks-evidence', 'public');
+            }
+        }
+        $data['initial_evidence_images'] = $initialEvidenceImagePaths;
+
+        // Handle reference images
+        $referenceImagePaths = [];
+        if ($request->hasFile('reference_images')) {
+            foreach ($request->file('reference_images') as $image) {
+                $referenceImagePaths[] = $image->store('tasks-reference', 'public');
+            }
+        }
+        $data['reference_images'] = $referenceImagePaths;
+
+        $task = Task::create($data);
 
         // Lógica para cambiar el estado a "incompleta" si la fecha límite ha pasado al momento de la creación
-        if ($task->deadline_at < now()) {
+        if ($task->deadline_at < now() && $task->status !== 'finalizada' && $task->status !== 'cancelada') {
             $task->status = 'incompleta';
             $task->save();
         }
@@ -84,7 +105,10 @@ class TaskController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $task = Task::with(['assignedTo', 'createdBy', 'incident'])->findOrFail($id);
+        $statuses = ['asignado', 'en progreso', 'realizada', 'finalizada', 'cancelada', 'incompleta', 'retraso en proceso'];
+
+        return view('admin.tasks.show', compact('task', 'statuses'));
     }
 
     /**
@@ -95,7 +119,7 @@ class TaskController extends Controller
         $task = Task::findOrFail($id);
         $workers = User::where('role', 'trabajador')->get();
         $priorities = ['baja', 'media', 'alta'];
-        $statuses = ['pendiente', 'en progreso', 'finalizada', 'cancelada'];
+        $statuses = ['asignado', 'en progreso', 'realizada', 'finalizada', 'cancelada', 'incompleta', 'retraso en proceso'];
 
         return view('admin.tasks.edit', compact('task', 'workers', 'priorities', 'statuses'));
     }
@@ -110,22 +134,50 @@ class TaskController extends Controller
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
-            'deadline_at' => ['required', 'date', 'after_or_equal:today'],
+            'deadline_at' => ['required', 'date'],
             'location' => ['required', 'string', 'max:255'],
             'priority' => ['required', 'string', 'in:baja,media,alta'],
-            'status' => ['required', 'string', 'in:pendiente,en progreso,finalizada,cancelada,incompleta'],
+            'status' => ['required', 'string', 'in:pendiente,asignado,en progreso,realizada,finalizada,cancelada,incompleta,retraso en proceso'],
             'assigned_to' => ['nullable', 'exists:users,id'],
+            'initial_evidence_images' => ['nullable', 'array'],
+            'initial_evidence_images.*' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'final_evidence_images' => ['nullable', 'array'],
+            'final_evidence_images.*' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'final_description' => ['nullable', 'string'],
+            'reference_images' => ['nullable', 'array'],
+            'reference_images.*' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ]);
 
-        $task->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'priority' => $request->priority,
-            'status' => $request->status,
-            'assigned_to' => $request->assigned_to,
-            'deadline_at' => $request->deadline_at,
-            'location' => $request->location,
-        ]);
+        $updateData = $request->except(['initial_evidence_images', 'final_evidence_images', 'reference_images']);
+
+        // Handle initial evidence images
+        if ($request->hasFile('initial_evidence_images')) {
+            $initialEvidenceImagePaths = [];
+            foreach ($request->file('initial_evidence_images') as $image) {
+                $initialEvidenceImagePaths[] = $image->store('tasks-evidence', 'public');
+            }
+            $updateData['initial_evidence_images'] = array_merge((array)$task->initial_evidence_images, $initialEvidenceImagePaths);
+        }
+
+        // Handle final evidence images
+        if ($request->hasFile('final_evidence_images')) {
+            $finalEvidenceImagePaths = [];
+            foreach ($request->file('final_evidence_images') as $image) {
+                $finalEvidenceImagePaths[] = $image->store('tasks-evidence', 'public');
+            }
+            $updateData['final_evidence_images'] = array_merge((array)$task->final_evidence_images, $finalEvidenceImagePaths);
+        }
+
+        // Handle reference images
+        if ($request->hasFile('reference_images')) {
+            $referenceImagePaths = [];
+            foreach ($request->file('reference_images') as $image) {
+                $referenceImagePaths[] = $image->store('tasks-reference', 'public');
+            }
+            $updateData['reference_images'] = array_merge((array)$task->reference_images, $referenceImagePaths);
+        }
+
+        $task->update($updateData);
 
         // Lógica para cambiar el estado a "incompleta" si la fecha límite ha pasado
         if ($task->deadline_at && $task->deadline_at < now() && $task->status !== 'finalizada' && $task->status !== 'cancelada') {
@@ -145,5 +197,33 @@ class TaskController extends Controller
         $task->delete();
 
         return redirect()->route('admin.tasks.index')->with('success', 'Tarea eliminada exitosamente.');
+    }
+
+    /**
+     * Review the specified task and update its status.
+     */
+    public function reviewTask(Request $request, string $id)
+    {
+        $task = Task::findOrFail($id);
+
+        $request->validate([
+            'action' => ['required', 'string', 'in:approve,reject,delay'],
+        ]);
+
+        switch ($request->action) {
+            case 'approve':
+                $task->status = 'finalizada';
+                break;
+            case 'reject':
+                $task->status = 'en progreso'; // Regresa a en progreso para corrección
+                break;
+            case 'delay':
+                $task->status = 'retraso en proceso'; // Pasa a retraso en proceso
+                break;
+        }
+
+        $task->save();
+
+        return redirect()->route('admin.tasks.show', $task->id)->with('success', 'Revisión de tarea realizada exitosamente.');
     }
 }

@@ -25,6 +25,7 @@ Route::middleware(['auth', 'role:administrador'])->prefix('admin')->name('admin.
     Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/users', \App\Http\Controllers\Admin\UserController::class);
     Route::resource('/tasks', \App\Http\Controllers\Admin\TaskController::class);
+    Route::put('/tasks/{task}/review', [\App\Http\Controllers\Admin\TaskController::class, 'reviewTask'])->name('tasks.review');
     Route::resource('/incidents', IncidentController::class)->only(['index', 'show']);
     Route::post('/incidents/{incident}/convert-to-task', [IncidentController::class, 'convertToTask'])->name('incidents.convert-to-task');
 });

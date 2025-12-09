@@ -19,6 +19,17 @@ class Task extends Model
         'assigned_to',
         'created_by',
         'incident_id',
+        'initial_evidence_images',
+        'final_evidence_images',
+        'final_description',
+        'reference_images',
+    ];
+
+    protected $casts = [
+        'initial_evidence_images' => 'array',
+        'final_evidence_images' => 'array',
+        'reference_images' => 'array',
+        'deadline_at' => 'datetime',
     ];
 
     public function assignedTo()

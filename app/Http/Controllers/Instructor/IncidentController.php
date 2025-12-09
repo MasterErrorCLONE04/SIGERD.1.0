@@ -35,21 +35,28 @@ class IncidentController extends Controller
     {
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string'],
-            'image' => ['nullable', 'image', 'max:2048'], // Max 2MB
+            'description' => ['required', 'string'], // Descripción detallada ahora es obligatoria
+            'location' => ['required', 'string', 'max:255'],
+            'initial_evidence_images' => ['required', 'array', 'min:1'], // Al menos una imagen es obligatoria
+            'initial_evidence_images.*' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Validar cada imagen
+            'report_date' => ['required', 'date', 'before_or_equal:today'], // Fecha del reporte, obligatoria
         ]);
 
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('incidents', 'public');
+        $initialEvidenceImagePaths = [];
+        if ($request->hasFile('initial_evidence_images')) {
+            foreach ($request->file('initial_evidence_images') as $image) {
+                $initialEvidenceImagePaths[] = $image->store('incident-evidence', 'public');
+            }
         }
 
         Incident::create([
             'title' => $request->title,
             'description' => $request->description,
-            'status' => 'pendiente',
+            'location' => $request->location,
+            'report_date' => $request->report_date,
+            'status' => 'pendiente de revisión',
             'reported_by' => Auth::id(),
-            'image' => $imagePath,
+            'initial_evidence_images' => $initialEvidenceImagePaths,
         ]);
 
         return redirect()->route('instructor.incidents.index')->with('success', 'Falla reportada exitosamente.');

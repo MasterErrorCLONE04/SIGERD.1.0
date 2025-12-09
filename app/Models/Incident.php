@@ -12,13 +12,25 @@ class Incident extends Model
     protected $fillable = [
         'title',
         'description',
+        'location',
+        'report_date',
         'status',
         'reported_by',
-        'image',
+        'initial_evidence_images',
+    ];
+
+    protected $casts = [
+        'initial_evidence_images' => 'array',
+        'report_date' => 'datetime',
     ];
 
     public function reportedBy()
     {
         return $this->belongsTo(User::class, 'reported_by');
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
     }
 }

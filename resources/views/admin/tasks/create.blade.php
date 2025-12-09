@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form method="POST" action="{{ route('admin.tasks.store') }}">
+                    <form method="POST" action="{{ route('admin.tasks.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         <!-- Title -->
@@ -38,6 +38,14 @@
                             <x-input-label for="location" :value="__('Ubicación')" />
                             <x-text-input id="location" class="block mt-1 w-full" type="text" name="location" :value="old('location')" required />
                             <x-input-error :messages="$errors->get('location')" class="mt-2" />
+                        </div>
+
+                        <!-- Reference Images -->
+                        <div class="mt-4">
+                            <x-input-label for="reference_images" :value="__('Imágenes de Referencia (Opcional)')" />
+                            <input id="reference_images" class="block mt-1 w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" name="reference_images[]" accept="image/*" multiple />
+                            <x-input-error :messages="$errors->get('reference_images')" class="mt-2" />
+                            <x-input-error :messages="$errors->all('reference_images.*')" class="mt-2" />
                         </div>
 
                         <!-- Priority -->

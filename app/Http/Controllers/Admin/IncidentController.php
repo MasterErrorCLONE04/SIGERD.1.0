@@ -39,24 +39,31 @@ class IncidentController extends Controller
     public function convertToTask(Request $request, Incident $incident)
     {
         $request->validate([
+            'task_title' => ['required', 'string', 'max:255'],
+            'task_description' => ['required', 'string'],
             'assigned_to' => ['required', 'exists:users,id'],
             'priority' => ['required', 'string', 'in:baja,media,alta'],
+            'deadline_at' => ['required', 'date', 'after_or_equal:today'],
+            'location' => ['required', 'string', 'max:255'],
         ]);
 
         // Crear la tarea
         Task::create([
-            'title' => 'Incidente: '.$incident->title,
-            'description' => $incident->description,
+            'title' => $request->task_title,
+            'description' => $request->task_description,
             'priority' => $request->priority,
-            'status' => 'pendiente',
+            'status' => 'asignado', // Estado inicial: “Asignado”
             'assigned_to' => $request->assigned_to,
             'created_by' => Auth::id(), // El administrador que convierte el incidente
             'incident_id' => $incident->id,
+            'deadline_at' => $request->deadline_at,
+            'location' => $request->location,
+            'reference_images' => $incident->initial_evidence_images, // Las imágenes del incidente se convierten en imágenes de referencia de la tarea
         ]);
 
-        // Actualizar el estado del incidente
+        // Actualizar el estado del incidente a “Asignado”
         $incident->update([
-            'status' => 'resuelto',
+            'status' => 'asignado',
         ]);
 
         return redirect()->route('admin.incidents.index')->with('success', 'Incidente convertido a tarea exitosamente.');
