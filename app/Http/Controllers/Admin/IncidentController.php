@@ -14,9 +14,31 @@ class IncidentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $incidents = Incident::with('reportedBy')->get();
+        $query = Incident::with('reportedBy');
+
+        // Aplicar búsqueda si se proporciona
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%")
+                  ->orWhere('location', 'like', "%{$search}%")
+                  ->orWhereHas('reportedBy', function($userQuery) use ($search) {
+                      $userQuery->where('name', 'like', "%{$search}%")
+                                ->orWhere('email', 'like', "%{$search}%");
+                  });
+            });
+        }
+
+        // Aplicar filtro de fecha de creación (fecha específica)
+        if ($request->filled('created_at_from')) {
+            $query->whereDate('created_at', '=', $request->input('created_at_from'));
+        }
+
+        // Ordenar por fecha de creación (más recientes primero)
+        $incidents = $query->orderBy('created_at', 'desc')->get();
 
         return view('admin.incidents.index', compact('incidents'));
     }

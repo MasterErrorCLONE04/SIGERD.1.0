@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules;
 
 class UserController extends Controller
@@ -14,9 +13,20 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $query = User::query();
+
+        // Aplicar búsqueda si se proporciona
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%");
+            });
+        }
+
+        $users = $query->orderBy('name')->get();
 
         return view('admin.users.index', compact('users'));
     }
@@ -36,19 +46,67 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role' => ['required', 'string', 'in:administrador,trabajador,instructor'],
+        ];
+
+        // Validar campos básicos primero
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => ['required', 'string', 'in:administrador,trabajador,instructor'],
-            'profile_photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // 2MB max
         ]);
 
         $profilePhotoPath = null;
         
-        // Manejar la subida de la foto de perfil
-        if ($request->hasFile('profile_photo')) {
-            $profilePhotoPath = $request->file('profile_photo')->store('profile-photos', 'public');
+        // Manejar la subida de la foto de perfil usando $_FILES directamente (sin fileinfo)
+        if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] === UPLOAD_ERR_OK) {
+            $file = $_FILES['profile_photo'];
+            $allowedExtensions = ['jpeg', 'jpg', 'png', 'gif'];
+            $fileName = $file['name'];
+            $fileSize = $file['size'];
+            $tmpName = $file['tmp_name'];
+            $maxSizeBytes = 2048 * 1024; // 2MB en bytes
+
+            // Obtener extensión del nombre del archivo
+            $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+            // Validar extensión
+            if (!in_array($extension, $allowedExtensions)) {
+                return redirect()->back()
+                    ->withErrors(['profile_photo' => 'El archivo debe ser una imagen (jpeg, jpg, png o gif).'])
+                    ->withInput();
+            }
+
+            // Validar tamaño
+            if ($fileSize > $maxSizeBytes) {
+                return redirect()->back()
+                    ->withErrors(['profile_photo' => 'El archivo no debe exceder 2MB.'])
+                    ->withInput();
+            }
+
+            // Generar nombre único para el archivo
+            $newFileName = 'profile-photos/' . uniqid() . '_' . time() . '.' . $extension;
+            $destinationPath = storage_path('app/public/' . $newFileName);
+
+            // Crear directorio si no existe
+            $directory = dirname($destinationPath);
+            if (!is_dir($directory)) {
+                mkdir($directory, 0755, true);
+            }
+
+            // Mover el archivo subido
+            if (move_uploaded_file($tmpName, $destinationPath)) {
+                $profilePhotoPath = $newFileName;
+            } else {
+                return redirect()->back()
+                    ->withErrors(['profile_photo' => 'Error al subir el archivo.'])
+                    ->withInput();
+            }
         }
 
         User::create([
@@ -100,11 +158,17 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
+        $rules = [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$id],
+            'role' => ['required', 'string', 'in:administrador,trabajador,instructor'],
+        ];
+
+        // Validar campos básicos primero
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$id],
             'role' => ['required', 'string', 'in:administrador,trabajador,instructor'],
-            'profile_photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ]);
 
         $updateData = [
@@ -113,15 +177,58 @@ class UserController extends Controller
             'role' => $request->role,
         ];
 
-        // Manejar la actualización de la foto de perfil
-        if ($request->hasFile('profile_photo')) {
-            // Eliminar la foto anterior si existe
-            if ($user->profile_photo && Storage::disk('public')->exists($user->profile_photo)) {
-                Storage::disk('public')->delete($user->profile_photo);
+        // Manejar la actualización de la foto de perfil usando $_FILES directamente (sin fileinfo)
+        if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] === UPLOAD_ERR_OK) {
+            $file = $_FILES['profile_photo'];
+            $allowedExtensions = ['jpeg', 'jpg', 'png', 'gif'];
+            $fileName = $file['name'];
+            $fileSize = $file['size'];
+            $tmpName = $file['tmp_name'];
+            $maxSizeBytes = 2048 * 1024; // 2MB en bytes
+
+            // Obtener extensión del nombre del archivo
+            $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+            // Validar extensión
+            if (!in_array($extension, $allowedExtensions)) {
+                return redirect()->back()
+                    ->withErrors(['profile_photo' => 'El archivo debe ser una imagen (jpeg, jpg, png o gif).'])
+                    ->withInput();
             }
-            
-            // Subir la nueva foto
-            $updateData['profile_photo'] = $request->file('profile_photo')->store('profile-photos', 'public');
+
+            // Validar tamaño
+            if ($fileSize > $maxSizeBytes) {
+                return redirect()->back()
+                    ->withErrors(['profile_photo' => 'El archivo no debe exceder 2MB.'])
+                    ->withInput();
+            }
+
+            // Eliminar la foto anterior si existe (sin usar Storage que requiere fileinfo)
+            if ($user->profile_photo) {
+                $oldPhotoPath = storage_path('app/public/' . $user->profile_photo);
+                if (file_exists($oldPhotoPath)) {
+                    unlink($oldPhotoPath);
+                }
+            }
+
+            // Generar nombre único para el archivo
+            $newFileName = 'profile-photos/' . uniqid() . '_' . time() . '.' . $extension;
+            $destinationPath = storage_path('app/public/' . $newFileName);
+
+            // Crear directorio si no existe
+            $directory = dirname($destinationPath);
+            if (!is_dir($directory)) {
+                mkdir($directory, 0755, true);
+            }
+
+            // Mover el archivo subido
+            if (move_uploaded_file($tmpName, $destinationPath)) {
+                $updateData['profile_photo'] = $newFileName;
+            } else {
+                return redirect()->back()
+                    ->withErrors(['profile_photo' => 'Error al subir el archivo.'])
+                    ->withInput();
+            }
         }
 
         $user->update($updateData);
@@ -136,9 +243,12 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         
-        // Eliminar la foto de perfil si existe
-        if ($user->profile_photo && Storage::disk('public')->exists($user->profile_photo)) {
-            Storage::disk('public')->delete($user->profile_photo);
+        // Eliminar la foto de perfil si existe (sin usar Storage que requiere fileinfo)
+        if ($user->profile_photo) {
+            $photoPath = storage_path('app/public/' . $user->profile_photo);
+            if (file_exists($photoPath)) {
+                unlink($photoPath);
+            }
         }
         
         $user->delete();

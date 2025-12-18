@@ -50,6 +50,7 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        // Validar campos básicos primero
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
@@ -58,46 +59,153 @@ class TaskController extends Controller
             'priority' => ['required', 'string', 'in:baja,media,alta'],
             'status' => ['nullable', 'string', 'in:pendiente,asignado,en progreso,realizada,finalizada,cancelada,incompleta,retraso en proceso'],
             'assigned_to' => ['nullable', 'exists:users,id'],
-            'initial_evidence_images' => ['nullable', 'array'],
-            'initial_evidence_images.*' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-            'final_evidence_images' => ['nullable', 'array'],
-            'final_evidence_images.*' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'final_description' => ['nullable', 'string'],
-            'reference_images' => ['nullable', 'array'],
-            'reference_images.*' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ]);
 
         $data = $request->except(['initial_evidence_images', 'final_evidence_images', 'reference_images']);
         $data['created_by'] = auth()->id();
         $data['status'] = 'asignado'; // Default status for direct creation
 
-        // Handle initial evidence images
-        $initialEvidenceImagePaths = [];
-        if ($request->hasFile('initial_evidence_images')) {
-            foreach ($request->file('initial_evidence_images') as $image) {
-                $initialEvidenceImagePaths[] = $image->store('tasks-evidence', 'public');
+        $allowedExtensions = ['jpeg', 'jpg', 'png', 'gif'];
+        $maxSizeBytes = 2048 * 1024; // 2MB en bytes
+
+        // Función helper para validar y guardar imágenes
+        $processImages = function($files, $fieldName, $folder) use ($allowedExtensions, $maxSizeBytes) {
+            $imagePaths = [];
+            
+            if (isset($files[$fieldName]) && is_array($files[$fieldName]['name'])) {
+                // Múltiples archivos
+                $fileCount = count($files[$fieldName]['name']);
+                for ($i = 0; $i < $fileCount; $i++) {
+                    if ($files[$fieldName]['error'][$i] === UPLOAD_ERR_OK) {
+                        $fileName = $files[$fieldName]['name'][$i];
+                        $fileSize = $files[$fieldName]['size'][$i];
+                        $tmpName = $files[$fieldName]['tmp_name'][$i];
+                        $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+                        // Validar extensión
+                        if (!in_array($extension, $allowedExtensions)) {
+                            throw new \Exception("El archivo {$fileName} debe ser una imagen (jpeg, jpg, png o gif).");
+                        }
+
+                        // Validar tamaño
+                        if ($fileSize > $maxSizeBytes) {
+                            throw new \Exception("El archivo {$fileName} no debe exceder 2MB.");
+                        }
+
+                        // Generar nombre único
+                        $newFileName = $folder . '/' . uniqid() . '_' . time() . '_' . $i . '.' . $extension;
+                        $destinationPath = storage_path('app/public/' . $newFileName);
+
+                        // Crear directorio si no existe
+                        $directory = dirname($destinationPath);
+                        if (!is_dir($directory)) {
+                            mkdir($directory, 0755, true);
+                        }
+
+                        // Mover el archivo
+                        if (move_uploaded_file($tmpName, $destinationPath)) {
+                            $imagePaths[] = $newFileName;
+                        } else {
+                            throw new \Exception("Error al subir el archivo {$fileName}.");
+                        }
+                    }
+                }
+            } elseif (isset($files[$fieldName]) && $files[$fieldName]['error'] === UPLOAD_ERR_OK) {
+                // Un solo archivo
+                $fileName = $files[$fieldName]['name'];
+                $fileSize = $files[$fieldName]['size'];
+                $tmpName = $files[$fieldName]['tmp_name'];
+                $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+                // Validar extensión
+                if (!in_array($extension, $allowedExtensions)) {
+                    throw new \Exception("El archivo {$fileName} debe ser una imagen (jpeg, jpg, png o gif).");
+                }
+
+                // Validar tamaño
+                if ($fileSize > $maxSizeBytes) {
+                    throw new \Exception("El archivo {$fileName} no debe exceder 2MB.");
+                }
+
+                // Generar nombre único
+                $newFileName = $folder . '/' . uniqid() . '_' . time() . '.' . $extension;
+                $destinationPath = storage_path('app/public/' . $newFileName);
+
+                // Crear directorio si no existe
+                $directory = dirname($destinationPath);
+                if (!is_dir($directory)) {
+                    mkdir($directory, 0755, true);
+                }
+
+                // Mover el archivo
+                if (move_uploaded_file($tmpName, $destinationPath)) {
+                    $imagePaths[] = $newFileName;
+                } else {
+                    throw new \Exception("Error al subir el archivo {$fileName}.");
+                }
             }
-        }
-        $data['initial_evidence_images'] = $initialEvidenceImagePaths;
+            
+            return $imagePaths;
+        };
 
-        // Handle reference images
-        $referenceImagePaths = [];
-        if ($request->hasFile('reference_images')) {
-            foreach ($request->file('reference_images') as $image) {
-                $referenceImagePaths[] = $image->store('tasks-reference', 'public');
+        try {
+            // Handle initial evidence images
+            $initialEvidenceImagePaths = [];
+            if (isset($_FILES['initial_evidence_images'])) {
+                $hasFiles = false;
+                if (is_array($_FILES['initial_evidence_images']['error'])) {
+                    foreach ($_FILES['initial_evidence_images']['error'] as $error) {
+                        if ($error !== UPLOAD_ERR_NO_FILE) {
+                            $hasFiles = true;
+                            break;
+                        }
+                    }
+                } else {
+                    $hasFiles = $_FILES['initial_evidence_images']['error'] !== UPLOAD_ERR_NO_FILE;
+                }
+
+                if ($hasFiles) {
+                    $initialEvidenceImagePaths = $processImages($_FILES, 'initial_evidence_images', 'tasks-evidence');
+                }
             }
+            $data['initial_evidence_images'] = $initialEvidenceImagePaths;
+
+            // Handle reference images
+            $referenceImagePaths = [];
+            if (isset($_FILES['reference_images'])) {
+                $hasFiles = false;
+                if (is_array($_FILES['reference_images']['error'])) {
+                    foreach ($_FILES['reference_images']['error'] as $error) {
+                        if ($error !== UPLOAD_ERR_NO_FILE) {
+                            $hasFiles = true;
+                            break;
+                        }
+                    }
+                } else {
+                    $hasFiles = $_FILES['reference_images']['error'] !== UPLOAD_ERR_NO_FILE;
+                }
+
+                if ($hasFiles) {
+                    $referenceImagePaths = $processImages($_FILES, 'reference_images', 'tasks-reference');
+                }
+            }
+            $data['reference_images'] = $referenceImagePaths;
+
+            $task = Task::create($data);
+
+            // Lógica para cambiar el estado a "incompleta" si la fecha límite ha pasado al momento de la creación
+            if ($task->deadline_at < now() && $task->status !== 'finalizada' && $task->status !== 'cancelada') {
+                $task->status = 'incompleta';
+                $task->save();
+            }
+
+            return redirect()->route('admin.tasks.index')->with('success', 'Tarea creada exitosamente.');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->withErrors(['images' => $e->getMessage()])
+                ->withInput();
         }
-        $data['reference_images'] = $referenceImagePaths;
-
-        $task = Task::create($data);
-
-        // Lógica para cambiar el estado a "incompleta" si la fecha límite ha pasado al momento de la creación
-        if ($task->deadline_at < now() && $task->status !== 'finalizada' && $task->status !== 'cancelada') {
-            $task->status = 'incompleta';
-            $task->save();
-        }
-
-        return redirect()->route('admin.tasks.index')->with('success', 'Tarea creada exitosamente.');
     }
 
     /**
@@ -131,6 +239,7 @@ class TaskController extends Controller
     {
         $task = Task::findOrFail($id);
 
+        // Validar campos básicos primero
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
@@ -139,53 +248,175 @@ class TaskController extends Controller
             'priority' => ['required', 'string', 'in:baja,media,alta'],
             'status' => ['required', 'string', 'in:pendiente,asignado,en progreso,realizada,finalizada,cancelada,incompleta,retraso en proceso'],
             'assigned_to' => ['nullable', 'exists:users,id'],
-            'initial_evidence_images' => ['nullable', 'array'],
-            'initial_evidence_images.*' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-            'final_evidence_images' => ['nullable', 'array'],
-            'final_evidence_images.*' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'final_description' => ['nullable', 'string'],
-            'reference_images' => ['nullable', 'array'],
-            'reference_images.*' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ]);
 
         $updateData = $request->except(['initial_evidence_images', 'final_evidence_images', 'reference_images']);
 
-        // Handle initial evidence images
-        if ($request->hasFile('initial_evidence_images')) {
-            $initialEvidenceImagePaths = [];
-            foreach ($request->file('initial_evidence_images') as $image) {
-                $initialEvidenceImagePaths[] = $image->store('tasks-evidence', 'public');
+        $allowedExtensions = ['jpeg', 'jpg', 'png', 'gif'];
+        $maxSizeBytes = 2048 * 1024; // 2MB en bytes
+
+        // Función helper para validar y guardar imágenes
+        $processImages = function($files, $fieldName, $folder) use ($allowedExtensions, $maxSizeBytes) {
+            $imagePaths = [];
+            
+            if (isset($files[$fieldName]) && is_array($files[$fieldName]['name'])) {
+                // Múltiples archivos
+                $fileCount = count($files[$fieldName]['name']);
+                for ($i = 0; $i < $fileCount; $i++) {
+                    if ($files[$fieldName]['error'][$i] === UPLOAD_ERR_OK) {
+                        $fileName = $files[$fieldName]['name'][$i];
+                        $fileSize = $files[$fieldName]['size'][$i];
+                        $tmpName = $files[$fieldName]['tmp_name'][$i];
+                        $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+                        // Validar extensión
+                        if (!in_array($extension, $allowedExtensions)) {
+                            throw new \Exception("El archivo {$fileName} debe ser una imagen (jpeg, jpg, png o gif).");
+                        }
+
+                        // Validar tamaño
+                        if ($fileSize > $maxSizeBytes) {
+                            throw new \Exception("El archivo {$fileName} no debe exceder 2MB.");
+                        }
+
+                        // Generar nombre único
+                        $newFileName = $folder . '/' . uniqid() . '_' . time() . '_' . $i . '.' . $extension;
+                        $destinationPath = storage_path('app/public/' . $newFileName);
+
+                        // Crear directorio si no existe
+                        $directory = dirname($destinationPath);
+                        if (!is_dir($directory)) {
+                            mkdir($directory, 0755, true);
+                        }
+
+                        // Mover el archivo
+                        if (move_uploaded_file($tmpName, $destinationPath)) {
+                            $imagePaths[] = $newFileName;
+                        } else {
+                            throw new \Exception("Error al subir el archivo {$fileName}.");
+                        }
+                    }
+                }
+            } elseif (isset($files[$fieldName]) && $files[$fieldName]['error'] === UPLOAD_ERR_OK) {
+                // Un solo archivo
+                $fileName = $files[$fieldName]['name'];
+                $fileSize = $files[$fieldName]['size'];
+                $tmpName = $files[$fieldName]['tmp_name'];
+                $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+                // Validar extensión
+                if (!in_array($extension, $allowedExtensions)) {
+                    throw new \Exception("El archivo {$fileName} debe ser una imagen (jpeg, jpg, png o gif).");
+                }
+
+                // Validar tamaño
+                if ($fileSize > $maxSizeBytes) {
+                    throw new \Exception("El archivo {$fileName} no debe exceder 2MB.");
+                }
+
+                // Generar nombre único
+                $newFileName = $folder . '/' . uniqid() . '_' . time() . '.' . $extension;
+                $destinationPath = storage_path('app/public/' . $newFileName);
+
+                // Crear directorio si no existe
+                $directory = dirname($destinationPath);
+                if (!is_dir($directory)) {
+                    mkdir($directory, 0755, true);
+                }
+
+                // Mover el archivo
+                if (move_uploaded_file($tmpName, $destinationPath)) {
+                    $imagePaths[] = $newFileName;
+                } else {
+                    throw new \Exception("Error al subir el archivo {$fileName}.");
+                }
             }
-            $updateData['initial_evidence_images'] = array_merge((array)$task->initial_evidence_images, $initialEvidenceImagePaths);
-        }
+            
+            return $imagePaths;
+        };
 
-        // Handle final evidence images
-        if ($request->hasFile('final_evidence_images')) {
-            $finalEvidenceImagePaths = [];
-            foreach ($request->file('final_evidence_images') as $image) {
-                $finalEvidenceImagePaths[] = $image->store('tasks-evidence', 'public');
+        try {
+            // Handle initial evidence images
+            if (isset($_FILES['initial_evidence_images'])) {
+                $hasFiles = false;
+                if (is_array($_FILES['initial_evidence_images']['error'])) {
+                    foreach ($_FILES['initial_evidence_images']['error'] as $error) {
+                        if ($error !== UPLOAD_ERR_NO_FILE) {
+                            $hasFiles = true;
+                            break;
+                        }
+                    }
+                } else {
+                    $hasFiles = $_FILES['initial_evidence_images']['error'] !== UPLOAD_ERR_NO_FILE;
+                }
+
+                if ($hasFiles) {
+                    $initialEvidenceImagePaths = $processImages($_FILES, 'initial_evidence_images', 'tasks-evidence');
+                    if (!empty($initialEvidenceImagePaths)) {
+                        $updateData['initial_evidence_images'] = array_merge((array)$task->initial_evidence_images, $initialEvidenceImagePaths);
+                    }
+                }
             }
-            $updateData['final_evidence_images'] = array_merge((array)$task->final_evidence_images, $finalEvidenceImagePaths);
-        }
 
-        // Handle reference images
-        if ($request->hasFile('reference_images')) {
-            $referenceImagePaths = [];
-            foreach ($request->file('reference_images') as $image) {
-                $referenceImagePaths[] = $image->store('tasks-reference', 'public');
+            // Handle final evidence images
+            if (isset($_FILES['final_evidence_images'])) {
+                $hasFiles = false;
+                if (is_array($_FILES['final_evidence_images']['error'])) {
+                    foreach ($_FILES['final_evidence_images']['error'] as $error) {
+                        if ($error !== UPLOAD_ERR_NO_FILE) {
+                            $hasFiles = true;
+                            break;
+                        }
+                    }
+                } else {
+                    $hasFiles = $_FILES['final_evidence_images']['error'] !== UPLOAD_ERR_NO_FILE;
+                }
+
+                if ($hasFiles) {
+                    $finalEvidenceImagePaths = $processImages($_FILES, 'final_evidence_images', 'tasks-evidence');
+                    if (!empty($finalEvidenceImagePaths)) {
+                        $updateData['final_evidence_images'] = array_merge((array)$task->final_evidence_images, $finalEvidenceImagePaths);
+                    }
+                }
             }
-            $updateData['reference_images'] = array_merge((array)$task->reference_images, $referenceImagePaths);
+
+            // Handle reference images
+            if (isset($_FILES['reference_images'])) {
+                $hasFiles = false;
+                if (is_array($_FILES['reference_images']['error'])) {
+                    foreach ($_FILES['reference_images']['error'] as $error) {
+                        if ($error !== UPLOAD_ERR_NO_FILE) {
+                            $hasFiles = true;
+                            break;
+                        }
+                    }
+                } else {
+                    $hasFiles = $_FILES['reference_images']['error'] !== UPLOAD_ERR_NO_FILE;
+                }
+
+                if ($hasFiles) {
+                    $referenceImagePaths = $processImages($_FILES, 'reference_images', 'tasks-reference');
+                    if (!empty($referenceImagePaths)) {
+                        $updateData['reference_images'] = array_merge((array)$task->reference_images, $referenceImagePaths);
+                    }
+                }
+            }
+
+            $task->update($updateData);
+
+            // Lógica para cambiar el estado a "incompleta" si la fecha límite ha pasado
+            if ($task->deadline_at && $task->deadline_at < now() && $task->status !== 'finalizada' && $task->status !== 'cancelada') {
+                $task->status = 'incompleta';
+                $task->save();
+            }
+
+            return redirect()->route('admin.tasks.index')->with('success', 'Tarea actualizada exitosamente.');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->withErrors(['images' => $e->getMessage()])
+                ->withInput();
         }
-
-        $task->update($updateData);
-
-        // Lógica para cambiar el estado a "incompleta" si la fecha límite ha pasado
-        if ($task->deadline_at && $task->deadline_at < now() && $task->status !== 'finalizada' && $task->status !== 'cancelada') {
-            $task->status = 'incompleta';
-            $task->save();
-        }
-
-        return redirect()->route('admin.tasks.index')->with('success', 'Tarea actualizada exitosamente.');
     }
 
     /**

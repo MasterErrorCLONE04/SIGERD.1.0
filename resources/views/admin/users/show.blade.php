@@ -288,11 +288,16 @@
                                                     @endif
                                                 </div>
                                                 
-                                                @if($incident->image)
+                                                @if($incident->initial_evidence_images && count($incident->initial_evidence_images) > 0)
                                                     <div class="mt-4">
-                                                        <img src="{{ asset('storage/' . $incident->image) }}" 
-                                                             alt="Imagen del incidente"
-                                                             class="h-32 w-32 object-cover rounded-lg border border-gray-200 dark:border-gray-600">
+                                                        <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Imágenes de Evidencia:</p>
+                                                        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+                                                            @foreach ($incident->initial_evidence_images as $imagePath)
+                                                                <img src="{{ asset('storage/' . $imagePath) }}" 
+                                                                     alt="Evidencia Inicial"
+                                                                     class="h-24 w-full object-cover rounded-lg border border-gray-200 dark:border-gray-600">
+                                                            @endforeach
+                                                        </div>
                                                     </div>
                                                 @endif
                                             </div>

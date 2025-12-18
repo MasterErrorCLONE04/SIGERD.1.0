@@ -14,21 +14,39 @@
                             </div>
                             <div>
                                 <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Usuarios del Sistema</h3>
-                                <p class="text-gray-600 dark:text-gray-400 mt-1">Gestiona todos los usuarios registrados en la plataforma</p>
+                                <p class="text-gray-600 dark:text-gray-400 mt-1">
+                                    @if(request('search'))
+                                        Se encontraron <strong class="text-gray-900 dark:text-white">{{ $users->count() }}</strong> resultado(s) para "{{ request('search') }}"
+                                    @else
+                                        Gestiona todos los usuarios registrados en la plataforma
+                                    @endif
+                                </p>
                             </div>
                         </div>
                         
                         <!-- Barra de búsqueda y acciones mejoradas -->
                         <div class="flex flex-col sm:flex-row gap-4 lg:min-w-96">
-                            <div class="relative flex-1">
-                                <input type="text" placeholder="Buscar por nombre o email..." 
+                            <form method="GET" action="{{ route('admin.users.index') }}" class="relative flex-1">
+                                <input type="text" 
+                                    name="search" 
+                                    value="{{ request('search') }}"
+                                    placeholder="Buscar por nombre o email..." 
                                     class="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500/50 focus:border-blue-400 transition-all duration-200 shadow-sm hover:shadow-md">
                                 <div class="absolute left-4 top-3.5">
                                     <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                     </svg>
                                 </div>
-                            </div>
+                                @if(request('search'))
+                                    <a href="{{ route('admin.users.index') }}" 
+                                       class="absolute right-4 top-3.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300" 
+                                       title="Limpiar búsqueda">
+                                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                    </a>
+                                @endif
+                            </form>
                             <a href="{{ route('admin.users.create') }}" 
                                 class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -198,20 +216,38 @@
                         <div class="max-w-sm mx-auto">
                             <div class="mb-6">
                                 <div class="mx-auto h-24 w-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl flex items-center justify-center shadow-xl">
-                                    <svg class="h-12 w-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
-                                    </svg>
+                                    @if(request('search'))
+                                        <svg class="h-12 w-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                        </svg>
+                                    @else
+                                        <svg class="h-12 w-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                                        </svg>
+                                    @endif
                                 </div>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">No hay usuarios registrados</h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-8">Comienza creando tu primer usuario para gestionar el sistema.</p>
-                            <a href="{{ route('admin.users.create') }}" 
-                                class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                </svg>
-                                Crear Primer Usuario
-                            </a>
+                            @if(request('search'))
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">No se encontraron resultados</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">No hay usuarios que coincidan con "<strong class="text-gray-900 dark:text-white">{{ request('search') }}</strong>".</p>
+                                <a href="{{ route('admin.users.index') }}" 
+                                    class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                    </svg>
+                                    Limpiar búsqueda
+                                </a>
+                            @else
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">No hay usuarios registrados</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-8">Comienza creando tu primer usuario para gestionar el sistema.</p>
+                                <a href="{{ route('admin.users.create') }}" 
+                                    class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                    </svg>
+                                    Crear Primer Usuario
+                                </a>
+                            @endif
                         </div>
                     </div>
                 @endif
