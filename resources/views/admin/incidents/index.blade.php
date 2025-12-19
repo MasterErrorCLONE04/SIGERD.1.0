@@ -3,8 +3,8 @@
 
 
 {{-- 2. Contenido -------------------------------------------------}}
-<div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+<div class="h-full p-6 lg:p-8">
+    <div class="max-w-full mx-auto space-y-6 h-full flex flex-col">
 
         {{-- 2.1 Filtros + crear ------------------------------------}}
         <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl
@@ -93,8 +93,8 @@
         {{-- 2.2 Tabla ---------------------------------------------}}
         <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl
                     rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/30
-                    overflow-hidden">
-            <div class="overflow-x-auto">
+                    overflow-hidden flex-1 flex flex-col">
+            <div class="overflow-x-auto flex-1">
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                     <thead class="bg-gray-50 dark:bg-gray-900/50">
                     <tr>

@@ -12,8 +12,8 @@
         </div>
     </x-slot>
 
-    <div class="py-8 bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-900 dark:to-slate-900 min-h-screen">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+    <div class="h-full p-6 lg:p-8">
+        <div class="max-w-full mx-auto space-y-6 h-full flex flex-col">
             
             {{-- Barra de búsqueda y filtros --}}
             <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/50 p-6">
@@ -112,8 +112,8 @@
             </div>
 
             {{-- Tabla de tareas --}}
-            <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/50 overflow-hidden">
-                <div class="overflow-x-auto">
+            <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/50 overflow-hidden flex-1 flex flex-col">
+                <div class="overflow-x-auto flex-1">
                     <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead class="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-900/70 dark:to-gray-800/70 backdrop-blur-sm">
                             <tr>

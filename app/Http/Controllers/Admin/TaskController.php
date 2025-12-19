@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TaskController extends Controller
 {
@@ -198,6 +199,17 @@ class TaskController extends Controller
             if ($task->deadline_at < now() && $task->status !== 'finalizada' && $task->status !== 'cancelada') {
                 $task->status = 'incompleta';
                 $task->save();
+            }
+
+            // Crear notificación para el trabajador asignado
+            if ($task->assigned_to) {
+                \App\Models\Notification::create([
+                    'user_id' => $task->assigned_to,
+                    'type' => 'task_assigned',
+                    'title' => 'Nueva Tarea Asignada',
+                    'message' => 'Te han asignado una nueva tarea: ' . $task->title,
+                    'link' => route('worker.tasks.show', $task->id),
+                ]);
             }
 
             return redirect()->route('admin.tasks.index')->with('success', 'Tarea creada exitosamente.');
@@ -435,7 +447,7 @@ class TaskController extends Controller
      */
     public function reviewTask(Request $request, string $id)
     {
-        $task = Task::findOrFail($id);
+        $task = Task::with('incident')->findOrFail($id);
 
         $request->validate([
             'action' => ['required', 'string', 'in:approve,reject,delay'],
@@ -444,6 +456,16 @@ class TaskController extends Controller
         switch ($request->action) {
             case 'approve':
                 $task->status = 'finalizada';
+                
+                // Si esta tarea está vinculada a un incidente, actualizar el incidente a "resuelto"
+                if ($task->incident_id && $task->incident) {
+                    $task->incident->update([
+                        'status' => 'resuelto',
+                        'resolved_at' => now(),
+                        'final_evidence_images' => $task->final_evidence_images,
+                        'resolution_description' => $task->final_description,
+                    ]);
+                }
                 break;
             case 'reject':
                 $task->status = 'en progreso'; // Regresa a en progreso para corrección
@@ -456,5 +478,83 @@ class TaskController extends Controller
         $task->save();
 
         return redirect()->route('admin.tasks.show', $task->id)->with('success', 'Revisión de tarea realizada exitosamente.');
+    }
+
+    /**
+     * Export tasks to PDF for a specific month
+     */
+    public function exportPDF(Request $request)
+    {
+        $request->validate([
+            'month' => 'required|integer|min:1|max:12',
+            'year' => 'required|integer|min:2020|max:2100',
+        ]);
+
+        $month = $request->input('month');
+        $year = $request->input('year');
+
+        // Obtener el nombre del mes en español
+        $monthNames = [
+            1 => 'Enero', 2 => 'Febrero', 3 => 'Marzo', 4 => 'Abril',
+            5 => 'Mayo', 6 => 'Junio', 7 => 'Julio', 8 => 'Agosto',
+            9 => 'Septiembre', 10 => 'Octubre', 11 => 'Noviembre', 12 => 'Diciembre'
+        ];
+        $monthName = $monthNames[$month];
+
+        // Filtrar tareas finalizadas en el mes especificado
+        $tasks = Task::with(['assignedTo', 'createdBy'])
+            ->whereYear('updated_at', $year)
+            ->whereMonth('updated_at', $month)
+            ->where('status', 'finalizada')
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
+        // Estadísticas del mes
+        $totalTasks = $tasks->count();
+        $tasksByPriority = [
+            'alta' => $tasks->where('priority', 'alta')->count(),
+            'media' => $tasks->where('priority', 'media')->count(),
+            'baja' => $tasks->where('priority', 'baja')->count(),
+        ];
+
+        // Calcular tiempo promedio de finalización
+        $avgCompletionDays = 0;
+        if ($totalTasks > 0) {
+            $totalDays = 0;
+            foreach ($tasks as $task) {
+                if ($task->created_at && $task->updated_at) {
+                    $totalDays += $task->created_at->diffInDays($task->updated_at);
+                }
+            }
+            $avgCompletionDays = round($totalDays / $totalTasks, 1);
+        }
+
+        // Tareas por trabajador
+        $tasksByWorker = $tasks->groupBy('assigned_to')->map(function ($workerTasks) {
+            return [
+                'worker' => $workerTasks->first()->assignedTo,
+                'count' => $workerTasks->count(),
+            ];
+        })->sortByDesc('count')->take(5);
+
+        $data = [
+            'month' => $monthName,
+            'year' => $year,
+            'tasks' => $tasks,
+            'totalTasks' => $totalTasks,
+            'tasksByPriority' => $tasksByPriority,
+            'avgCompletionDays' => $avgCompletionDays,
+            'tasksByWorker' => $tasksByWorker,
+            'generatedDate' => now()->format('d/m/Y H:i'),
+        ];
+
+        $pdf = Pdf::loadView('admin.tasks.pdf', $data)
+            ->setPaper('a4', 'portrait')
+            ->setOption('margin-top', 10)
+            ->setOption('margin-bottom', 10)
+            ->setOption('margin-left', 10)
+            ->setOption('margin-right', 10);
+
+        return $pdf->download("reporte-tareas-{$monthName}-{$year}.pdf");
     }
 }

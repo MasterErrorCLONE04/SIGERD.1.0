@@ -108,7 +108,7 @@
                         </div>
                     </div>
 
-                    {{-- Imágenes de evidencia --}}
+                    {{-- Imágenes de evidencia inicial --}}
                     @if ($incident->initial_evidence_images && count($incident->initial_evidence_images) > 0)
                         <div class="mb-6">
                             <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
@@ -117,21 +117,101 @@
                                 </svg>
                                 Imágenes de Evidencia Inicial
                             </h3>
-                            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                            <div class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4">
                                 @foreach ($incident->initial_evidence_images as $imagePath)
-                                    <div class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                                    <div class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 bg-gray-100 dark:bg-gray-700 cursor-pointer"
+                                         onclick="openImageModal('{{ asset('storage/' . $imagePath) }}')">
                                         <img src="{{ asset('storage/' . $imagePath) }}" 
                                              alt="Evidencia Inicial" 
-                                             class="w-full h-48 object-cover cursor-pointer"
-                                             onclick="openImageModal('{{ asset('storage/' . $imagePath) }}')">
+                                             class="w-full h-64 object-cover">
                                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                                            <svg class="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-10 h-10 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
                                             </svg>
+                                        </div>
+                                        <div class="absolute bottom-3 right-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <span class="text-xs font-medium text-gray-700 dark:text-gray-300">Click para ampliar</span>
                                         </div>
                                     </div>
                                 @endforeach
                             </div>
+                        </div>
+                    @endif
+
+                    {{-- Información de resolución (solo si está resuelto) --}}
+                    @if ($incident->status === 'resuelto')
+                        <div class="mb-6 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-2xl p-6">
+                            <h3 class="text-lg font-bold text-green-900 dark:text-green-100 mb-4 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                Información de Resolución
+                            </h3>
+
+                            {{-- Fecha de resolución --}}
+                            <div class="mb-4">
+                                <h4 class="text-sm font-semibold text-green-700 dark:text-green-300 mb-2 flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    Resuelto el
+                                </h4>
+                                <p class="text-gray-900 dark:text-white font-medium">
+                                    {{ $incident->resolved_at->format('d/m/Y H:i:s') }} 
+                                    <span class="text-sm text-gray-600 dark:text-gray-400">({{ $incident->resolved_at->diffForHumans() }})</span>
+                                </p>
+                            </div>
+
+                            {{-- Descripción de resolución --}}
+                            @if ($incident->resolution_description)
+                                <div class="mb-4">
+                                    <h4 class="text-sm font-semibold text-green-700 dark:text-green-300 mb-2 flex items-center gap-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                        </svg>
+                                        Descripción de la Solución
+                                    </h4>
+                                    <p class="text-gray-800 dark:text-gray-200 leading-relaxed whitespace-pre-wrap bg-white/50 dark:bg-gray-800/50 p-4 rounded-lg">{{ $incident->resolution_description }}</p>
+                                </div>
+                            @endif
+
+                            {{-- Imágenes de evidencia final --}}
+                            @if ($incident->final_evidence_images && count($incident->final_evidence_images) > 0)
+                                <div>
+                                    <h4 class="text-sm font-semibold text-green-700 dark:text-green-300 mb-3 flex items-center gap-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                        Imágenes de Evidencia Final
+                                    </h4>
+                                    <div class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4">
+                                        @foreach ($incident->final_evidence_images as $imagePath)
+                                            <div class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 bg-gray-100 dark:bg-gray-700 cursor-pointer"
+                                                 onclick="openImageModal('{{ asset('storage/' . $imagePath) }}')">
+                                                <img src="{{ asset('storage/' . $imagePath) }}" 
+                                                     alt="Evidencia Final" 
+                                                     class="w-full h-64 object-cover">
+                                                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                                                    <svg class="w-10 h-10 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="absolute top-3 left-3 bg-green-500/90 backdrop-blur-sm px-2.5 py-1 rounded-lg">
+                                                    <span class="text-xs font-bold text-white flex items-center gap-1">
+                                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                                        </svg>
+                                                        Final
+                                                    </span>
+                                                </div>
+                                                <div class="absolute bottom-3 right-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                                                    <span class="text-xs font-medium text-gray-700 dark:text-gray-300">Click para ampliar</span>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     @endif
 
@@ -268,20 +348,27 @@
     </div>
 
     {{-- Modal para ver imagen en grande --}}
-    <div id="imageModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="closeImageModal()">
-        <div class="relative max-w-5xl max-h-full">
+    <div id="imageModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="closeImageModal()">
+        <div class="relative max-w-7xl max-h-full" onclick="event.stopPropagation()">
             <img id="modalImage" src="" alt="Imagen ampliada" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl">
-            <button onclick="closeImageModal()" class="absolute top-4 right-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-2 transition">
+            <button onclick="closeImageModal()" class="absolute top-4 right-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-3 transition-all hover:scale-110">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                 </svg>
             </button>
+            {{-- Botón de descarga --}}
+            <a id="downloadButton" href="" download class="absolute bottom-4 right-4 text-white bg-indigo-600 hover:bg-indigo-700 rounded-full p-3 transition-all hover:scale-110 shadow-lg">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                </svg>
+            </a>
         </div>
     </div>
 
     <script>
         function openImageModal(imageSrc) {
             document.getElementById('modalImage').src = imageSrc;
+            document.getElementById('downloadButton').href = imageSrc;
             document.getElementById('imageModal').classList.remove('hidden');
             document.getElementById('imageModal').classList.add('flex');
             document.body.style.overflow = 'hidden';

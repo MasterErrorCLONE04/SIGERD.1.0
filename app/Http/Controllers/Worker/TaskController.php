@@ -238,6 +238,31 @@ class TaskController extends Controller
 
             $task->update($updateData);
 
+            // Crear notificación para el administrador que creó la tarea
+            if ($task->created_by) {
+                $notificationMessage = '';
+                $notificationType = 'task_updated';
+                
+                if (isset($updateData['status'])) {
+                    if ($updateData['status'] === 'en progreso') {
+                        $notificationMessage = Auth::user()->name . ' ha iniciado el trabajo en: ' . $task->title;
+                    } elseif ($updateData['status'] === 'realizada') {
+                        $notificationMessage = Auth::user()->name . ' ha completado: ' . $task->title;
+                        $notificationType = 'task_completed';
+                    } else {
+                        $notificationMessage = Auth::user()->name . ' actualizó la tarea: ' . $task->title;
+                    }
+                    
+                    \App\Models\Notification::create([
+                        'user_id' => $task->created_by,
+                        'type' => $notificationType,
+                        'title' => 'Actualización de Tarea',
+                        'message' => $notificationMessage,
+                        'link' => route('admin.tasks.show', $task->id),
+                    ]);
+                }
+            }
+
             return redirect()->route('worker.tasks.index')->with('success', 'Tarea actualizada exitosamente.');
         } catch (\Exception $e) {
             return redirect()->back()

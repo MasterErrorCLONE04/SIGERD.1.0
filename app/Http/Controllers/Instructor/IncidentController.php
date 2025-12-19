@@ -111,7 +111,7 @@ class IncidentController extends Controller
             return back()->withErrors(['initial_evidence_images' => 'Debe subir al menos una imagen de evidencia.'])->withInput();
         }
 
-        Incident::create([
+        $incident = Incident::create([
             'title' => $request->title,
             'description' => $request->description,
             'location' => $request->location,
@@ -120,6 +120,18 @@ class IncidentController extends Controller
             'reported_by' => Auth::id(),
             'initial_evidence_images' => $initialEvidenceImagePaths,
         ]);
+
+        // Crear notificaciones para todos los administradores
+        $admins = \App\Models\User::where('role', 'administrador')->get();
+        foreach ($admins as $admin) {
+            \App\Models\Notification::create([
+                'user_id' => $admin->id,
+                'type' => 'incident_created',
+                'title' => 'Nuevo Incidente Reportado',
+                'message' => Auth::user()->name . ' ha reportado: ' . $request->title,
+                'link' => route('admin.incidents.show', $incident->id),
+            ]);
+        }
 
         return redirect()->route('instructor.incidents.index')->with('success', 'Falla reportada exitosamente.');
     }

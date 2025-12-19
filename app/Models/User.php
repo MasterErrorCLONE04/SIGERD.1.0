@@ -150,4 +150,10 @@ class User extends Authenticatable
         return $this->hasMany(\App\Models\Incident::class, 'reported_by');
     }
 
+    // Notificaciones del usuario
+    public function notifications()
+    {
+        return $this->hasMany(\App\Models\Notification::class);
+    }
+
 }

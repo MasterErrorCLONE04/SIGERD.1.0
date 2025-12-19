@@ -291,11 +291,19 @@
                                                 @if($incident->initial_evidence_images && count($incident->initial_evidence_images) > 0)
                                                     <div class="mt-4">
                                                         <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Imágenes de Evidencia:</p>
-                                                        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+                                                        <div class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4">
                                                             @foreach ($incident->initial_evidence_images as $imagePath)
-                                                                <img src="{{ asset('storage/' . $imagePath) }}" 
-                                                                     alt="Evidencia Inicial"
-                                                                     class="h-24 w-full object-cover rounded-lg border border-gray-200 dark:border-gray-600">
+                                                                <div class="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02]" onclick="openImageModal('{{ asset('storage/' . $imagePath) }}')" title="Click para ampliar">
+                                                                    <img src="{{ asset('storage/' . $imagePath) }}" 
+                                                                         alt="Evidencia Inicial"
+                                                                         class="h-48 w-full object-cover">
+                                                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                                                    <div class="absolute top-3 right-3">
+                                                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-blue-500 text-white shadow-lg">
+                                                                            Inicial
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
                                                             @endforeach
                                                         </div>
                                                     </div>
@@ -346,4 +354,43 @@
 
         </div>
     </div>
+
+    <!-- Modal para ampliar imagen -->
+    <div id="imageModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="closeImageModal()">
+        <div class="relative max-w-7xl max-h-full">
+            <img id="modalImage" src="" alt="Imagen ampliada" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl">
+            <button onclick="closeImageModal()" class="absolute top-4 right-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-3 transition transform hover:scale-110">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+            <a id="downloadButton" href="" download class="absolute bottom-4 right-4 text-white bg-indigo-600 hover:bg-indigo-700 rounded-full p-3 transition transform hover:scale-110 flex items-center justify-center">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function openImageModal(imageSrc) {
+            document.getElementById('modalImage').src = imageSrc;
+            document.getElementById('downloadButton').href = imageSrc;
+            document.getElementById('imageModal').classList.remove('hidden');
+            document.getElementById('imageModal').classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').classList.add('hidden');
+            document.getElementById('imageModal').classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeImageModal();
+            }
+        });
+    </script>
 </x-app-layout>

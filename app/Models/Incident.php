@@ -17,11 +17,16 @@ class Incident extends Model
         'status',
         'reported_by',
         'initial_evidence_images',
+        'resolved_at',
+        'final_evidence_images',
+        'resolution_description',
     ];
 
     protected $casts = [
         'initial_evidence_images' => 'array',
+        'final_evidence_images' => 'array',
         'report_date' => 'datetime',
+        'resolved_at' => 'datetime',
     ];
 
     public function reportedBy()

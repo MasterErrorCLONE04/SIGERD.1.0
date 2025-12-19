@@ -144,16 +144,18 @@
                             <div class="mb-8">
                                 <p class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Imágenes de Referencia</p>
                                 <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Imágenes de referencia proporcionadas para la tarea</p>
-                                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                <div class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4">
                                     @foreach ($task->reference_images as $imagePath)
-                                        <div class="relative group">
-                                            <img src="{{ asset('storage/' . $imagePath) }}" alt="Imagen de Referencia" class="w-full h-32 object-cover rounded-lg shadow-md">
-                                            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-opacity rounded-lg flex items-center justify-center">
-                                                <a href="{{ asset('storage/' . $imagePath) }}" target="_blank" class="opacity-0 group-hover:opacity-100 text-white">
-                                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                                                    </svg>
-                                                </a>
+                                        <div class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 bg-gray-100 dark:bg-gray-700 cursor-pointer"
+                                             onclick="openImageModal('{{ asset('storage/' . $imagePath) }}')">
+                                            <img src="{{ asset('storage/' . $imagePath) }}" alt="Imagen de Referencia" class="w-full h-56 object-cover">
+                                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                                                <svg class="w-10 h-10 text-white drop-shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                                                </svg>
+                                            </div>
+                                            <div class="absolute bottom-3 right-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <span class="text-xs font-medium text-gray-700 dark:text-gray-300">Click para ampliar</span>
                                             </div>
                                         </div>
                                     @endforeach
@@ -165,16 +167,21 @@
                             <div class="mb-8">
                                 <p class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Evidencia Inicial: Estado de la Falla al Llegar</p>
                                 <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Imágenes que muestran cómo se encontró la falla al llegar al lugar</p>
-                                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                <div class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4">
                                     @foreach ($task->initial_evidence_images as $imagePath)
-                                        <div class="relative group">
-                                            <img src="{{ asset('storage/' . $imagePath) }}" alt="Evidencia Inicial" class="w-full h-32 object-cover rounded-lg shadow-md">
-                                            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-opacity rounded-lg flex items-center justify-center">
-                                                <a href="{{ asset('storage/' . $imagePath) }}" target="_blank" class="opacity-0 group-hover:opacity-100 text-white">
-                                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                                                    </svg>
-                                                </a>
+                                        <div class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 bg-gray-100 dark:bg-gray-700 cursor-pointer"
+                                             onclick="openImageModal('{{ asset('storage/' . $imagePath) }}')">
+                                            <img src="{{ asset('storage/' . $imagePath) }}" alt="Evidencia Inicial" class="w-full h-56 object-cover">
+                                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                                                <svg class="w-10 h-10 text-white drop-shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                                                </svg>
+                                            </div>
+                                            <div class="absolute top-3 left-3 bg-blue-500/90 backdrop-blur-sm px-2.5 py-1 rounded-lg">
+                                                <span class="text-xs font-bold text-white">Inicial</span>
+                                            </div>
+                                            <div class="absolute bottom-3 right-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <span class="text-xs font-medium text-gray-700 dark:text-gray-300">Click para ampliar</span>
                                             </div>
                                         </div>
                                     @endforeach
@@ -186,16 +193,26 @@
                             <div class="mb-8">
                                 <p class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Evidencia Final: Trabajo Completado</p>
                                 <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Imágenes que muestran el trabajo finalizado</p>
-                                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                <div class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4">
                                     @foreach ($task->final_evidence_images as $imagePath)
-                                        <div class="relative group">
-                                            <img src="{{ asset('storage/' . $imagePath) }}" alt="Evidencia Final" class="w-full h-32 object-cover rounded-lg shadow-md">
-                                            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-opacity rounded-lg flex items-center justify-center">
-                                                <a href="{{ asset('storage/' . $imagePath) }}" target="_blank" class="opacity-0 group-hover:opacity-100 text-white">
-                                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                                        <div class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 bg-gray-100 dark:bg-gray-700 cursor-pointer"
+                                             onclick="openImageModal('{{ asset('storage/' . $imagePath) }}')">
+                                            <img src="{{ asset('storage/' . $imagePath) }}" alt="Evidencia Final" class="w-full h-56 object-cover">
+                                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                                                <svg class="w-10 h-10 text-white drop-shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                                                </svg>
+                                            </div>
+                                            <div class="absolute top-3 left-3 bg-green-500/90 backdrop-blur-sm px-2.5 py-1 rounded-lg">
+                                                <span class="text-xs font-bold text-white flex items-center gap-1">
+                                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                                                     </svg>
-                                                </a>
+                                                    Final
+                                                </span>
+                                            </div>
+                                            <div class="absolute bottom-3 right-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <span class="text-xs font-medium text-gray-700 dark:text-gray-300">Click para ampliar</span>
                                             </div>
                                         </div>
                                     @endforeach
@@ -318,4 +335,45 @@
 
         </div>
     </div>
+
+    {{-- Modal para ver imagen en grande --}}
+    <div id="imageModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="closeImageModal()">
+        <div class="relative max-w-7xl max-h-full" onclick="event.stopPropagation()">
+            <img id="modalImage" src="" alt="Imagen ampliada" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl">
+            <button onclick="closeImageModal()" class="absolute top-4 right-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-3 transition-all hover:scale-110">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+            {{-- Botón de descarga --}}
+            <a id="downloadButton" href="" download class="absolute bottom-4 right-4 text-white bg-indigo-600 hover:bg-indigo-700 rounded-full p-3 transition-all hover:scale-110 shadow-lg">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function openImageModal(imageSrc) {
+            document.getElementById('modalImage').src = imageSrc;
+            document.getElementById('downloadButton').href = imageSrc;
+            document.getElementById('imageModal').classList.remove('hidden');
+            document.getElementById('imageModal').classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').classList.add('hidden');
+            document.getElementById('imageModal').classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cerrar con ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeImageModal();
+            }
+        });
+    </script>
 </x-app-layout>

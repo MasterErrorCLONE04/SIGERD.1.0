@@ -70,11 +70,11 @@ class IncidentController extends Controller
         ]);
 
         // Crear la tarea
-        Task::create([
+        $task = Task::create([
             'title' => $request->task_title,
             'description' => $request->task_description,
             'priority' => $request->priority,
-            'status' => 'asignado', // Estado inicial: “Asignado”
+            'status' => 'asignado', // Estado inicial: "Asignado"
             'assigned_to' => $request->assigned_to,
             'created_by' => Auth::id(), // El administrador que convierte el incidente
             'incident_id' => $incident->id,
@@ -83,9 +83,27 @@ class IncidentController extends Controller
             'reference_images' => $incident->initial_evidence_images, // Las imágenes del incidente se convierten en imágenes de referencia de la tarea
         ]);
 
-        // Actualizar el estado del incidente a “Asignado”
+        // Actualizar el estado del incidente a "Asignado"
         $incident->update([
             'status' => 'asignado',
+        ]);
+
+        // Crear notificación para el trabajador asignado
+        \App\Models\Notification::create([
+            'user_id' => $request->assigned_to,
+            'type' => 'task_assigned',
+            'title' => 'Nueva Tarea Asignada',
+            'message' => 'Te han asignado una nueva tarea: ' . $request->task_title,
+            'link' => route('worker.tasks.show', $task->id),
+        ]);
+
+        // Crear notificación para el instructor que reportó el incidente
+        \App\Models\Notification::create([
+            'user_id' => $incident->reported_by,
+            'type' => 'incident_converted',
+            'title' => 'Incidente Convertido a Tarea',
+            'message' => 'Tu incidente "' . $incident->title . '" ha sido convertido en una tarea',
+            'link' => route('instructor.incidents.show', $incident->id),
         ]);
 
         return redirect()->route('admin.incidents.index')->with('success', 'Incidente convertido a tarea exitosamente.');
