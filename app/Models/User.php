@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, \Laravel\Sanctum\HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -40,7 +40,7 @@ class User extends Authenticatable
         if ($this->profile_photo && file_exists(storage_path('app/public/' . $this->profile_photo))) {
             return asset('storage/' . $this->profile_photo);
         }
-        
+
         // Retornar una imagen por defecto si no tiene foto
         return $this->generateAvatarUrl();
     }
@@ -52,13 +52,13 @@ class User extends Authenticatable
     {
         $names = explode(' ', trim($this->name));
         $initials = '';
-        
+
         foreach ($names as $name) {
             if (!empty($name)) {
                 $initials .= strtoupper(substr($name, 0, 1));
             }
         }
-        
+
         return substr($initials, 0, 2) ?: 'U';
     }
 
@@ -69,7 +69,7 @@ class User extends Authenticatable
     {
         $name = urlencode($this->name);
         $initials = urlencode($this->initials);
-        
+
         // Usar UI Avatars como servicio de avatares por defecto
         return "https://ui-avatars.com/api/?name={$initials}&color=ffffff&background=6366f1&size=200&font-size=0.5";
     }
