@@ -14,7 +14,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     $user = Auth::user();
-    
+
     if ($user->isAdmin()) {
         return redirect()->route('admin.dashboard');
     } elseif ($user->isInstructor()) {
@@ -22,7 +22,7 @@ Route::get('/dashboard', function () {
     } elseif ($user->isTrabajador()) {
         return redirect()->route('worker.dashboard');
     }
-    
+
     // Si no tiene un rol válido, cerrar sesión y redirigir al login
     Auth::logout();
     return redirect()->route('login')->with('error', 'No tienes permisos para acceder al sistema.');
@@ -41,12 +41,12 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'role:administrador'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/users', \App\Http\Controllers\Admin\UserController::class);
     Route::resource('/tasks', \App\Http\Controllers\Admin\TaskController::class);
     Route::get('/tasks-export-pdf', [\App\Http\Controllers\Admin\TaskController::class, 'exportPDF'])->name('tasks.export-pdf');
     Route::put('/tasks/{task}/review', [\App\Http\Controllers\Admin\TaskController::class, 'reviewTask'])->name('tasks.review');
-    Route::resource('/incidents', IncidentController::class)->only(['index', 'show']);
+    Route::resource('/incidents', IncidentController::class)->only(['index', 'show', 'store']);
     Route::post('/incidents/{incident}/convert-to-task', [IncidentController::class, 'convertToTask'])->name('incidents.convert-to-task');
 });
 
@@ -60,4 +60,4 @@ Route::middleware(['auth', 'role:trabajador'])->prefix('worker')->name('worker.'
     Route::resource('/tasks', \App\Http\Controllers\Worker\TaskController::class)->only(['index', 'show', 'update']);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

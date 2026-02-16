@@ -30,9 +30,11 @@ class TaskController extends Controller
             $query->where('priority', $request->priority);
         }
 
-        $tasks = $query->get();
+        $tasks = $query->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
+        $workers = User::where('role', 'trabajador')->get();
+        $priorities = ['baja', 'media', 'alta'];
 
-        return view('admin.tasks.index', compact('tasks'));
+        return view('admin.tasks.index', compact('tasks', 'workers', 'priorities'));
     }
 
     /**
@@ -71,9 +73,9 @@ class TaskController extends Controller
         $maxSizeBytes = 2048 * 1024; // 2MB en bytes
 
         // Función helper para validar y guardar imágenes
-        $processImages = function($files, $fieldName, $folder) use ($allowedExtensions, $maxSizeBytes) {
+        $processImages = function ($files, $fieldName, $folder) use ($allowedExtensions, $maxSizeBytes) {
             $imagePaths = [];
-            
+
             if (isset($files[$fieldName]) && is_array($files[$fieldName]['name'])) {
                 // Múltiples archivos
                 $fileCount = count($files[$fieldName]['name']);
@@ -146,7 +148,7 @@ class TaskController extends Controller
                     throw new \Exception("Error al subir el archivo {$fileName}.");
                 }
             }
-            
+
             return $imagePaths;
         };
 
@@ -269,9 +271,9 @@ class TaskController extends Controller
         $maxSizeBytes = 2048 * 1024; // 2MB en bytes
 
         // Función helper para validar y guardar imágenes
-        $processImages = function($files, $fieldName, $folder) use ($allowedExtensions, $maxSizeBytes) {
+        $processImages = function ($files, $fieldName, $folder) use ($allowedExtensions, $maxSizeBytes) {
             $imagePaths = [];
-            
+
             if (isset($files[$fieldName]) && is_array($files[$fieldName]['name'])) {
                 // Múltiples archivos
                 $fileCount = count($files[$fieldName]['name']);
@@ -344,7 +346,7 @@ class TaskController extends Controller
                     throw new \Exception("Error al subir el archivo {$fileName}.");
                 }
             }
-            
+
             return $imagePaths;
         };
 
@@ -366,7 +368,7 @@ class TaskController extends Controller
                 if ($hasFiles) {
                     $initialEvidenceImagePaths = $processImages($_FILES, 'initial_evidence_images', 'tasks-evidence');
                     if (!empty($initialEvidenceImagePaths)) {
-                        $updateData['initial_evidence_images'] = array_merge((array)$task->initial_evidence_images, $initialEvidenceImagePaths);
+                        $updateData['initial_evidence_images'] = array_merge((array) $task->initial_evidence_images, $initialEvidenceImagePaths);
                     }
                 }
             }
@@ -388,7 +390,7 @@ class TaskController extends Controller
                 if ($hasFiles) {
                     $finalEvidenceImagePaths = $processImages($_FILES, 'final_evidence_images', 'tasks-evidence');
                     if (!empty($finalEvidenceImagePaths)) {
-                        $updateData['final_evidence_images'] = array_merge((array)$task->final_evidence_images, $finalEvidenceImagePaths);
+                        $updateData['final_evidence_images'] = array_merge((array) $task->final_evidence_images, $finalEvidenceImagePaths);
                     }
                 }
             }
@@ -410,7 +412,7 @@ class TaskController extends Controller
                 if ($hasFiles) {
                     $referenceImagePaths = $processImages($_FILES, 'reference_images', 'tasks-reference');
                     if (!empty($referenceImagePaths)) {
-                        $updateData['reference_images'] = array_merge((array)$task->reference_images, $referenceImagePaths);
+                        $updateData['reference_images'] = array_merge((array) $task->reference_images, $referenceImagePaths);
                     }
                 }
             }
@@ -456,7 +458,7 @@ class TaskController extends Controller
         switch ($request->action) {
             case 'approve':
                 $task->status = 'finalizada';
-                
+
                 // Si esta tarea está vinculada a un incidente, actualizar el incidente a "resuelto"
                 if ($task->incident_id && $task->incident) {
                     $task->incident->update([
@@ -495,9 +497,18 @@ class TaskController extends Controller
 
         // Obtener el nombre del mes en español
         $monthNames = [
-            1 => 'Enero', 2 => 'Febrero', 3 => 'Marzo', 4 => 'Abril',
-            5 => 'Mayo', 6 => 'Junio', 7 => 'Julio', 8 => 'Agosto',
-            9 => 'Septiembre', 10 => 'Octubre', 11 => 'Noviembre', 12 => 'Diciembre'
+            1 => 'Enero',
+            2 => 'Febrero',
+            3 => 'Marzo',
+            4 => 'Abril',
+            5 => 'Mayo',
+            6 => 'Junio',
+            7 => 'Julio',
+            8 => 'Agosto',
+            9 => 'Septiembre',
+            10 => 'Octubre',
+            11 => 'Noviembre',
+            12 => 'Diciembre'
         ];
         $monthName = $monthNames[$month];
 

@@ -6,11 +6,14 @@
             <div class="mb-8">
                 <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/50 p-8">
                     <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-                        <div class="flex items-center space-x-4">
-                            <div class="p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-lg">
-                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
-                                </svg>
+                        <div class="flex items-center space-x-5">
+                            <div class="relative group">
+                                <div class="absolute -inset-1 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
+                                <div class="relative p-4 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl shadow-xl transform group-hover:scale-105 transition-all duration-300 border border-white/20">
+                                    <svg class="w-8 h-8 text-white drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                    </svg>
+                                </div>
                             </div>
                             <div>
                                 <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Usuarios del Sistema</h3>
@@ -47,13 +50,13 @@
                                     </a>
                                 @endif
                             </form>
-                            <a href="{{ route('admin.users.create') }}" 
+                            <button onclick="openModal('createUserModal')" 
                                 class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                                 </svg>
                                 Crear Usuario
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -101,7 +104,7 @@
                                     <td class="px-8 py-6">
                                         <div class="flex items-center space-x-4">
                                             <div class="relative">
-                                                @if($user->profile_photo)
+                                                @if($user->hasProfilePhoto())
                                                     <img src="{{ $user->profile_photo_url }}" 
                                                          alt="{{ $user->name }}"
                                                          class="h-14 w-14 rounded-2xl object-cover shadow-lg ring-4 ring-white/50 dark:ring-gray-700/50 group-hover:scale-110 transition-transform duration-200">
@@ -253,14 +256,223 @@
                 @endif
             </div>
 
-            <!-- Paginación mejorada (opcional) -->
-            @if(method_exists($users, 'links'))
+            {{-- Paginación Estilizada --}}
+            @if ($users->hasPages() || $users->total() > 0)
                 <div class="mt-8">
-                    <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl border border-white/20 dark:border-gray-700/50 p-4">
-                        {{ $users->links() }}
+                    <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl border border-white/20 dark:border-gray-700/50 px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-6">
+                        <div class="text-sm font-medium order-2 sm:order-1 flex items-center gap-2">
+                            <span class="text-slate-400 dark:text-gray-500">Mostrando</span>
+                            <div class="flex items-center gap-1 bg-white dark:bg-gray-800 px-2 py-1 rounded-md border border-slate-200 dark:border-gray-700 shadow-sm">
+                                <span class="text-slate-900 dark:text-white font-bold">{{ $users->firstItem() ?? 0 }}</span>
+                                <span class="text-slate-400">-</span>
+                                <span class="text-slate-900 dark:text-white font-bold">{{ $users->lastItem() ?? 0 }}</span>
+                            </div>
+                            <span class="text-slate-400 dark:text-gray-500">de <span class="text-slate-700 dark:text-gray-300">{{ $users->total() }}</span> usuarios</span>
+                        </div>
+
+                        <div class="flex items-center gap-2 order-1 sm:order-2">
+                            {{-- Botón Anterior --}}
+                            @if ($users->onFirstPage())
+                                <span class="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-100 dark:border-gray-800 bg-slate-50 dark:bg-gray-900/50 text-slate-300 dark:text-gray-700 cursor-not-allowed transition-all">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </span>
+                            @else
+                                <a href="{{ $users->previousPageUrl() }}" class="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700 hover:border-blue-300 dark:hover:border-blue-900 transition-all shadow-sm group">
+                                    <svg class="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </a>
+                            @endif
+
+                            {{-- Páginas Numeradas --}}
+                            <div class="hidden sm:flex items-center gap-2 mx-2">
+                                @foreach ($users->getUrlRange(max(1, $users->currentPage() - 1), min($users->lastPage(), $users->currentPage() + 1)) as $page => $url)
+                                    @if ($page == $users->currentPage())
+                                        <span class="w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 text-white font-bold shadow-lg shadow-blue-500/30 scale-110 z-10 transition-all">{{ $page }}</span>
+                                    @else
+                                        <a href="{{ $url }}" class="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-slate-600 dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-300 dark:hover:border-blue-900 transition-all font-medium">{{ $page }}</a>
+                                    @endif
+                                @endforeach
+                            </div>
+
+                            {{-- Botón Siguiente --}}
+                            @if ($users->hasMorePages())
+                                <a href="{{ $users->nextPageUrl() }}" class="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700 hover:border-blue-300 dark:hover:border-blue-900 transition-all shadow-sm group">
+                                    <svg class="w-5 h-5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </a>
+                            @else
+                                <span class="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-100 dark:border-gray-800 bg-slate-50 dark:bg-gray-900/50 text-slate-300 dark:text-gray-700 cursor-not-allowed transition-all">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </span>
+                            @endif
+                        </div>
                     </div>
                 </div>
             @endif
         </div>
     </div>
+
+    <!-- Modal para Crear Usuario -->
+    <div id="createUserModal" class="fixed inset-0 z-50 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Overlay -->
+            <div class="fixed inset-0 bg-gray-900/60 backdrop-blur-sm transition-opacity" aria-hidden="true" onclick="closeModal('createUserModal')"></div>
+
+            <!-- Modal Panel -->
+            <div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full border border-white/20 dark:border-gray-700">
+                <div class="p-8">
+                    <!-- Header del Modal -->
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="flex items-center space-x-4">
+                            <div class="p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-lg">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-gray-900 dark:text-white" id="modal-title">Nuevo Usuario</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mt-1">Completa la información para crear un nuevo usuario</p>
+                            </div>
+                        </div>
+                        <button onclick="closeModal('createUserModal')" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <form method="POST" action="{{ route('admin.users.store') }}" enctype="multipart/form-data" class="space-y-6">
+                        @csrf
+
+                        <!-- Foto de perfil -->
+                        <div class="space-y-4">
+                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300">Foto de Perfil</label>
+                            <div class="flex items-start space-x-6">
+                                <div class="shrink-0">
+                                    <div id="imagePreview" class="h-24 w-24 rounded-2xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-lg shadow-lg ring-4 ring-white/50 dark:ring-gray-700/50 overflow-hidden">
+                                        <span id="initialsPlaceholder">?</span>
+                                        <img id="previewImg" class="h-full w-full object-cover hidden" alt="Preview">
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="relative">
+                                        <input type="file" id="profile_photo" name="profile_photo" accept="image/*" class="hidden" onchange="previewImage(this)">
+                                        <label for="profile_photo" class="inline-flex items-center px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl font-medium text-gray-700 dark:text-gray-300 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer transition-all duration-200">
+                                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                            </svg>
+                                            Seleccionar foto
+                                        </label>
+                                    </div>
+                                    <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">JPG, PNG, GIF hasta 2MB. Opcional.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label for="name" class="block text-sm font-bold text-gray-700 dark:text-gray-300">Nombre Completo</label>
+                                <input id="name" name="name" type="text" value="{{ old('name') }}" required oninput="updateInitials(this.value)" class="block w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500/50 focus:border-blue-400 transition-all duration-200 shadow-sm" placeholder="Nombre completo">
+                            </div>
+                            <div class="space-y-2">
+                                <label for="email" class="block text-sm font-bold text-gray-700 dark:text-gray-300">Correo Electrónico</label>
+                                <input id="email" name="email" type="email" value="{{ old('email') }}" required class="block w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500/50 focus:border-blue-400 transition-all duration-200 shadow-sm" placeholder="usuario@ejemplo.com">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label for="password" class="block text-sm font-bold text-gray-700 dark:text-gray-300">Contraseña</label>
+                                <input id="password" name="password" type="password" required class="block w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500/50 focus:border-blue-400 transition-all duration-200 shadow-sm" placeholder="••••••••">
+                            </div>
+                            <div class="space-y-2">
+                                <label for="password_confirmation" class="block text-sm font-bold text-gray-700 dark:text-gray-300">Confirmar Contraseña</label>
+                                <input id="password_confirmation" name="password_confirmation" type="password" required class="block w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500/50 focus:border-blue-400 transition-all duration-200 shadow-sm" placeholder="••••••••">
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="role" class="block text-sm font-bold text-gray-700 dark:text-gray-300">Rol del Usuario</label>
+                            <select id="role" name="role" required class="block w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500/50 focus:border-blue-400 transition-all duration-200 shadow-sm">
+                                <option value="">Selecciona un rol</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role }}" {{ old('role') == $role ? 'selected' : '' }}>{{ ucfirst($role) }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Botones de acción -->
+                        <div class="flex items-center justify-end space-x-4 pt-6">
+                            <button type="button" onclick="closeModal('createUserModal')" class="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-xl font-semibold transition-all shadow-sm">Cancelar</button>
+                            <button type="submit" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all shadow-lg transform hover:scale-105">Crear Usuario</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function previewImage(input) {
+            const preview = document.getElementById('previewImg');
+            const placeholder = document.getElementById('initialsPlaceholder');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.classList.remove('hidden');
+                    placeholder.classList.add('hidden');
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.classList.add('hidden');
+                placeholder.classList.remove('hidden');
+            }
+        }
+        
+        function updateInitials(name) {
+            const placeholder = document.getElementById('initialsPlaceholder');
+            const preview = document.getElementById('previewImg');
+            
+            if (preview.classList.contains('hidden')) {
+                if (name.trim()) {
+                    const names = name.trim().split(' ');
+                    let initials = '';
+                    names.forEach(n => { if (n) initials += n.charAt(0).toUpperCase(); });
+                    placeholder.textContent = initials.substring(0, 2) || '?';
+                } else {
+                    placeholder.textContent = '?';
+                }
+            }
+        }
+
+        // Cerrar modal con ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal('createUserModal');
+        });
+
+        // Mostrar el modal si hay errores de validación
+        @if ($errors->any())
+            window.onload = function() {
+                openModal('createUserModal');
+            };
+        @endif
+    </script>
 </x-app-layout>

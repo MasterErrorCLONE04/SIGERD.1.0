@@ -20,26 +20,18 @@ class UserController extends Controller
         // Aplicar búsqueda si se proporciona
         if ($request->filled('search')) {
             $search = $request->input('search');
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('email', 'like', "%{$search}%");
+                    ->orWhere('email', 'like', "%{$search}%");
             });
         }
 
-        $users = $query->orderBy('name')->get();
-
-        return view('admin.users.index', compact('users'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
+        $users = $query->orderBy('created_at', 'desc')->paginate(5)->withQueryString();
         $roles = ['administrador', 'trabajador', 'instructor'];
 
-        return view('admin.users.create', compact('roles'));
+        return view('admin.users.index', compact('users', 'roles'));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -62,7 +54,7 @@ class UserController extends Controller
         ]);
 
         $profilePhotoPath = null;
-        
+
         // Manejar la subida de la foto de perfil usando $_FILES directamente (sin fileinfo)
         if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] === UPLOAD_ERR_OK) {
             $file = $_FILES['profile_photo'];
@@ -126,13 +118,13 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user = User::with([
-            'assignedTasks' => function($query) {
+            'assignedTasks' => function ($query) {
                 $query->with('createdBy')->orderBy('created_at', 'desc');
             },
-            'createdTasks' => function($query) {
+            'createdTasks' => function ($query) {
                 $query->with('assignedTo')->orderBy('created_at', 'desc');
             },
-            'reportedIncidents' => function($query) {
+            'reportedIncidents' => function ($query) {
                 $query->orderBy('created_at', 'desc');
             }
         ])->findOrFail($id);
@@ -160,14 +152,14 @@ class UserController extends Controller
 
         $rules = [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$id],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $id],
             'role' => ['required', 'string', 'in:administrador,trabajador,instructor'],
         ];
 
         // Validar campos básicos primero
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$id],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $id],
             'role' => ['required', 'string', 'in:administrador,trabajador,instructor'],
         ]);
 
@@ -242,7 +234,7 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);
-        
+
         // Eliminar la foto de perfil si existe (sin usar Storage que requiere fileinfo)
         if ($user->profile_photo) {
             $photoPath = storage_path('app/public/' . $user->profile_photo);
@@ -250,7 +242,7 @@ class UserController extends Controller
                 unlink($photoPath);
             }
         }
-        
+
         $user->delete();
 
         return redirect()->route('admin.users.index')->with('success', 'Usuario eliminado exitosamente.');

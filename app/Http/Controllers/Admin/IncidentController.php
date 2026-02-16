@@ -21,14 +21,14 @@ class IncidentController extends Controller
         // Aplicar búsqueda si se proporciona
         if ($request->filled('search')) {
             $search = $request->input('search');
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%")
-                  ->orWhere('location', 'like', "%{$search}%")
-                  ->orWhereHas('reportedBy', function($userQuery) use ($search) {
-                      $userQuery->where('name', 'like', "%{$search}%")
-                                ->orWhere('email', 'like', "%{$search}%");
-                  });
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhere('location', 'like', "%{$search}%")
+                    ->orWhereHas('reportedBy', function ($userQuery) use ($search) {
+                        $userQuery->where('name', 'like', "%{$search}%")
+                            ->orWhere('email', 'like', "%{$search}%");
+                    });
             });
         }
 
@@ -38,7 +38,7 @@ class IncidentController extends Controller
         }
 
         // Ordenar por fecha de creación (más recientes primero)
-        $incidents = $query->orderBy('created_at', 'desc')->get();
+        $incidents = $query->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
 
         return view('admin.incidents.index', compact('incidents'));
     }
@@ -53,6 +53,90 @@ class IncidentController extends Controller
         $priorities = ['baja', 'media', 'alta'];
 
         return view('admin.incidents.show', compact('incident', 'workers', 'priorities'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'location' => ['required', 'string', 'max:255'],
+            'report_date' => ['required', 'date', 'before_or_equal:today'],
+        ]);
+
+        // Validar manualmente las imágenes sin usar fileinfo
+        $allowedExtensions = ['jpeg', 'jpg', 'png', 'gif'];
+        $maxSize = 2 * 1024 * 1024; // 2MB en bytes
+        $initialEvidenceImagePaths = [];
+
+        if (isset($_FILES['initial_evidence_images']) && $_FILES['initial_evidence_images']['error'][0] !== UPLOAD_ERR_NO_FILE) {
+            $files = $_FILES['initial_evidence_images'];
+            $fileCount = count($files['name']);
+
+            // Límite de 10 imágenes
+            if ($fileCount > 10) {
+                return back()->withErrors(['initial_evidence_images' => 'No puedes subir más de 10 imágenes.'])->withInput();
+            }
+
+            if ($fileCount === 0) {
+                return back()->withErrors(['initial_evidence_images' => 'Debe subir al menos una imagen de evidencia.'])->withInput();
+            }
+
+            // Crear directorio si no existe
+            $uploadDir = storage_path('app/public/incident-evidence');
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+
+            for ($i = 0; $i < $fileCount; $i++) {
+                if ($files['error'][$i] === UPLOAD_ERR_OK) {
+                    $fileName = $files['name'][$i];
+                    $fileTmpName = $files['tmp_name'][$i];
+                    $fileSize = $files['size'][$i];
+
+                    // Validar extensión
+                    $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+                    if (!in_array($fileExtension, $allowedExtensions)) {
+                        return back()->withErrors(['initial_evidence_images' => "El archivo '{$fileName}' tiene una extensión no permitida. Solo se permiten: " . implode(', ', $allowedExtensions)])->withInput();
+                    }
+
+                    // Validar tamaño
+                    if ($fileSize > $maxSize) {
+                        return back()->withErrors(['initial_evidence_images' => "El archivo '{$fileName}' excede el tamaño máximo de 2MB."])->withInput();
+                    }
+
+                    // Generar nombre único
+                    $newFileName = uniqid() . '_' . time() . '.' . $fileExtension;
+                    $destinationPath = $uploadDir . '/' . $newFileName;
+
+                    // Mover archivo
+                    if (move_uploaded_file($fileTmpName, $destinationPath)) {
+                        $initialEvidenceImagePaths[] = 'incident-evidence/' . $newFileName;
+                    } else {
+                        return back()->withErrors(['initial_evidence_images' => "Error al subir el archivo '{$fileName}'."])->withInput();
+                    }
+                } elseif ($files['error'][$i] !== UPLOAD_ERR_NO_FILE) {
+                    return back()->withErrors(['initial_evidence_images' => "Error al subir el archivo: código de error {$files['error'][$i]}."])->withInput();
+                }
+            }
+        } else {
+            return back()->withErrors(['initial_evidence_images' => 'Debe subir al menos una imagen de evidencia.'])->withInput();
+        }
+
+        $incident = Incident::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'location' => $request->location,
+            'report_date' => $request->report_date,
+            'status' => 'pendiente de revisión',
+            'reported_by' => Auth::id(),
+            'initial_evidence_images' => $initialEvidenceImagePaths,
+        ]);
+
+        return redirect()->route('admin.incidents.index')->with('success', 'Falla reportada exitosamente.');
     }
 
     /**
