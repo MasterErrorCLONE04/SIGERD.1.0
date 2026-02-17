@@ -2,18 +2,25 @@
     {{-- 1. Header con breadcrumbs e icono -----------------------------}}
 
     {{-- 2. Área de contenido ------------------------------------------}}
-    <div class="h-full p-6 lg:p-8">
-        <div class="max-w-full mx-auto space-y-8 h-full flex flex-col">
+    <div class="p-6 lg:p-8">
+        <div class="max-w-full mx-auto space-y-8">
 
             {{-- Header de la Página --}}
-            <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/50 p-8">
+            <div
+                class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/50 p-8">
                 <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
                     <div class="flex items-center space-x-5">
                         <div class="relative group">
-                            <div class="absolute -inset-1 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
-                            <div class="relative p-4 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-xl transform group-hover:scale-105 transition-all duration-300 border border-white/20">
-                                <svg class="w-8 h-8 text-white drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                            <div
+                                class="absolute -inset-1 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-300">
+                            </div>
+                            <div
+                                class="relative p-4 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-xl transform group-hover:scale-105 transition-all duration-300 border border-white/20">
+                                <svg class="w-8 h-8 text-white drop-shadow-sm" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4">
+                                    </path>
                                 </svg>
                             </div>
                         </div>
@@ -85,8 +92,9 @@
 
             {{-- 2.2 Tabla responsive -----------------------------------}}
             <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl
-                    rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/30
-                    overflow-hidden flex-1 flex flex-col">
+                    rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/30">
+                {{-- VISTA DE ESCRITORIO (Tabla) --}}
+                {{-- VISTA DE ESCRITORIO (Tabla) --}}
                 <div class="overflow-x-auto flex-1">
                     <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead class="bg-gray-50 dark:bg-gray-900/50">
@@ -130,10 +138,14 @@
                                         @php
                                             $priorityColors = [
                                                 'alta' => 'bg-red-100 text-red-800 dark:bg-red-500/20 dark:text-red-300',
-                                                'media' => 'bg-yellow-100 text-yellow-800 dark:bg-yellow-500/20 dark:text-yellow-300',
-                                                'baja' => 'bg-green-100 text-green-800 dark:bg-green-500/20 dark:text-green-300',
+                                                'media' =>
+                                                    'bg-yellow-100 text-yellow-800 dark:bg-yellow-500/20 dark:text-yellow-300',
+                                                'baja' =>
+                                                    'bg-green-100 text-green-800 dark:bg-green-500/20 dark:text-green-300',
                                             ];
-                                            $color = $priorityColors[strtolower($task->priority)] ?? 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
+                                            $color =
+                                                $priorityColors[strtolower($task->priority)] ??
+                                                'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
                                         @endphp
                                         <span
                                             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $color }}">
@@ -145,11 +157,16 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @php
                                             $statusColors = [
-                                                'pendiente' => 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300',
-                                                'en progreso' => 'bg-blue-100 text-blue-800 dark:bg-blue-500/20 dark:text-blue-300',
-                                                'completada' => 'bg-green-100 text-green-800 dark:bg-green-500/20 dark:text-green-300',
+                                                'pendiente' =>
+                                                    'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300',
+                                                'en progreso' =>
+                                                    'bg-blue-100 text-blue-800 dark:bg-blue-500/20 dark:text-blue-300',
+                                                'completada' =>
+                                                    'bg-green-100 text-green-800 dark:bg-green-500/20 dark:text-green-300',
                                             ];
-                                            $sc = $statusColors[strtolower($task->status)] ?? 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
+                                            $sc =
+                                                $statusColors[strtolower($task->status)] ??
+                                                'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
                                         @endphp
                                         <span
                                             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $sc }}">
@@ -167,9 +184,10 @@
                                     {{-- Acciones --}}
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <div class="flex items-center justify-end gap-2">
-                                            <a href="{{ route('admin.tasks.show', $task->id) }}" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-md
-                                                                  bg-blue-50 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300
-                                                                  hover:bg-blue-100 dark:hover:bg-blue-500/30 transition">
+                                            <a href="{{ route('admin.tasks.show', $task->id) }}"
+                                                class="inline-flex items-center gap-1 px-3 py-1.5 rounded-md
+                                                                                      bg-blue-50 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300
+                                                                                      hover:bg-blue-100 dark:hover:bg-blue-500/30 transition">
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -178,9 +196,10 @@
                                                 </svg>
                                                 Ver
                                             </a>
-                                            <button onclick="startEditTask({{ $task->id }})" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-md
-                                                              bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300
-                                                              hover:bg-indigo-100 dark:hover:bg-indigo-500/30 transition">
+                                            <button onclick="startEditTask({{ $task->id }})"
+                                                class="inline-flex items-center gap-1 px-3 py-1.5 rounded-md
+                                                                                  bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300
+                                                                                  hover:bg-indigo-100 dark:hover:bg-indigo-500/30 transition">
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -192,8 +211,8 @@
                                                 @csrf @method('DELETE')
                                                 <button type="submit"
                                                     class="inline-flex items-center gap-1 px-3 py-1.5 rounded-md
-                                                                           bg-red-50 dark:bg-red-500/20 text-red-700 dark:text-red-300
-                                                                           hover:bg-red-100 dark:hover:bg-red-500/30 transition">
+                                                                                               bg-red-50 dark:bg-red-500/20 text-red-700 dark:text-red-300
+                                                                                               hover:bg-red-100 dark:hover:bg-red-500/30 transition">
                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                         viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -210,6 +229,9 @@
                         </tbody>
                     </table>
                 </div>
+
+
+
 
                 {{-- Paginación Estilizada --}}
                 @if ($tasks->hasPages() || $tasks->total() > 0)

@@ -3,8 +3,8 @@
 
 
     {{-- 2. Contenido -------------------------------------------------}}
-    <div class="h-full p-6 lg:p-8">
-        <div class="max-w-full mx-auto space-y-8 h-full flex flex-col">
+    <div class="p-6 lg:p-8">
+        <div class="max-w-full mx-auto space-y-8">
 
             {{-- Header de la Página --}}
             <div
@@ -137,8 +137,7 @@
 
             {{-- 2.2 Tabla ---------------------------------------------}}
             <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl
-                    rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/30
-                    overflow-hidden flex-1 flex flex-col">
+                    rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/30">
                 <div class="overflow-x-auto flex-1">
                     <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead class="bg-gray-50 dark:bg-gray-900/50">
