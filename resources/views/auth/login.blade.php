@@ -1,130 +1,185 @@
 <x-guest-layout>
-    {{-- Header --}}
-    <div class="text-center mb-8">
-        <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl shadow-lg mb-4">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-            </svg>
-        </div>
-        <h2 class="text-3xl font-bold text-gray-800 mb-2">¡Bienvenido de vuelta!</h2>
-        <p class="text-gray-600">Ingresa tus credenciales para continuar</p>
-    </div>
+    <!-- Centered Card Wrapper -->
+    <div class="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8">
 
-    {{-- Session Status --}}
-    <x-auth-session-status class="mb-6" :status="session('status')" />
+        <!-- The Card Itself -->
+        <div
+            class="w-full max-w-7xl bg-white dark:bg-slate-800 rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col lg:flex-row">
 
-    <form method="POST" action="{{ route('login') }}" class="space-y-6">
-        @csrf
+            {{-- Left Column (Features/Brand) --}}
+            <div
+                class="w-full lg:w-1/2 p-8 lg:p-16 flex flex-col justify-center bg-slate-50 dark:bg-slate-900/50 border-r border-slate-100 dark:border-slate-700/50">
+                <div class="max-w-md mx-auto lg:mx-0">
+                    <div
+                        class="flex items-center space-x-3 mb-12 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 w-fit">
+                        <div class="bg-[#1E3A8A] p-2.5 rounded-xl shadow-lg shadow-blue-900/20">
+                            <span class="material-icons-round text-white text-2xl">description</span>
+                        </div>
+                        <div>
+                            <h1
+                                class="text-2xl font-bold text-[#1E3A8A] dark:text-blue-400 leading-none tracking-tight">
+                                SIGERD</h1>
+                            <p
+                                class="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold mt-1">
+                                Sistema de Gestión</p>
+                        </div>
+                    </div>
 
-        {{-- Email Address --}}
-        <div>
-            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
-                Correo Electrónico
-            </label>
-            <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
-                    </svg>
-                </div>
-                <input id="email"
-                    type="email"
-                    name="email"
-                    value="{{ old('email') }}"
-                    required
-                    autofocus
-                    autocomplete="username"
-                    placeholder="usuario@ejemplo.com"
-                    class="block w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" />
-            </div>
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+                    <h2
+                        class="text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white mb-6 leading-[1.15] tracking-tight">
+                        Gestiona tus <span class="text-[#1E3A8A] dark:text-blue-400 relative">reportes<span
+                                class="absolute bottom-1 left-0 w-full h-2 bg-blue-200/30 dark:bg-blue-900/30 -z-10 rounded-full"></span></span>
+                        de manera eficiente
+                    </h2>
 
-        {{-- Password --}}
-        <div>
-            <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">
-                Contraseña
-            </label>
-            <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                    </svg>
-                </div>
-                <input id="password"
-                    type="password"
-                    name="password"
-                    required
-                    autocomplete="current-password"
-                    placeholder="••••••••"
-                    class="block w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" />
-            </div>
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+                    <p class="text-lg text-slate-600 dark:text-slate-400 mb-10 leading-relaxed font-medium">
+                        Plataforma integral para el seguimiento y gestión de incidentes y tareas de mantenimiento para
+                        entornos corporativos de alto nivel.
+                    </p>
 
-        {{-- Remember Me & Forgot Password --}}
-        <div class="flex items-center justify-between">
-            <label for="remember_me" class="flex items-center cursor-pointer group">
-                <input id="remember_me" type="checkbox"
-                    class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer"
-                    name="remember">
-                <span class="ml-2 text-sm text-gray-600 group-hover:text-gray-800 transition">Recordarme</span>
-            </label>
+                    <div class="space-y-4">
+                        <div
+                            class="flex items-center p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-all duration-300 group cursor-default">
+                            <div
+                                class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-xl mr-4 group-hover:scale-110 transition-transform duration-300">
+                                <span
+                                    class="material-icons-round text-[#1E3A8A] dark:text-blue-400 text-xl">speed</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-900 dark:text-white text-sm">Gestión en Tiempo Real</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">Seguimiento
+                                    instantáneo de todas las tareas.</p>
+                            </div>
+                        </div>
 
-            @if (Route::has('password.request'))
-                <a href="{{ route('password.request') }}" class="text-sm font-medium text-blue-600 hover:text-blue-700 transition">
-                    ¿Olvidaste tu contraseña?
-                </a>
-            @endif
-        </div>
+                        <div
+                            class="flex items-center p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-all duration-300 group cursor-default">
+                            <div
+                                class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-xl mr-4 group-hover:scale-110 transition-transform duration-300">
+                                <span
+                                    class="material-icons-round text-[#1E3A8A] dark:text-blue-400 text-xl">notifications_active</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-900 dark:text-white text-sm">Notificaciones Inteligentes
+                                </h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">Mantente
+                                    informado de cada actualización.</p>
+                            </div>
+                        </div>
 
-        {{-- Submit Button --}}
-        <div class="space-y-4">
-            <button type="submit"
-                class="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transform hover:scale-[1.02] transition-all duration-200">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
-                </svg>
-                Iniciar Sesión
-            </button>
-
-            {{-- Divider --}}
-            <div class="relative">
-                <div class="absolute inset-0 flex items-center">
-                    <div class="w-full border-t border-gray-200"></div>
-                </div>
-                <div class="relative flex justify-center text-sm">
-                    <span class="px-4 bg-white/70 text-gray-500">o continúa con</span>
+                        <div
+                            class="flex items-center p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-all duration-300 group cursor-default">
+                            <div
+                                class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-xl mr-4 group-hover:scale-110 transition-transform duration-300">
+                                <span
+                                    class="material-icons-round text-[#1E3A8A] dark:text-blue-400 text-xl">verified_user</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-900 dark:text-white text-sm">Seguro y Confiable</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">Tu información
+                                    protegida bajo estándares bancarios.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            {{-- Social Login Placeholder --}}
-            <div class="grid grid-cols-2 gap-3">
-                <button type="button" disabled
-                    class="flex items-center justify-center gap-2 px-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-700 font-medium hover:bg-gray-50 transition opacity-50 cursor-not-allowed">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/>
-                    </svg>
-                    Google
-                </button>
-                <button type="button" disabled
-                    class="flex items-center justify-center gap-2 px-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-700 font-medium hover:bg-gray-50 transition opacity-50 cursor-not-allowed">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
-                    </svg>
-                    Facebook
-                </button>
+            {{-- Right Column (Form) --}}
+            <div
+                class="w-full lg:w-1/2 p-8 lg:p-16 flex items-center justify-center relative overflow-hidden bg-white dark:bg-slate-800">
+                <!-- Background Decoration -->
+                <div class="absolute -top-24 -right-24 w-96 h-96 bg-[#1E3A8A]/5 rounded-full blur-[100px]"></div>
+                <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-blue-400/10 rounded-full blur-[80px]"></div>
+
+                <div class="w-full max-w-sm z-10 relative">
+                    <div class="text-center mb-10">
+                        <div
+                            class="inline-flex items-center justify-center w-20 h-20 bg-slate-50 dark:bg-slate-900 rounded-3xl mb-6 shadow-inner ring-1 ring-slate-100 dark:ring-slate-700">
+                            <span class="material-icons-round text-[#1E3A8A] dark:text-blue-400 text-4xl">person</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-2 tracking-tight">¡Bienvenido!
+                        </h2>
+                        <p class="text-slate-500 dark:text-slate-400 font-medium">Ingresa tus credenciales para
+                            continuar</p>
+                    </div>
+
+                    {{-- LARAVEL FORM --}}
+                    <x-auth-session-status class="mb-6" :status="session('status')" />
+
+                    <form method="POST" action="{{ route('login') }}" class="space-y-5">
+                        @csrf
+
+                        {{-- Email --}}
+                        <div class="space-y-2">
+                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">Correo
+                                Electrónico</label>
+                            <div class="relative group">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <span
+                                        class="material-icons-round text-slate-400 text-xl group-focus-within:text-[#1E3A8A] transition-colors">alternate_email</span>
+                                </div>
+                                <input name="email" value="{{ old('email') }}" required autofocus
+                                    class="block w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1E3A8A]/10 focus:border-[#1E3A8A] transition-all duration-200 font-medium sm:text-sm"
+                                    placeholder="usuario@ejemplo.com" type="email" />
+                            </div>
+                            <x-input-error :messages="$errors->get('email')" class="mt-1 ml-1" />
+                        </div>
+
+                        {{-- Password --}}
+                        <div class="space-y-2">
+                            <label
+                                class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">Contraseña</label>
+                            <div class="relative group">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <span
+                                        class="material-icons-round text-slate-400 text-xl group-focus-within:text-[#1E3A8A] transition-colors">lock_outline</span>
+                                </div>
+                                <input name="password" required
+                                    class="block w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1E3A8A]/10 focus:border-[#1E3A8A] transition-all duration-200 font-medium sm:text-sm"
+                                    placeholder="••••••••" type="password" />
+                            </div>
+                            <x-input-error :messages="$errors->get('password')" class="mt-1 ml-1" />
+                        </div>
+
+                        {{-- Options --}}
+                        <div class="flex items-center justify-between pt-2">
+                            <label
+                                class="flex items-center text-sm font-medium text-slate-600 dark:text-slate-400 cursor-pointer select-none group">
+                                <input name="remember"
+                                    class="w-4 h-4 rounded border-slate-300 text-[#1E3A8A] focus:ring-[#1E3A8A] mr-2.5 bg-white dark:bg-slate-900 transition-colors cursor-pointer"
+                                    type="checkbox" />
+                                <span
+                                    class="group-hover:text-slate-800 dark:group-hover:text-slate-300 transition-colors">Recordarme</span>
+                            </label>
+                            @if (Route::has('password.request'))
+                                <a class="text-sm font-semibold text-[#1E3A8A] dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+                                    href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a>
+                            @endif
+                        </div>
+
+                        <button
+                            class="w-full py-4 bg-[#0F2742] hover:bg-[#1E3A5F] text-white font-bold rounded-xl transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg shadow-[#0F2742]/30 hover:shadow-[#0F2742]/50 flex items-center justify-center space-x-2.5 text-sm sm:text-base mt-4 uppercase tracking-widest"
+                            type="submit">
+                            <span class="material-icons-round">login</span>
+                            <span>Iniciar Sesión Segura</span>
+                        </button>
+                    </form>
+
+                </div>
+
+                <p
+                    class="absolute bottom-6 text-center text-[10px] text-slate-400 dark:text-slate-600 uppercase tracking-[0.2em] font-bold opacity-70 hover:opacity-100 transition-opacity cursor-default">
+                    SIGERD © {{ date('Y') }} - Todos los derechos reservados
+                </p>
             </div>
         </div>
-    </form>
 
-    {{-- Mobile Logo --}}
-    <div class="lg:hidden mt-8 text-center">
-        <div class="inline-flex items-center gap-2 text-sm text-gray-600">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-            </svg>
-            <span class="font-semibold">SIGERD</span>
-        </div>
+        <!-- Theme Toggle -->
+        <button
+            class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-white dark:bg-slate-800 shadow-xl border border-slate-100 dark:border-slate-700 flex items-center justify-center text-slate-400 dark:text-yellow-400 hover:scale-110 active:scale-95 transition-all duration-300 z-50 hover:text-[#1E3A8A] dark:hover:text-yellow-300"
+            onclick="document.documentElement.classList.toggle('dark')">
+            <span class="material-icons-round dark:hidden text-2xl">dark_mode</span>
+            <span class="material-icons-round hidden dark:block text-2xl">light_mode</span>
+        </button>
     </div>
 </x-guest-layout>
