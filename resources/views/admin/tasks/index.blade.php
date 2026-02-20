@@ -1,313 +1,220 @@
 <x-app-layout>
-    {{-- 1. Header con breadcrumbs e icono -----------------------------}}
-
-    {{-- 2. Área de contenido ------------------------------------------}}
-    <div class="p-6 lg:p-8">
-        <div class="max-w-full mx-auto space-y-8">
-
-            {{-- Header de la Página --}}
-            <div
-                class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/50 p-8">
-                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-                    <div class="flex items-center space-x-5">
-                        <div class="relative group">
-                            <div
-                                class="absolute -inset-1 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-300">
-                            </div>
-                            <div
-                                class="relative p-4 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-xl transform group-hover:scale-105 transition-all duration-300 border border-white/20">
-                                <svg class="w-8 h-8 text-white drop-shadow-sm" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4">
-                                    </path>
-                                </svg>
-                            </div>
+    <div class="p-6 lg:p-8 bg-slate-50 min-h-screen">
+        <div class="max-w-7xl mx-auto space-y-6">
+            
+            <!-- Header Card -->
+            <div class="bg-white rounded-[1.25rem] shadow-sm border border-slate-200/60 p-6 md:p-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div class="flex items-center gap-5">
+                        <div class="w-16 h-16 bg-[#F4F6FF] rounded-2xl flex items-center justify-center text-[#4F46E5] flex-shrink-0">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                            </svg>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Gestión de Tareas</h3>
-                            <p class="text-gray-600 dark:text-gray-400 mt-1">
-                                Supervisa y organiza el flujo de trabajo del sistema
+                            <h2 class="text-[1.35rem] font-bold text-slate-800 tracking-tight">Gestión de Tareas</h2>
+                            <p class="text-sm text-slate-500 mt-1">
+                                Supervisa y organiza el flujo de trabajo del sistema.
                             </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col xl:flex-row items-center gap-4 w-full md:w-auto">
+                        <form method="GET" action="{{ route('admin.tasks.index') }}" class="flex flex-col sm:flex-row gap-3 w-full xl:w-auto">
+                            <div class="relative flex-grow sm:w-64">
+                                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                                    <svg class="h-4 w-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                </div>
+                                <input type="text" 
+                                    name="search" 
+                                    value="{{ request('search') }}"
+                                    placeholder="Buscar título..." 
+                                    class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200/80 rounded-xl text-sm text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-100 focus:border-slate-300 transition-colors">
+                            </div>
+                            <div class="flex gap-2 w-full sm:w-auto">
+                                <select name="priority" class="w-full sm:w-auto px-4 py-2.5 bg-white border border-slate-200/80 rounded-xl text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-100 focus:border-slate-300 transition-colors flex-grow">
+                                    <option value="">Prioridad</option>
+                                    <option value="alta" {{ request('priority') == 'alta' ? 'selected' : '' }}>Alta</option>
+                                    <option value="media" {{ request('priority') == 'media' ? 'selected' : '' }}>Media</option>
+                                    <option value="baja" {{ request('priority') == 'baja' ? 'selected' : '' }}>Baja</option>
+                                </select>
+                                <button type="submit" class="sm:hidden flex items-center justify-center px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl transition-colors">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                </button>
+                            </div>
+                            <button type="submit" class="hidden sm:flex items-center justify-center px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            </button>
+                        </form>
+
+                        <div class="flex items-center gap-2 w-full xl:w-auto">
+                            <button onclick="openExportModal()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-[#10B981] hover:bg-[#059669] text-white px-4 py-2.5 rounded-xl text-sm font-medium transition-colors shadow-sm focus:ring-2 focus:ring-[#10B981]/50 whitespace-nowrap">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                <span class="hidden sm:inline">Exportar</span> PDF
+                            </button>
+                            <button onclick="openModal('createTaskModal')" class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] text-white px-5 py-2.5 rounded-xl text-sm font-medium transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 whitespace-nowrap">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                                Crear Tarea
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {{-- 2.1 Filtros + crear ------------------------------------}}
-            <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl
-                    rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/30
-                    px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <form method="GET" action="{{ route('admin.tasks.index') }}"
-                    class="flex flex-col sm:flex-row gap-3 sm:gap-4 flex-1">
-                    {{-- Buscador --}}
-                    <input type="text" name="search" placeholder="Buscar por título..." value="{{ request('search') }}"
-                        class="w-full sm:w-80 rounded-lg bg-gray-50 dark:bg-gray-900
-                              border-gray-300 dark:border-gray-600
-                              text-gray-800 dark:text-gray-200
-                              focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400">
-                    {{-- Filtro prioridad --}}
-                    <select name="priority" class="rounded-lg bg-gray-50 dark:bg-gray-900
-                               border-gray-300 dark:border-gray-600
-                               text-gray-800 dark:text-gray-200
-                               focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400">
-                        <option value="">Todas las prioridades</option>
-                        <option value="alta" {{ request('priority') == 'alta' ? 'selected' : '' }}>Alta</option>
-                        <option value="media" {{ request('priority') == 'media' ? 'selected' : '' }}>Media</option>
-                        <option value="baja" {{ request('priority') == 'baja' ? 'selected' : '' }}>Baja</option>
-                    </select>
-                    <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white
-                               bg-indigo-500 hover:bg-indigo-600
-                               focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
-                               dark:focus:ring-offset-gray-800 shadow-md hover:shadow-lg transition">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                        Buscar
-                    </button>
-                </form>
-                <div class="flex gap-3">
-                    <button onclick="openExportModal()" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white
-                               bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700
-                               focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500
-                               dark:focus:ring-offset-gray-800 shadow-md hover:shadow-lg transition">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                        Exportar PDF
-                    </button>
-                    <button onclick="openModal('createTaskModal')" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white
-                          bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700
-                          focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
-                          dark:focus:ring-offset-gray-800 shadow-md hover:shadow-lg transition">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                        </svg>
-                        Crear Tarea
-                    </button>
-                </div>
-            </div>
-
-            {{-- 2.2 Tabla responsive -----------------------------------}}
-            <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl
-                    rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/30">
-                {{-- VISTA DE ESCRITORIO (Tabla) --}}
-                {{-- VISTA DE ESCRITORIO (Tabla) --}}
-                <div class="overflow-x-auto flex-1">
-                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                        <thead class="bg-gray-50 dark:bg-gray-900/50">
-                            <tr>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                    Título</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                    Descripción</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                    Prioridad</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                    Estado</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                    Asignado a</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                    Creado por</th>
-                                <th
-                                    class="px-6 py-3 text-right text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-                                    Acciones</th>
+            <!-- Table Card -->
+            <div class="bg-white rounded-[1.25rem] shadow-sm border border-slate-200/60 overflow-hidden flex flex-col min-h-[500px]">
+                <div class="overflow-x-auto flex-grow">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-100">
+                                <th class="px-6 py-5 text-[11px] font-bold text-slate-500 uppercase tracking-widest min-w-[300px]">
+                                    Tarea
+                                </th>
+                                <th class="px-6 py-5 text-[11px] font-bold text-slate-500 uppercase tracking-widest hidden lg:table-cell min-w-[200px]">
+                                    Participantes
+                                </th>
+                                <th class="px-6 py-5 text-[11px] font-bold text-slate-500 uppercase tracking-widest min-w-[180px]">
+                                    Estado & Prioridad
+                                </th>
+                                <th class="px-6 py-5 text-[11px] font-bold text-slate-500 uppercase tracking-widest text-right min-w-[120px]">
+                                    Acciones
+                                </th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                            @foreach ($tasks as $task)
-                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
-                                    <td
-                                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
-                                        {{ $task->title }}
+                        <tbody class="divide-y divide-slate-100/70">
+                            @forelse ($tasks as $task)
+                                <tr class="hover:bg-slate-50/50 transition-colors group">
+                                    <td class="px-6 py-5 relative">
+                                        <div class="text-[0.95rem] font-bold text-slate-800 pr-4">{{ $task->title }}</div>
+                                        <div class="text-[0.8rem] text-slate-500 mt-1 line-clamp-2 pr-4 leading-relaxed" title="{{ $task->description }}">{{ $task->description }}</div>
+                                        <div class="lg:hidden mt-3 text-[0.8rem] flex items-center gap-2">
+                                            <span class="text-slate-400">Para:</span>
+                                            <span class="font-medium bg-slate-100 text-slate-700 px-2 py-0.5 rounded">{{ $task->assignedTo->name ?? '—' }}</span>
+                                        </div>
                                     </td>
-                                    <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">
-                                        {{ Str::limit($task->description, 50) }}
+                                    <td class="px-6 py-5 hidden lg:table-cell align-top">
+                                        <div class="text-[0.85rem] text-slate-700 mb-1.5 flex items-center gap-2">
+                                            <span class="text-slate-400 text-[0.75rem] uppercase tracking-wider font-semibold">Para</span> 
+                                            <span class="font-medium bg-slate-100/80 px-2.5 py-1 rounded-md">{{ $task->assignedTo->name ?? '—' }}</span>
+                                        </div>
+                                        <div class="text-[0.8rem] text-slate-400 flex items-center gap-2">
+                                            <span class="text-slate-400/70 text-[0.7rem] uppercase tracking-wider font-semibold">De</span>
+                                            {{ $task->createdBy->name ?? '—' }}
+                                        </div>
                                     </td>
+                                    
+                                    <td class="px-6 py-5 align-top">
+                                        <div class="flex flex-col gap-2.5 items-start">
+                                            {{-- Estado Badge --}}
+                                            @php
+                                                $status = strtolower($task->status);
+                                                $statusClass = match($status) {
+                                                    'completada', 'finalizada', 'realizada' => 'bg-[#ECFDF5] text-[#059669] ring-1 ring-[#059669]/20',
+                                                    'en progreso' => 'bg-[#EFF6FF] text-[#2563EB] ring-1 ring-[#2563EB]/20',
+                                                    'asignado' => 'bg-[#F0FDF4] text-[#16A34A] ring-1 ring-[#16A34A]/20',
+                                                    'cancelada' => 'bg-[#FEF2F2] text-[#DC2626] ring-1 ring-[#DC2626]/20',
+                                                    'retraso en proceso', 'incompleta' => 'bg-[#FFFBEB] text-[#D97706] ring-1 ring-[#D97706]/20',
+                                                    default => 'bg-[#F1F5F9] text-[#475569] ring-1 ring-[#475569]/20'
+                                                };
+                                            @endphp
+                                            <span class="inline-flex items-center px-2.5 py-1 rounded-md text-[0.75rem] font-bold uppercase tracking-wider {{ $statusClass }}">
+                                                {{ $task->status }}
+                                            </span>
 
-                                    {{-- Prioridad con badge --}}
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        @php
-                                            $priorityColors = [
-                                                'alta' => 'bg-red-100 text-red-800 dark:bg-red-500/20 dark:text-red-300',
-                                                'media' =>
-                                                    'bg-yellow-100 text-yellow-800 dark:bg-yellow-500/20 dark:text-yellow-300',
-                                                'baja' =>
-                                                    'bg-green-100 text-green-800 dark:bg-green-500/20 dark:text-green-300',
-                                            ];
-                                            $color =
-                                                $priorityColors[strtolower($task->priority)] ??
-                                                'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
-                                        @endphp
-                                        <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $color }}">
-                                            {{ ucfirst($task->priority) }}
-                                        </span>
+                                            {{-- Prioridad Badge --}}
+                                            @php
+                                                $priority = strtolower($task->priority);
+                                                $priorityClass = match($priority) {
+                                                    'alta' => 'text-[#EF4444] bg-[#FEF2F2]',
+                                                    'media' => 'text-[#F59E0B] bg-[#FFFBEB]',
+                                                    'baja' => 'text-[#10B981] bg-[#ECFDF5]',
+                                                    default => 'text-slate-500 bg-slate-100'
+                                                };
+                                            @endphp
+                                            <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded {{ $priorityClass }} text-[0.7rem] font-bold ml-0.5">
+                                                <div class="w-1.5 h-1.5 rounded-full currentColor bg-current"></div>
+                                                PRIORIDAD {{ strtoupper($task->priority) }}
+                                            </div>
+                                        </div>
                                     </td>
-
-                                    {{-- Estado con badge --}}
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        @php
-                                            $statusColors = [
-                                                'pendiente' =>
-                                                    'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300',
-                                                'en progreso' =>
-                                                    'bg-blue-100 text-blue-800 dark:bg-blue-500/20 dark:text-blue-300',
-                                                'completada' =>
-                                                    'bg-green-100 text-green-800 dark:bg-green-500/20 dark:text-green-300',
-                                            ];
-                                            $sc =
-                                                $statusColors[strtolower($task->status)] ??
-                                                'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
-                                        @endphp
-                                        <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $sc }}">
-                                            {{ ucfirst($task->status) }}
-                                        </span>
-                                    </td>
-
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">
-                                        {{ $task->assignedTo->name ?? '—' }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">
-                                        {{ $task->createdBy->name ?? '—' }}
-                                    </td>
-
-                                    {{-- Acciones --}}
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <div class="flex items-center justify-end gap-2">
-                                            <a href="{{ route('admin.tasks.show', $task->id) }}"
-                                                class="inline-flex items-center gap-1 px-3 py-1.5 rounded-md
-                                                                                      bg-blue-50 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300
-                                                                                      hover:bg-blue-100 dark:hover:bg-blue-500/30 transition">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                </svg>
-                                                Ver
+                                    
+                                    <td class="px-6 py-5 text-right align-top">
+                                        <div class="flex items-center justify-end gap-1.5 text-slate-400 opacity-80 group-hover:opacity-100 transition-opacity">
+                                            <a href="{{ route('admin.tasks.show', $task->id) }}" class="p-2 hover:bg-slate-100 hover:text-slate-700 rounded-lg transition-colors" title="Ver detalle">
+                                                <svg class="w-[1.1rem] h-[1.1rem]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                                             </a>
-                                            <button onclick="startEditTask({{ $task->id }})"
-                                                class="inline-flex items-center gap-1 px-3 py-1.5 rounded-md
-                                                                                  bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300
-                                                                                  hover:bg-indigo-100 dark:hover:bg-indigo-500/30 transition">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                </svg>
-                                                Editar
+                                            <button onclick="startEditTask({{ $task->id }})" class="p-2 hover:bg-[#F0F5FF] hover:text-[#2563EB] rounded-lg transition-colors" title="Editar tarea">
+                                                <svg class="w-[1.1rem] h-[1.1rem]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                                             </button>
-                                            <form action="{{ route('admin.tasks.destroy', $task->id) }}" method="POST"
-                                                onsubmit="return confirm('¿Eliminar esta tarea?');" class="inline">
+                                            <form action="{{ route('admin.tasks.destroy', $task->id) }}" method="POST" class="inline-block" onsubmit="return confirm('¿Eliminar esta tarea?');">
                                                 @csrf @method('DELETE')
-                                                <button type="submit"
-                                                    class="inline-flex items-center gap-1 px-3 py-1.5 rounded-md
-                                                                                               bg-red-50 dark:bg-red-500/20 text-red-700 dark:text-red-300
-                                                                                               hover:bg-red-100 dark:hover:bg-red-500/30 transition">
-                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                        viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                    </svg>
-                                                    Eliminar
+                                                <button type="submit" class="p-2 hover:bg-[#FEF2F2] hover:text-[#DC2626] rounded-lg transition-colors cursor-pointer" title="Eliminar tarea">
+                                                    <svg class="w-[1.1rem] h-[1.1rem]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                                 </button>
                                             </form>
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="px-8 py-16 text-center text-slate-500">
+                                        <div class="flex items-center justify-center flex-col">
+                                            <svg class="w-12 h-12 text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                                            <span>No se encontraron tareas.</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
 
-
-
-
-                {{-- Paginación Estilizada --}}
+                <!-- Footer Pagination -->
                 @if ($tasks->hasPages() || $tasks->total() > 0)
-                    <div
-                        class="px-6 py-5 bg-gray-50/50 dark:bg-gray-900/20 border-t border-gray-100 dark:border-gray-700/50 flex flex-col sm:flex-row items-center justify-between gap-6 mt-auto">
-                        <div class="text-sm font-medium order-2 sm:order-1 flex items-center gap-2">
-                            <span class="text-slate-400 dark:text-gray-500">Mostrando</span>
-                            <div
-                                class="flex items-center gap-1 bg-white dark:bg-gray-800 px-2 py-1 rounded-md border border-slate-200 dark:border-gray-700 shadow-sm">
-                                <span class="text-slate-900 dark:text-white font-bold">{{ $tasks->firstItem() ?? 0 }}</span>
-                                <span class="text-slate-400">-</span>
-                                <span class="text-slate-900 dark:text-white font-bold">{{ $tasks->lastItem() ?? 0 }}</span>
-                            </div>
-                            <span class="text-slate-400 dark:text-gray-500">de <span
-                                    class="text-slate-700 dark:text-gray-300">{{ $tasks->total() }}</span> tareas</span>
-                        </div>
-
-                        <div class="flex items-center gap-2 order-1 sm:order-2">
-                            {{-- Botón Anterior --}}
-                            @if ($tasks->onFirstPage())
-                                <span
-                                    class="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-100 dark:border-gray-800 bg-slate-50 dark:bg-gray-900/50 text-slate-300 dark:text-gray-700 cursor-not-allowed transition-all">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                            d="M15 19l-7-7 7-7" />
-                                    </svg>
-                                </span>
-                            @else
-                                <a href="{{ $tasks->previousPageUrl() }}"
-                                    class="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700 hover:border-indigo-300 dark:hover:border-indigo-900 transition-all shadow-sm group">
-                                    <svg class="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" fill="none"
-                                        stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                            d="M15 19l-7-7 7-7" />
-                                    </svg>
-                                </a>
-                            @endif
-
-                            {{-- Páginas Numeradas --}}
-                            <div class="flex items-center gap-1.5 px-1">
-                                @foreach ($tasks->getUrlRange(max(1, $tasks->currentPage() - 2), min($tasks->lastPage(), $tasks->currentPage() + 2)) as $page => $url)
-                                    @if ($page == $tasks->currentPage())
-                                        <span
-                                            class="w-10 h-10 flex items-center justify-center rounded-xl bg-indigo-600 dark:bg-indigo-500 text-white font-bold shadow-lg shadow-indigo-200 dark:shadow-indigo-900/20 scale-105 z-10">
-                                            {{ $page }}
-                                        </span>
-                                    @else
-                                        <a href="{{ $url }}"
-                                            class="w-10 h-10 flex items-center justify-center rounded-xl text-slate-500 dark:text-gray-400 hover:bg-white dark:hover:bg-gray-800 hover:text-indigo-600 dark:hover:text-white hover:shadow-sm transition-all font-medium">
-                                            {{ $page }}
-                                        </a>
-                                    @endif
-                                @endforeach
-                            </div>
-
-                            {{-- Botón Siguiente --}}
-                            @if ($tasks->hasMorePages())
-                                <a href="{{ $tasks->nextPageUrl() }}"
-                                    class="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-gray-700 hover:border-indigo-300 dark:hover:border-indigo-900 transition-all shadow-sm group">
-                                    <svg class="w-5 h-5 group-hover:translate-x-0.5 transition-transform" fill="none"
-                                        stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                            d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                            @else
-                                <span
-                                    class="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-100 dark:border-gray-800 bg-slate-50 dark:bg-gray-900/50 text-slate-300 dark:text-gray-700 cursor-not-allowed transition-all">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                            d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </span>
-                            @endif
-                        </div>
+                <div class="px-6 py-5 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 mt-auto style-pagination-none">
+                    <div class="text-[0.85rem] text-slate-500 font-medium whitespace-nowrap">
+                        Mostrando <span class="font-bold text-slate-700">{{ $tasks->firstItem() ?? 0 }}</span> a <span class="font-bold text-slate-700">{{ $tasks->lastItem() ?? 0 }}</span> de <span class="font-bold text-slate-700">{{ $tasks->total() }}</span> tareas
                     </div>
+                    
+                    <div class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 w-full sm:w-auto justify-end">
+                        {{-- Botón Anterior --}}
+                        @if ($tasks->onFirstPage())
+                            <span class="w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-lg border border-slate-200 text-slate-300 cursor-not-allowed">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                            </span>
+                        @else
+                            <a href="{{ $tasks->previousPageUrl() }}" class="w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-colors shadow-sm">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                            </a>
+                        @endif
+
+                        {{-- Páginas Numeradas --}}
+                        <div class="flex items-center gap-1.5 mx-1">
+                            @foreach ($tasks->getUrlRange(max(1, $tasks->currentPage() - 1), min($tasks->lastPage(), $tasks->currentPage() + 1)) as $page => $url)
+                                @if ($page == $tasks->currentPage())
+                                    <span class="w-9 h-9 flex items-center justify-center rounded-lg bg-[#1A202C] text-white text-[0.85rem] font-bold shadow-sm">{{ $page }}</span>
+                                @else
+                                    <a href="{{ $url }}" class="w-9 h-9 flex items-center justify-center rounded-lg border border-transparent text-slate-600 hover:border-slate-200 hover:bg-slate-50 text-[0.85rem] font-semibold transition-colors">{{ $page }}</a>
+                                @endif
+                            @endforeach
+                        </div>
+
+                        {{-- Botón Siguiente --}}
+                        @if ($tasks->hasMorePages())
+                            <a href="{{ $tasks->nextPageUrl() }}" class="w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-colors shadow-sm">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                            </a>
+                        @else
+                            <span class="w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-lg border border-slate-200 text-slate-300 cursor-not-allowed">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                            </span>
+                        @endif
+                    </div>
+                </div>
                 @endif
             </div>
 

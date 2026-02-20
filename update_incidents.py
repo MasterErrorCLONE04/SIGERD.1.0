@@ -1,4 +1,11 @@
-<x-app-layout>
+import sys
+
+file_path = r'c:\laragon\www\SIGERD.1.0\resources\views\admin\incidents\index.blade.php'
+
+with open(file_path, 'r', encoding='utf-8') as f:
+    content = f.read()
+
+new_ui = """<x-app-layout>
     <div class="p-6 lg:p-8 bg-slate-50 min-h-screen">
         <div class="max-w-7xl mx-auto space-y-6">
             
@@ -208,3 +215,9 @@
         </div>
     </div>
 </x-app-layout>
+"""
+
+with open(file_path, 'w', encoding='utf-8') as f:
+    f.write(new_ui)
+
+print("Replacement successful")
