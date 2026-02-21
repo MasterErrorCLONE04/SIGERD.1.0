@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="p-6 lg:p-8 bg-slate-50 min-h-screen">
-        <div class="max-w-7xl mx-auto space-y-6">
+        <div class="max-w-full mx-auto space-y-6">
             
             <!-- Header Card -->
             <div class="bg-white rounded-[1.25rem] shadow-sm border border-slate-200/60 p-6 md:p-8">
@@ -147,9 +147,15 @@
                                             <a href="{{ route('admin.tasks.show', $task->id) }}" class="p-2 hover:bg-slate-100 hover:text-slate-700 rounded-lg transition-colors" title="Ver detalle">
                                                 <svg class="w-[1.1rem] h-[1.1rem]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                                             </a>
-                                            <button onclick="startEditTask({{ $task->id }})" class="p-2 hover:bg-[#F0F5FF] hover:text-[#2563EB] rounded-lg transition-colors" title="Editar tarea">
-                                                <svg class="w-[1.1rem] h-[1.1rem]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
-                                            </button>
+                                            @if(empty($task->initial_evidence_images) && empty($task->final_evidence_images))
+                                                <button onclick="startEditTask({{ $task->id }})" class="p-2 hover:bg-[#F0F5FF] hover:text-[#2563EB] rounded-lg transition-colors" title="Editar tarea">
+                                                    <svg class="w-[1.1rem] h-[1.1rem]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                                </button>
+                                            @else
+                                                <button disabled class="p-2 text-slate-300 rounded-lg cursor-not-allowed" title="Edición bloqueada: Tarea con evidencia">
+                                                    <svg class="w-[1.1rem] h-[1.1rem]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg>
+                                                </button>
+                                            @endif
                                             <form action="{{ route('admin.tasks.destroy', $task->id) }}" method="POST" class="inline-block" onsubmit="return confirm('¿Eliminar esta tarea?');">
                                                 @csrf @method('DELETE')
                                                 <button type="submit" class="p-2 hover:bg-[#FEF2F2] hover:text-[#DC2626] rounded-lg transition-colors cursor-pointer" title="Eliminar tarea">

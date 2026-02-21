@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="p-6 lg:p-8 bg-slate-50 min-h-screen">
-        <div class="max-w-7xl mx-auto space-y-6">
+        <div class="max-w-full mx-auto space-y-6">
             
             <!-- Header Card -->
             <div class="bg-white rounded-[1.25rem] shadow-sm border border-slate-200/60 p-6 md:p-8">

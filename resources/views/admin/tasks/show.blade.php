@@ -376,11 +376,20 @@
                         <span class="material-symbols-outlined text-xl">arrow_back</span>
                         <span>Volver a la Lista</span>
                     </a>
-                    <a href="{{ route('admin.tasks.edit', $task->id) }}"
-                        class="w-full sm:w-auto px-8 py-3 rounded-xl bg-indigo-600 text-white font-semibold hover:shadow-lg hover:shadow-indigo-600/30 transition-all flex items-center justify-center space-x-2">
-                        <span class="material-symbols-outlined text-xl">edit</span>
-                        <span>Editar Tarea</span>
-                    </a>
+                    @if(empty($task->initial_evidence_images) && empty($task->final_evidence_images))
+                        <a href="{{ route('admin.tasks.edit', $task->id) }}"
+                            class="w-full sm:w-auto px-8 py-3 rounded-xl bg-indigo-600 text-white font-semibold hover:shadow-lg hover:shadow-indigo-600/30 transition-all flex items-center justify-center space-x-2">
+                            <span class="material-symbols-outlined text-xl">edit</span>
+                            <span>Editar Tarea</span>
+                        </a>
+                    @else
+                        <button disabled
+                            class="w-full sm:w-auto px-8 py-3 rounded-xl bg-slate-200 dark:bg-gray-700 text-slate-400 dark:text-gray-500 font-semibold cursor-not-allowed flex items-center justify-center space-x-2 border border-slate-200 dark:border-gray-600"
+                            title="No se puede editar: Tarea con evidencia registrada">
+                            <span class="material-symbols-outlined text-xl">block</span>
+                            <span>Edición Bloqueada</span>
+                        </button>
+                    @endif
                 </div>
             </div>
 
