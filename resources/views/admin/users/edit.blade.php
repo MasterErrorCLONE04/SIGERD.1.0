@@ -30,7 +30,7 @@
                             <x-input-label for="name" :value="__('Nombre')" class="text-gray-700 dark:text-gray-200" />
                             <x-text-input id="name" name="name" type="text" :value="old('name', $user->name)" required
                                 autofocus autocomplete="name" class="mt-2 w-full rounded-lg border-gray-300 dark:border-gray-600
-                                                 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200
+                                                 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 dark:text-gray-200
                                                  focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400" />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
@@ -41,7 +41,7 @@
                                 class="text-gray-700 dark:text-gray-200" />
                             <x-text-input id="email" name="email" type="email" :value="old('email', $user->email)"
                                 required autocomplete="username" class="mt-2 w-full rounded-lg border-gray-300 dark:border-gray-600
-                                                 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200
+                                                 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 dark:text-gray-200
                                                  focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400" />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
@@ -57,13 +57,13 @@
                                 @else
                                     <span
                                         class="inline-flex h-20 w-20 items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700">
-                                        <svg class="w-10 h-10 text-gray-400 dark:text-gray-500" fill="currentColor"
+                                        <svg class="w-10 h-10 text-gray-400 dark:text-gray-500 dark:text-[#B0B3B8]" fill="currentColor"
                                             viewBox="0 0 24 24">
                                             <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                         </svg>
                                     </span>
                                 @endif
-                                <input id="profile_photo" name="profile_photo" type="file" accept="image/*" class="block w-full text-sm text-gray-600 dark:text-gray-400
+                                <input id="profile_photo" name="profile_photo" type="file" accept="image/*" class="block w-full text-sm text-gray-600 dark:text-gray-300 dark:text-gray-400
                                               file:mr-4 file:py-2 file:px-4
                                               file:rounded-lg file:border-0
                                               file:text-sm file:font-semibold
@@ -79,7 +79,7 @@
                         <div>
                             <x-input-label for="role" :value="__('Rol')" class="text-gray-700 dark:text-gray-200" />
                             <select id="role" name="role" class="mt-2 w-full rounded-lg border-gray-300 dark:border-gray-600
-                                           bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200
+                                           bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 dark:text-gray-200
                                            focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400">
                                 @foreach ($roles as $role)
                                     <option value="{{ $role }}" @selected($user->role === $role)>

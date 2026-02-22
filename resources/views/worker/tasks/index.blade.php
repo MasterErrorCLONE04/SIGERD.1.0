@@ -26,7 +26,7 @@
                             <input type="text" name="search" placeholder="Buscar por título o descripción..."
                                 value="{{ request('search') }}" class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-900
                                           border-gray-300 dark:border-gray-600
-                                          text-gray-800 dark:text-gray-200
+                                          text-gray-800 dark:text-gray-100 dark:text-gray-200
                                           focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400
                                           focus:border-blue-400 transition-all duration-200 shadow-sm hover:shadow-md">
                             <div class="absolute left-4 top-3.5">
@@ -38,7 +38,7 @@
                             </div>
                             @if(request('search'))
                                 <a href="{{ route('worker.tasks.index', array_filter(request()->except('search'))) }}"
-                                    class="absolute right-4 top-3.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                                    class="absolute right-4 top-3.5 text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-300"
                                     title="Limpiar búsqueda">
                                     <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -51,7 +51,7 @@
                         {{-- Filtro estado --}}
                         <select name="status" class="w-full lg:w-48 rounded-lg bg-gray-50 dark:bg-gray-900
                                        border-gray-300 dark:border-gray-600
-                                       text-gray-800 dark:text-gray-200
+                                       text-gray-800 dark:text-gray-100 dark:text-gray-200
                                        focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400
                                        focus:border-blue-400 transition-all duration-200 shadow-sm hover:shadow-md">
                             <option value="">Todos los estados</option>
@@ -68,7 +68,7 @@
                         {{-- Filtro prioridad --}}
                         <select name="priority" class="w-full lg:w-48 rounded-lg bg-gray-50 dark:bg-gray-900
                                        border-gray-300 dark:border-gray-600
-                                       text-gray-800 dark:text-gray-200
+                                       text-gray-800 dark:text-gray-100 dark:text-gray-200
                                        focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400
                                        focus:border-blue-400 transition-all duration-200 shadow-sm hover:shadow-md">
                             <option value="">Todas las prioridades</option>
@@ -93,7 +93,7 @@
                             </button>
                             @if(request()->anyFilled(['search', 'status', 'priority']))
                                 <a href="{{ route('worker.tasks.index') }}"
-                                    class="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-gray-700 dark:text-gray-300
+                                    class="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-gray-700 dark:text-gray-200 dark:text-gray-300
                                                               bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600
                                                               focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500
                                                               dark:focus:ring-offset-gray-800 shadow-md hover:shadow-lg transition">
@@ -105,13 +105,13 @@
                                 </a>
                             @endif
                         </div>
-                        <div class="text-sm text-gray-600 dark:text-gray-400">
+                        <div class="text-sm text-gray-600 dark:text-gray-300 dark:text-gray-400">
                             @if(request()->anyFilled(['search', 'status', 'priority']))
-                                Se encontraron <strong class="text-gray-900 dark:text-white">{{ $tasks->count() }}</strong>
+                                Se encontraron <strong class="text-gray-900 dark:text-gray-100 dark:text-white">{{ $tasks->count() }}</strong>
                                 resultado(s)
                             @else
                                 Total de tareas: <strong
-                                    class="text-gray-900 dark:text-white">{{ $tasks->count() }}</strong>
+                                    class="text-gray-900 dark:text-gray-100 dark:text-white">{{ $tasks->count() }}</strong>
                             @endif
                         </div>
                     </div>
@@ -129,39 +129,39 @@
                             class="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-900/70 dark:to-gray-800/70 backdrop-blur-sm">
                             <tr>
                                 <th
-                                    class="px-6 py-4 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">
+                                    class="px-6 py-4 text-left text-xs font-bold text-gray-700 dark:text-gray-200 dark:text-gray-300 uppercase tracking-wide">
                                     Título</th>
                                 <th
-                                    class="px-6 py-4 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">
+                                    class="px-6 py-4 text-left text-xs font-bold text-gray-700 dark:text-gray-200 dark:text-gray-300 uppercase tracking-wide">
                                     Descripción</th>
                                 <th
-                                    class="px-6 py-4 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">
+                                    class="px-6 py-4 text-left text-xs font-bold text-gray-700 dark:text-gray-200 dark:text-gray-300 uppercase tracking-wide">
                                     Prioridad</th>
                                 <th
-                                    class="px-6 py-4 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">
+                                    class="px-6 py-4 text-left text-xs font-bold text-gray-700 dark:text-gray-200 dark:text-gray-300 uppercase tracking-wide">
                                     Estado</th>
                                 <th
-                                    class="px-6 py-4 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">
+                                    class="px-6 py-4 text-left text-xs font-bold text-gray-700 dark:text-gray-200 dark:text-gray-300 uppercase tracking-wide">
                                     Fecha Límite</th>
                                 <th
-                                    class="px-6 py-4 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">
+                                    class="px-6 py-4 text-left text-xs font-bold text-gray-700 dark:text-gray-200 dark:text-gray-300 uppercase tracking-wide">
                                     Asignado por</th>
                                 <th
-                                    class="px-6 py-4 text-right text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">
+                                    class="px-6 py-4 text-right text-xs font-bold text-gray-700 dark:text-gray-200 dark:text-gray-300 uppercase tracking-wide">
                                     Acciones</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                        <tbody class="bg-white dark:bg-[#242526] dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                             @forelse($tasks as $task)
                                 <tr class="group hover:bg-blue-50/50 dark:hover:bg-gray-700/30 transition-all duration-200">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div
-                                            class="text-sm font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                            class="text-sm font-bold text-gray-900 dark:text-gray-100 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                                             {{ $task->title }}
                                         </div>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <div class="text-sm text-gray-600 dark:text-gray-300 max-w-xs truncate">
+                                        <div class="text-sm text-gray-600 dark:text-gray-300 dark:text-gray-300 max-w-xs truncate">
                                             {{ Str::limit($task->description, 50) }}
                                         </div>
                                     </td>
@@ -172,7 +172,7 @@
                                                 'media' => 'bg-yellow-100 text-yellow-800 dark:bg-yellow-500/20 dark:text-yellow-300',
                                                 'baja' => 'bg-green-100 text-green-800 dark:bg-green-500/20 dark:text-green-300',
                                             ];
-                                            $color = $priorityColors[$task->priority] ?? 'bg-gray-100 text-gray-800 dark:bg-gray-500/20 dark:text-gray-300';
+                                            $color = $priorityColors[$task->priority] ?? 'bg-gray-100 text-gray-800 dark:text-gray-100 dark:bg-gray-500/20 dark:text-gray-300';
                                         @endphp
                                         <span
                                             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $color }}">
@@ -186,9 +186,9 @@
                                                 'en progreso' => 'bg-blue-100 text-blue-800 dark:bg-blue-500/20 dark:text-blue-300',
                                                 'realizada' => 'bg-indigo-100 text-indigo-800 dark:bg-indigo-500/20 dark:text-indigo-300',
                                                 'finalizada' => 'bg-green-100 text-green-800 dark:bg-green-500/20 dark:text-green-300',
-                                                'cancelada' => 'bg-gray-100 text-gray-800 dark:bg-gray-500/20 dark:text-gray-300',
+                                                'cancelada' => 'bg-gray-100 text-gray-800 dark:text-gray-100 dark:bg-gray-500/20 dark:text-gray-300',
                                             ];
-                                            $color = $statusColors[$task->status] ?? 'bg-gray-100 text-gray-800 dark:bg-gray-500/20 dark:text-gray-300';
+                                            $color = $statusColors[$task->status] ?? 'bg-gray-100 text-gray-800 dark:text-gray-100 dark:bg-gray-500/20 dark:text-gray-300';
                                         @endphp
                                         <span
                                             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $color }}">
@@ -196,7 +196,7 @@
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-600 dark:text-gray-300">
+                                        <div class="text-sm text-gray-600 dark:text-gray-300 dark:text-gray-300">
                                             @if($task->deadline_at < now() && !in_array($task->status, ['finalizada', 'cancelada', 'realizada']))
                                                 <span
                                                     class="text-red-600 dark:text-red-400 font-medium">{{ $task->deadline_at->format('d/m/Y') }}</span>
@@ -217,7 +217,7 @@
                                                 {{ substr($task->createdBy->name ?? 'N/A', 0, 1) }}
                                             </div>
                                             <span
-                                                class="text-sm text-gray-600 dark:text-gray-300">{{ $task->createdBy->name ?? 'N/A' }}</span>
+                                                class="text-sm text-gray-600 dark:text-gray-300 dark:text-gray-300">{{ $task->createdBy->name ?? 'N/A' }}</span>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -245,9 +245,9 @@
                                                     d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                                             </svg>
                                             @if(request()->anyFilled(['search', 'status', 'priority']))
-                                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">No se
+                                                <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 dark:text-white mb-2">No se
                                                     encontraron resultados</h3>
-                                                <p class="text-gray-600 dark:text-gray-400 mb-4">No hay tareas que coincidan con
+                                                <p class="text-gray-600 dark:text-gray-300 dark:text-gray-400 mb-4">No hay tareas que coincidan con
                                                     los filtros aplicados.</p>
                                                 <a href="{{ route('worker.tasks.index') }}"
                                                     class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white bg-blue-500 hover:bg-blue-600 transition">
@@ -258,9 +258,9 @@
                                                     Limpiar filtros
                                                 </a>
                                             @else
-                                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">No tienes
+                                                <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 dark:text-white mb-2">No tienes
                                                     tareas asignadas</h3>
-                                                <p class="text-gray-600 dark:text-gray-400">Las tareas que te asignen aparecerán
+                                                <p class="text-gray-600 dark:text-gray-300 dark:text-gray-400">Las tareas que te asignen aparecerán
                                                     aquí.</p>
                                             @endif
                                         </div>

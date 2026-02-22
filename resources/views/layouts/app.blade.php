@@ -14,6 +14,15 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Theme Initialization -->
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
 </head>
 
 <body class="font-sans antialiased bg-gray-50 dark:bg-gray-900">
@@ -24,7 +33,8 @@
         {{-- Main Content Area --}}
         <div class="flex-1 flex flex-col overflow-hidden">
             {{-- Top Bar (opcional para breadcrumbs, notificaciones, etc.) --}}
-            <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 z-10">
+            <header
+                class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 relative z-50">
                 <div class="px-4 sm:px-6 lg:px-8 py-4">
                     <div class="flex items-center justify-between">
                         {{-- Page Heading --}}
@@ -214,7 +224,7 @@
                                         </a>
 
                                         {{-- Configuración --}}
-                                        <a href="{{ route('profile.edit') }}"
+                                        <a href="{{ route('settings.index') }}"
                                             class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
                                             <div
                                                 class="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
@@ -235,7 +245,7 @@
                                         </a>
 
                                         {{-- Ayuda --}}
-                                        <a href="#"
+                                        <a href="{{ route('support.index') }}"
                                             class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
                                             <div
                                                 class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">

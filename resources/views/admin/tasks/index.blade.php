@@ -1,9 +1,9 @@
 <x-app-layout>
-    <div class="p-6 lg:p-8 bg-slate-50 min-h-screen">
+    <div class="p-6 lg:p-8 bg-slate-50 dark:bg-[#18191A] min-h-screen">
         <div class="max-w-full mx-auto space-y-6">
             
             <!-- Header Card -->
-            <div class="bg-white rounded-[1.25rem] shadow-sm border border-slate-200/60 p-6 md:p-8">
+            <div class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 md:p-8">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div class="flex items-center gap-5">
                         <div class="w-16 h-16 bg-[#F4F6FF] rounded-2xl flex items-center justify-center text-[#4F46E5] flex-shrink-0">
@@ -12,8 +12,8 @@
                             </svg>
                         </div>
                         <div>
-                            <h2 class="text-[1.35rem] font-bold text-slate-800 tracking-tight">Gestión de Tareas</h2>
-                            <p class="text-sm text-slate-500 mt-1">
+                            <h2 class="text-[1.35rem] font-bold text-slate-800 dark:text-gray-100 tracking-tight">Gestión de Tareas</h2>
+                            <p class="text-sm text-slate-500 dark:text-[#B0B3B8] mt-1">
                                 Supervisa y organiza el flujo de trabajo del sistema.
                             </p>
                         </div>
@@ -23,7 +23,7 @@
                         <form method="GET" action="{{ route('admin.tasks.index') }}" class="flex flex-col sm:flex-row gap-3 w-full xl:w-auto">
                             <div class="relative flex-grow sm:w-64">
                                 <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                                    <svg class="h-4 w-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="h-4 w-4 text-slate-400 dark:text-[#9CA3AF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                     </svg>
                                 </div>
@@ -31,20 +31,20 @@
                                     name="search" 
                                     value="{{ request('search') }}"
                                     placeholder="Buscar título..." 
-                                    class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200/80 rounded-xl text-sm text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-100 focus:border-slate-300 transition-colors">
+                                    class="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-[#242526] border border-slate-200/80 rounded-xl text-sm text-slate-700 dark:text-gray-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-100 focus:border-slate-300 transition-colors">
                             </div>
                             <div class="flex gap-2 w-full sm:w-auto">
-                                <select name="priority" class="w-full sm:w-auto px-4 py-2.5 bg-white border border-slate-200/80 rounded-xl text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-100 focus:border-slate-300 transition-colors flex-grow">
+                                <select name="priority" class="w-full sm:w-auto px-4 py-2.5 bg-white dark:bg-[#242526] border border-slate-200/80 rounded-xl text-sm text-slate-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-slate-100 focus:border-slate-300 transition-colors flex-grow">
                                     <option value="">Prioridad</option>
                                     <option value="alta" {{ request('priority') == 'alta' ? 'selected' : '' }}>Alta</option>
                                     <option value="media" {{ request('priority') == 'media' ? 'selected' : '' }}>Media</option>
                                     <option value="baja" {{ request('priority') == 'baja' ? 'selected' : '' }}>Baja</option>
                                 </select>
-                                <button type="submit" class="sm:hidden flex items-center justify-center px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl transition-colors">
+                                <button type="submit" class="sm:hidden flex items-center justify-center px-4 py-2.5 bg-slate-100 dark:bg-[#3A3B3C] hover:bg-slate-200 text-slate-600 dark:text-gray-300 rounded-xl transition-colors">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                                 </button>
                             </div>
-                            <button type="submit" class="hidden sm:flex items-center justify-center px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl transition-colors">
+                            <button type="submit" class="hidden sm:flex items-center justify-center px-4 py-2.5 bg-slate-100 dark:bg-[#3A3B3C] hover:bg-slate-200 text-slate-600 dark:text-gray-300 rounded-xl transition-colors">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                             </button>
                         </form>
@@ -66,43 +66,43 @@
             </div>
 
             <!-- Table Card -->
-            <div class="bg-white rounded-[1.25rem] shadow-sm border border-slate-200/60 overflow-hidden flex flex-col min-h-[500px]">
+            <div class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] overflow-hidden flex flex-col min-h-[500px]">
                 <div class="overflow-x-auto flex-grow">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="border-b border-slate-100">
-                                <th class="px-6 py-5 text-[11px] font-bold text-slate-500 uppercase tracking-widest min-w-[300px]">
+                            <tr class="border-b border-slate-100 dark:border-[#3A3B3C]">
+                                <th class="px-6 py-5 text-[11px] font-bold text-slate-500 dark:text-[#B0B3B8] uppercase tracking-widest min-w-[300px]">
                                     Tarea
                                 </th>
-                                <th class="px-6 py-5 text-[11px] font-bold text-slate-500 uppercase tracking-widest hidden lg:table-cell min-w-[200px]">
+                                <th class="px-6 py-5 text-[11px] font-bold text-slate-500 dark:text-[#B0B3B8] uppercase tracking-widest hidden lg:table-cell min-w-[200px]">
                                     Participantes
                                 </th>
-                                <th class="px-6 py-5 text-[11px] font-bold text-slate-500 uppercase tracking-widest min-w-[180px]">
+                                <th class="px-6 py-5 text-[11px] font-bold text-slate-500 dark:text-[#B0B3B8] uppercase tracking-widest min-w-[180px]">
                                     Estado & Prioridad
                                 </th>
-                                <th class="px-6 py-5 text-[11px] font-bold text-slate-500 uppercase tracking-widest text-right min-w-[120px]">
+                                <th class="px-6 py-5 text-[11px] font-bold text-slate-500 dark:text-[#B0B3B8] uppercase tracking-widest text-right min-w-[120px]">
                                     Acciones
                                 </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100/70">
                             @forelse ($tasks as $task)
-                                <tr class="hover:bg-slate-50/50 transition-colors group">
+                                <tr class="hover:bg-slate-50 dark:hover:bg-[#3A3B3C]/50 dark:bg-[#18191A] transition-colors group">
                                     <td class="px-6 py-5 relative">
-                                        <div class="text-[0.95rem] font-bold text-slate-800 pr-4">{{ $task->title }}</div>
-                                        <div class="text-[0.8rem] text-slate-500 mt-1 line-clamp-2 pr-4 leading-relaxed" title="{{ $task->description }}">{{ $task->description }}</div>
+                                        <div class="text-[0.95rem] font-bold text-slate-800 dark:text-gray-100 pr-4">{{ $task->title }}</div>
+                                        <div class="text-[0.8rem] text-slate-500 dark:text-[#B0B3B8] mt-1 line-clamp-2 pr-4 leading-relaxed" title="{{ $task->description }}">{{ $task->description }}</div>
                                         <div class="lg:hidden mt-3 text-[0.8rem] flex items-center gap-2">
-                                            <span class="text-slate-400">Para:</span>
-                                            <span class="font-medium bg-slate-100 text-slate-700 px-2 py-0.5 rounded">{{ $task->assignedTo->name ?? '—' }}</span>
+                                            <span class="text-slate-400 dark:text-[#9CA3AF]">Para:</span>
+                                            <span class="font-medium bg-slate-100 dark:bg-[#3A3B3C] text-slate-700 dark:text-gray-200 px-2 py-0.5 rounded">{{ $task->assignedTo->name ?? '—' }}</span>
                                         </div>
                                     </td>
                                     <td class="px-6 py-5 hidden lg:table-cell align-top">
-                                        <div class="text-[0.85rem] text-slate-700 mb-1.5 flex items-center gap-2">
-                                            <span class="text-slate-400 text-[0.75rem] uppercase tracking-wider font-semibold">Para</span> 
-                                            <span class="font-medium bg-slate-100/80 px-2.5 py-1 rounded-md">{{ $task->assignedTo->name ?? '—' }}</span>
+                                        <div class="text-[0.85rem] text-slate-700 dark:text-gray-200 mb-1.5 flex items-center gap-2">
+                                            <span class="text-slate-400 dark:text-[#9CA3AF] text-[0.75rem] uppercase tracking-wider font-semibold">Para</span> 
+                                            <span class="font-medium bg-slate-100/80 dark:bg-[#4E4F50] px-2.5 py-1 rounded-md">{{ $task->assignedTo->name ?? '—' }}</span>
                                         </div>
-                                        <div class="text-[0.8rem] text-slate-400 flex items-center gap-2">
-                                            <span class="text-slate-400/70 text-[0.7rem] uppercase tracking-wider font-semibold">De</span>
+                                        <div class="text-[0.8rem] text-slate-400 dark:text-[#9CA3AF] flex items-center gap-2">
+                                            <span class="text-slate-400 dark:text-[#9CA3AF]/70 text-[0.7rem] uppercase tracking-wider font-semibold">De</span>
                                             {{ $task->createdBy->name ?? '—' }}
                                         </div>
                                     </td>
@@ -132,7 +132,7 @@
                                                     'alta' => 'text-[#EF4444] bg-[#FEF2F2]',
                                                     'media' => 'text-[#F59E0B] bg-[#FFFBEB]',
                                                     'baja' => 'text-[#10B981] bg-[#ECFDF5]',
-                                                    default => 'text-slate-500 bg-slate-100'
+                                                    default => 'text-slate-500 dark:text-[#B0B3B8] bg-slate-100 dark:bg-[#3A3B3C]'
                                                 };
                                             @endphp
                                             <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded {{ $priorityClass }} text-[0.7rem] font-bold ml-0.5">
@@ -143,8 +143,8 @@
                                     </td>
                                     
                                     <td class="px-6 py-5 text-right align-top">
-                                        <div class="flex items-center justify-end gap-1.5 text-slate-400 opacity-80 group-hover:opacity-100 transition-opacity">
-                                            <a href="{{ route('admin.tasks.show', $task->id) }}" class="p-2 hover:bg-slate-100 hover:text-slate-700 rounded-lg transition-colors" title="Ver detalle">
+                                        <div class="flex items-center justify-end gap-1.5 text-slate-400 dark:text-[#9CA3AF] opacity-80 group-hover:opacity-100 transition-opacity">
+                                            <a href="{{ route('admin.tasks.show', $task->id) }}" class="p-2 hover:bg-slate-100 dark:bg-[#3A3B3C] hover:text-slate-700 dark:text-gray-200 rounded-lg transition-colors" title="Ver detalle">
                                                 <svg class="w-[1.1rem] h-[1.1rem]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                                             </a>
                                             @if(empty($task->initial_evidence_images) && empty($task->final_evidence_images))
@@ -167,7 +167,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4" class="px-8 py-16 text-center text-slate-500">
+                                    <td colspan="4" class="px-8 py-16 text-center text-slate-500 dark:text-[#B0B3B8]">
                                         <div class="flex items-center justify-center flex-col">
                                             <svg class="w-12 h-12 text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
                                             <span>No se encontraron tareas.</span>
@@ -181,19 +181,19 @@
 
                 <!-- Footer Pagination -->
                 @if ($tasks->hasPages() || $tasks->total() > 0)
-                <div class="px-6 py-5 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 mt-auto style-pagination-none">
-                    <div class="text-[0.85rem] text-slate-500 font-medium whitespace-nowrap">
-                        Mostrando <span class="font-bold text-slate-700">{{ $tasks->firstItem() ?? 0 }}</span> a <span class="font-bold text-slate-700">{{ $tasks->lastItem() ?? 0 }}</span> de <span class="font-bold text-slate-700">{{ $tasks->total() }}</span> tareas
+                <div class="px-6 py-5 border-t border-slate-100 dark:border-[#3A3B3C] flex flex-col sm:flex-row items-center justify-between gap-4 mt-auto style-pagination-none">
+                    <div class="text-[0.85rem] text-slate-500 dark:text-[#B0B3B8] font-medium whitespace-nowrap">
+                        Mostrando <span class="font-bold text-slate-700 dark:text-gray-200">{{ $tasks->firstItem() ?? 0 }}</span> a <span class="font-bold text-slate-700 dark:text-gray-200">{{ $tasks->lastItem() ?? 0 }}</span> de <span class="font-bold text-slate-700 dark:text-gray-200">{{ $tasks->total() }}</span> tareas
                     </div>
                     
                     <div class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 w-full sm:w-auto justify-end">
                         {{-- Botón Anterior --}}
                         @if ($tasks->onFirstPage())
-                            <span class="w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-lg border border-slate-200 text-slate-300 cursor-not-allowed">
+                            <span class="w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-lg border border-slate-200 dark:border-[#3A3B3C] text-slate-300 cursor-not-allowed">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
                             </span>
                         @else
-                            <a href="{{ $tasks->previousPageUrl() }}" class="w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-colors shadow-sm">
+                            <a href="{{ $tasks->previousPageUrl() }}" class="w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-lg border border-slate-200 dark:border-[#3A3B3C] text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-[#3A3B3C] dark:bg-[#18191A] hover:border-slate-300 transition-colors shadow-sm">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
                             </a>
                         @endif
@@ -204,18 +204,18 @@
                                 @if ($page == $tasks->currentPage())
                                     <span class="w-9 h-9 flex items-center justify-center rounded-lg bg-[#1A202C] text-white text-[0.85rem] font-bold shadow-sm">{{ $page }}</span>
                                 @else
-                                    <a href="{{ $url }}" class="w-9 h-9 flex items-center justify-center rounded-lg border border-transparent text-slate-600 hover:border-slate-200 hover:bg-slate-50 text-[0.85rem] font-semibold transition-colors">{{ $page }}</a>
+                                    <a href="{{ $url }}" class="w-9 h-9 flex items-center justify-center rounded-lg border border-transparent text-slate-600 dark:text-gray-300 hover:border-slate-200 dark:border-[#3A3B3C] hover:bg-slate-50 dark:hover:bg-[#3A3B3C] dark:bg-[#18191A] text-[0.85rem] font-semibold transition-colors">{{ $page }}</a>
                                 @endif
                             @endforeach
                         </div>
 
                         {{-- Botón Siguiente --}}
                         @if ($tasks->hasMorePages())
-                            <a href="{{ $tasks->nextPageUrl() }}" class="w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-colors shadow-sm">
+                            <a href="{{ $tasks->nextPageUrl() }}" class="w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-lg border border-slate-200 dark:border-[#3A3B3C] text-slate-600 dark:text-gray-300 hover:bg-slate-50 dark:hover:bg-[#3A3B3C] dark:bg-[#18191A] hover:border-slate-300 transition-colors shadow-sm">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
                             </a>
                         @else
-                            <span class="w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-lg border border-slate-200 text-slate-300 cursor-not-allowed">
+                            <span class="w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-lg border border-slate-200 dark:border-[#3A3B3C] text-slate-300 cursor-not-allowed">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
                             </span>
                         @endif
@@ -230,9 +230,9 @@
     {{-- Modal para exportar PDF --}}
     <div id="exportModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4"
         x-data="{ open: false }">
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-6 transform transition-all">
+        <div class="bg-white dark:bg-[#242526] dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-6 transform transition-all">
             <div class="flex items-center justify-between mb-6">
-                <h3 class="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 dark:text-white flex items-center gap-3">
                     <div class="p-2 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -242,7 +242,7 @@
                     Exportar Reporte PDF
                 </h3>
                 <button onclick="closeExportModal()"
-                    class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition">
+                    class="text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-300 transition">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M6 18L18 6M6 6l12 12" />
@@ -252,11 +252,11 @@
 
             <form action="{{ route('admin.tasks.export-pdf') }}" method="GET" class="space-y-5">
                 <div>
-                    <label for="month" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    <label for="month" class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-2">
                         Mes
                     </label>
                     <select id="month" name="month" required
-                        class="w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400">
+                        class="w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 dark:text-gray-200 focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400">
                         <option value="">Seleccionar mes</option>
                         <option value="1">Enero</option>
                         <option value="2">Febrero</option>
@@ -274,11 +274,11 @@
                 </div>
 
                 <div>
-                    <label for="year" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    <label for="year" class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-2">
                         Año
                     </label>
                     <select id="year" name="year" required
-                        class="w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400">
+                        class="w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 dark:text-gray-200 focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400">
                         <option value="">Seleccionar año</option>
                         @php
                             $currentYear = date('Y');
@@ -297,7 +297,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <div class="text-sm text-gray-700 dark:text-gray-300">
+                        <div class="text-sm text-gray-700 dark:text-gray-200 dark:text-gray-300">
                             <p class="font-semibold mb-1">Información</p>
                             <p>Se exportarán únicamente las tareas <strong>finalizadas</strong> durante el mes y año
                                 seleccionado.</p>
@@ -307,7 +307,7 @@
 
                 <div class="flex gap-3 pt-2">
                     <button type="button" onclick="closeExportModal()"
-                        class="flex-1 px-4 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 font-semibold transition">
+                        class="flex-1 px-4 py-2.5 rounded-lg text-gray-700 dark:text-gray-200 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 font-semibold transition">
                         Cancelar
                     </button>
                     <button type="submit"
@@ -327,8 +327,8 @@
                 onclick="closeModal('createTaskModal')"></div>
 
             <div
-                class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
-                <div class="bg-white dark:bg-gray-800 px-6 pt-6 pb-4">
+                class="inline-block align-bottom bg-white dark:bg-[#242526] dark:bg-gray-800 rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
+                <div class="bg-white dark:bg-[#242526] dark:bg-gray-800 px-6 pt-6 pb-4">
                     <div class="flex items-center justify-between mb-6">
                         <div class="flex items-center space-x-3">
                             <div class="p-2 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl">
@@ -338,10 +338,10 @@
                                     </path>
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Crear Nueva Tarea</h3>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-white">Crear Nueva Tarea</h3>
                         </div>
                         <button onclick="closeModal('createTaskModal')"
-                            class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                            class="text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-300">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M6 18L18 6M6 6l12 12"></path>
@@ -355,35 +355,35 @@
 
                         <div>
                             <label for="task_title"
-                                class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Título
+                                class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">Título
                                 *</label>
                             <input id="task_title" name="title" type="text" required
-                                class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                                class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500"
                                 placeholder="Título de la tarea">
                         </div>
 
                         <div>
                             <label for="task_description"
-                                class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Descripción</label>
+                                class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">Descripción</label>
                             <textarea id="task_description" name="description" rows="3"
-                                class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                                class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500"
                                 placeholder="Descripción de la tarea"></textarea>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label for="task_deadline"
-                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Fecha
+                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">Fecha
                                     Límite *</label>
                                 <input id="task_deadline" name="deadline_at" type="date" required
-                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500">
                             </div>
                             <div>
                                 <label for="task_location"
-                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Ubicación
+                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">Ubicación
                                     *</label>
                                 <input id="task_location" name="location" type="text" required
-                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500"
                                     placeholder="Ubicación de la tarea">
                             </div>
                         </div>
@@ -391,10 +391,10 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label for="task_priority"
-                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Prioridad
+                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">Prioridad
                                     *</label>
                                 <select id="task_priority" name="priority" required
-                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500">
                                     @foreach ($priorities as $priority)
                                         <option value="{{ $priority }}">{{ ucfirst($priority) }}</option>
                                     @endforeach
@@ -402,10 +402,10 @@
                             </div>
                             <div>
                                 <label for="task_assigned_to"
-                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Asignar
+                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">Asignar
                                     a</label>
                                 <select id="task_assigned_to" name="assigned_to"
-                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500">
                                     <option value="">Selecciona un trabajador</option>
                                     @foreach ($workers as $worker)
                                         <option value="{{ $worker->id }}">{{ $worker->name }}</option>
@@ -416,19 +416,19 @@
 
                         <div>
                             <label for="task_reference_images"
-                                class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Imágenes de
+                                class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">Imágenes de
                                 Referencia (Opcional)</label>
                             <input id="task_reference_images" name="reference_images[]" type="file" accept="image/*"
                                 multiple
-                                class="block w-full text-sm text-gray-900 dark:text-gray-400 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 focus:outline-none">
-                            <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">PNG, JPG, GIF hasta 2MB cada una.
+                                class="block w-full text-sm text-gray-900 dark:text-gray-100 dark:text-gray-400 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 focus:outline-none">
+                            <p class="mt-1 text-xs text-gray-500 dark:text-[#B0B3B8] dark:text-gray-400">PNG, JPG, GIF hasta 2MB cada una.
                             </p>
                         </div>
 
                         <div
-                            class="flex items-center justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                            class="flex items-center justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-[#3A3B3C] dark:border-gray-700">
                             <button type="button" onclick="closeModal('createTaskModal')"
-                                class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg font-medium transition-colors">Cancelar</button>
+                                class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 dark:text-gray-300 bg-white dark:bg-[#242526] dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-[#3A3B3C] dark:hover:bg-gray-600 rounded-lg font-medium transition-colors">Cancelar</button>
                             <button type="submit"
                                 class="px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-lg transition-all shadow-lg">Crear
                                 Tarea</button>
@@ -447,8 +447,8 @@
                 onclick="closeModal('editTaskModal')"></div>
 
             <div
-                class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
-                <div class="bg-white dark:bg-gray-800 px-6 pt-6 pb-4">
+                class="inline-block align-bottom bg-white dark:bg-[#242526] dark:bg-gray-800 rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
+                <div class="bg-white dark:bg-[#242526] dark:bg-gray-800 px-6 pt-6 pb-4">
                     <div class="flex items-center justify-between mb-6">
                         <div class="flex items-center space-x-3">
                             <div class="p-2 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl">
@@ -458,11 +458,11 @@
                                     </path>
                                 </svg>
                             </div>
-                            <h3 id="editTaskModalTitle" class="text-xl font-bold text-gray-900 dark:text-white">Editar
+                            <h3 id="editTaskModalTitle" class="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-white">Editar
                                 Tarea</h3>
                         </div>
                         <button onclick="closeModal('editTaskModal')"
-                            class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                            class="text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-300">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M6 18L18 6M6 6l12 12"></path>
@@ -476,43 +476,43 @@
 
                         <div>
                             <label for="edit_task_title"
-                                class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Título
+                                class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">Título
                                 *</label>
                             <input id="edit_task_title" name="title" type="text" required
-                                class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                         </div>
 
                         <div>
                             <label for="edit_task_description"
-                                class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Descripción</label>
+                                class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">Descripción</label>
                             <textarea id="edit_task_description" name="description" rows="3"
-                                class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                                class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label for="edit_task_deadline"
-                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Fecha
+                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">Fecha
                                     Límite *</label>
                                 <input id="edit_task_deadline" name="deadline_at" type="date" required
-                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                             </div>
                             <div>
                                 <label for="edit_task_location"
-                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Ubicación
+                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">Ubicación
                                     *</label>
                                 <input id="edit_task_location" name="location" type="text" required
-                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                             </div>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label for="edit_task_priority"
-                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Prioridad
+                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">Prioridad
                                     *</label>
                                 <select id="edit_task_priority" name="priority" required
-                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                                     @foreach ($priorities as $priority)
                                         <option value="{{ $priority }}">{{ ucfirst($priority) }}</option>
                                     @endforeach
@@ -520,10 +520,10 @@
                             </div>
                             <div>
                                 <label for="edit_task_status"
-                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Estado
+                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">Estado
                                     *</label>
                                 <select id="edit_task_status" name="status" required
-                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                                     <option value="pendiente">Pendiente</option>
                                     <option value="asignado">Asignado</option>
                                     <option value="en progreso">En Progreso</option>
@@ -538,10 +538,10 @@
 
                         <div>
                             <label for="edit_task_assigned_to"
-                                class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Asignar
+                                class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">Asignar
                                 a</label>
                             <select id="edit_task_assigned_to" name="assigned_to"
-                                class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                                 <option value="">Selecciona un trabajador</option>
                                 @foreach ($workers as $worker)
                                     <option value="{{ $worker->id }}">{{ $worker->name }}</option>
@@ -550,9 +550,9 @@
                         </div>
 
                         <div
-                            class="flex items-center justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                            class="flex items-center justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-[#3A3B3C] dark:border-gray-700">
                             <button type="button" onclick="closeModal('editTaskModal')"
-                                class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg font-medium transition-colors">Cancelar</button>
+                                class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 dark:text-gray-300 bg-white dark:bg-[#242526] dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-[#3A3B3C] dark:hover:bg-gray-600 rounded-lg font-medium transition-colors">Cancelar</button>
                             <button id="editTaskSubmitBtn" type="submit"
                                 class="px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all shadow-lg">Guardar
                                 Cambios</button>

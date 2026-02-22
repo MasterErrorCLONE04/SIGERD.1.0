@@ -40,7 +40,7 @@
                         </div>
                         <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
                             <button onclick="openModal('createTaskModal')"
-                                class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white text-[#4F46E5] hover:bg-slate-50 px-5 py-3 rounded-xl text-sm font-bold transition-colors shadow-sm focus:ring-2 focus:ring-white/50">
+                                class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white dark:bg-[#242526] text-[#4F46E5] hover:bg-slate-50 dark:hover:bg-[#3A3B3C] dark:bg-[#18191A] px-5 py-3 rounded-xl text-sm font-bold transition-colors shadow-sm focus:ring-2 focus:ring-white/50">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                         d="M12 4v16m8-8H4" />
@@ -64,7 +64,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
                 <!-- Total Users Card -->
                 <div
-                    class="bg-white rounded-[1.25rem] shadow-sm border border-slate-200/60 p-6 flex flex-col justify-between group hover:shadow-md transition-shadow">
+                    class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 flex flex-col justify-between group hover:shadow-md transition-shadow">
                     <div class="flex items-center justify-between mb-4">
                         <div
                             class="w-12 h-12 bg-[#ECFDF5] text-[#10B981] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -75,17 +75,17 @@
                             </svg>
                         </div>
                         <span
-                            class="text-[0.75rem] font-bold text-slate-400 uppercase tracking-wider bg-slate-100 px-2.5 py-1 rounded-lg">Usuarios</span>
+                            class="text-[0.75rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider bg-slate-100 dark:bg-[#3A3B3C] px-2.5 py-1 rounded-lg">Usuarios</span>
                     </div>
                     <div>
-                        <div class="text-[2.25rem] font-black text-slate-800 leading-none mb-1">{{ $totalUsers }}</div>
-                        <div class="text-[0.85rem] text-slate-500 font-medium">Registrados en total</div>
+                        <div class="text-[2.25rem] font-black text-slate-800 dark:text-gray-100 leading-none mb-1">{{ $totalUsers }}</div>
+                        <div class="text-[0.85rem] text-slate-500 dark:text-[#B0B3B8] font-medium">Registrados en total</div>
                     </div>
                 </div>
 
                 <!-- Total Tasks Card -->
                 <div
-                    class="bg-white rounded-[1.25rem] shadow-sm border border-slate-200/60 p-6 flex flex-col justify-between group hover:shadow-md transition-shadow">
+                    class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 flex flex-col justify-between group hover:shadow-md transition-shadow">
                     <div class="flex items-center justify-between mb-4">
                         <div
                             class="w-12 h-12 bg-[#EFF6FF] text-[#3B82F6] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -96,17 +96,17 @@
                             </svg>
                         </div>
                         <span
-                            class="text-[0.75rem] font-bold text-slate-400 uppercase tracking-wider bg-slate-100 px-2.5 py-1 rounded-lg">Tareas</span>
+                            class="text-[0.75rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider bg-slate-100 dark:bg-[#3A3B3C] px-2.5 py-1 rounded-lg">Tareas</span>
                     </div>
                     <div>
-                        <div class="text-[2.25rem] font-black text-slate-800 leading-none mb-1">{{ $totalTasks }}</div>
-                        <div class="text-[0.85rem] text-slate-500 font-medium">Gestionadas activamente</div>
+                        <div class="text-[2.25rem] font-black text-slate-800 dark:text-gray-100 leading-none mb-1">{{ $totalTasks }}</div>
+                        <div class="text-[0.85rem] text-slate-500 dark:text-[#B0B3B8] font-medium">Gestionadas activamente</div>
                     </div>
                 </div>
 
                 <!-- Pending Review Incidents Card -->
                 <div
-                    class="bg-white rounded-[1.25rem] shadow-sm border border-slate-200/60 p-6 flex flex-col justify-between group hover:shadow-md transition-shadow">
+                    class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 flex flex-col justify-between group hover:shadow-md transition-shadow">
                     <div class="flex items-center justify-between mb-4">
                         <div
                             class="w-12 h-12 bg-[#FFFBEB] text-[#F59E0B] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -116,18 +116,18 @@
                             </svg>
                         </div>
                         <span
-                            class="text-[0.75rem] font-bold text-slate-400 uppercase tracking-wider bg-slate-100 px-2.5 py-1 rounded-lg">Incidentes</span>
+                            class="text-[0.75rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider bg-slate-100 dark:bg-[#3A3B3C] px-2.5 py-1 rounded-lg">Incidentes</span>
                     </div>
                     <div>
-                        <div class="text-[2.25rem] font-black text-slate-800 leading-none mb-1">
+                        <div class="text-[2.25rem] font-black text-slate-800 dark:text-gray-100 leading-none mb-1">
                             {{ $pendingReviewIncidents }}</div>
-                        <div class="text-[0.85rem] text-slate-500 font-medium">Pendientes de revisión</div>
+                        <div class="text-[0.85rem] text-slate-500 dark:text-[#B0B3B8] font-medium">Pendientes de revisión</div>
                     </div>
                 </div>
 
                 <!-- Overdue Tasks Card -->
                 <div
-                    class="bg-white rounded-[1.25rem] shadow-sm border border-slate-200/60 p-6 flex flex-col justify-between group hover:shadow-md transition-shadow">
+                    class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 flex flex-col justify-between group hover:shadow-md transition-shadow">
                     <div class="flex items-center justify-between mb-4">
                         <div
                             class="w-12 h-12 bg-[#FEF2F2] text-[#EF4444] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -137,12 +137,12 @@
                             </svg>
                         </div>
                         <span
-                            class="text-[0.75rem] font-bold text-slate-400 uppercase tracking-wider bg-slate-100 px-2.5 py-1 rounded-lg">Alerta</span>
+                            class="text-[0.75rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider bg-slate-100 dark:bg-[#3A3B3C] px-2.5 py-1 rounded-lg">Alerta</span>
                     </div>
                     <div>
-                        <div class="text-[2.25rem] font-black text-slate-800 leading-none mb-1">{{ $overdueTasks }}
+                        <div class="text-[2.25rem] font-black text-slate-800 dark:text-gray-100 leading-none mb-1">{{ $overdueTasks }}
                         </div>
-                        <div class="text-[0.85rem] text-slate-500 font-medium">Tareas Vencidas</div>
+                        <div class="text-[0.85rem] text-slate-500 dark:text-[#B0B3B8] font-medium">Tareas Vencidas</div>
                     </div>
                 </div>
             </div>
@@ -152,7 +152,7 @@
 
                 <!-- Chart 1: Tareas por Estado -->
                 <div
-                    class="bg-white rounded-[1.25rem] shadow-sm border border-slate-200/60 p-6 md:p-8 flex flex-col h-full hover:shadow-md transition-shadow">
+                    class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 md:p-8 flex flex-col h-full hover:shadow-md transition-shadow">
                     <div class="flex items-start gap-4 mb-6">
                         <div
                             class="w-14 h-14 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -163,8 +163,8 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-[1.15rem] font-bold text-slate-800">Tareas por Estado</h3>
-                            <p class="text-[0.8rem] text-slate-500 mt-1 leading-relaxed line-clamp-2"
+                            <h3 class="text-[1.15rem] font-bold text-slate-800 dark:text-gray-100">Tareas por Estado</h3>
+                            <p class="text-[0.8rem] text-slate-500 dark:text-[#B0B3B8] mt-1 leading-relaxed line-clamp-2"
                                 title="Distribución actual de las tareas según su estado de avance.">Distribución actual
                                 de las tareas según su estado de avance.</p>
                         </div>
@@ -172,23 +172,23 @@
 
                     <div class="grid grid-cols-3 gap-3 mb-8">
                         <div
-                            class="bg-slate-50/80 rounded-xl p-3 border border-slate-100/80 text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.7rem] font-bold text-slate-400 uppercase tracking-wider mb-0.5">
+                            class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
+                            <div class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
                                 Asignadas</div>
                             <div class="text-[1.3rem] font-black text-[#3B82F6]">{{ $tasksByStatus['asignado'] ?? 0 }}
                             </div>
                         </div>
                         <div
-                            class="bg-slate-50/80 rounded-xl p-3 border border-slate-100/80 text-center flex flex-col items-center justify-center">
+                            class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
                             <div
-                                class="text-[0.7rem] font-bold text-slate-400 uppercase tracking-wider mb-0.5 whitespace-nowrap">
+                                class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5 whitespace-nowrap">
                                 Con Avance</div>
                             <div class="text-[1.3rem] font-black text-[#F59E0B]">
                                 {{ $tasksByStatus['en progreso'] ?? 0 }}</div>
                         </div>
                         <div
-                            class="bg-slate-50/80 rounded-xl p-3 border border-slate-100/80 text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.7rem] font-bold text-slate-400 uppercase tracking-wider mb-0.5">
+                            class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
+                            <div class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
                                 Terminadas</div>
                             <div class="text-[1.3rem] font-black text-[#10B981]">{{ $tasksByStatus['finalizada'] ?? 0 }}
                             </div>
@@ -202,7 +202,7 @@
 
                 <!-- Chart 2: Usuarios por Rol -->
                 <div
-                    class="bg-white rounded-[1.25rem] shadow-sm border border-slate-200/60 p-6 md:p-8 flex flex-col h-full hover:shadow-md transition-shadow">
+                    class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 md:p-8 flex flex-col h-full hover:shadow-md transition-shadow">
                     <div class="flex items-start gap-4 mb-6">
                         <div
                             class="w-14 h-14 bg-[#F5F3FF] text-[#7C3AED] rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -213,8 +213,8 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-[1.15rem] font-bold text-slate-800">Usuarios por Rol</h3>
-                            <p class="text-[0.8rem] text-slate-500 mt-1 leading-relaxed line-clamp-2"
+                            <h3 class="text-[1.15rem] font-bold text-slate-800 dark:text-gray-100">Usuarios por Rol</h3>
+                            <p class="text-[0.8rem] text-slate-500 dark:text-[#B0B3B8] mt-1 leading-relaxed line-clamp-2"
                                 title="Desglose del equipo según el rol ocupado dentro del sistema.">Desglose del equipo
                                 según el rol ocupado dentro del sistema.</p>
                         </div>
@@ -222,20 +222,20 @@
 
                     <div class="grid grid-cols-3 gap-3 mb-8">
                         <div
-                            class="bg-slate-50/80 rounded-xl p-3 border border-slate-100/80 text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.65rem] font-bold text-slate-400 uppercase tracking-wider mb-0.5">
+                            class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
+                            <div class="text-[0.65rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
                                 Administradores</div>
                             <div class="text-[1.3rem] font-black text-[#4F46E5]">{{ $adminUsers }}</div>
                         </div>
                         <div
-                            class="bg-slate-50/80 rounded-xl p-3 border border-slate-100/80 text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.7rem] font-bold text-slate-400 uppercase tracking-wider mb-0.5">
+                            class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
+                            <div class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
                                 Instructores</div>
                             <div class="text-[1.3rem] font-black text-[#9333EA]">{{ $instructorUsers }}</div>
                         </div>
                         <div
-                            class="bg-slate-50/80 rounded-xl p-3 border border-slate-100/80 text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.7rem] font-bold text-slate-400 uppercase tracking-wider mb-0.5">
+                            class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
+                            <div class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
                                 Trabajadores</div>
                             <div class="text-[1.3rem] font-black text-[#EC4899]">{{ $workerUsers }}</div>
                         </div>
@@ -248,7 +248,7 @@
 
                 <!-- Chart 3: Tareas por Prioridad -->
                 <div
-                    class="bg-white rounded-[1.25rem] shadow-sm border border-slate-200/60 p-6 md:p-8 flex flex-col h-full hover:shadow-md transition-shadow">
+                    class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 md:p-8 flex flex-col h-full hover:shadow-md transition-shadow">
                     <div class="flex items-start gap-4 mb-6">
                         <div
                             class="w-14 h-14 bg-[#FFF1F2] text-[#E11D48] rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -259,8 +259,8 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-[1.15rem] font-bold text-slate-800">Tareas por Prioridad</h3>
-                            <p class="text-[0.8rem] text-slate-500 mt-1 leading-relaxed line-clamp-2"
+                            <h3 class="text-[1.15rem] font-bold text-slate-800 dark:text-gray-100">Tareas por Prioridad</h3>
+                            <p class="text-[0.8rem] text-slate-500 dark:text-[#B0B3B8] mt-1 leading-relaxed line-clamp-2"
                                 title="Desglose del volumen de tareas según su nivel de urgencia actual.">Desglose del
                                 volumen de tareas según su nivel de urgencia actual.</p>
                         </div>
@@ -268,22 +268,22 @@
 
                     <div class="grid grid-cols-3 gap-3 mb-8">
                         <div
-                            class="bg-slate-50/80 rounded-xl p-3 border border-slate-100/80 text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.7rem] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Crítica
+                            class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
+                            <div class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">Crítica
                                 (Alta)</div>
                             <div class="text-[1.3rem] font-black text-[#EF4444]">{{ $tasksByPriority['alta'] ?? 0 }}
                             </div>
                         </div>
                         <div
-                            class="bg-slate-50/80 rounded-xl p-3 border border-slate-100/80 text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.7rem] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Media
+                            class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
+                            <div class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">Media
                             </div>
                             <div class="text-[1.3rem] font-black text-[#F59E0B]">{{ $tasksByPriority['media'] ?? 0 }}
                             </div>
                         </div>
                         <div
-                            class="bg-slate-50/80 rounded-xl p-3 border border-slate-100/80 text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.7rem] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Leve
+                            class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
+                            <div class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">Leve
                                 (Baja)</div>
                             <div class="text-[1.3rem] font-black text-[#10B981]">{{ $tasksByPriority['baja'] ?? 0 }}
                             </div>
@@ -297,7 +297,7 @@
 
                 <!-- Chart 4: Incidentes por Estado -->
                 <div
-                    class="bg-white rounded-[1.25rem] shadow-sm border border-slate-200/60 p-6 md:p-8 flex flex-col h-full hover:shadow-md transition-shadow">
+                    class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 md:p-8 flex flex-col h-full hover:shadow-md transition-shadow">
                     <div class="flex items-start gap-4 mb-6">
                         <div
                             class="w-14 h-14 bg-[#FFFBEB] text-[#D97706] rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -308,8 +308,8 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-[1.15rem] font-bold text-slate-800">Incidentes por Estado</h3>
-                            <p class="text-[0.8rem] text-slate-500 mt-1 leading-relaxed line-clamp-2"
+                            <h3 class="text-[1.15rem] font-bold text-slate-800 dark:text-gray-100">Incidentes por Estado</h3>
+                            <p class="text-[0.8rem] text-slate-500 dark:text-[#B0B3B8] mt-1 leading-relaxed line-clamp-2"
                                 title="Gestión y estado actual de las fallas e incidentes reportados.">Gestión y estado
                                 actual de las fallas e incidentes reportados.</p>
                         </div>
@@ -317,22 +317,22 @@
 
                     <div class="grid grid-cols-3 gap-3 mb-8">
                         <div
-                            class="bg-slate-50/80 rounded-xl p-3 border border-slate-100/80 text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.7rem] font-bold text-slate-400 uppercase tracking-wider mb-0.5">
+                            class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
+                            <div class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
                                 Pendientes</div>
                             <div class="text-[1.3rem] font-black text-[#F59E0B]">
                                 {{ $incidentsByStatus['pendiente de revisión'] ?? 0 }}</div>
                         </div>
                         <div
-                            class="bg-slate-50/80 rounded-xl p-3 border border-slate-100/80 text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.7rem] font-bold text-slate-400 uppercase tracking-wider mb-0.5">
+                            class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
+                            <div class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
                                 Atendidos</div>
                             <div class="text-[1.3rem] font-black text-[#3B82F6]">
                                 {{ $incidentsByStatus['asignado'] ?? 0 }}</div>
                         </div>
                         <div
-                            class="bg-slate-50/80 rounded-xl p-3 border border-slate-100/80 text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.7rem] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Cerrados
+                            class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
+                            <div class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">Cerrados
                             </div>
                             <div class="text-[1.3rem] font-black text-[#10B981]">
                                 {{ $incidentsByStatus['resuelto'] ?? 0 }}</div>
@@ -347,16 +347,16 @@
             </div>
 
             <!-- Quick Actions -->
-            <div class="bg-white rounded-[1.25rem] shadow-sm border border-slate-200/60 overflow-hidden mb-8">
-                <div class="p-6 md:p-8 border-b border-slate-100">
-                    <h3 class="text-[1.15rem] font-bold text-slate-800">Acciones Rápidas</h3>
-                    <p class="text-slate-500 text-[0.85rem] mt-1 font-medium">Atajos útiles para gestionar tu plataforma
+            <div class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] overflow-hidden mb-8">
+                <div class="p-6 md:p-8 border-b border-slate-100 dark:border-[#3A3B3C]">
+                    <h3 class="text-[1.15rem] font-bold text-slate-800 dark:text-gray-100">Acciones Rápidas</h3>
+                    <p class="text-slate-500 dark:text-[#B0B3B8] text-[0.85rem] mt-1 font-medium">Atajos útiles para gestionar tu plataforma
                         inmediatamente.</p>
                 </div>
-                <div class="p-6 md:p-8 bg-slate-50/50">
+                <div class="p-6 md:p-8 bg-slate-50/50 dark:bg-[#18191A]">
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                         <button onclick="openModal('createUserModal')"
-                            class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 p-5 bg-white border border-slate-200/60 hover:border-indigo-300 hover:shadow-md rounded-2xl transition-all group">
+                            class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 p-5 bg-white dark:bg-[#242526] border border-slate-200/60 dark:border-[#3A3B3C] hover:border-indigo-300 hover:shadow-md rounded-2xl transition-all group">
                             <div
                                 class="w-12 h-12 bg-[#EEF2FF] text-[#4F46E5] rounded-xl flex items-center justify-center group-hover:bg-[#4F46E5] group-hover:text-white transition-colors shrink-0">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -365,13 +365,13 @@
                                 </svg>
                             </div>
                             <div class="flex flex-col justify-center h-full">
-                                <span class="text-[0.95rem] font-bold text-slate-800">Nuevo Usuario</span>
-                                <span class="text-[0.75rem] text-slate-500 mt-0.5">Registra a alguien</span>
+                                <span class="text-[0.95rem] font-bold text-slate-800 dark:text-gray-100">Nuevo Usuario</span>
+                                <span class="text-[0.75rem] text-slate-500 dark:text-[#B0B3B8] mt-0.5">Registra a alguien</span>
                             </div>
                         </button>
 
                         <button onclick="openModal('createTaskModal')"
-                            class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 p-5 bg-white border border-slate-200/60 hover:border-green-300 hover:shadow-md rounded-2xl transition-all group">
+                            class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 p-5 bg-white dark:bg-[#242526] border border-slate-200/60 dark:border-[#3A3B3C] hover:border-green-300 hover:shadow-md rounded-2xl transition-all group">
                             <div
                                 class="w-12 h-12 bg-[#ECFDF5] text-[#10B981] rounded-xl flex items-center justify-center group-hover:bg-[#10B981] group-hover:text-white transition-colors shrink-0">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -381,13 +381,13 @@
                                 </svg>
                             </div>
                             <div class="flex flex-col justify-center h-full">
-                                <span class="text-[0.95rem] font-bold text-slate-800">Nueva Tarea</span>
-                                <span class="text-[0.75rem] text-slate-500 mt-0.5">Asigna trabajo</span>
+                                <span class="text-[0.95rem] font-bold text-slate-800 dark:text-gray-100">Nueva Tarea</span>
+                                <span class="text-[0.75rem] text-slate-500 dark:text-[#B0B3B8] mt-0.5">Asigna trabajo</span>
                             </div>
                         </button>
 
                         <a href="{{ route('admin.incidents.index') }}"
-                            class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 p-5 bg-white border border-slate-200/60 hover:border-amber-300 hover:shadow-md rounded-2xl transition-all group">
+                            class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 p-5 bg-white dark:bg-[#242526] border border-slate-200/60 dark:border-[#3A3B3C] hover:border-amber-300 hover:shadow-md rounded-2xl transition-all group">
                             <div
                                 class="w-12 h-12 bg-[#FFFBEB] text-[#F59E0B] rounded-xl flex items-center justify-center group-hover:bg-[#F59E0B] group-hover:text-white transition-colors shrink-0">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -397,13 +397,13 @@
                                 </svg>
                             </div>
                             <div class="flex flex-col justify-center h-full">
-                                <span class="text-[0.95rem] font-bold text-slate-800">Ver Reportes</span>
-                                <span class="text-[0.75rem] text-slate-500 mt-0.5">Incidentes recientes</span>
+                                <span class="text-[0.95rem] font-bold text-slate-800 dark:text-gray-100">Ver Reportes</span>
+                                <span class="text-[0.75rem] text-slate-500 dark:text-[#B0B3B8] mt-0.5">Incidentes recientes</span>
                             </div>
                         </a>
 
                         <a href="#"
-                            class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 p-5 bg-white border border-slate-200/60 hover:border-purple-300 hover:shadow-md rounded-2xl transition-all group">
+                            class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 p-5 bg-white dark:bg-[#242526] border border-slate-200/60 dark:border-[#3A3B3C] hover:border-purple-300 hover:shadow-md rounded-2xl transition-all group">
                             <div
                                 class="w-12 h-12 bg-[#F5F3FF] text-[#7C3AED] rounded-xl flex items-center justify-center group-hover:bg-[#7C3AED] group-hover:text-white transition-colors shrink-0">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -415,8 +415,8 @@
                                 </svg>
                             </div>
                             <div class="flex flex-col justify-center h-full">
-                                <span class="text-[0.95rem] font-bold text-slate-800">Ajustar Sistema</span>
-                                <span class="text-[0.75rem] text-slate-500 mt-0.5">Configuraciones locales</span>
+                                <span class="text-[0.95rem] font-bold text-slate-800 dark:text-gray-100">Ajustar Sistema</span>
+                                <span class="text-[0.75rem] text-slate-500 dark:text-[#B0B3B8] mt-0.5">Configuraciones locales</span>
                             </div>
                         </a>
                     </div>
@@ -493,8 +493,8 @@
 
                     <!-- Modal Content -->
                     <div
-                        class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
-                        <div class="bg-white dark:bg-gray-800 px-6 pt-6 pb-4">
+                        class="inline-block align-bottom bg-white dark:bg-[#242526] dark:bg-gray-800 rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+                        <div class="bg-white dark:bg-[#242526] dark:bg-gray-800 px-6 pt-6 pb-4">
                             <div class="flex items-center justify-between mb-6">
                                 <div class="flex items-center space-x-3">
                                     <div class="p-2 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl">
@@ -505,10 +505,10 @@
                                             </path>
                                         </svg>
                                     </div>
-                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">Crear Nuevo Usuario</h3>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-white">Crear Nuevo Usuario</h3>
                                 </div>
                                 <button onclick="closeModal('createUserModal')"
-                                    class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                                    class="text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-300">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M6 18L18 6M6 6l12 12"></path>
@@ -522,7 +522,7 @@
 
                                 <!-- Foto de perfil -->
                                 <div class="space-y-2">
-                                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">
+                                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300">
                                         Foto de Perfil (Opcional)
                                     </label>
                                     <div class="flex items-center space-x-4">
@@ -536,7 +536,7 @@
                                             <input type="file" id="user_profile_photo" name="profile_photo"
                                                 accept="image/*" class="hidden" onchange="previewUserImage(this)">
                                             <label for="user_profile_photo"
-                                                class="inline-flex items-center px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer">
+                                                class="inline-flex items-center px-3 py-2 bg-white dark:bg-[#242526] dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-200 dark:text-gray-300 shadow-sm hover:bg-gray-50 dark:hover:bg-[#3A3B3C] dark:hover:bg-gray-600 cursor-pointer">
                                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -554,23 +554,23 @@
                                     <!-- Nombre -->
                                     <div>
                                         <label for="user_name"
-                                            class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                            class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">
                                             Nombre Completo *
                                         </label>
                                         <input id="user_name" name="name" type="text" required
                                             oninput="updateUserInitials(this.value)"
-                                            class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                            class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                                             placeholder="Nombre completo">
                                     </div>
 
                                     <!-- Email -->
                                     <div>
                                         <label for="user_email"
-                                            class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                            class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">
                                             Correo Electrónico *
                                         </label>
                                         <input id="user_email" name="email" type="email" required
-                                            class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                            class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                                             placeholder="usuario@ejemplo.com">
                                     </div>
                                 </div>
@@ -579,23 +579,23 @@
                                     <!-- Contraseña -->
                                     <div>
                                         <label for="user_password"
-                                            class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                            class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">
                                             Contraseña *
                                         </label>
                                         <input id="user_password" name="password" type="password" required
-                                            class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                            class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                                             placeholder="••••••••">
                                     </div>
 
                                     <!-- Confirmar Contraseña -->
                                     <div>
                                         <label for="user_password_confirmation"
-                                            class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                            class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">
                                             Confirmar Contraseña *
                                         </label>
                                         <input id="user_password_confirmation" name="password_confirmation"
                                             type="password" required
-                                            class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                            class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                                             placeholder="••••••••">
                                     </div>
                                 </div>
@@ -603,11 +603,11 @@
                                 <!-- Rol -->
                                 <div>
                                     <label for="user_role"
-                                        class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                        class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">
                                         Rol del Usuario *
                                     </label>
                                     <select id="user_role" name="role" required
-                                        class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                        class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                                         <option value="">Selecciona un rol</option>
                                         @foreach ($roles as $role)
                                             <option value="{{ $role }}">{{ ucfirst($role) }}</option>
@@ -617,9 +617,9 @@
 
                                 <!-- Botones -->
                                 <div
-                                    class="flex items-center justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                                    class="flex items-center justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-[#3A3B3C] dark:border-gray-700">
                                     <button type="button" onclick="closeModal('createUserModal')"
-                                        class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg font-medium transition-colors">
+                                        class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 dark:text-gray-300 bg-white dark:bg-[#242526] dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-[#3A3B3C] dark:hover:bg-gray-600 rounded-lg font-medium transition-colors">
                                         Cancelar
                                     </button>
                                     <button type="submit"
@@ -643,8 +643,8 @@
 
                     <!-- Modal Content -->
                     <div
-                        class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
-                        <div class="bg-white dark:bg-gray-800 px-6 pt-6 pb-4">
+                        class="inline-block align-bottom bg-white dark:bg-[#242526] dark:bg-gray-800 rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
+                        <div class="bg-white dark:bg-[#242526] dark:bg-gray-800 px-6 pt-6 pb-4">
                             <div class="flex items-center justify-between mb-6">
                                 <div class="flex items-center space-x-3">
                                     <div class="p-2 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl">
@@ -655,10 +655,10 @@
                                             </path>
                                         </svg>
                                     </div>
-                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">Crear Nueva Tarea</h3>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-white">Crear Nueva Tarea</h3>
                                 </div>
                                 <button onclick="closeModal('createTaskModal')"
-                                    class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                                    class="text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-300">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M6 18L18 6M6 6l12 12"></path>
@@ -673,22 +673,22 @@
                                 <!-- Título -->
                                 <div>
                                     <label for="task_title"
-                                        class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                        class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">
                                         Título *
                                     </label>
                                     <input id="task_title" name="title" type="text" required
-                                        class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                                        class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500"
                                         placeholder="Título de la tarea">
                                 </div>
 
                                 <!-- Descripción -->
                                 <div>
                                     <label for="task_description"
-                                        class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                        class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">
                                         Descripción
                                     </label>
                                     <textarea id="task_description" name="description" rows="3"
-                                        class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                                        class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500"
                                         placeholder="Descripción de la tarea"></textarea>
                                 </div>
 
@@ -696,21 +696,21 @@
                                     <!-- Fecha Límite -->
                                     <div>
                                         <label for="task_deadline"
-                                            class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                            class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">
                                             Fecha Límite *
                                         </label>
                                         <input id="task_deadline" name="deadline_at" type="date" required
-                                            class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                                            class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500">
                                     </div>
 
                                     <!-- Ubicación -->
                                     <div>
                                         <label for="task_location"
-                                            class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                            class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">
                                             Ubicación *
                                         </label>
                                         <input id="task_location" name="location" type="text" required
-                                            class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                                            class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500"
                                             placeholder="Ubicación de la tarea">
                                     </div>
                                 </div>
@@ -719,11 +719,11 @@
                                     <!-- Prioridad -->
                                     <div>
                                         <label for="task_priority"
-                                            class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                            class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">
                                             Prioridad *
                                         </label>
                                         <select id="task_priority" name="priority" required
-                                            class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                                            class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500">
                                             @foreach ($priorities as $priority)
                                                 <option value="{{ $priority }}">{{ ucfirst($priority) }}</option>
                                             @endforeach
@@ -733,11 +733,11 @@
                                     <!-- Asignar a -->
                                     <div>
                                         <label for="task_assigned_to"
-                                            class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                            class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">
                                             Asignar a
                                         </label>
                                         <select id="task_assigned_to" name="assigned_to"
-                                            class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                                            class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500">
                                             <option value="">Selecciona un trabajador</option>
                                             @foreach ($workers as $worker)
                                                 <option value="{{ $worker->id }}">{{ $worker->name }}</option>
@@ -749,22 +749,22 @@
                                 <!-- Imágenes de Referencia -->
                                 <div>
                                     <label for="task_reference_images"
-                                        class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                        class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">
                                         Imágenes de Referencia (Opcional)
                                     </label>
                                     <input id="task_reference_images" name="reference_images[]" type="file"
                                         accept="image/*" multiple
-                                        class="block w-full text-sm text-gray-900 dark:text-gray-400 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 focus:outline-none">
-                                    <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">PNG, JPG, GIF hasta 2MB
+                                        class="block w-full text-sm text-gray-900 dark:text-gray-100 dark:text-gray-400 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 focus:outline-none">
+                                    <p class="mt-1 text-xs text-gray-500 dark:text-[#B0B3B8] dark:text-gray-400">PNG, JPG, GIF hasta 2MB
                                         cada una.
                                     </p>
                                 </div>
 
                                 <!-- Botones -->
                                 <div
-                                    class="flex items-center justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                                    class="flex items-center justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-[#3A3B3C] dark:border-gray-700">
                                     <button type="button" onclick="closeModal('createTaskModal')"
-                                        class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg font-medium transition-colors">
+                                        class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 dark:text-gray-300 bg-white dark:bg-[#242526] dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-[#3A3B3C] dark:hover:bg-gray-600 rounded-lg font-medium transition-colors">
                                         Cancelar
                                     </button>
                                     <button type="submit"

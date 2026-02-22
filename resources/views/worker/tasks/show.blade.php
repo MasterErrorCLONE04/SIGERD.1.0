@@ -21,9 +21,9 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {{-- Título y descripción --}}
                         <div class="md:col-span-2">
-                            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">{{ $task->title }}</h1>
+                            <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100 dark:text-white mb-4">{{ $task->title }}</h1>
                             <div class="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg">
-                                <p class="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{{ $task->description }}</p>
+                                <p class="text-gray-700 dark:text-gray-200 dark:text-gray-300 whitespace-pre-wrap">{{ $task->description }}</p>
                             </div>
                         </div>
 
@@ -37,8 +37,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Ubicación</p>
-                                    <p class="text-base font-semibold text-gray-900 dark:text-white">{{ $task->location }}</p>
+                                    <p class="text-sm font-medium text-gray-600 dark:text-gray-300 dark:text-gray-400">Ubicación</p>
+                                    <p class="text-base font-semibold text-gray-900 dark:text-gray-100 dark:text-white">{{ $task->location }}</p>
                                 </div>
                             </div>
 
@@ -49,8 +49,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Fecha Límite</p>
-                                    <p class="text-base font-semibold text-gray-900 dark:text-white">
+                                    <p class="text-sm font-medium text-gray-600 dark:text-gray-300 dark:text-gray-400">Fecha Límite</p>
+                                    <p class="text-base font-semibold text-gray-900 dark:text-gray-100 dark:text-white">
                                         {{ $task->deadline_at->format('d/m/Y') }}
                                         @if($task->deadline_at < now() && !in_array($task->status, ['finalizada', 'cancelada', 'realizada']))
                                             <span class="ml-2 text-xs text-red-600 dark:text-red-400 font-medium">(Vencida)</span>
@@ -68,14 +68,14 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Prioridad</p>
+                                    <p class="text-sm font-medium text-gray-600 dark:text-gray-300 dark:text-gray-400">Prioridad</p>
                                     @php
                                         $priorityColors = [
                                             'alta' => 'bg-red-100 text-red-800 dark:bg-red-500/20 dark:text-red-300',
                                             'media' => 'bg-yellow-100 text-yellow-800 dark:bg-yellow-500/20 dark:text-yellow-300',
                                             'baja' => 'bg-green-100 text-green-800 dark:bg-green-500/20 dark:text-green-300',
                                         ];
-                                        $color = $priorityColors[$task->priority] ?? 'bg-gray-100 text-gray-800 dark:bg-gray-500/20 dark:text-gray-300';
+                                        $color = $priorityColors[$task->priority] ?? 'bg-gray-100 text-gray-800 dark:text-gray-100 dark:bg-gray-500/20 dark:text-gray-300';
                                     @endphp
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium {{ $color }}">
                                         {{ ucfirst($task->priority) }}
@@ -93,16 +93,16 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Estado</p>
+                                    <p class="text-sm font-medium text-gray-600 dark:text-gray-300 dark:text-gray-400">Estado</p>
                                     @php
                                         $statusColors = [
                                             'asignado' => 'bg-yellow-100 text-yellow-800 dark:bg-yellow-500/20 dark:text-yellow-300',
                                             'en progreso' => 'bg-blue-100 text-blue-800 dark:bg-blue-500/20 dark:text-blue-300',
                                             'realizada' => 'bg-indigo-100 text-indigo-800 dark:bg-indigo-500/20 dark:text-indigo-300',
                                             'finalizada' => 'bg-green-100 text-green-800 dark:bg-green-500/20 dark:text-green-300',
-                                            'cancelada' => 'bg-gray-100 text-gray-800 dark:bg-gray-500/20 dark:text-gray-300',
+                                            'cancelada' => 'bg-gray-100 text-gray-800 dark:text-gray-100 dark:bg-gray-500/20 dark:text-gray-300',
                                         ];
-                                        $color = $statusColors[$task->status] ?? 'bg-gray-100 text-gray-800 dark:bg-gray-500/20 dark:text-gray-300';
+                                        $color = $statusColors[$task->status] ?? 'bg-gray-100 text-gray-800 dark:text-gray-100 dark:bg-gray-500/20 dark:text-gray-300';
                                     @endphp
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium {{ $color }}">
                                         {{ ucfirst($task->status) }}
@@ -117,12 +117,12 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Asignado por</p>
+                                    <p class="text-sm font-medium text-gray-600 dark:text-gray-300 dark:text-gray-400">Asignado por</p>
                                     <div class="flex items-center gap-2 mt-1">
                                         <div class="h-8 w-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-xs font-bold">
                                             {{ substr($task->createdBy->name ?? 'N/A', 0, 1) }}
                                         </div>
-                                        <p class="text-base font-semibold text-gray-900 dark:text-white">{{ $task->createdBy->name ?? 'N/A' }}</p>
+                                        <p class="text-base font-semibold text-gray-900 dark:text-gray-100 dark:text-white">{{ $task->createdBy->name ?? 'N/A' }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -138,12 +138,12 @@
                  $task->final_description)
                 <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/50 overflow-hidden">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Evidencias y Documentación</h3>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-white mb-6">Evidencias y Documentación</h3>
                         
                         @if ($task->reference_images && count($task->reference_images) > 0)
                             <div class="mb-8">
-                                <p class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Imágenes de Referencia</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Imágenes de referencia proporcionadas para la tarea</p>
+                                <p class="text-lg font-semibold text-gray-900 dark:text-gray-100 dark:text-white mb-2">Imágenes de Referencia</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 dark:text-gray-400 mb-4">Imágenes de referencia proporcionadas para la tarea</p>
                                 <div class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4">
                                     @foreach ($task->reference_images as $imagePath)
                                         <div class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 bg-gray-100 dark:bg-gray-700 cursor-pointer"
@@ -155,7 +155,7 @@
                                                 </svg>
                                             </div>
                                             <div class="absolute bottom-3 right-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <span class="text-xs font-medium text-gray-700 dark:text-gray-300">Click para ampliar</span>
+                                                <span class="text-xs font-medium text-gray-700 dark:text-gray-200 dark:text-gray-300">Click para ampliar</span>
                                             </div>
                                         </div>
                                     @endforeach
@@ -165,8 +165,8 @@
 
                         @if ($task->initial_evidence_images && count($task->initial_evidence_images) > 0)
                             <div class="mb-8">
-                                <p class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Evidencia Inicial: Estado de la Falla al Llegar</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Imágenes que muestran cómo se encontró la falla al llegar al lugar</p>
+                                <p class="text-lg font-semibold text-gray-900 dark:text-gray-100 dark:text-white mb-2">Evidencia Inicial: Estado de la Falla al Llegar</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 dark:text-gray-400 mb-4">Imágenes que muestran cómo se encontró la falla al llegar al lugar</p>
                                 <div class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4">
                                     @foreach ($task->initial_evidence_images as $imagePath)
                                         <div class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 bg-gray-100 dark:bg-gray-700 cursor-pointer"
@@ -181,7 +181,7 @@
                                                 <span class="text-xs font-bold text-white">Inicial</span>
                                             </div>
                                             <div class="absolute bottom-3 right-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <span class="text-xs font-medium text-gray-700 dark:text-gray-300">Click para ampliar</span>
+                                                <span class="text-xs font-medium text-gray-700 dark:text-gray-200 dark:text-gray-300">Click para ampliar</span>
                                             </div>
                                         </div>
                                     @endforeach
@@ -191,8 +191,8 @@
 
                         @if ($task->final_evidence_images && count($task->final_evidence_images) > 0)
                             <div class="mb-8">
-                                <p class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Evidencia Final: Trabajo Completado</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Imágenes que muestran el trabajo finalizado</p>
+                                <p class="text-lg font-semibold text-gray-900 dark:text-gray-100 dark:text-white mb-2">Evidencia Final: Trabajo Completado</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 dark:text-gray-400 mb-4">Imágenes que muestran el trabajo finalizado</p>
                                 <div class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4">
                                     @foreach ($task->final_evidence_images as $imagePath)
                                         <div class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 bg-gray-100 dark:bg-gray-700 cursor-pointer"
@@ -212,7 +212,7 @@
                                                 </span>
                                             </div>
                                             <div class="absolute bottom-3 right-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <span class="text-xs font-medium text-gray-700 dark:text-gray-300">Click para ampliar</span>
+                                                <span class="text-xs font-medium text-gray-700 dark:text-gray-200 dark:text-gray-300">Click para ampliar</span>
                                             </div>
                                         </div>
                                     @endforeach
@@ -222,9 +222,9 @@
 
                         @if ($task->final_description)
                             <div class="mb-6">
-                                <p class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Descripción del Trabajo Realizado</p>
+                                <p class="text-lg font-semibold text-gray-900 dark:text-gray-100 dark:text-white mb-2">Descripción del Trabajo Realizado</p>
                                 <div class="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg">
-                                    <p class="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{{ $task->final_description }}</p>
+                                    <p class="text-gray-700 dark:text-gray-200 dark:text-gray-300 whitespace-pre-wrap">{{ $task->final_description }}</p>
                                 </div>
                             </div>
                         @endif
@@ -236,7 +236,7 @@
             @if ($task->status === 'asignado' || $task->status === 'en progreso')
                 <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/50 overflow-hidden">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Actualizar Tarea</h3>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-white mb-6">Actualizar Tarea</h3>
                         <form method="POST" action="{{ route('worker.tasks.update', $task->id) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
@@ -245,16 +245,16 @@
                                 <!-- Initial Evidence Images - Cuando llega y ve cómo encontró la falla -->
                                 <div class="mb-6">
                                     <x-input-label for="initial_evidence_images" :value="__('Evidencia Inicial: Estado de la Falla al Llegar')" />
-                                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 mt-1">
+                                    <p class="text-sm text-gray-600 dark:text-gray-300 dark:text-gray-400 mb-2 mt-1">
                                         Sube imágenes que muestren cómo encontraste la falla al llegar al lugar. Estas imágenes documentan el estado inicial del problema.
                                     </p>
                                     <input id="initial_evidence_images" 
-                                           class="block mt-1 w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 p-2" 
+                                           class="block mt-1 w-full text-sm text-gray-900 dark:text-gray-100 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 p-2" 
                                            type="file" 
                                            name="initial_evidence_images[]" 
                                            accept="image/*" 
                                            multiple />
-                                    <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Puedes seleccionar múltiples imágenes (máximo 2MB por imagen)</p>
+                                    <p class="mt-1 text-xs text-gray-500 dark:text-[#B0B3B8] dark:text-gray-400">Puedes seleccionar múltiples imágenes (máximo 2MB por imagen)</p>
                                     <x-input-error :messages="$errors->get('initial_evidence_images')" class="mt-2" />
                                     <x-input-error :messages="$errors->all('initial_evidence_images.*')" class="mt-2" />
                                 </div>
@@ -264,17 +264,17 @@
                                 <!-- Final Evidence Images - Después de haber terminado el trabajo -->
                                 <div class="mb-6">
                                     <x-input-label for="final_evidence_images" :value="__('Evidencia Final: Trabajo Completado')" />
-                                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 mt-1">
+                                    <p class="text-sm text-gray-600 dark:text-gray-300 dark:text-gray-400 mb-2 mt-1">
                                         Sube imágenes que muestren el trabajo finalizado. Estas imágenes documentan que el problema fue resuelto correctamente.
                                     </p>
                                     <input id="final_evidence_images" 
-                                           class="block mt-1 w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 p-2" 
+                                           class="block mt-1 w-full text-sm text-gray-900 dark:text-gray-100 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 p-2" 
                                            type="file" 
                                            name="final_evidence_images[]" 
                                            accept="image/*" 
                                            multiple 
                                            required />
-                                    <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Puedes seleccionar múltiples imágenes (máximo 2MB por imagen)</p>
+                                    <p class="mt-1 text-xs text-gray-500 dark:text-[#B0B3B8] dark:text-gray-400">Puedes seleccionar múltiples imágenes (máximo 2MB por imagen)</p>
                                     <x-input-error :messages="$errors->get('final_evidence_images')" class="mt-2" />
                                     <x-input-error :messages="$errors->all('final_evidence_images.*')" class="mt-2" />
                                 </div>
@@ -282,13 +282,13 @@
                                 <!-- Final Description -->
                                 <div class="mb-6">
                                     <x-input-label for="final_description" :value="__('Descripción del Trabajo Realizado')" />
-                                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 mt-1">
+                                    <p class="text-sm text-gray-600 dark:text-gray-300 dark:text-gray-400 mb-2 mt-1">
                                         Describe detalladamente el trabajo que realizaste para resolver la falla.
                                     </p>
                                     <textarea id="final_description" 
                                               name="final_description" 
                                               rows="4"
-                                              class="block mt-1 w-full border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 focus:border-blue-500 dark:focus:border-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 rounded-md shadow-sm" 
+                                              class="block mt-1 w-full border-gray-300 dark:border-gray-700 bg-white dark:bg-[#242526] dark:bg-gray-900 text-gray-700 dark:text-gray-200 dark:text-gray-300 focus:border-blue-500 dark:focus:border-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 rounded-md shadow-sm" 
                                               placeholder="Describe qué acciones realizaste para resolver la falla..."
                                               required>{{ old('final_description', $task->final_description) }}</textarea>
                                     <x-input-error :messages="$errors->get('final_description')" class="mt-2" />
@@ -297,7 +297,7 @@
 
                             <div class="flex items-center justify-end gap-4 mt-6">
                                 <a href="{{ route('worker.tasks.index') }}" 
-                                   class="px-6 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-lg transition">
+                                   class="px-6 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 dark:text-gray-300 font-semibold rounded-lg transition">
                                     Cancelar
                                 </a>
                                 <x-primary-button class="px-6 py-3">
@@ -314,7 +314,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                         <div>
-                            <p class="text-gray-700 dark:text-gray-300">
+                            <p class="text-gray-700 dark:text-gray-200 dark:text-gray-300">
                                 <strong class="font-medium">Nota:</strong> Esta tarea tiene un estado que no permite más actualizaciones directamente desde esta vista (Estado: <span class="font-semibold">"{{ ucfirst($task->status) }}"</span>).
                             </p>
                         </div>
@@ -325,7 +325,7 @@
             {{-- Botón volver --}}
             <div class="flex justify-start">
                 <a href="{{ route('worker.tasks.index') }}" 
-                   class="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-lg transition shadow-md hover:shadow-lg">
+                   class="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 dark:text-gray-300 font-semibold rounded-lg transition shadow-md hover:shadow-lg">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                     </svg>

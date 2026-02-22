@@ -18,11 +18,11 @@
             {{-- Tarjetas de estadísticas --}}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {{-- Total de tareas --}}
-                <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/50 p-6">
+                <div class="bg-white dark:bg-[#242526] rounded-2xl shadow-lg border border-gray-100 dark:border-[#3A3B3C] p-6">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Total de Tareas</p>
-                            <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2">{{ $totalTasks }}</p>
+                            <p class="text-sm font-medium text-gray-600 dark:text-gray-300 dark:text-gray-400">Total de Tareas</p>
+                            <p class="text-3xl font-bold text-gray-900 dark:text-gray-100 dark:text-white mt-2">{{ $totalTasks }}</p>
                         </div>
                         <div class="p-3 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -33,11 +33,11 @@
                 </div>
 
                 {{-- Tareas asignadas --}}
-                <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/50 p-6">
+                <div class="bg-white dark:bg-[#242526] rounded-2xl shadow-lg border border-gray-100 dark:border-[#3A3B3C] p-6">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Asignadas</p>
-                            <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2">{{ $assignedTasks }}</p>
+                            <p class="text-sm font-medium text-gray-600 dark:text-gray-300 dark:text-gray-400">Asignadas</p>
+                            <p class="text-3xl font-bold text-gray-900 dark:text-gray-100 dark:text-white mt-2">{{ $assignedTasks }}</p>
                         </div>
                         <div class="p-3 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-xl">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -48,11 +48,11 @@
                 </div>
 
                 {{-- En progreso --}}
-                <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/50 p-6">
+                <div class="bg-white dark:bg-[#242526] rounded-2xl shadow-lg border border-gray-100 dark:border-[#3A3B3C] p-6">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">En Progreso</p>
-                            <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2">{{ $inProgressTasks }}</p>
+                            <p class="text-sm font-medium text-gray-600 dark:text-gray-300 dark:text-gray-400">En Progreso</p>
+                            <p class="text-3xl font-bold text-gray-900 dark:text-gray-100 dark:text-white mt-2">{{ $inProgressTasks }}</p>
                         </div>
                         <div class="p-3 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -63,11 +63,11 @@
                 </div>
 
                 {{-- Completadas --}}
-                <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/50 p-6">
+                <div class="bg-white dark:bg-[#242526] rounded-2xl shadow-lg border border-gray-100 dark:border-[#3A3B3C] p-6">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Completadas</p>
-                            <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2">{{ $completedTasks }}</p>
+                            <p class="text-sm font-medium text-gray-600 dark:text-gray-300 dark:text-gray-400">Completadas</p>
+                            <p class="text-3xl font-bold text-gray-900 dark:text-gray-100 dark:text-white mt-2">{{ $completedTasks }}</p>
                         </div>
                         <div class="p-3 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -82,7 +82,7 @@
             @if($overdueTasks > 0 || $upcomingDeadlineTasks > 0)
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     @if($overdueTasks > 0)
-                        <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl p-6">
+                        <div class="bg-red-50 dark:bg-[#3A3B3C] border border-red-600 dark:border-red-800 rounded-2xl p-6">
                             <div class="flex items-center gap-4">
                                 <div class="p-3 bg-red-500 rounded-xl">
                                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -98,7 +98,7 @@
                     @endif
 
                     @if($upcomingDeadlineTasks > 0)
-                        <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-2xl p-6">
+                        <div class="bg-yellow-50 dark:bg-[#3A3B3C] border border-yellow-600 dark:border-yellow-800 rounded-2xl p-6">
                             <div class="flex items-center gap-4">
                                 <div class="p-3 bg-yellow-500 rounded-xl">
                                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -117,9 +117,9 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {{-- Tareas urgentes --}}
-                <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/50 overflow-hidden">
-                    <div class="p-6 border-b border-gray-200 dark:border-gray-700">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                <div class="bg-white dark:bg-[#242526] rounded-2xl shadow-lg border border-gray-100 dark:border-[#3A3B3C] overflow-hidden">
+                    <div class="p-6 border-b border-gray-200 dark:border-[#3A3B3C] dark:border-gray-700">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-white flex items-center gap-2">
                             <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
                             </svg>
@@ -131,8 +131,8 @@
                             <div class="mb-4 last:mb-0 p-4 bg-red-50 dark:bg-red-900/10 rounded-lg border border-red-200 dark:border-red-800">
                                 <div class="flex items-start justify-between">
                                     <div class="flex-1">
-                                        <h4 class="font-semibold text-gray-900 dark:text-white">{{ $task->title }}</h4>
-                                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                                        <h4 class="font-semibold text-gray-900 dark:text-gray-100 dark:text-white">{{ $task->title }}</h4>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300 dark:text-gray-400 mt-1">
                                             Fecha límite: <span class="font-medium text-red-600 dark:text-red-400">{{ $task->deadline_at->format('d/m/Y') }}</span>
                                         </p>
                                     </div>
@@ -143,15 +143,15 @@
                                 </div>
                             </div>
                         @empty
-                            <p class="text-gray-500 dark:text-gray-400 text-center py-8">No tienes tareas urgentes</p>
+                            <p class="text-gray-500 dark:text-[#B0B3B8] dark:text-gray-400 text-center py-8">No tienes tareas urgentes</p>
                         @endforelse
                     </div>
                 </div>
 
                 {{-- Tareas recientes --}}
-                <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/50 overflow-hidden">
-                    <div class="p-6 border-b border-gray-200 dark:border-gray-700">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                <div class="bg-white dark:bg-[#242526] rounded-2xl shadow-lg border border-gray-100 dark:border-[#3A3B3C] overflow-hidden">
+                    <div class="p-6 border-b border-gray-200 dark:border-[#3A3B3C] dark:border-gray-700">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-white flex items-center gap-2">
                             <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
@@ -160,14 +160,14 @@
                     </div>
                     <div class="p-6">
                         @forelse($recentTasks as $task)
-                            <div class="mb-4 last:mb-0 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                            <div class="mb-4 last:mb-0 p-4 bg-gray-50 dark:bg-[#18191A] rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition">
                                 <div class="flex items-start justify-between">
                                     <div class="flex-1">
-                                        <h4 class="font-semibold text-gray-900 dark:text-white">{{ $task->title }}</h4>
-                                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                                        <h4 class="font-semibold text-gray-900 dark:text-gray-100 dark:text-white">{{ $task->title }}</h4>
+                                        <p class="text-sm text-gray-600 dark:text-gray-300 dark:text-gray-400 mt-1">
                                             Asignada por: <span class="font-medium">{{ $task->createdBy->name ?? 'N/A' }}</span>
                                         </p>
-                                        <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                                        <p class="text-xs text-gray-500 dark:text-[#B0B3B8] dark:text-gray-500 dark:text-[#B0B3B8] mt-1">
                                             {{ $task->created_at->diffForHumans() }}
                                         </p>
                                     </div>
@@ -178,15 +178,15 @@
                                 </div>
                             </div>
                         @empty
-                            <p class="text-gray-500 dark:text-gray-400 text-center py-8">No tienes tareas recientes</p>
+                            <p class="text-gray-500 dark:text-[#B0B3B8] dark:text-gray-400 text-center py-8">No tienes tareas recientes</p>
                         @endforelse
                     </div>
                 </div>
             </div>
 
             {{-- Acceso rápido --}}
-            <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/50 p-6">
-                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Acceso Rápido</h3>
+            <div class="bg-white dark:bg-[#242526] rounded-2xl shadow-lg border border-gray-100 dark:border-[#3A3B3C] p-6">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-white mb-4">Acceso Rápido</h3>
                 <div class="flex flex-wrap gap-4">
                     <a href="{{ route('worker.tasks.index') }}" 
                        class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">

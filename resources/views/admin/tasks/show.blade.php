@@ -32,15 +32,15 @@
         }
     </style>
 
-    <div class="py-8 bg-slate-50 dark:bg-gray-900 min-h-screen">
+    <div class="py-8 bg-slate-50 dark:bg-[#18191A] dark:bg-gray-900 min-h-screen">
         <div class="max-w-full mx-auto px-4 sm:px-8 lg:px-12 w-full">
 
             <div
-                class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-slate-200 dark:border-gray-700 overflow-hidden">
+                class="bg-white dark:bg-[#242526] dark:bg-gray-800 rounded-2xl shadow-sm border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-700 overflow-hidden">
                 {{-- Header Section --}}
-                <div class="p-8 border-b border-slate-100 dark:border-gray-700">
+                <div class="p-8 border-b border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
                     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
-                        <h1 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">
+                        <h1 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-gray-100 dark:text-white">
                             @if($task->incident)
                                 Incidente: {{ $task->title }}
                             @else
@@ -62,8 +62,8 @@
                                     'media' => 'bg-amber-100 text-amber-700',
                                     'baja' => 'bg-emerald-100 text-emerald-700',
                                 ];
-                                $statusColor = $statusColors[$task->status] ?? 'bg-slate-100 text-slate-700';
-                                $priorityColor = $priorityColors[$task->priority] ?? 'bg-slate-100 text-slate-700';
+                                $statusColor = $statusColors[$task->status] ?? 'bg-slate-100 dark:bg-[#3A3B3C] text-slate-700 dark:text-gray-200';
+                                $priorityColor = $priorityColors[$task->priority] ?? 'bg-slate-100 dark:bg-[#3A3B3C] text-slate-700 dark:text-gray-200';
 
                                 $statusDotColors = [
                                     'pendiente' => 'bg-yellow-500',
@@ -94,10 +94,10 @@
                         </div>
                     </div>
 
-                    <div class="flex items-start space-x-3 text-slate-600 dark:text-gray-400">
+                    <div class="flex items-start space-x-3 text-slate-600 dark:text-gray-300 dark:text-gray-400">
                         <span class="material-symbols-outlined text-indigo-600 text-xl mt-0.5">description</span>
                         <div class="flex-1">
-                            <h3 class="font-semibold text-slate-800 dark:text-gray-200 mb-1">Descripción</h3>
+                            <h3 class="font-semibold text-slate-800 dark:text-gray-100 dark:text-gray-200 mb-1">Descripción</h3>
                             <p class="text-sm leading-relaxed">{{ $task->description ?: 'Sin descripción detallada.' }}
                             </p>
                         </div>
@@ -106,42 +106,42 @@
 
                 {{-- Metadata Grid --}}
                 <div
-                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-8 bg-slate-50/50 dark:bg-gray-900/50">
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-8 bg-slate-50/50 dark:bg-[#18191A] dark:bg-gray-900/50">
                     <div
-                        class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-gray-700">
-                        <div class="flex items-center space-x-2 text-slate-500 dark:text-gray-400 mb-2">
+                        class="bg-white dark:bg-[#242526] dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
+                        <div class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
                             <span class="material-symbols-outlined text-sm">place</span>
                             <span class="text-xs font-medium uppercase tracking-wider">Ubicación</span>
                         </div>
-                        <p class="font-semibold text-slate-800 dark:text-white">{{ $task->location }}</p>
+                        <p class="font-semibold text-slate-800 dark:text-gray-100 dark:text-white">{{ $task->location }}</p>
                     </div>
                     <div
-                        class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-gray-700">
-                        <div class="flex items-center space-x-2 text-slate-500 dark:text-gray-400 mb-2">
+                        class="bg-white dark:bg-[#242526] dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
+                        <div class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
                             <span class="material-symbols-outlined text-sm">event</span>
                             <span class="text-xs font-medium uppercase tracking-wider">Fecha Límite</span>
                         </div>
-                        <p class="font-semibold text-slate-800 dark:text-white">
+                        <p class="font-semibold text-slate-800 dark:text-gray-100 dark:text-white">
                             {{ $task->deadline_at->format('d/m/Y H:i') }}
                         </p>
                     </div>
                     <div
-                        class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-gray-700">
-                        <div class="flex items-center space-x-2 text-slate-500 dark:text-gray-400 mb-2">
+                        class="bg-white dark:bg-[#242526] dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
+                        <div class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
                             <span class="material-symbols-outlined text-sm">person</span>
                             <span class="text-xs font-medium uppercase tracking-wider">Asignado a</span>
                         </div>
-                        <p class="font-semibold text-slate-800 dark:text-white">
+                        <p class="font-semibold text-slate-800 dark:text-gray-100 dark:text-white">
                             {{ $task->assignedTo->name ?? 'Sin asignar' }}
                         </p>
                     </div>
                     <div
-                        class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-gray-700">
-                        <div class="flex items-center space-x-2 text-slate-500 dark:text-gray-400 mb-2">
+                        class="bg-white dark:bg-[#242526] dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
+                        <div class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
                             <span class="material-symbols-outlined text-sm">schedule</span>
                             <span class="text-xs font-medium uppercase tracking-wider">Creado por</span>
                         </div>
-                        <p class="font-semibold text-slate-800 dark:text-white">{{ $task->createdBy->name ?? 'N/A' }}
+                        <p class="font-semibold text-slate-800 dark:text-gray-100 dark:text-white">{{ $task->createdBy->name ?? 'N/A' }}
                         </p>
                     </div>
                 </div>
@@ -171,15 +171,15 @@
 
                 {{-- Image Galleries Section --}}
                 <div
-                    class="p-8 border-t border-slate-100 dark:border-gray-700 bg-white dark:bg-gray-800 text-slate-800 dark:text-white">
+                    class="p-8 border-t border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700 bg-white dark:bg-[#242526] dark:bg-gray-800 text-slate-800 dark:text-gray-100 dark:text-white">
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         {{-- Reference Images --}}
                         <section class="space-y-4">
                             <div
-                                class="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-gray-700">
+                                class="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
                                 <div class="flex items-center space-x-2">
                                     <span class="material-symbols-outlined text-indigo-600">image</span>
-                                    <h3 class="font-bold text-slate-800 dark:text-gray-200">Imágenes de Referencia</h3>
+                                    <h3 class="font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200">Imágenes de Referencia</h3>
                                 </div>
                             </div>
 
@@ -192,7 +192,7 @@
                                     class="flex gap-3 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-2">
                                     @if($refCount > 0)
                                         @foreach ($task->reference_images as $imagePath)
-                                            <div class="w-48 h-48 flex-shrink-0 relative group/item overflow-hidden rounded-xl bg-slate-100 dark:bg-gray-700 cursor-pointer border border-slate-100 dark:border-gray-600 snap-start"
+                                            <div class="w-48 h-48 flex-shrink-0 relative group/item overflow-hidden rounded-xl bg-slate-100 dark:bg-[#3A3B3C] dark:bg-gray-700 cursor-pointer border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-600 snap-start"
                                                 onclick="openImageModal('{{ asset('storage/' . $imagePath) }}')">
                                                 <img alt="Ref"
                                                     class="w-full h-full object-cover transition-transform duration-300 group-hover/item:scale-110"
@@ -207,11 +207,11 @@
                                 </div>
                                 @if($refCount > 3)
                                     <button @click="scrollLeft()"
-                                        class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 shadow-lg flex items-center justify-center text-slate-600 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#242526] dark:bg-gray-800 border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-700 shadow-lg flex items-center justify-center text-slate-600 dark:text-gray-300 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
                                         <span class="material-symbols-outlined text-sm">chevron_left</span>
                                     </button>
                                     <button @click="scrollRight()"
-                                        class="absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 shadow-lg flex items-center justify-center text-slate-600 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        class="absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#242526] dark:bg-gray-800 border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-700 shadow-lg flex items-center justify-center text-slate-600 dark:text-gray-300 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
                                         <span class="material-symbols-outlined text-sm">chevron_right</span>
                                     </button>
                                 @endif
@@ -221,9 +221,9 @@
                         {{-- Initial Evidence --}}
                         <section class="space-y-4">
                             <div
-                                class="flex items-center space-x-2 pb-2 border-b border-slate-100 dark:border-gray-700">
+                                class="flex items-center space-x-2 pb-2 border-b border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
                                 <span class="material-symbols-outlined text-blue-500">pending_actions</span>
-                                <h3 class="font-bold text-slate-800 dark:text-gray-200">Evidencia Inicial</h3>
+                                <h3 class="font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200">Evidencia Inicial</h3>
                             </div>
 
                             @php $initialCount = count($task->initial_evidence_images ?? []); @endphp
@@ -235,7 +235,7 @@
                                     class="flex gap-3 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-2">
                                     @if($initialCount > 0)
                                         @foreach ($task->initial_evidence_images as $imagePath)
-                                            <div class="w-48 h-48 flex-shrink-0 relative group/item rounded-xl overflow-hidden border border-slate-100 dark:border-gray-700 cursor-pointer snap-start"
+                                            <div class="w-48 h-48 flex-shrink-0 relative group/item rounded-xl overflow-hidden border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700 cursor-pointer snap-start"
                                                 onclick="openImageModal('{{ asset('storage/' . $imagePath) }}')">
                                                 <img alt="Initial"
                                                     class="w-full h-full object-cover transition-transform duration-300 group-hover/item:scale-110"
@@ -251,17 +251,17 @@
                                         @endforeach
                                     @else
                                         <div
-                                            class="w-48 h-48 flex-shrink-0 bg-slate-50 dark:bg-gray-900/50 rounded-xl border border-slate-100 dark:border-gray-700 flex items-center justify-center italic text-slate-400 text-xs snap-start">
+                                            class="w-48 h-48 flex-shrink-0 bg-slate-50 dark:bg-[#18191A] dark:bg-gray-900/50 rounded-xl border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700 flex items-center justify-center italic text-slate-400 dark:text-[#9CA3AF] text-xs snap-start">
                                             Sin registros iniciales</div>
                                     @endif
                                 </div>
                                 @if($initialCount > 3)
                                     <button @click="scrollLeft()"
-                                        class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 shadow-lg flex items-center justify-center text-slate-600 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#242526] dark:bg-gray-800 border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-700 shadow-lg flex items-center justify-center text-slate-600 dark:text-gray-300 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
                                         <span class="material-symbols-outlined text-sm">chevron_left</span>
                                     </button>
                                     <button @click="scrollRight()"
-                                        class="absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 shadow-lg flex items-center justify-center text-slate-600 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        class="absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#242526] dark:bg-gray-800 border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-700 shadow-lg flex items-center justify-center text-slate-600 dark:text-gray-300 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
                                         <span class="material-symbols-outlined text-sm">chevron_right</span>
                                     </button>
                                 @endif
@@ -271,9 +271,9 @@
                         {{-- Final Evidence --}}
                         <section class="space-y-4">
                             <div
-                                class="flex items-center space-x-2 pb-2 border-b border-slate-100 dark:border-gray-700">
+                                class="flex items-center space-x-2 pb-2 border-b border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
                                 <span class="material-symbols-outlined text-green-500">task_alt</span>
-                                <h3 class="font-bold text-slate-800 dark:text-gray-200">Evidencia Final</h3>
+                                <h3 class="font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200">Evidencia Final</h3>
                             </div>
 
                             @php $finalCount = count($task->final_evidence_images ?? []); @endphp
@@ -285,7 +285,7 @@
                                     class="flex gap-3 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-2">
                                     @if($finalCount > 0)
                                         @foreach ($task->final_evidence_images as $imagePath)
-                                            <div class="w-48 h-48 flex-shrink-0 relative group/item rounded-xl overflow-hidden border border-slate-100 dark:border-gray-700 cursor-pointer snap-start"
+                                            <div class="w-48 h-48 flex-shrink-0 relative group/item rounded-xl overflow-hidden border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700 cursor-pointer snap-start"
                                                 onclick="openImageModal('{{ asset('storage/' . $imagePath) }}')">
                                                 <img alt="Final"
                                                     class="w-full h-full object-cover transition-transform duration-300 group-hover/item:scale-110"
@@ -303,17 +303,17 @@
                                         @endforeach
                                     @else
                                         <div
-                                            class="w-48 h-48 flex-shrink-0 bg-slate-50 dark:bg-gray-900/50 rounded-xl border border-slate-100 dark:border-gray-700 flex items-center justify-center italic text-slate-400 text-xs snap-start">
+                                            class="w-48 h-48 flex-shrink-0 bg-slate-50 dark:bg-[#18191A] dark:bg-gray-900/50 rounded-xl border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700 flex items-center justify-center italic text-slate-400 dark:text-[#9CA3AF] text-xs snap-start">
                                             Sin registros finales</div>
                                     @endif
                                 </div>
                                 @if($finalCount > 3)
                                     <button @click="scrollLeft()"
-                                        class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 shadow-lg flex items-center justify-center text-slate-600 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#242526] dark:bg-gray-800 border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-700 shadow-lg flex items-center justify-center text-slate-600 dark:text-gray-300 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
                                         <span class="material-symbols-outlined text-sm">chevron_left</span>
                                     </button>
                                     <button @click="scrollRight()"
-                                        class="absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 shadow-lg flex items-center justify-center text-slate-600 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        class="absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#242526] dark:bg-gray-800 border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-700 shadow-lg flex items-center justify-center text-slate-600 dark:text-gray-300 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
                                         <span class="material-symbols-outlined text-sm">chevron_right</span>
                                     </button>
                                 @endif
@@ -324,10 +324,10 @@
 
                 {{-- Final Description --}}
                 @if($task->final_description)
-                    <div class="p-8 border-t border-slate-100 dark:border-gray-700">
+                    <div class="p-8 border-t border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
                         <div class="flex items-center space-x-2 mb-4">
-                            <span class="material-symbols-outlined text-slate-400">rate_review</span>
-                            <h3 class="font-bold text-slate-800 dark:text-gray-200">Descripción Final del Trabajo</h3>
+                            <span class="material-symbols-outlined text-slate-400 dark:text-[#9CA3AF]">rate_review</span>
+                            <h3 class="font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200">Descripción Final del Trabajo</h3>
                         </div>
                         <div
                             class="p-5 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-800/50">
@@ -340,8 +340,8 @@
 
                 {{-- Review Actions --}}
                 @if ($task->status === 'realizada')
-                    <div class="p-8 border-t border-slate-100 dark:border-gray-700 bg-slate-50/20">
-                        <h3 class="text-lg font-bold text-slate-800 dark:text-gray-200 mb-6 flex items-center gap-2">
+                    <div class="p-8 border-t border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700 bg-slate-50/20">
+                        <h3 class="text-lg font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200 mb-6 flex items-center gap-2">
                             <span class="material-symbols-outlined text-indigo-600">fact_check</span>
                             Revisión y Control
                         </h3>
@@ -370,9 +370,9 @@
 
                 {{-- Footer Buttons --}}
                 <div
-                    class="p-8 border-t border-slate-100 dark:border-gray-700 bg-slate-50/30 dark:bg-gray-900/30 flex flex-col sm:flex-row items-center justify-end space-y-3 sm:space-y-0 sm:space-x-4">
+                    class="p-8 border-t border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700 bg-slate-50/30 dark:bg-gray-900/30 flex flex-col sm:flex-row items-center justify-end space-y-3 sm:space-y-0 sm:space-x-4">
                     <a href="{{ route('admin.tasks.index') }}"
-                        class="w-full sm:w-auto px-6 py-3 rounded-xl border border-slate-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-slate-600 dark:text-gray-300 font-semibold hover:bg-slate-50 dark:hover:bg-gray-600 transition-all flex items-center justify-center space-x-2 shadow-sm">
+                        class="w-full sm:w-auto px-6 py-3 rounded-xl border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-600 bg-white dark:bg-[#242526] dark:bg-gray-700 text-slate-600 dark:text-gray-300 dark:text-gray-300 font-semibold hover:bg-slate-50 dark:hover:bg-[#3A3B3C] dark:bg-[#18191A] dark:hover:bg-gray-600 transition-all flex items-center justify-center space-x-2 shadow-sm">
                         <span class="material-symbols-outlined text-xl">arrow_back</span>
                         <span>Volver a la Lista</span>
                     </a>
@@ -384,7 +384,7 @@
                         </a>
                     @else
                         <button disabled
-                            class="w-full sm:w-auto px-8 py-3 rounded-xl bg-slate-200 dark:bg-gray-700 text-slate-400 dark:text-gray-500 font-semibold cursor-not-allowed flex items-center justify-center space-x-2 border border-slate-200 dark:border-gray-600"
+                            class="w-full sm:w-auto px-8 py-3 rounded-xl bg-slate-200 dark:bg-gray-700 text-slate-400 dark:text-[#9CA3AF] dark:text-gray-500 dark:text-[#B0B3B8] font-semibold cursor-not-allowed flex items-center justify-center space-x-2 border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-600"
                             title="No se puede editar: Tarea con evidencia registrada">
                             <span class="material-symbols-outlined text-xl">block</span>
                             <span>Edición Bloqueada</span>
@@ -393,7 +393,7 @@
                 </div>
             </div>
 
-            <footer class="py-12 text-center text-slate-400 dark:text-gray-500 text-sm">
+            <footer class="py-12 text-center text-slate-400 dark:text-[#9CA3AF] dark:text-gray-500 dark:text-[#B0B3B8] text-sm">
                 © {{ date('Y') }} SIGERD - Todos los derechos reservados.
             </footer>
         </div>
@@ -416,7 +416,7 @@
 
             {{-- Botón de descarga --}}
             <a id="downloadButton" href="" download
-                class="mt-12 flex items-center gap-4 bg-white text-indigo-900 px-10 py-4 rounded-[1.5rem] font-bold uppercase tracking-[0.2em] text-xs transition-all hover:scale-105 active:scale-95 shadow-2xl">
+                class="mt-12 flex items-center gap-4 bg-white dark:bg-[#242526] text-indigo-900 px-10 py-4 rounded-[1.5rem] font-bold uppercase tracking-[0.2em] text-xs transition-all hover:scale-105 active:scale-95 shadow-2xl">
                 <span class="material-symbols-outlined">download</span>
                 Descargar Archivo
             </a>
