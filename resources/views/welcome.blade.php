@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SIGERD - Enterprise Management System</title>
+    <link rel="icon" href="{{ asset('logo/logo-minimalista.webp') }}" type="image/webp">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -117,12 +118,7 @@
             <div class="flex justify-between items-center py-5">
                 <!-- Logo -->
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 bg-[#0F2742] rounded-md flex items-center justify-center">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                    </div>
+                    <img src="{{ asset('logo/logo-minimalista.webp') }}" alt="SIGERD Logo" class="w-8 h-auto">
                     <div>
                         <h1 class="text-lg font-bold text-[#0B1F33] tracking-tight">SIGERD</h1>
                         <p class="text-[10px] text-[#7A8A9A] font-medium uppercase tracking-[0.2em]">Enterprise
@@ -431,12 +427,7 @@
         <div class="max-w-7xl mx-auto grid lg:grid-cols-4 gap-16 pb-16 border-b border-[#E9EDF2]">
             <div class="lg:col-span-2 space-y-8">
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 bg-[#0F2742] rounded flex items-center justify-center">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                    </div>
+                    <img src="{{ asset('logo/logo-minimalista.webp') }}" alt="SIGERD Logo" class="w-10 h-auto">
                     <span class="text-2xl font-bold tracking-tight text-[#0B1F33]">SIGERD</span>
                 </div>
                 <p class="text-sm text-[#7A8A9A] max-w-sm">Sistema avanzado de gestión de infraestructuras para

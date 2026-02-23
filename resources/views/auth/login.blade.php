@@ -12,8 +12,8 @@
                 <div class="max-w-md mx-auto lg:mx-0">
                     <div
                         class="flex items-center space-x-3 mb-12 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 w-fit">
-                        <div class="bg-[#1E3A8A] p-2.5 rounded-xl shadow-lg shadow-blue-900/20">
-                            <span class="material-icons-round text-white text-2xl">description</span>
+                        <div class="p-2">
+                            <img src="{{ asset('logo/logo-minimalista.webp') }}" alt="SIGERD Logo" class="h-10 w-auto">
                         </div>
                         <div>
                             <h1

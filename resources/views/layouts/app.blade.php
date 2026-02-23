@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>SIGERD</title>
+    <link rel="icon" href="{{ asset('logo/logo-minimalista.webp') }}" type="image/webp">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

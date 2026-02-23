@@ -19,10 +19,17 @@
         <div
             class="flex items-center justify-between h-[84px] px-6 border-b border-slate-100 dark:border-gray-700 flex-shrink-0">
             <div class="flex items-center gap-3 min-w-0" x-show="!sidebarCollapsed" x-transition>
-                <div class="min-w-0">
-                    <h1 class="text-xl font-extrabold text-[#1E293B] dark:text-white tracking-tight">SIGERD</h1>
-                    <p class="text-[0.7rem] text-slate-500 dark:text-gray-400 font-medium tracking-wide">Sistema de
-                        Gestión</p>
+                <div class="min-w-0 flex items-center gap-3">
+                    <img src="{{ asset('logo/logo-minimalista.webp') }}" alt="SIGERD Logo"
+                        class="w-8 h-8 flex-shrink-0">
+                    <div>
+                        <h1
+                            class="text-xl font-extrabold text-[#1E293B] dark:text-white tracking-tight leading-none text-left">
+                            SIGERD</h1>
+                        <p
+                            class="text-[0.65rem] text-slate-500 dark:text-gray-400 font-medium tracking-wide mt-1 text-left">
+                            Sistema de Gestión</p>
+                    </div>
                 </div>
             </div>
 

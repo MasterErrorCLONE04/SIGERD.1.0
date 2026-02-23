@@ -3,7 +3,8 @@
         <div class="max-w-full mx-auto space-y-6">
 
             <!-- Header Card -->
-            <div class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 md:p-8">
+            <div
+                class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 md:p-8">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div class="flex items-center gap-5">
                         <div class="w-16 h-16 bg-[#F4F6FF] rounded-2xl flex items-center justify-center text-[#4F46E5]">
@@ -14,10 +15,12 @@
                             </svg>
                         </div>
                         <div>
-                            <h2 class="text-[1.35rem] font-bold text-slate-800 dark:text-gray-100 tracking-tight">Usuarios del Sistema</h2>
+                            <h2 class="text-[1.35rem] font-bold text-slate-800 dark:text-gray-100 tracking-tight">
+                                Usuarios del Sistema</h2>
                             <p class="text-sm text-slate-500 dark:text-[#B0B3B8] mt-1">
                                 @if(request('search'))
-                                    Se encontraron <strong class="text-slate-800 dark:text-gray-100">{{ $users->count() }}</strong>
+                                    Se encontraron <strong
+                                        class="text-slate-800 dark:text-gray-100">{{ $users->count() }}</strong>
                                     resultado(s) para "{{ request('search') }}"
                                 @else
                                     Gestiona todos los usuarios registrados en la plataforma.
@@ -29,8 +32,8 @@
                     <div class="flex items-center gap-4">
                         <form method="GET" action="{{ route('admin.users.index') }}" class="relative w-full md:w-auto">
                             <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                                <svg class="h-4 w-4 text-slate-400 dark:text-[#9CA3AF]" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="h-4 w-4 text-slate-400 dark:text-[#9CA3AF]" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                 </svg>
@@ -60,18 +63,19 @@
                             <tr class="border-b border-slate-100 dark:border-[#3A3B3C]">
                                 <th
                                     class="px-8 py-5 text-[11px] font-bold text-slate-500 dark:text-[#B0B3B8] uppercase tracking-widest flex items-center gap-2">
-                                    <svg class="w-3.5 h-3.5 text-slate-400 dark:text-[#9CA3AF]" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
+                                    <svg class="w-3.5 h-3.5 text-slate-400 dark:text-[#9CA3AF]" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z">
                                         </path>
                                     </svg>
                                     Usuario
                                 </th>
-                                <th class="px-8 py-5 text-[11px] font-bold text-slate-500 dark:text-[#B0B3B8] uppercase tracking-widest">
+                                <th
+                                    class="px-8 py-5 text-[11px] font-bold text-slate-500 dark:text-[#B0B3B8] uppercase tracking-widest">
                                     <div class="flex items-center gap-2">
-                                        <svg class="w-3.5 h-3.5 text-slate-400 dark:text-[#9CA3AF]" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
+                                        <svg class="w-3.5 h-3.5 text-slate-400 dark:text-[#9CA3AF]" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
                                             </path>
@@ -79,10 +83,11 @@
                                         Email
                                     </div>
                                 </th>
-                                <th class="px-8 py-5 text-[11px] font-bold text-slate-500 dark:text-[#B0B3B8] uppercase tracking-widest">
+                                <th
+                                    class="px-8 py-5 text-[11px] font-bold text-slate-500 dark:text-[#B0B3B8] uppercase tracking-widest">
                                     <div class="flex items-center gap-2">
-                                        <svg class="w-3.5 h-3.5 text-slate-400 dark:text-[#9CA3AF]" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
+                                        <svg class="w-3.5 h-3.5 text-slate-400 dark:text-[#9CA3AF]" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
                                             </path>
@@ -98,7 +103,8 @@
                         </thead>
                         <tbody class="divide-y divide-slate-100/70">
                             @forelse ($users as $user)
-                                <tr class="hover:bg-slate-50 dark:hover:bg-[#3A3B3C]/50 dark:bg-[#18191A] transition-colors group">
+                                <tr
+                                    class="hover:bg-slate-50 dark:hover:bg-[#3A3B3C]/50 dark:bg-[#18191A] transition-colors group">
                                     <td class="px-8 py-5">
                                         <div class="flex items-center gap-4">
                                             <div class="relative flex-shrink-0">
@@ -113,13 +119,16 @@
                                                 @endif
                                             </div>
                                             <div>
-                                                <div class="text-[0.95rem] font-bold text-slate-800 dark:text-gray-100">{{ $user->name }}</div>
-                                                <div class="text-[0.8rem] text-slate-500 dark:text-[#B0B3B8] mt-0.5">ID: {{ $user->id }}</div>
+                                                <div class="text-[0.95rem] font-bold text-slate-800 dark:text-gray-100">
+                                                    {{ $user->name }}</div>
+                                                <div class="text-[0.8rem] text-slate-500 dark:text-[#B0B3B8] mt-0.5">ID:
+                                                    {{ $user->id }}</div>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="px-8 py-5">
-                                        <div class="text-[0.95rem] text-slate-700 dark:text-gray-200 font-medium">{{ $user->email }}</div>
+                                        <div class="text-[0.95rem] text-slate-700 dark:text-gray-200 font-medium">
+                                            {{ $user->email }}</div>
                                         <div
                                             class="flex items-center gap-1.5 mt-1 text-[0.8rem] text-[#10B981] font-medium">
                                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -131,11 +140,11 @@
                                     </td>
                                     <td class="px-8 py-5">
                                         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-[0.8rem] font-semibold tracking-wide
-                                                    @if($user->role === 'admin') bg-[#F5F3FF] text-[#6D28D9]
-                                                    @elseif($user->role === 'coordinador') bg-[#EFF6FF] text-[#2563EB]
-                                                    @elseif($user->role === 'instructor') bg-[#F1F5F9] text-[#475569]
-                                                    @else bg-[#F1F5F9] text-[#475569]
-                                                    @endif">
+                                                        @if($user->role === 'admin') bg-[#F5F3FF] text-[#6D28D9]
+                                                        @elseif($user->role === 'coordinador') bg-[#EFF6FF] text-[#2563EB]
+                                                        @elseif($user->role === 'instructor') bg-[#F1F5F9] text-[#475569]
+                                                        @else bg-[#F1F5F9] text-[#475569]
+                                                        @endif">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 @if($user->role === 'admin')
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -200,15 +209,52 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4" class="px-8 py-16 text-center text-slate-500 dark:text-[#B0B3B8]">
-                                        <div class="flex items-center justify-center flex-col">
-                                            <svg class="w-12 h-12 text-slate-300 mb-4" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z">
-                                                </path>
-                                            </svg>
-                                            <span>No se encontraron usuarios.</span>
+                                    <td colspan="4" class="px-8 py-20 text-center">
+                                        <div class="flex flex-col items-center justify-center">
+                                            <div
+                                                class="w-20 h-20 bg-slate-50 dark:bg-[#3A3B3C]/30 rounded-full flex items-center justify-center mb-5 ring-4 ring-slate-50/50 dark:ring-[#3A3B3C]/20">
+                                                @if(request('search'))
+                                                    <svg class="w-10 h-10 text-slate-400 dark:text-[#9CA3AF]" fill="none"
+                                                        stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                                    </svg>
+                                                @else
+                                                    <svg class="w-10 h-10 text-slate-400 dark:text-[#9CA3AF]" fill="none"
+                                                        stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z">
+                                                        </path>
+                                                    </svg>
+                                                @endif
+                                            </div>
+                                            <h3 class="text-lg font-bold text-slate-800 dark:text-gray-100 mb-1">
+                                                @if(request('search'))
+                                                    No se encontraron resultados
+                                                @else
+                                                    No hay usuarios registrados
+                                                @endif
+                                            </h3>
+                                            <p class="text-slate-500 dark:text-[#B0B3B8] text-sm max-w-sm mx-auto">
+                                                @if(request('search'))
+                                                    No encontramos ningún usuario que coincida con
+                                                    "<strong>{{ request('search') }}</strong>". Intenta usar otras palabras
+                                                    clave.
+                                                @else
+                                                    Aún no tienes ningún usuario en el sistema. Puedes empezar añadiendo uno
+                                                    nuevo.
+                                                @endif
+                                            </p>
+                                            @if(!request('search'))
+                                                <button onclick="openModal('createUserModal')"
+                                                    class="mt-6 inline-flex items-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] text-white px-5 py-2.5 rounded-xl text-sm font-medium transition-colors shadow-sm focus:ring-2 focus:ring-slate-200">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                            d="M12 4v16m8-8H4"></path>
+                                                    </svg>
+                                                    Crear Primer Usuario
+                                                </button>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>
@@ -222,9 +268,11 @@
                     <div
                         class="px-8 py-5 border-t border-slate-100 dark:border-[#3A3B3C] flex flex-col sm:flex-row items-center justify-between gap-4 mt-auto">
                         <div class="text-[0.85rem] text-slate-500 dark:text-[#B0B3B8] font-medium">
-                            Mostrando <span class="font-bold text-slate-700 dark:text-gray-200">{{ $users->firstItem() ?? 0 }}</span> a <span
-                                class="font-bold text-slate-700 dark:text-gray-200">{{ $users->lastItem() ?? 0 }}</span> de <span
-                                class="font-bold text-slate-700 dark:text-gray-200">{{ $users->total() }}</span> resultados
+                            Mostrando <span
+                                class="font-bold text-slate-700 dark:text-gray-200">{{ $users->firstItem() ?? 0 }}</span> a
+                            <span class="font-bold text-slate-700 dark:text-gray-200">{{ $users->lastItem() ?? 0 }}</span>
+                            de <span class="font-bold text-slate-700 dark:text-gray-200">{{ $users->total() }}</span>
+                            resultados
                         </div>
 
                         <div class="flex items-center gap-1.5">
@@ -308,9 +356,11 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 dark:text-white" id="modal-title">Nuevo
+                                <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 dark:text-white"
+                                    id="modal-title">Nuevo
                                     Usuario</h3>
-                                <p class="text-gray-600 dark:text-gray-300 dark:text-gray-400 mt-1">Completa la información para crear un
+                                <p class="text-gray-600 dark:text-gray-300 dark:text-gray-400 mt-1">Completa la
+                                    información para crear un
                                     nuevo usuario</p>
                             </div>
                         </div>
@@ -329,7 +379,9 @@
 
                         <!-- Foto de perfil -->
                         <div class="space-y-4">
-                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-200 dark:text-gray-300">Foto de
+                            <label
+                                class="block text-sm font-bold text-gray-700 dark:text-gray-200 dark:text-gray-300">Foto
+                                de
                                 Perfil</label>
                             <div class="flex items-start space-x-6">
                                 <div class="shrink-0">
@@ -354,7 +406,8 @@
                                             Seleccionar foto
                                         </label>
                                     </div>
-                                    <p class="mt-2 text-sm text-gray-500 dark:text-[#B0B3B8] dark:text-gray-400">JPG, PNG, GIF hasta 2MB.
+                                    <p class="mt-2 text-sm text-gray-500 dark:text-[#B0B3B8] dark:text-gray-400">JPG,
+                                        PNG, GIF hasta 2MB.
                                         Opcional.</p>
                                 </div>
                             </div>
@@ -399,7 +452,9 @@
                         </div>
 
                         <div class="space-y-2">
-                            <label for="role" class="block text-sm font-bold text-gray-700 dark:text-gray-200 dark:text-gray-300">Rol del
+                            <label for="role"
+                                class="block text-sm font-bold text-gray-700 dark:text-gray-200 dark:text-gray-300">Rol
+                                del
                                 Usuario</label>
                             <select id="role" name="role" required
                                 class="block w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-blue-500/50 focus:border-blue-400 transition-all duration-200 shadow-sm">
