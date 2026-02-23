@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center gap-3">
-            <div class="p-2 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl">
+            <div class="p-2 bg-indigo-600 rounded-xl">
                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -18,14 +18,14 @@
 
             {{-- Barra de búsqueda y filtros --}}
             <div
-                class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/50 p-6">
+                class="bg-white dark:bg-[#242526] rounded-2xl shadow-sm border border-slate-200 dark:border-[#3A3B3C] p-6">
                 <form method="GET" action="{{ route('worker.tasks.index') }}" class="space-y-4">
                     <div class="flex flex-col lg:flex-row gap-4">
                         {{-- Buscador --}}
                         <div class="relative flex-1">
                             <input type="text" name="search" placeholder="Buscar por título o descripción..."
-                                value="{{ request('search') }}" class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-900
-                                          border-gray-300 dark:border-gray-600
+                                value="{{ request('search') }}" class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-50 dark:bg-[#18191A]
+                                          border-gray-300 dark:border-[#3A3B3C]
                                           text-gray-800 dark:text-gray-100 dark:text-gray-200
                                           focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400
                                           focus:border-blue-400 transition-all duration-200 shadow-sm hover:shadow-md">
@@ -49,8 +49,8 @@
                         </div>
 
                         {{-- Filtro estado --}}
-                        <select name="status" class="w-full lg:w-48 rounded-lg bg-gray-50 dark:bg-gray-900
-                                       border-gray-300 dark:border-gray-600
+                        <select name="status" class="w-full lg:w-48 rounded-lg bg-gray-50 dark:bg-[#18191A]
+                                       border-gray-300 dark:border-[#3A3B3C]
                                        text-gray-800 dark:text-gray-100 dark:text-gray-200
                                        focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400
                                        focus:border-blue-400 transition-all duration-200 shadow-sm hover:shadow-md">
@@ -66,8 +66,8 @@
                         </select>
 
                         {{-- Filtro prioridad --}}
-                        <select name="priority" class="w-full lg:w-48 rounded-lg bg-gray-50 dark:bg-gray-900
-                                       border-gray-300 dark:border-gray-600
+                        <select name="priority" class="w-full lg:w-48 rounded-lg bg-gray-50 dark:bg-[#18191A]
+                                       border-gray-300 dark:border-[#3A3B3C]
                                        text-gray-800 dark:text-gray-100 dark:text-gray-200
                                        focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400
                                        focus:border-blue-400 transition-all duration-200 shadow-sm hover:shadow-md">
@@ -120,13 +120,13 @@
 
             {{-- Tabla de tareas --}}
             <div
-                class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/50">
+                class="bg-white dark:bg-[#242526] rounded-2xl shadow-sm border border-slate-200 dark:border-[#3A3B3C]">
                 {{-- VISTA DE ESCRITORIO (Tabla) --}}
                 {{-- VISTA DE ESCRITORIO (Tabla) --}}
                 <div class="overflow-x-auto flex-1">
-                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <table class="min-w-full divide-y divide-slate-200 dark:divide-[#3A3B3C]">
                         <thead
-                            class="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-900/70 dark:to-gray-800/70 backdrop-blur-sm">
+                            class="bg-slate-50 dark:bg-[#18191A] border-b border-slate-200 dark:border-[#3A3B3C]">
                             <tr>
                                 <th
                                     class="px-6 py-4 text-left text-xs font-bold text-gray-700 dark:text-gray-200 dark:text-gray-300 uppercase tracking-wide">
@@ -151,9 +151,9 @@
                                     Acciones</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white dark:bg-[#242526] dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                        <tbody class="bg-white dark:bg-[#242526] dark:bg-gray-800 divide-y divide-slate-200 dark:divide-[#3A3B3C]">
                             @forelse($tasks as $task)
-                                <tr class="group hover:bg-blue-50/50 dark:hover:bg-gray-700/30 transition-all duration-200">
+                                <tr class="group hover:bg-slate-50 dark:hover:bg-[#3A3B3C] transition-all duration-200">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div
                                             class="text-sm font-bold text-gray-900 dark:text-gray-100 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">

@@ -29,14 +29,10 @@
     class="bg-[#F8FAFC] dark:bg-[#0F172A] text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-300">
     {{ $slot }}
 
-    <!-- Theme Toggle Script -->
+    <!-- Theme Override - Always Light for Login -->
     <script>
-        // Simple theme toggle logic
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark')
-        } else {
-            document.documentElement.classList.remove('dark')
-        }
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
     </script>
 </body>
 

@@ -100,7 +100,9 @@
                         </svg>
                         <span x-show="!sidebarCollapsed" x-transition class="text-[0.95rem]">Dashboard</span>
                         @if(request()->routeIs('admin.dashboard'))
-                            <div class="absolute right-0 top-1/2 -translate-y-1/2 h-7 w-1 bg-[#1E293B] dark:bg-indigo-500 rounded-l-full"></div>
+                            <div
+                                class="absolute right-0 top-1/2 -translate-y-1/2 h-7 w-1 bg-[#1E293B] dark:bg-indigo-500 rounded-l-full">
+                            </div>
                         @endif
                     </a>
 
@@ -114,7 +116,9 @@
                         </svg>
                         <span x-show="!sidebarCollapsed" x-transition class="text-[0.95rem]">Usuarios</span>
                         @if(request()->routeIs('admin.users.*'))
-                            <div class="absolute right-0 top-1/2 -translate-y-1/2 h-7 w-1.5 bg-[#1E293B] dark:bg-indigo-500 rounded-l-full"></div>
+                            <div
+                                class="absolute right-0 top-1/2 -translate-y-1/2 h-7 w-1.5 bg-[#1E293B] dark:bg-indigo-500 rounded-l-full">
+                            </div>
                         @endif
                     </a>
 
@@ -128,7 +132,9 @@
                         </svg>
                         <span x-show="!sidebarCollapsed" x-transition class="text-[0.95rem]">Tareas</span>
                         @if(request()->routeIs('admin.tasks.*'))
-                            <div class="absolute right-0 top-1/2 -translate-y-1/2 h-7 w-1 bg-[#1E293B] dark:bg-indigo-500 rounded-l-full"></div>
+                            <div
+                                class="absolute right-0 top-1/2 -translate-y-1/2 h-7 w-1 bg-[#1E293B] dark:bg-indigo-500 rounded-l-full">
+                            </div>
                         @endif
                     </a>
 
@@ -142,7 +148,9 @@
                         </svg>
                         <span x-show="!sidebarCollapsed" x-transition class="text-[0.95rem]">Incidentes</span>
                         @if(request()->routeIs('admin.incidents.*'))
-                            <div class="absolute right-0 top-1/2 -translate-y-1/2 h-7 w-1 bg-[#1E293B] dark:bg-indigo-500 rounded-l-full"></div>
+                            <div
+                                class="absolute right-0 top-1/2 -translate-y-1/2 h-7 w-1 bg-[#1E293B] dark:bg-indigo-500 rounded-l-full">
+                            </div>
                         @endif
                     </a>
                 @endif
@@ -159,7 +167,9 @@
                         </svg>
                         <span x-show="!sidebarCollapsed" x-transition class="text-[0.95rem]">Dashboard</span>
                         @if(request()->routeIs('instructor.dashboard'))
-                            <div class="absolute right-0 top-1/2 -translate-y-1/2 h-7 w-1 bg-[#1E293B] dark:bg-indigo-500 rounded-l-full"></div>
+                            <div
+                                class="absolute right-0 top-1/2 -translate-y-1/2 h-7 w-1 bg-[#1E293B] dark:bg-indigo-500 rounded-l-full">
+                            </div>
                         @endif
                     </a>
 
@@ -173,7 +183,9 @@
                         </svg>
                         <span x-show="!sidebarCollapsed" x-transition class="text-[0.95rem]">Mis Reportes</span>
                         @if(request()->routeIs('instructor.incidents.*') && !request()->routeIs('instructor.incidents.create'))
-                            <div class="absolute right-0 top-1/2 -translate-y-1/2 h-7 w-1 bg-[#1E293B] dark:bg-indigo-500 rounded-l-full"></div>
+                            <div
+                                class="absolute right-0 top-1/2 -translate-y-1/2 h-7 w-1 bg-[#1E293B] dark:bg-indigo-500 rounded-l-full">
+                            </div>
                         @endif
                     </a>
                 @endif
@@ -190,7 +202,9 @@
                         </svg>
                         <span x-show="!sidebarCollapsed" x-transition class="text-[0.95rem]">Dashboard</span>
                         @if(request()->routeIs('worker.dashboard'))
-                            <div class="absolute right-0 top-1/2 -translate-y-1/2 h-7 w-1 bg-[#1E293B] dark:bg-indigo-500 rounded-l-full"></div>
+                            <div
+                                class="absolute right-0 top-1/2 -translate-y-1/2 h-7 w-1 bg-[#1E293B] dark:bg-indigo-500 rounded-l-full">
+                            </div>
                         @endif
                     </a>
 
@@ -204,7 +218,9 @@
                         </svg>
                         <span x-show="!sidebarCollapsed" x-transition class="text-[0.95rem]">Mis Tareas</span>
                         @if(request()->routeIs('worker.tasks.*'))
-                            <div class="absolute right-0 top-1/2 -translate-y-1/2 h-7 w-1 bg-[#1E293B] dark:bg-indigo-500 rounded-l-full"></div>
+                            <div
+                                class="absolute right-0 top-1/2 -translate-y-1/2 h-7 w-1 bg-[#1E293B] dark:bg-indigo-500 rounded-l-full">
+                            </div>
                         @endif
                     </a>
                 @endif
@@ -213,7 +229,7 @@
 
         {{-- Footer del Sidebar --}}
         <div class="px-4 py-6 border-t border-slate-100 dark:border-gray-700 flex-shrink-0 space-y-2">
-            <a href="{{ route('profile.edit') }}" :title="sidebarCollapsed ? 'Configuración' : ''"
+            <a href="{{ route('settings.index') }}" :title="sidebarCollapsed ? 'Configuración' : ''"
                 class="flex items-center px-4 py-2.5 rounded-lg text-[#64748B] dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-[#1E293B] dark:hover:text-white font-medium transition-colors"
                 :class="sidebarCollapsed ? 'justify-center' : ''">
                 <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 text-slate-400 dark:text-gray-500"
@@ -245,7 +261,7 @@
 
     {{-- Botón para abrir sidebar en móviles --}}
     <button @click="sidebarOpen = true; sidebarCollapsed = false" x-show="!sidebarOpen" x-transition
-        class="lg:hidden fixed top-4 left-4 z-30 p-2.5 bg-white text-slate-700 rounded-lg shadow-sm border border-slate-200 hover:bg-slate-50 transition-colors">
+        class="lg:hidden fixed top-4 left-4 z-50 p-2.5 bg-white text-slate-700 rounded-lg shadow-sm border border-slate-200 hover:bg-slate-50 transition-colors">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>

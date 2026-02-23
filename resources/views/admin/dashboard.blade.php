@@ -17,13 +17,12 @@
         <div class="max-w-full mx-auto">
             <!-- Welcome Section -->
             <div
-                class="bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] rounded-[1.25rem] shadow-lg shadow-indigo-500/20 mb-8 overflow-hidden relative">
-                <div class="absolute inset-0 bg-white/10 [mask-image:linear-gradient(45deg,transparent,white)]"></div>
+                class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] mb-8 overflow-hidden relative">
                 <div class="p-6 md:p-8 relative z-10">
                     <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                         <div class="flex items-center gap-5">
                             <div
-                                class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center text-white flex-shrink-0 ring-1 ring-white/30">
+                                class="w-16 h-16 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-gray-200 flex-shrink-0">
                                 <svg class="w-8 h-8 drop-shadow-sm" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -31,16 +30,18 @@
                                 </svg>
                             </div>
                             <div>
-                                <h2 class="text-[1.5rem] md:text-[1.75rem] font-bold text-white tracking-tight">
+                                <h2
+                                    class="text-[1.5rem] md:text-[1.75rem] font-bold text-slate-800 dark:text-gray-100 tracking-tight">
                                     ¡Bienvenido, {{ Auth::user()->name }}!
                                 </h2>
-                                <p class="text-indigo-100/90 text-[0.95rem] mt-1 font-medium">Gestiona y supervisa todas
+                                <p class="text-slate-500 dark:text-[#B0B3B8] text-[0.95rem] mt-1 font-medium">Gestiona y
+                                    supervisa todas
                                     las operaciones del sistema</p>
                             </div>
                         </div>
                         <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
                             <button onclick="openModal('createTaskModal')"
-                                class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white dark:bg-[#242526] text-[#4F46E5] hover:bg-slate-50 dark:hover:bg-[#3A3B3C] dark:bg-[#18191A] px-5 py-3 rounded-xl text-sm font-bold transition-colors shadow-sm focus:ring-2 focus:ring-white/50">
+                                class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] text-white px-5 py-2.5 rounded-xl text-sm font-medium transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 whitespace-nowrap">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                         d="M12 4v16m8-8H4" />
@@ -48,7 +49,7 @@
                                 Nueva Tarea
                             </button>
                             <button onclick="openModal('createUserModal')"
-                                class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white backdrop-blur-md px-5 py-3 rounded-xl text-sm font-bold transition-colors border border-white/20 focus:ring-2 focus:ring-white/50">
+                                class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-slate-100 dark:bg-[#3A3B3C] hover:bg-slate-200 text-slate-700 dark:text-gray-200 px-5 py-2.5 rounded-xl text-sm font-medium transition-colors whitespace-nowrap">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                         d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
@@ -78,8 +79,10 @@
                             class="text-[0.75rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider bg-slate-100 dark:bg-[#3A3B3C] px-2.5 py-1 rounded-lg">Usuarios</span>
                     </div>
                     <div>
-                        <div class="text-[2.25rem] font-black text-slate-800 dark:text-gray-100 leading-none mb-1">{{ $totalUsers }}</div>
-                        <div class="text-[0.85rem] text-slate-500 dark:text-[#B0B3B8] font-medium">Registrados en total</div>
+                        <div class="text-[2.25rem] font-black text-slate-800 dark:text-gray-100 leading-none mb-1">
+                            {{ $totalUsers }}</div>
+                        <div class="text-[0.85rem] text-slate-500 dark:text-[#B0B3B8] font-medium">Registrados en total
+                        </div>
                     </div>
                 </div>
 
@@ -99,8 +102,10 @@
                             class="text-[0.75rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider bg-slate-100 dark:bg-[#3A3B3C] px-2.5 py-1 rounded-lg">Tareas</span>
                     </div>
                     <div>
-                        <div class="text-[2.25rem] font-black text-slate-800 dark:text-gray-100 leading-none mb-1">{{ $totalTasks }}</div>
-                        <div class="text-[0.85rem] text-slate-500 dark:text-[#B0B3B8] font-medium">Gestionadas activamente</div>
+                        <div class="text-[2.25rem] font-black text-slate-800 dark:text-gray-100 leading-none mb-1">
+                            {{ $totalTasks }}</div>
+                        <div class="text-[0.85rem] text-slate-500 dark:text-[#B0B3B8] font-medium">Gestionadas
+                            activamente</div>
                     </div>
                 </div>
 
@@ -120,8 +125,10 @@
                     </div>
                     <div>
                         <div class="text-[2.25rem] font-black text-slate-800 dark:text-gray-100 leading-none mb-1">
-                            {{ $pendingReviewIncidents }}</div>
-                        <div class="text-[0.85rem] text-slate-500 dark:text-[#B0B3B8] font-medium">Pendientes de revisión</div>
+                            {{ $pendingReviewIncidents }}
+                        </div>
+                        <div class="text-[0.85rem] text-slate-500 dark:text-[#B0B3B8] font-medium">Pendientes de
+                            revisión</div>
                     </div>
                 </div>
 
@@ -140,7 +147,8 @@
                             class="text-[0.75rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider bg-slate-100 dark:bg-[#3A3B3C] px-2.5 py-1 rounded-lg">Alerta</span>
                     </div>
                     <div>
-                        <div class="text-[2.25rem] font-black text-slate-800 dark:text-gray-100 leading-none mb-1">{{ $overdueTasks }}
+                        <div class="text-[2.25rem] font-black text-slate-800 dark:text-gray-100 leading-none mb-1">
+                            {{ $overdueTasks }}
                         </div>
                         <div class="text-[0.85rem] text-slate-500 dark:text-[#B0B3B8] font-medium">Tareas Vencidas</div>
                     </div>
@@ -163,7 +171,8 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-[1.15rem] font-bold text-slate-800 dark:text-gray-100">Tareas por Estado</h3>
+                            <h3 class="text-[1.15rem] font-bold text-slate-800 dark:text-gray-100">Tareas por Estado
+                            </h3>
                             <p class="text-[0.8rem] text-slate-500 dark:text-[#B0B3B8] mt-1 leading-relaxed line-clamp-2"
                                 title="Distribución actual de las tareas según su estado de avance.">Distribución actual
                                 de las tareas según su estado de avance.</p>
@@ -173,7 +182,8 @@
                     <div class="grid grid-cols-3 gap-3 mb-8">
                         <div
                             class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
+                            <div
+                                class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
                                 Asignadas</div>
                             <div class="text-[1.3rem] font-black text-[#3B82F6]">{{ $tasksByStatus['asignado'] ?? 0 }}
                             </div>
@@ -184,11 +194,13 @@
                                 class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5 whitespace-nowrap">
                                 Con Avance</div>
                             <div class="text-[1.3rem] font-black text-[#F59E0B]">
-                                {{ $tasksByStatus['en progreso'] ?? 0 }}</div>
+                                {{ $tasksByStatus['en progreso'] ?? 0 }}
+                            </div>
                         </div>
                         <div
                             class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
+                            <div
+                                class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
                                 Terminadas</div>
                             <div class="text-[1.3rem] font-black text-[#10B981]">{{ $tasksByStatus['finalizada'] ?? 0 }}
                             </div>
@@ -223,19 +235,22 @@
                     <div class="grid grid-cols-3 gap-3 mb-8">
                         <div
                             class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.65rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
+                            <div
+                                class="text-[0.65rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
                                 Administradores</div>
                             <div class="text-[1.3rem] font-black text-[#4F46E5]">{{ $adminUsers }}</div>
                         </div>
                         <div
                             class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
+                            <div
+                                class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
                                 Instructores</div>
                             <div class="text-[1.3rem] font-black text-[#9333EA]">{{ $instructorUsers }}</div>
                         </div>
                         <div
                             class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
+                            <div
+                                class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
                                 Trabajadores</div>
                             <div class="text-[1.3rem] font-black text-[#EC4899]">{{ $workerUsers }}</div>
                         </div>
@@ -259,7 +274,8 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-[1.15rem] font-bold text-slate-800 dark:text-gray-100">Tareas por Prioridad</h3>
+                            <h3 class="text-[1.15rem] font-bold text-slate-800 dark:text-gray-100">Tareas por Prioridad
+                            </h3>
                             <p class="text-[0.8rem] text-slate-500 dark:text-[#B0B3B8] mt-1 leading-relaxed line-clamp-2"
                                 title="Desglose del volumen de tareas según su nivel de urgencia actual.">Desglose del
                                 volumen de tareas según su nivel de urgencia actual.</p>
@@ -269,21 +285,27 @@
                     <div class="grid grid-cols-3 gap-3 mb-8">
                         <div
                             class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">Crítica
+                            <div
+                                class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
+                                Crítica
                                 (Alta)</div>
                             <div class="text-[1.3rem] font-black text-[#EF4444]">{{ $tasksByPriority['alta'] ?? 0 }}
                             </div>
                         </div>
                         <div
                             class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">Media
+                            <div
+                                class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
+                                Media
                             </div>
                             <div class="text-[1.3rem] font-black text-[#F59E0B]">{{ $tasksByPriority['media'] ?? 0 }}
                             </div>
                         </div>
                         <div
                             class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">Leve
+                            <div
+                                class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
+                                Leve
                                 (Baja)</div>
                             <div class="text-[1.3rem] font-black text-[#10B981]">{{ $tasksByPriority['baja'] ?? 0 }}
                             </div>
@@ -308,7 +330,8 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-[1.15rem] font-bold text-slate-800 dark:text-gray-100">Incidentes por Estado</h3>
+                            <h3 class="text-[1.15rem] font-bold text-slate-800 dark:text-gray-100">Incidentes por Estado
+                            </h3>
                             <p class="text-[0.8rem] text-slate-500 dark:text-[#B0B3B8] mt-1 leading-relaxed line-clamp-2"
                                 title="Gestión y estado actual de las fallas e incidentes reportados.">Gestión y estado
                                 actual de las fallas e incidentes reportados.</p>
@@ -318,24 +341,31 @@
                     <div class="grid grid-cols-3 gap-3 mb-8">
                         <div
                             class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
+                            <div
+                                class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
                                 Pendientes</div>
                             <div class="text-[1.3rem] font-black text-[#F59E0B]">
-                                {{ $incidentsByStatus['pendiente de revisión'] ?? 0 }}</div>
+                                {{ $incidentsByStatus['pendiente de revisión'] ?? 0 }}
+                            </div>
                         </div>
                         <div
                             class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
+                            <div
+                                class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
                                 Atendidos</div>
                             <div class="text-[1.3rem] font-black text-[#3B82F6]">
-                                {{ $incidentsByStatus['asignado'] ?? 0 }}</div>
+                                {{ $incidentsByStatus['asignado'] ?? 0 }}
+                            </div>
                         </div>
                         <div
                             class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
-                            <div class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">Cerrados
+                            <div
+                                class="text-[0.7rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
+                                Cerrados
                             </div>
                             <div class="text-[1.3rem] font-black text-[#10B981]">
-                                {{ $incidentsByStatus['resuelto'] ?? 0 }}</div>
+                                {{ $incidentsByStatus['resuelto'] ?? 0 }}
+                            </div>
                         </div>
                     </div>
 
@@ -347,10 +377,12 @@
             </div>
 
             <!-- Quick Actions -->
-            <div class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] overflow-hidden mb-8">
+            <div
+                class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] overflow-hidden mb-8">
                 <div class="p-6 md:p-8 border-b border-slate-100 dark:border-[#3A3B3C]">
                     <h3 class="text-[1.15rem] font-bold text-slate-800 dark:text-gray-100">Acciones Rápidas</h3>
-                    <p class="text-slate-500 dark:text-[#B0B3B8] text-[0.85rem] mt-1 font-medium">Atajos útiles para gestionar tu plataforma
+                    <p class="text-slate-500 dark:text-[#B0B3B8] text-[0.85rem] mt-1 font-medium">Atajos útiles para
+                        gestionar tu plataforma
                         inmediatamente.</p>
                 </div>
                 <div class="p-6 md:p-8 bg-slate-50/50 dark:bg-[#18191A]">
@@ -365,8 +397,10 @@
                                 </svg>
                             </div>
                             <div class="flex flex-col justify-center h-full">
-                                <span class="text-[0.95rem] font-bold text-slate-800 dark:text-gray-100">Nuevo Usuario</span>
-                                <span class="text-[0.75rem] text-slate-500 dark:text-[#B0B3B8] mt-0.5">Registra a alguien</span>
+                                <span class="text-[0.95rem] font-bold text-slate-800 dark:text-gray-100">Nuevo
+                                    Usuario</span>
+                                <span class="text-[0.75rem] text-slate-500 dark:text-[#B0B3B8] mt-0.5">Registra a
+                                    alguien</span>
                             </div>
                         </button>
 
@@ -381,8 +415,10 @@
                                 </svg>
                             </div>
                             <div class="flex flex-col justify-center h-full">
-                                <span class="text-[0.95rem] font-bold text-slate-800 dark:text-gray-100">Nueva Tarea</span>
-                                <span class="text-[0.75rem] text-slate-500 dark:text-[#B0B3B8] mt-0.5">Asigna trabajo</span>
+                                <span class="text-[0.95rem] font-bold text-slate-800 dark:text-gray-100">Nueva
+                                    Tarea</span>
+                                <span class="text-[0.75rem] text-slate-500 dark:text-[#B0B3B8] mt-0.5">Asigna
+                                    trabajo</span>
                             </div>
                         </button>
 
@@ -397,8 +433,10 @@
                                 </svg>
                             </div>
                             <div class="flex flex-col justify-center h-full">
-                                <span class="text-[0.95rem] font-bold text-slate-800 dark:text-gray-100">Ver Reportes</span>
-                                <span class="text-[0.75rem] text-slate-500 dark:text-[#B0B3B8] mt-0.5">Incidentes recientes</span>
+                                <span class="text-[0.95rem] font-bold text-slate-800 dark:text-gray-100">Ver
+                                    Reportes</span>
+                                <span class="text-[0.75rem] text-slate-500 dark:text-[#B0B3B8] mt-0.5">Incidentes
+                                    recientes</span>
                             </div>
                         </a>
 
@@ -415,8 +453,10 @@
                                 </svg>
                             </div>
                             <div class="flex flex-col justify-center h-full">
-                                <span class="text-[0.95rem] font-bold text-slate-800 dark:text-gray-100">Ajustar Sistema</span>
-                                <span class="text-[0.75rem] text-slate-500 dark:text-[#B0B3B8] mt-0.5">Configuraciones locales</span>
+                                <span class="text-[0.95rem] font-bold text-slate-800 dark:text-gray-100">Ajustar
+                                    Sistema</span>
+                                <span class="text-[0.75rem] text-slate-500 dark:text-[#B0B3B8] mt-0.5">Configuraciones
+                                    locales</span>
                             </div>
                         </a>
                     </div>
@@ -505,7 +545,8 @@
                                             </path>
                                         </svg>
                                     </div>
-                                    <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-white">Crear Nuevo Usuario</h3>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-white">Crear
+                                        Nuevo Usuario</h3>
                                 </div>
                                 <button onclick="closeModal('createUserModal')"
                                     class="text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-300">
@@ -522,7 +563,8 @@
 
                                 <!-- Foto de perfil -->
                                 <div class="space-y-2">
-                                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300">
+                                    <label
+                                        class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300">
                                         Foto de Perfil (Opcional)
                                     </label>
                                     <div class="flex items-center space-x-4">
@@ -655,7 +697,8 @@
                                             </path>
                                         </svg>
                                     </div>
-                                    <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-white">Crear Nueva Tarea</h3>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-white">Crear
+                                        Nueva Tarea</h3>
                                 </div>
                                 <button onclick="closeModal('createTaskModal')"
                                     class="text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-300">
@@ -755,7 +798,8 @@
                                     <input id="task_reference_images" name="reference_images[]" type="file"
                                         accept="image/*" multiple
                                         class="block w-full text-sm text-gray-900 dark:text-gray-100 dark:text-gray-400 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 focus:outline-none">
-                                    <p class="mt-1 text-xs text-gray-500 dark:text-[#B0B3B8] dark:text-gray-400">PNG, JPG, GIF hasta 2MB
+                                    <p class="mt-1 text-xs text-gray-500 dark:text-[#B0B3B8] dark:text-gray-400">PNG,
+                                        JPG, GIF hasta 2MB
                                         cada una.
                                     </p>
                                 </div>
@@ -783,21 +827,21 @@
 
                 {{-- Datos del servidor en formato JSON --}}
                 <script id="dashboard-tasks-status-data" type="application/json">
-                    {!! json_encode($tasksByStatus) !!}
-                </script>
+                        {!! json_encode($tasksByStatus) !!}
+                    </script>
                 <script id="dashboard-tasks-priority-data" type="application/json">
-                    {!! json_encode($tasksByPriority) !!}
-                </script>
+                        {!! json_encode($tasksByPriority) !!}
+                    </script>
                 <script id="dashboard-incidents-status-data" type="application/json">
-                    {!! json_encode($incidentsByStatus) !!}
-                </script>
+                        {!! json_encode($incidentsByStatus) !!}
+                    </script>
                 <script id="dashboard-users-data" type="application/json">
-                    {
-                        "admin": {{ $adminUsers }},
-                        "worker": {{ $workerUsers }},
-                        "instructor": {{ $instructorUsers }}
-                    }
-                </script>
+                        {
+                            "admin": {{ $adminUsers }},
+                            "worker": {{ $workerUsers }},
+                            "instructor": {{ $instructorUsers }}
+                        }
+                    </script>
 
                 {{-- Script principal de gráficos --}}
                 <script type="text/javascript">
@@ -814,24 +858,20 @@
 
                         // --- Tareas por Estado Chart (Doughnut) ---
                         const tasksByStatusCtx = document.getElementById('tasksByStatusChart').getContext('2d');
-                        const tasksByStatusLabels = Object.keys(tasksByStatusData);
-                        const tasksByStatusValues = Object.values(tasksByStatusData);
-
-                        const taskStatusColors = {
-                            'asignado': '#4299e1', // blue-500
-                            'en progreso': '#ecc94b', // yellow-500
-                            'finalizada': '#48bb78', // green-500
-                        };
-
-                        const taskStatusBackgrounds = tasksByStatusLabels.map(label => taskStatusColors[label] || '#a0aec0');
+                        
+                        // Solo graficamos los 3 estados mostrados en las tarjetas superiores
+                        const displayLabels = ['Asignadas', 'Con Avance', 'Terminadas'];
+                        const displayKeys = ['asignado', 'en progreso', 'finalizada'];
+                        const displayValues = displayKeys.map(key => tasksByStatusData[key] || 0);
+                        const displayColors = ['#3B82F6', '#F59E0B', '#10B981']; // blue, amber, emerald
 
                         new Chart(tasksByStatusCtx, {
                             type: 'doughnut',
                             data: {
-                                labels: tasksByStatusLabels.map(l => l.charAt(0).toUpperCase() + l.slice(1)),
+                                labels: displayLabels,
                                 datasets: [{
-                                    data: tasksByStatusValues,
-                                    backgroundColor: taskStatusBackgrounds,
+                                    data: displayValues,
+                                    backgroundColor: displayColors,
                                     hoverOffset: 4
                                 }]
                             },

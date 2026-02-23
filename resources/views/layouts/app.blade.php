@@ -34,8 +34,8 @@
         <div class="flex-1 flex flex-col overflow-hidden">
             {{-- Top Bar (opcional para breadcrumbs, notificaciones, etc.) --}}
             <header
-                class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 relative z-50">
-                <div class="px-4 sm:px-6 lg:px-8 py-4">
+                class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 relative z-40">
+                <div class="px-4 py-4 pl-14 lg:pl-8 lg:px-8">
                     <div class="flex items-center justify-between">
                         {{-- Page Heading --}}
                         <div class="flex-1">
@@ -146,10 +146,10 @@
                                     @if (Auth::user()->hasProfilePhoto())
                                         <img src="{{ asset('storage/' . Auth::user()->profile_photo) }}"
                                             alt="{{ Auth::user()->name }}"
-                                            class="w-10 h-10 rounded-lg object-cover ring-2 ring-transparent group-hover:ring-blue-500 transition">
+                                            class="w-10 h-10 rounded-full object-cover ring-2 ring-transparent group-hover:ring-blue-500 transition">
                                     @else
                                         <div
-                                            class="w-10 h-10 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-lg flex items-center justify-center text-white font-bold ring-2 ring-transparent group-hover:ring-blue-500 transition">
+                                            class="w-10 h-10 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-full flex items-center justify-center text-white font-bold ring-2 ring-transparent group-hover:ring-blue-500 transition">
                                             {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                                         </div>
                                     @endif
@@ -180,10 +180,10 @@
                                             @if (Auth::user()->hasProfilePhoto())
                                                 <img src="{{ asset('storage/' . Auth::user()->profile_photo) }}"
                                                     alt="{{ Auth::user()->name }}"
-                                                    class="w-12 h-12 rounded-lg object-cover">
+                                                    class="w-12 h-12 rounded-full object-cover">
                                             @else
                                                 <div
-                                                    class="w-12 h-12 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-lg flex items-center justify-center text-white font-bold text-lg">
+                                                    class="w-12 h-12 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
                                                     {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                                                 </div>
                                             @endif
