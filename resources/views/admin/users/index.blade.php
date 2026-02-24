@@ -1,55 +1,75 @@
 <x-app-layout>
+    <x-slot name="header">
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                    </path>
+                </svg>
+            </div>
+            <div>
+                <h2 class="text-xl font-bold text-slate-800 dark:text-gray-100 tracking-tight">Usuarios del Sistema</h2>
+                <p class="text-[0.85rem] text-slate-500 dark:text-[#B0B3B8] mt-0.5">Gestiona todos los usuarios registrados en la plataforma.</p>
+            </div>
+        </div>
+    </x-slot>
     <div class="p-6 lg:p-8 bg-slate-50 dark:bg-[#18191A] min-h-screen">
         <div class="max-w-full mx-auto space-y-6">
 
-            <!-- Header Card -->
-            <div
-                class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 md:p-8">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                    <div class="flex items-center gap-5">
-                        <div class="w-16 h-16 bg-[#F4F6FF] rounded-2xl flex items-center justify-center text-[#4F46E5]">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
-                                </path>
-                            </svg>
-                        </div>
-                        <div>
-                            <h2 class="text-[1.35rem] font-bold text-slate-800 dark:text-gray-100 tracking-tight">
-                                Usuarios del Sistema</h2>
-                            <p class="text-sm text-slate-500 dark:text-[#B0B3B8] mt-1">
-                                @if(request('search'))
-                                    Se encontraron <strong
-                                        class="text-slate-800 dark:text-gray-100">{{ $users->count() }}</strong>
-                                    resultado(s) para "{{ request('search') }}"
-                                @else
-                                    Gestiona todos los usuarios registrados en la plataforma.
-                                @endif
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center gap-4">
-                        <form method="GET" action="{{ route('admin.users.index') }}" class="relative w-full md:w-auto">
-                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                                <svg class="h-4 w-4 text-slate-400 dark:text-[#9CA3AF]" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            <!-- Filter Bar -->
+            <div class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-4 md:p-5">
+                <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-5 w-full">
+                    
+                    @if(request('search'))
+                        <!-- Info Section -->
+                        <div class="flex items-center gap-3 px-2 w-full xl:w-auto">
+                            <div class="p-2 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-xl text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                             </div>
-                            <input type="text" name="search" value="{{ request('search') }}"
-                                placeholder="Buscar por nombre, email..."
-                                class="w-full md:w-72 pl-10 pr-4 py-2.5 bg-white dark:bg-[#242526] border border-slate-200/80 rounded-xl text-sm text-slate-700 dark:text-gray-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-100 focus:border-slate-300 transition-colors">
+                            <div>
+                                <p class="text-[0.85rem] text-slate-600 dark:text-[#B0B3B8]">
+                                    Se encontraron <strong class="text-slate-800 dark:text-gray-100">{{ $users->count() }}</strong>
+                                    resultado(s) para <span class="text-slate-800 dark:text-gray-100 font-medium">"{{ request('search') }}"</span>
+                                </p>
+                            </div>
+                        </div>
+                    @endif
+                    
+                    <!-- Search & Actions Form -->
+                    <div class="flex flex-col lg:flex-row items-center justify-between gap-4 w-full flex-wrap @if(!request('search')) xl:ml-auto @endif">
+                        <form method="GET" action="{{ route('admin.users.index') }}" class="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto flex-grow">
+                            <!-- Search Input -->
+                            <div class="relative w-full sm:w-64 lg:w-96 flex-grow">
+                                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                                    <svg class="h-4 w-4 text-slate-400 dark:text-[#9CA3AF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                </div>
+                                <input type="text" 
+                                    name="search" 
+                                    value="{{ request('search') }}"
+                                    placeholder="Buscar por nombre, correo, etc..." 
+                                    class="w-full pl-10 pr-9 py-2.5 bg-slate-50 dark:bg-[#18191A] border border-slate-200/80 dark:border-[#3A3B3C] rounded-xl text-sm text-slate-700 dark:text-gray-200 placeholder-slate-400/80 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/50 focus:border-[#4F46E5] transition-colors shadow-sm">
+                                @if(request('search'))
+                                    <a href="{{ route('admin.users.index') }}" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-[#4F46E5] transition-colors" title="Limpiar búsqueda">
+                                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    </a>
+                                @endif
+                            </div>
                         </form>
-                        <button onclick="openModal('createUserModal')"
-                            class="flex items-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] text-white px-5 py-2.5 rounded-xl text-sm font-medium transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 whitespace-nowrap">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                    d="M12 4v16m8-8H4"></path>
-                            </svg>
-                            Crear Usuario
-                        </button>
+
+                        <!-- Action Buttons -->
+                        <div class="flex items-center gap-2 w-full lg:w-auto flex-shrink-0">
+                            <button onclick="openModal('createUserModal')" class="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] text-white px-5 py-2.5 rounded-xl text-[0.85rem] font-medium transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 whitespace-nowrap">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                                Crear Usuario
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -209,36 +229,34 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4" class="px-8 py-20 text-center">
+                                    <td colspan="4" class="px-8 py-24 text-center">
                                         <div class="flex flex-col items-center justify-center">
-                                            <div
-                                                class="w-20 h-20 bg-slate-50 dark:bg-[#3A3B3C]/30 rounded-full flex items-center justify-center mb-5 ring-4 ring-slate-50/50 dark:ring-[#3A3B3C]/20">
+                                            <div class="w-24 h-24 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-[1.5rem] flex items-center justify-center mb-6 ring-4 ring-[#F4F6FF]/50 dark:ring-indigo-900/10 transition-transform hover:scale-105 duration-300">
                                                 @if(request('search'))
-                                                    <svg class="w-10 h-10 text-slate-400 dark:text-[#9CA3AF]" fill="none"
+                                                    <svg class="w-12 h-12 text-[#4F46E5] dark:text-indigo-400" fill="none"
                                                         stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                                     </svg>
                                                 @else
-                                                    <svg class="w-10 h-10 text-slate-400 dark:text-[#9CA3AF]" fill="none"
-                                                        stroke="currentColor" viewBox="0 0 24 24">
+                                                    <svg class="w-12 h-12 text-[#4F46E5] dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z">
+                                                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
                                                         </path>
                                                     </svg>
                                                 @endif
                                             </div>
-                                            <h3 class="text-lg font-bold text-slate-800 dark:text-gray-100 mb-1">
+                                            <h3 class="text-xl font-bold text-slate-800 dark:text-gray-100 mb-2 tracking-tight">
                                                 @if(request('search'))
                                                     No se encontraron resultados
                                                 @else
                                                     No hay usuarios registrados
                                                 @endif
                                             </h3>
-                                            <p class="text-slate-500 dark:text-[#B0B3B8] text-sm max-w-sm mx-auto">
+                                            <p class="text-slate-500 dark:text-[#B0B3B8] text-[0.95rem] max-w-sm mx-auto leading-relaxed">
                                                 @if(request('search'))
                                                     No encontramos ningún usuario que coincida con
-                                                    "<strong>{{ request('search') }}</strong>". Intenta usar otras palabras
+                                                    <span class="font-medium text-slate-700 dark:text-gray-200">"{{ request('search') }}"</span>. Intenta usar otras palabras
                                                     clave.
                                                 @else
                                                     Aún no tienes ningún usuario en el sistema. Puedes empezar añadiendo uno
@@ -247,12 +265,12 @@
                                             </p>
                                             @if(!request('search'))
                                                 <button onclick="openModal('createUserModal')"
-                                                    class="mt-6 inline-flex items-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] text-white px-5 py-2.5 rounded-xl text-sm font-medium transition-colors shadow-sm focus:ring-2 focus:ring-slate-200">
-                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                    class="mt-8 inline-flex items-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] text-white px-6 py-3 rounded-xl text-[0.95rem] font-medium transition-all shadow-sm focus:ring-2 focus:ring-slate-200/50 hover:shadow-md hover:-translate-y-0.5">
+                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                             d="M12 4v16m8-8H4"></path>
                                                     </svg>
-                                                    Crear Primer Usuario
+                                                    Crear Usuario
                                                 </button>
                                             @endif
                                         </div>

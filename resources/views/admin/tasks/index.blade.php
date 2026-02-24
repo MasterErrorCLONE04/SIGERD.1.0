@@ -1,27 +1,31 @@
 <x-app-layout>
+    <x-slot name="header">
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                </svg>
+            </div>
+            <div>
+                <h2 class="text-xl font-bold text-slate-800 dark:text-gray-100 tracking-tight">Gestión de Tareas</h2>
+                <p class="text-[0.85rem] text-slate-500 dark:text-[#B0B3B8] mt-0.5">Supervisa y organiza el flujo de trabajo del sistema.</p>
+            </div>
+        </div>
+    </x-slot>
+
     <div class="p-6 lg:p-8 bg-slate-50 dark:bg-[#18191A] min-h-screen">
         <div class="max-w-full mx-auto space-y-6">
             
-            <!-- Header Card -->
-            <div class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 md:p-8">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                    <div class="flex items-center gap-5">
-                        <div class="w-16 h-16 bg-[#F4F6FF] rounded-2xl flex items-center justify-center text-[#4F46E5] flex-shrink-0">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
-                            </svg>
-                        </div>
-                        <div>
-                            <h2 class="text-[1.35rem] font-bold text-slate-800 dark:text-gray-100 tracking-tight">Gestión de Tareas</h2>
-                            <p class="text-sm text-slate-500 dark:text-[#B0B3B8] mt-1">
-                                Supervisa y organiza el flujo de trabajo del sistema.
-                            </p>
-                        </div>
-                    </div>
+            <!-- Filter Bar -->
+            <div class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-4 md:p-5">
+                <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-5 w-full">
                     
-                    <div class="flex flex-col xl:flex-row items-center gap-4 w-full md:w-auto">
-                        <form method="GET" action="{{ route('admin.tasks.index') }}" class="flex flex-col sm:flex-row gap-3 w-full xl:w-auto">
-                            <div class="relative flex-grow sm:w-64">
+                    <!-- Search & Actions Form -->
+                    <div class="flex flex-col lg:flex-row items-center justify-between gap-4 w-full flex-wrap">
+                        <form method="GET" action="{{ route('admin.tasks.index') }}" class="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto flex-grow">
+                            
+                            <!-- Search Input -->
+                            <div class="relative w-full sm:w-64 lg:w-96 flex-grow">
                                 <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                                     <svg class="h-4 w-4 text-slate-400 dark:text-[#9CA3AF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -31,32 +35,49 @@
                                     name="search" 
                                     value="{{ request('search') }}"
                                     placeholder="Buscar título..." 
-                                    class="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-[#242526] border border-slate-200/80 rounded-xl text-sm text-slate-700 dark:text-gray-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-100 focus:border-slate-300 transition-colors">
+                                    class="w-full pl-10 pr-9 py-2.5 bg-slate-50 dark:bg-[#18191A] border border-slate-200/80 dark:border-[#3A3B3C] rounded-xl text-sm text-slate-700 dark:text-gray-200 placeholder-slate-400/80 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/50 focus:border-[#4F46E5] transition-colors shadow-sm">
+                                @if(request('search'))
+                                    <a href="{{ route('admin.tasks.index', array_filter(request()->except('search'))) }}" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-[#4F46E5] transition-colors">
+                                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    </a>
+                                @endif
                             </div>
-                            <div class="flex gap-2 w-full sm:w-auto">
-                                <select name="priority" class="w-full sm:w-auto pl-4 pr-10 py-2.5 bg-white dark:bg-[#242526] border border-slate-200/80 rounded-xl text-sm text-slate-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-slate-100 focus:border-slate-300 transition-colors flex-grow appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%239CA3AF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:0.75rem_auto] bg-[position:right_1rem_center] bg-no-repeat">
+                            
+                            <!-- Priority & Submit Group -->
+                            <div class="flex items-center gap-2 w-full sm:w-auto max-sm:mt-1 flex-shrink-0">
+                                <!-- Priority Select -->
+                                <select name="priority" class="w-full sm:w-[130px] pl-3.5 pr-8 py-2.5 bg-slate-50 dark:bg-[#18191A] border border-slate-200/80 dark:border-[#3A3B3C] rounded-xl text-sm text-slate-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/50 focus:border-[#4F46E5] transition-colors shadow-sm appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%239CA3AF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:0.75rem_auto] bg-[position:right_0.8rem_center] bg-no-repeat cursor-pointer">
                                     <option value="">Prioridad</option>
                                     <option value="alta" {{ request('priority') == 'alta' ? 'selected' : '' }}>Alta</option>
                                     <option value="media" {{ request('priority') == 'media' ? 'selected' : '' }}>Media</option>
                                     <option value="baja" {{ request('priority') == 'baja' ? 'selected' : '' }}>Baja</option>
                                 </select>
-                                <button type="submit" class="sm:hidden flex items-center justify-center px-4 py-2.5 bg-slate-100 dark:bg-[#3A3B3C] hover:bg-slate-200 text-slate-600 dark:text-gray-300 rounded-xl transition-colors">
+                                
+                                <!-- Submit Button -->
+                                <button type="submit" class="flex items-center justify-center px-4 py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-slate-700 dark:text-gray-200 rounded-xl transition-colors font-medium text-[0.85rem] shadow-sm flex-shrink-0" title="Buscar">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                                 </button>
+                                
+                                <!-- Clear Button -->
+                                @if(request()->anyFilled(['search', 'priority']))
+                                    <a href="{{ route('admin.tasks.index') }}" class="flex items-center justify-center px-4 py-2.5 bg-[#F4F6FF] hover:bg-[#E0E7FF] dark:bg-indigo-900/20 dark:hover:bg-indigo-900/40 text-[#4F46E5] dark:text-indigo-400 rounded-xl transition-colors font-medium text-[0.85rem] gap-1.5 shadow-sm flex-shrink-0" title="Limpiar filtros">
+                                        <svg class="w-4 h-4 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                                        Limpiar
+                                    </a>
+                                @endif
                             </div>
-                            <button type="submit" class="hidden sm:flex items-center justify-center px-4 py-2.5 bg-slate-100 dark:bg-[#3A3B3C] hover:bg-slate-200 text-slate-600 dark:text-gray-300 rounded-xl transition-colors">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                            </button>
                         </form>
 
-                        <div class="flex items-center gap-2 w-full xl:w-auto">
-                            <button onclick="openExportModal()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-[#10B981] hover:bg-[#059669] text-white px-4 py-2.5 rounded-xl text-sm font-medium transition-colors shadow-sm focus:ring-2 focus:ring-[#10B981]/50 whitespace-nowrap">
+                        <!-- Action Buttons -->
+                        <div class="flex items-center gap-2 w-full lg:w-auto lg:pl-4 lg:border-l border-slate-200 dark:border-[#3A3B3C] flex-shrink-0">
+                            <button onclick="openExportModal()" class="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-[#10B981] hover:bg-[#059669] text-white px-4 py-2.5 rounded-xl text-[0.85rem] font-medium transition-colors shadow-sm focus:ring-2 focus:ring-[#10B981]/50 whitespace-nowrap">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                                <span class="hidden sm:inline">Exportar</span> PDF
+                                <span class="hidden sm:inline">Exportar PDF</span>
+                                <span class="sm:hidden">Exportar</span>
                             </button>
-                            <button onclick="openModal('createTaskModal')" class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] text-white px-5 py-2.5 rounded-xl text-sm font-medium transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 whitespace-nowrap">
+                            <button onclick="openModal('createTaskModal')" class="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] text-white px-5 py-2.5 rounded-xl text-[0.85rem] font-medium transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 whitespace-nowrap">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                 </svg>
                                 Crear Tarea
                             </button>
