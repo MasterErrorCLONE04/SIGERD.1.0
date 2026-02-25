@@ -79,7 +79,7 @@
                         <div class="flex items-center gap-2 w-full lg:w-auto flex-shrink-0">
                             <button onclick="openModal('createUserModal')"
                                 class="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] text-white px-5 py-2.5 rounded-xl text-[0.85rem] font-medium transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 whitespace-nowrap">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-4 h-4 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 4v16m8-8H4"></path>
                                 </svg>
@@ -179,28 +179,43 @@
                                     </td>
                                     <td class="px-8 py-5">
                                         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-[0.8rem] font-semibold tracking-wide
-                                                            @if($user->role === 'admin') bg-[#F5F3FF] text-[#6D28D9]
-                                                            @elseif($user->role === 'coordinador') bg-[#EFF6FF] text-[#2563EB]
-                                                            @elseif($user->role === 'instructor') bg-[#F1F5F9] text-[#475569]
-                                                            @else bg-[#F1F5F9] text-[#475569]
-                                                            @endif">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                @if($user->role === 'admin')
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
-                                                    </path>
-                                                @elseif($user->role === 'coordinador')
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z">
-                                                    </path>
-                                                @else
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M12 14l9-5-9-5-9 5 9 5z"></path>
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z">
-                                                    </path>
-                                                @endif
-                                            </svg>
+                                                                        @if($user->role === 'admin') bg-[#F5F3FF] text-[#6D28D9]
+                                                                        @elseif($user->role === 'coordinador') bg-[#EFF6FF] text-[#2563EB]
+                                                                        @elseif($user->role === 'instructor') bg-[#F1F5F9] text-[#475569]
+                                                                        @else bg-[#F1F5F9] text-[#475569]
+                                                                        @endif">
+                                            @if($user->role === 'admin' || $user->role === 'administrador')
+                                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path fill-rule="evenodd"
+                                                        d="M12.516 2.17a.75.75 0 00-1.032 0 11.209 11.209 0 01-7.877 3.08.75.75 0 00-.722.515A12.74 12.74 0 002.25 9.75c0 5.942 4.064 10.933 9.563 12.348a.749.749 0 00.374 0c5.499-1.415 9.563-6.406 9.563-12.348 0-1.39-.223-2.73-.635-3.985a.75.75 0 00-.722-.516l-.143.001c-2.996 0-5.717-1.17-7.734-3.08zm3.094 8.016a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            @elseif($user->role === 'coordinador')
+                                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path fill-rule="evenodd"
+                                                        d="M8.25 6.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM15.75 9.75a3 3 0 116 0 3 3 0 01-6 0zM2.25 9.75a3 3 0 116 0 3 3 0 01-6 0zM6.31 15.117A6.745 6.745 0 0112 12a6.745 6.745 0 016.709 7.498.75.75 0 01-.372.568A12.696 12.696 0 0112 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 01-.372-.568 6.787 6.787 0 011.019-4.38z"
+                                                        clip-rule="evenodd" />
+                                                    <path
+                                                        d="M5.082 14.254a8.287 8.287 0 00-1.308 5.135 9.687 9.687 0 01-1.764-.44l-.115-.04a.563.563 0 01-.373-.487l-.01-.121a3.75 3.75 0 016.576-3.149 11.026 11.026 0 01-3.006-.898zM20.226 19.389a8.287 8.287 0 00-1.308-5.135 11.026 11.026 0 01-3.006.898 3.75 3.75 0 016.576 3.149l-.01.121a.563.563 0 01-.373.487l-.115.04c-.567.198-1.157.349-1.764.44z" />
+                                                </svg>
+                                            @elseif($user->role === 'instructor')
+                                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path
+                                                        d="M11.7 2.805a.75.75 0 01.6 0A60.65 60.65 0 0122.83 8.72a.75.75 0 01-.231 1.337 49.949 49.949 0 00-9.902 3.912l-.003.002-.34.18a.75.75 0 01-.707 0A50.009 50.009 0 007.5 12.174v-.224c0-.131.067-.248.172-.311a54.614 54.614 0 014.653-2.52.75.75 0 00-.65-1.352 56.129 56.129 0 00-4.78 2.589 1.858 1.858 0 00-.859 1.228 49.803 49.803 0 00-4.634-1.527.75.75 0 01-.231-1.337A60.653 60.653 0 0111.7 2.805z" />
+                                                    <path
+                                                        d="M13.06 15.473a48.45 48.45 0 017.666-3.282c.134 1.414.22 2.843.255 4.285a.75.75 0 01-.46.71 47.878 47.878 0 00-8.105 4.342.75.75 0 01-.832 0 47.877 47.877 0 00-8.104-4.342.75.75 0 01-.461-.71c.035-1.442.121-2.87.255-4.286A48.4 48.4 0 016 13.18v1.27a1.5 1.5 0 00-.14 2.508c-.09.38-.222.753-.397 1.11.452.213.901.434 1.346.661a6.729 6.729 0 00.551-1.608 1.5 1.5 0 00.14-2.67v-.645a48.549 48.549 0 013.44 1.668 2.25 2.25 0 002.12 0z" />
+                                                    <path
+                                                        d="M4.462 19.462c.42-.419.753-.89 1-1.394.453.213.902.434 1.347.662a6.742 6.742 0 01-1.286 1.794.75.75 0 01-1.06-1.062z" />
+                                                </svg>
+                                            @else
+                                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path fill-rule="evenodd"
+                                                        d="M7.5 5.25A3.25 3.25 0 0110.75 2h2.5A3.25 3.25 0 0116.5 5.25V6h3.625c.621 0 1.125.504 1.125 1.125v2.413A1.5 1.5 0 0020.25 9.6h-16.5A1.5 1.5 0 002.75 9.538V7.125C2.75 6.504 3.254 6 3.875 6H7.5v-.75zm1.5 0V6h6v-.75a1.75 1.75 0 00-1.75-1.75h-2.5A1.75 1.75 0 009 5.25z"
+                                                        clip-rule="evenodd" />
+                                                    <path
+                                                        d="M2.75 11.25V17.5A2.25 2.25 0 005 19.75h14A2.25 2.25 0 0021 17.5v-6.25H2.75z" />
+                                                </svg>
+                                            @endif
                                             {{ ucfirst($user->role) }}
                                         </div>
                                     </td>
@@ -294,7 +309,8 @@
                                             @if(!request('search'))
                                                 <button onclick="openModal('createUserModal')"
                                                     class="mt-8 inline-flex items-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] text-white px-6 py-3 rounded-xl text-[0.95rem] font-medium transition-all shadow-sm focus:ring-2 focus:ring-slate-200/50 hover:shadow-md hover:-translate-y-0.5">
-                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <svg class="w-5 h-5 !text-white" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                             d="M12 4v16m8-8H4"></path>
                                                     </svg>

@@ -100,7 +100,7 @@
                     <a href="{{ route('admin.dashboard') }}" :title="sidebarCollapsed ? 'Dashboard' : ''"
                         class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('admin.dashboard') ? 'bg-[#F2F5F8] dark:bg-gray-700 text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
                         :class="sidebarCollapsed ? 'justify-center' : ''">
-                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('admin.dashboard') ? 'text-[#475569] dark:text-white' : 'text-slate-400 dark:text-gray-500' }}"
+                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('admin.dashboard') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-gray-500' }}"
                             :class="!sidebarCollapsed ? 'mr-3.5' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
@@ -116,7 +116,7 @@
                     <a href="{{ route('admin.users.index') }}" :title="sidebarCollapsed ? 'Usuarios' : ''"
                         class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('admin.users.*') ? 'bg-[#F2F5F8] dark:bg-gray-700 text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
                         :class="sidebarCollapsed ? 'justify-center' : ''">
-                        <svg class="w-[1.25rem] h-[1.25rem] flex-shrink-0 {{ request()->routeIs('admin.users.*') ? 'text-[#1E293B] dark:text-white' : 'text-slate-400 dark:text-gray-500' }}"
+                        <svg class="w-[1.25rem] h-[1.25rem] flex-shrink-0 {{ request()->routeIs('admin.users.*') ? '!text-[#1E293B] dark:!text-white' : '!text-slate-400 dark:!text-gray-500' }}"
                             :class="!sidebarCollapsed ? 'mr-3.5' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -132,7 +132,7 @@
                     <a href="{{ route('admin.tasks.index') }}" :title="sidebarCollapsed ? 'Tareas' : ''"
                         class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('admin.tasks.*') ? 'bg-[#F2F5F8] dark:bg-gray-700 text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
                         :class="sidebarCollapsed ? 'justify-center' : ''">
-                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('admin.tasks.*') ? 'text-[#475569] dark:text-white' : 'text-slate-400 dark:text-gray-500' }}"
+                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('admin.tasks.*') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-gray-500' }}"
                             :class="!sidebarCollapsed ? 'mr-3.5' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -148,7 +148,7 @@
                     <a href="{{ route('admin.incidents.index') }}" :title="sidebarCollapsed ? 'Incidentes' : ''"
                         class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('admin.incidents.*') ? 'bg-[#F2F5F8] dark:bg-gray-700 text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
                         :class="sidebarCollapsed ? 'justify-center' : ''">
-                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('admin.incidents.*') ? 'text-[#475569] dark:text-white' : 'text-slate-400 dark:text-gray-500' }}"
+                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('admin.incidents.*') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-gray-500' }}"
                             :class="!sidebarCollapsed ? 'mr-3.5' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -167,7 +167,7 @@
                     <a href="{{ route('instructor.dashboard') }}" :title="sidebarCollapsed ? 'Dashboard' : ''"
                         class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('instructor.dashboard') ? 'bg-[#F2F5F8] dark:bg-gray-700 text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
                         :class="sidebarCollapsed ? 'justify-center' : ''">
-                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('instructor.dashboard') ? 'text-[#475569] dark:text-white' : 'text-slate-400 dark:text-gray-500' }}"
+                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('instructor.dashboard') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-gray-500' }}"
                             :class="!sidebarCollapsed ? 'mr-3.5' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
@@ -183,7 +183,7 @@
                     <a href="{{ route('instructor.incidents.index') }}" :title="sidebarCollapsed ? 'Mis Reportes' : ''"
                         class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('instructor.incidents.*') && !request()->routeIs('instructor.incidents.create') ? 'bg-[#F2F5F8] dark:bg-gray-700 text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
                         :class="sidebarCollapsed ? 'justify-center' : ''">
-                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('instructor.incidents.*') && !request()->routeIs('instructor.incidents.create') ? 'text-[#475569] dark:text-white' : 'text-slate-400 dark:text-gray-500' }}"
+                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('instructor.incidents.*') && !request()->routeIs('instructor.incidents.create') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-gray-500' }}"
                             :class="!sidebarCollapsed ? 'mr-3.5' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -202,7 +202,7 @@
                     <a href="{{ route('worker.dashboard') }}" :title="sidebarCollapsed ? 'Dashboard' : ''"
                         class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('worker.dashboard') ? 'bg-[#F2F5F8] dark:bg-gray-700 text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
                         :class="sidebarCollapsed ? 'justify-center' : ''">
-                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('worker.dashboard') ? 'text-[#475569] dark:text-white' : 'text-slate-400 dark:text-gray-500' }}"
+                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('worker.dashboard') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-gray-500' }}"
                             :class="!sidebarCollapsed ? 'mr-3.5' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
@@ -218,7 +218,7 @@
                     <a href="{{ route('worker.tasks.index') }}" :title="sidebarCollapsed ? 'Mis Tareas' : ''"
                         class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('worker.tasks.*') ? 'bg-[#F2F5F8] dark:bg-gray-700 text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
                         :class="sidebarCollapsed ? 'justify-center' : ''">
-                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('worker.tasks.*') ? 'text-[#475569] dark:text-white' : 'text-slate-400 dark:text-gray-500' }}"
+                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('worker.tasks.*') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-gray-500' }}"
                             :class="!sidebarCollapsed ? 'mr-3.5' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />

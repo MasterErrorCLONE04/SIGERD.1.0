@@ -1,8 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-indigo-600/10 rounded-lg flex items-center justify-center">
-                <span class="material-symbols-outlined text-indigo-600">assignment</span>
+        <div class="flex items-center gap-4">
+            <div
+                class="w-12 h-12 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
+                <span class="material-symbols-outlined">assignment</span>
             </div>
             <h2 class="text-xl font-bold text-slate-800 dark:text-gray-100 tracking-tight">
                 {{ __('Detalles de la Tarea') }}
@@ -97,7 +98,8 @@
                     <div class="flex items-start space-x-3 text-slate-600 dark:text-gray-300 dark:text-gray-400">
                         <span class="material-symbols-outlined text-indigo-600 text-xl mt-0.5">description</span>
                         <div class="flex-1">
-                            <h3 class="font-semibold text-slate-800 dark:text-gray-100 dark:text-gray-200 mb-1">Descripción</h3>
+                            <h3 class="font-semibold text-slate-800 dark:text-gray-100 dark:text-gray-200 mb-1">
+                                Descripción</h3>
                             <p class="text-sm leading-relaxed">{{ $task->description ?: 'Sin descripción detallada.' }}
                             </p>
                         </div>
@@ -109,15 +111,18 @@
                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-8 bg-slate-50/50 dark:bg-[#18191A] dark:bg-gray-900/50">
                     <div
                         class="bg-white dark:bg-[#242526] dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
-                        <div class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
+                        <div
+                            class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
                             <span class="material-symbols-outlined text-sm">place</span>
                             <span class="text-xs font-medium uppercase tracking-wider">Ubicación</span>
                         </div>
-                        <p class="font-semibold text-slate-800 dark:text-gray-100 dark:text-white">{{ $task->location }}</p>
+                        <p class="font-semibold text-slate-800 dark:text-gray-100 dark:text-white">{{ $task->location }}
+                        </p>
                     </div>
                     <div
                         class="bg-white dark:bg-[#242526] dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
-                        <div class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
+                        <div
+                            class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
                             <span class="material-symbols-outlined text-sm">event</span>
                             <span class="text-xs font-medium uppercase tracking-wider">Fecha Límite</span>
                         </div>
@@ -127,7 +132,8 @@
                     </div>
                     <div
                         class="bg-white dark:bg-[#242526] dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
-                        <div class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
+                        <div
+                            class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
                             <span class="material-symbols-outlined text-sm">person</span>
                             <span class="text-xs font-medium uppercase tracking-wider">Asignado a</span>
                         </div>
@@ -137,11 +143,13 @@
                     </div>
                     <div
                         class="bg-white dark:bg-[#242526] dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
-                        <div class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
+                        <div
+                            class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
                             <span class="material-symbols-outlined text-sm">schedule</span>
                             <span class="text-xs font-medium uppercase tracking-wider">Creado por</span>
                         </div>
-                        <p class="font-semibold text-slate-800 dark:text-gray-100 dark:text-white">{{ $task->createdBy->name ?? 'N/A' }}
+                        <p class="font-semibold text-slate-800 dark:text-gray-100 dark:text-white">
+                            {{ $task->createdBy->name ?? 'N/A' }}
                         </p>
                     </div>
                 </div>
@@ -179,7 +187,8 @@
                                 class="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
                                 <div class="flex items-center space-x-2">
                                     <span class="material-symbols-outlined text-indigo-600">image</span>
-                                    <h3 class="font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200">Imágenes de Referencia</h3>
+                                    <h3 class="font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200">Imágenes
+                                        de Referencia</h3>
                                 </div>
                             </div>
 
@@ -223,7 +232,8 @@
                             <div
                                 class="flex items-center space-x-2 pb-2 border-b border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
                                 <span class="material-symbols-outlined text-blue-500">pending_actions</span>
-                                <h3 class="font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200">Evidencia Inicial</h3>
+                                <h3 class="font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200">Evidencia
+                                    Inicial</h3>
                             </div>
 
                             @php $initialCount = count($task->initial_evidence_images ?? []); @endphp
@@ -273,7 +283,8 @@
                             <div
                                 class="flex items-center space-x-2 pb-2 border-b border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
                                 <span class="material-symbols-outlined text-green-500">task_alt</span>
-                                <h3 class="font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200">Evidencia Final</h3>
+                                <h3 class="font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200">Evidencia
+                                    Final</h3>
                             </div>
 
                             @php $finalCount = count($task->final_evidence_images ?? []); @endphp
@@ -327,7 +338,8 @@
                     <div class="p-8 border-t border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
                         <div class="flex items-center space-x-2 mb-4">
                             <span class="material-symbols-outlined text-slate-400 dark:text-[#9CA3AF]">rate_review</span>
-                            <h3 class="font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200">Descripción Final del Trabajo</h3>
+                            <h3 class="font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200">Descripción Final del
+                                Trabajo</h3>
                         </div>
                         <div
                             class="p-5 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-800/50">
@@ -341,7 +353,8 @@
                 {{-- Review Actions --}}
                 @if ($task->status === 'realizada')
                     <div class="p-8 border-t border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700 bg-slate-50/20">
-                        <h3 class="text-lg font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200 mb-6 flex items-center gap-2">
+                        <h3
+                            class="text-lg font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200 mb-6 flex items-center gap-2">
                             <span class="material-symbols-outlined text-indigo-600">fact_check</span>
                             Revisión y Control
                         </h3>
@@ -393,7 +406,8 @@
                 </div>
             </div>
 
-            <footer class="py-12 text-center text-slate-400 dark:text-[#9CA3AF] dark:text-gray-500 dark:text-[#B0B3B8] text-sm">
+            <footer
+                class="py-12 text-center text-slate-400 dark:text-[#9CA3AF] dark:text-gray-500 dark:text-[#B0B3B8] text-sm">
                 © {{ date('Y') }} SIGERD - Todos los derechos reservados.
             </footer>
         </div>

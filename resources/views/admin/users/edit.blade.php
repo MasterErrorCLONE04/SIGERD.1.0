@@ -1,13 +1,15 @@
 <x-app-layout>
     {{-- Page header ------------------------------------------------}}
     <x-slot name="header">
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-4">
             {{-- Icono opcional --}}
-            <svg class="w-6 h-6 text-indigo-500 dark:text-indigo-400" fill="none" stroke="currentColor"
-                viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
+            <div
+                class="w-12 h-12 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+            </div>
             <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 tracking-tight">
                 {{ __('Editar Usuario') }}
             </h2>
@@ -57,8 +59,8 @@
                                 @else
                                     <span
                                         class="inline-flex h-20 w-20 items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700">
-                                        <svg class="w-10 h-10 text-gray-400 dark:text-gray-500 dark:text-[#B0B3B8]" fill="currentColor"
-                                            viewBox="0 0 24 24">
+                                        <svg class="w-10 h-10 text-gray-400 dark:text-gray-500 dark:text-[#B0B3B8]"
+                                            fill="currentColor" viewBox="0 0 24 24">
                                             <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                         </svg>
                                     </span>

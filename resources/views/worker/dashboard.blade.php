@@ -1,8 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex items-center gap-3">
-            <div class="p-2 bg-indigo-600 rounded-xl">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="flex items-center gap-4">
+            <div
+                class="w-12 h-12 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
@@ -26,10 +27,11 @@
                             <p class="text-sm font-medium text-gray-600 dark:text-gray-300 dark:text-gray-400">Total de
                                 Tareas</p>
                             <p class="text-3xl font-bold text-gray-900 dark:text-gray-100 dark:text-white mt-2">
-                                {{ $totalTasks }}</p>
+                                {{ $totalTasks }}
+                            </p>
                         </div>
-                        <div class="p-3 bg-indigo-600 rounded-xl">
-                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="p-3 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-xl">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                             </svg>
@@ -45,10 +47,11 @@
                             <p class="text-sm font-medium text-gray-600 dark:text-gray-300 dark:text-gray-400">Asignadas
                             </p>
                             <p class="text-3xl font-bold text-gray-900 dark:text-gray-100 dark:text-white mt-2">
-                                {{ $assignedTasks }}</p>
+                                {{ $assignedTasks }}
+                            </p>
                         </div>
-                        <div class="p-3 bg-yellow-500 rounded-xl">
-                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="p-3 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-xl">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
@@ -64,10 +67,11 @@
                             <p class="text-sm font-medium text-gray-600 dark:text-gray-300 dark:text-gray-400">En
                                 Progreso</p>
                             <p class="text-3xl font-bold text-gray-900 dark:text-gray-100 dark:text-white mt-2">
-                                {{ $inProgressTasks }}</p>
+                                {{ $inProgressTasks }}
+                            </p>
                         </div>
-                        <div class="p-3 bg-purple-600 rounded-xl">
-                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="p-3 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-xl">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
@@ -83,10 +87,11 @@
                             <p class="text-sm font-medium text-gray-600 dark:text-gray-300 dark:text-gray-400">
                                 Completadas</p>
                             <p class="text-3xl font-bold text-gray-900 dark:text-gray-100 dark:text-white mt-2">
-                                {{ $completedTasks }}</p>
+                                {{ $completedTasks }}
+                            </p>
                         </div>
-                        <div class="p-3 bg-green-600 rounded-xl">
-                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="p-3 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-xl">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
@@ -101,8 +106,8 @@
                     @if($overdueTasks > 0)
                         <div class="bg-red-50 dark:bg-[#3A3B3C] border border-red-600 dark:border-red-800 rounded-2xl p-6">
                             <div class="flex items-center gap-4">
-                                <div class="p-3 bg-red-500 rounded-xl">
-                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="p-3 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-xl">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                                     </svg>
@@ -120,8 +125,8 @@
                         <div
                             class="bg-yellow-50 dark:bg-[#3A3B3C] border border-yellow-600 dark:border-yellow-800 rounded-2xl p-6">
                             <div class="flex items-center gap-4">
-                                <div class="p-3 bg-yellow-500 rounded-xl">
-                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="p-3 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-xl">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
@@ -131,7 +136,8 @@
                                     </h3>
                                     <p class="text-yellow-700 dark:text-yellow-400">Tienes
                                         <strong>{{ $upcomingDeadlineTasks }}</strong> tarea(s) con fecha límite en los próximos
-                                        7 días</p>
+                                        7 días
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -160,7 +166,8 @@
                                 <div class="flex items-start justify-between">
                                     <div class="flex-1">
                                         <h4 class="font-semibold text-gray-900 dark:text-gray-100 dark:text-white">
-                                            {{ $task->title }}</h4>
+                                            {{ $task->title }}
+                                        </h4>
                                         <p class="text-sm text-gray-600 dark:text-gray-300 dark:text-gray-400 mt-1">
                                             Fecha límite: <span
                                                 class="font-medium text-red-600 dark:text-red-400">{{ $task->deadline_at->format('d/m/Y') }}</span>
@@ -199,7 +206,8 @@
                                 <div class="flex items-start justify-between">
                                     <div class="flex-1">
                                         <h4 class="font-semibold text-gray-900 dark:text-gray-100 dark:text-white">
-                                            {{ $task->title }}</h4>
+                                            {{ $task->title }}
+                                        </h4>
                                         <p class="text-sm text-gray-600 dark:text-gray-300 dark:text-gray-400 mt-1">
                                             Asignada por: <span
                                                 class="font-medium">{{ $task->createdBy->name ?? 'N/A' }}</span>
@@ -230,7 +238,8 @@
                 <div class="flex flex-wrap gap-4">
                     <a href="{{ route('worker.tasks.index') }}"
                         class="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 !text-white dark:!text-gray-900" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                         </svg>
