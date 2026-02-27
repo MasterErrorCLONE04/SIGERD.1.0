@@ -467,6 +467,15 @@ class TaskController extends Controller
                         'final_evidence_images' => $task->final_evidence_images,
                         'resolution_description' => $task->final_description,
                     ]);
+
+                    // Notificar al instructor que su incidencia ha sido resuelta
+                    \App\Models\Notification::create([
+                        'user_id' => $task->incident->reported_by,
+                        'type' => 'incident_resolved',
+                        'title' => 'Incidencia Resuelta',
+                        'message' => 'Reparación/Mantenimiento finalizado con éxito para tu incidencia: ' . $task->incident->title,
+                        'link' => route('instructor.incidents.show', $task->incident_id),
+                    ]);
                 }
                 break;
             case 'reject':
