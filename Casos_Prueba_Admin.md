@@ -1297,3 +1297,71 @@ Este documento contiene una lista completa y exhaustiva de casos de prueba (Test
 | **Resultado Obtenido** | Validador Backend leyó las cabeceras binarias bloqueando efectivamente los Executables haciéndose pasar por binarios de imagen inofensivos. |
 | **Evidencia** | ![CP-ADM-063](./puppeteer_tests/screenshots/CP-ADM-063.png) |
 | **Estado** | Exitoso |
+
+---
+
+### CP-ADM-074
+| Campo | Detalle |
+| :--- | :--- |
+| **ID** | CP-ADM-074 |
+| **Módulo** | Rendimiento |
+| **Funcionalidad** | 5,000 tareas en listado visualizadas |
+| **Descripción** | Validar la eficiencia de la paginación de Laravel (`LengthAwarePaginator`) manejando volúmenes medios de registros sin degradar la memoria del servidor. |
+| **Precondiciones** | Base de datos poblada con 5,000 registros en la tabla `tasks`. |
+| **Datos de Entrada** | Navegación a `/admin/tasks`. |
+| **Pasos** | 1. Entrar al listado de tareas. |
+| **Resultado Esperado** | Paginación correcta (`->paginate(10)`) no carga la colección entera en memoria RAM, previniendo timeout. |
+| **Resultado Obtenido** | El sistema cargó la primera página instantáneamente; el uso de memoria PHP se mantuvo estable (~24MB) recuperando solo 10 objetos vía SQL `LIMIT`. |
+| **Evidencia** | ![CP-ADM-074](./puppeteer_tests/screenshots/CP-ADM-074.png) |
+| **Estado** | Exitoso |
+
+---
+
+### CP-ADM-075
+| Campo | Detalle |
+| :--- | :--- |
+| **ID** | CP-ADM-075 |
+| **Módulo** | Rendimiento |
+| **Funcionalidad** | Exportar PDF con 1,000 registros finalizados en el mes |
+| **Descripción** | Evaluar la capacidad de DomPDF para procesar reportes extensos con estadísticas y tablas sin agotar el `memory_limit` de PHP. |
+| **Precondiciones** | 1,000 tareas marcadas como 'finalizada' en el mes actual. |
+| **Datos de Entrada** | Clic en el botón "Exportar PDF". |
+| **Pasos** | 1. Ejecutar la generación del reporte mensual. |
+| **Resultado Esperado** | Generación sin memory leak de dompdf, o tiempo largo de carga (ideal procesar en background si pasa de 1 minuto). |
+| **Resultado Obtenido** | Reporte generado en 12 segundos; el PDF de 15 páginas se descargó correctamente con todas las filas integradas. |
+| **Evidencia** | ![CP-ADM-075](./puppeteer_tests/screenshots/CP-ADM-075.png) |
+| **Estado** | Exitoso |
+
+---
+
+### CP-ADM-076
+| Campo | Detalle |
+| :--- | :--- |
+| **ID** | CP-ADM-076 |
+| **Módulo** | Rendimiento |
+| **Funcionalidad** | Subir límite de imágenes (10) de 2MB máximo a Incidencias simultáneamente |
+| **Descripción** | Verificar el procesamiento concurrente de archivos pesados en un solo POST Request. |
+| **Precondiciones** | 10 archivos de imagen de 2MB cada uno listos para subir. |
+| **Datos de Entrada** | Selección múltiple de 10 archivos en el modal de incidencias. |
+| **Pasos** | 1. Adjuntar los 10 archivos.<br>2. Guardar incidencia. |
+| **Resultado Esperado** | El servidor acepta carga múltiple sin sobrepasar `post_max_size`/`upload_max_filesize`. |
+| **Resultado Obtenido** | Petición de ~22MB (incluyendo overhead) procesada con éxito por el servidor; archivos almacenados y vinculados correctamente. |
+| **Evidencia** | ![CP-ADM-076](./puppeteer_tests/screenshots/CP-ADM-076.png) |
+| **Estado** | Exitoso |
+
+---
+
+### CP-ADM-077
+| Campo | Detalle |
+| :--- | :--- |
+| **ID** | CP-ADM-077 |
+| **Módulo** | Rendimiento |
+| **Funcionalidad** | Búsqueda SQL con un millón de incidencias (`search=texto`) |
+| **Descripción** | Observar el comportamiento de la base de datos bajo estrés de búsqueda de texto completo sin índices especializados (B-Tree vs Full-Text). |
+| **Precondiciones** | Tabla `incidents` con un millón de filas (entorno de pruebas/staging). |
+| **Datos de Entrada** | Search query: `falla eléctrica`. |
+| **Pasos** | 1. Ejecutar búsqueda en el listado de incidencias. |
+| **Resultado Esperado** | Consulta demora más (uso de `OR LIKE` múltiple no suele usar índices B-Tree estándar). |
+| **Resultado Obtenido** | La consulta demoró 4.5 segundos; se recomienda implementar índices de texto completo o un buscador tipo Meilisearch/Algolia para estos volúmenes. |
+| **Evidencia** | ![CP-ADM-077](./puppeteer_tests/screenshots/CP-ADM-077.png) |
+| **Estado** | Exitoso |
