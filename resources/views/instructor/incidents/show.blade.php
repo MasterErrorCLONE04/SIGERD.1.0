@@ -337,7 +337,7 @@
                     <div
                         class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200 dark:border-[#3A3B3C] dark:border-gray-700">
                         <a href="{{ route('instructor.incidents.index') }}"
-                            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 dark:text-gray-300 font-semibold rounded-lg transition shadow-sm hover:shadow-md">
+                            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold rounded-lg transition-colors shadow-sm focus:ring-2 focus:ring-slate-200">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -363,7 +363,7 @@
             </button>
             {{-- Botón de descarga --}}
             <a id="downloadButton" href="" download
-                class="absolute bottom-4 right-4 text-white bg-indigo-600 hover:bg-indigo-700 rounded-full p-3 transition-all hover:scale-110 shadow-lg">
+                class="absolute bottom-4 right-4 bg-[#1A202C] hover:bg-[#2D3748] text-white rounded-full p-3 transition-all hover:scale-110 shadow-lg focus:ring-2 focus:ring-slate-200">
                 <svg class="w-6 h-6 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />

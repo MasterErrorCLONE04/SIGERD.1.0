@@ -174,7 +174,7 @@
                                         </p>
                                     </div>
                                     <a href="{{ route('worker.tasks.show', $task->id) }}"
-                                        class="ml-4 px-3 py-1.5 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded-lg transition">
+                                        class="ml-4 px-3 py-1.5 bg-[#1A202C] hover:bg-[#2D3748] text-white text-sm font-medium rounded-lg transition">
                                         Ver
                                     </a>
                                 </div>
@@ -218,7 +218,7 @@
                                         </p>
                                     </div>
                                     <a href="{{ route('worker.tasks.show', $task->id) }}"
-                                        class="ml-4 px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition">
+                                        class="ml-4 px-3 py-1.5 bg-[#1A202C] hover:bg-[#2D3748] text-white text-sm font-medium rounded-lg transition">
                                         Ver
                                     </a>
                                 </div>
@@ -237,9 +237,8 @@
                 <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-white mb-4">Acceso Rápido</h3>
                 <div class="flex flex-wrap gap-4">
                     <a href="{{ route('worker.tasks.index') }}"
-                        class="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
-                        <svg class="w-5 h-5 !text-white dark:!text-gray-900" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
+                        class="inline-flex items-center gap-2 px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold rounded-xl transition-all shadow-sm focus:ring-2 focus:ring-slate-200">
+                        <svg class="w-5 h-5 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                         </svg>

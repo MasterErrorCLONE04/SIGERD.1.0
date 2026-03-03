@@ -264,9 +264,9 @@
             <div class="carousel-container">
                 <!-- Feature 1 -->
                 <div
-                    class="carousel-item bg-[#F4F6F8] p-10 rounded-2xl border border-[#DCE3EA] hover:border-[#1E3A5F] transition-all group">
+                    class="carousel-item bg-[#F4F6F8] p-10 rounded-2xl border border-[#DCE3EA] hover:border-[#2D6CDF] hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
                     <div
-                        class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-8 shadow-sm group-hover:bg-[#1E3A5F] group-hover:text-white transition-all">
+                        class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-8 shadow-sm border border-transparent group-hover:bg-blue-50 group-hover:border-blue-100 group-hover:text-[#2D6CDF] transition-all duration-300">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
@@ -281,9 +281,9 @@
 
                 <!-- Feature 2 -->
                 <div
-                    class="carousel-item bg-[#F4F6F8] p-10 rounded-2xl border border-[#DCE3EA] hover:border-[#1E3A5F] transition-all group">
+                    class="carousel-item bg-[#F4F6F8] p-10 rounded-2xl border border-[#DCE3EA] hover:border-[#2D6CDF] hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
                     <div
-                        class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-8 shadow-sm group-hover:bg-[#1E3A5F] group-hover:text-white transition-all">
+                        class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-8 shadow-sm border border-transparent group-hover:bg-blue-50 group-hover:border-blue-100 group-hover:text-[#2D6CDF] transition-all duration-300">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -296,9 +296,9 @@
 
                 <!-- Feature 3 -->
                 <div
-                    class="carousel-item bg-[#F4F6F8] p-10 rounded-2xl border border-[#DCE3EA] hover:border-[#1E3A5F] transition-all group">
+                    class="carousel-item bg-[#F4F6F8] p-10 rounded-2xl border border-[#DCE3EA] hover:border-[#2D6CDF] hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
                     <div
-                        class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-8 shadow-sm group-hover:bg-[#1E3A5F] group-hover:text-white transition-all">
+                        class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-8 shadow-sm border border-transparent group-hover:bg-blue-50 group-hover:border-blue-100 group-hover:text-[#2D6CDF] transition-all duration-300">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
@@ -311,9 +311,9 @@
 
                 <!-- Feature 4 -->
                 <div
-                    class="carousel-item bg-[#F4F6F8] p-10 rounded-2xl border border-[#DCE3EA] hover:border-[#1E3A5F] transition-all group">
+                    class="carousel-item bg-[#F4F6F8] p-10 rounded-2xl border border-[#DCE3EA] hover:border-[#2D6CDF] hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
                     <div
-                        class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-8 shadow-sm group-hover:bg-[#1E3A5F] group-hover:text-white transition-all">
+                        class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-8 shadow-sm border border-transparent group-hover:bg-blue-50 group-hover:border-blue-100 group-hover:text-[#2D6CDF] transition-all duration-300">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />

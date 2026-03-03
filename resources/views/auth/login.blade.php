@@ -174,12 +174,6 @@
             </div>
         </div>
 
-        <!-- Theme Toggle -->
-        <button
-            class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-white dark:bg-slate-800 shadow-xl border border-slate-100 dark:border-slate-700 flex items-center justify-center text-slate-400 dark:text-yellow-400 hover:scale-110 active:scale-95 transition-all duration-300 z-50 hover:text-[#1E3A8A] dark:hover:text-yellow-300"
-            onclick="document.documentElement.classList.toggle('dark')">
-            <span class="material-icons-round dark:hidden text-2xl">dark_mode</span>
-            <span class="material-icons-round hidden dark:block text-2xl">light_mode</span>
-        </button>
+
     </div>
 </x-guest-layout>

@@ -95,7 +95,7 @@
                                         </p>
                                     </div>
                                     <a href="{{ route('instructor.incidents.show', $incident->id) }}"
-                                        class="ml-4 px-3 py-1.5 bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-medium rounded-lg transition">
+                                        class="ml-4 px-3 py-1.5 bg-[#1A202C] hover:bg-[#2D3748] text-white text-sm font-medium rounded-lg transition">
                                         Ver
                                     </a>
                                 </div>
@@ -153,7 +153,7 @@
                                         </div>
                                     </div>
                                     <a href="{{ route('instructor.incidents.show', $incident->id) }}"
-                                        class="ml-4 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition">
+                                        class="ml-4 px-3 py-1.5 bg-[#1A202C] hover:bg-[#2D3748] text-white text-sm font-medium rounded-lg transition">
                                         Ver
                                     </a>
                                 </div>
@@ -172,17 +172,15 @@
                 <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-white mb-4">Acceso Rápido</h3>
                 <div class="flex flex-wrap gap-4">
                     <a href="{{ route('instructor.incidents.create') }}"
-                        class="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
-                        <svg class="w-5 h-5 !text-white dark:!text-gray-900" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
+                        class="inline-flex items-center gap-2 px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold rounded-xl transition-all shadow-sm focus:ring-2 focus:ring-slate-200">
+                        <svg class="w-5 h-5 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                         </svg>
                         Reportar Nueva Falla
                     </a>
                     <a href="{{ route('instructor.incidents.index') }}"
-                        class="inline-flex items-center gap-2 px-6 py-3 bg-slate-800 hover:bg-slate-900 dark:bg-gray-700 dark:hover:bg-gray-600 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
-                        <svg class="w-5 h-5 !text-white dark:!text-gray-900" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
+                        class="inline-flex items-center gap-2 px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold rounded-xl transition-all shadow-sm focus:ring-2 focus:ring-slate-200">
+                        <svg class="w-5 h-5 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>

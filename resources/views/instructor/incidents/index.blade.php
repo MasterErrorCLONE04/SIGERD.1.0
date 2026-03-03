@@ -73,11 +73,10 @@
                         <div class="flex gap-3">
                             <button type="submit"
                                 class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white
-                                           bg-[#1A202C] hover:bg-[#2D3748] dark:bg-white dark:hover:bg-gray-100 dark:text-gray-900
+                                           bg-[#1A202C] hover:bg-[#2D3748] text-white font-medium
                                            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-200
-                                           dark:focus:ring-offset-gray-800 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
-                                <svg class="w-5 h-5 !text-white dark:!text-gray-900" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                           dark:focus:ring-offset-[#18191A] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                 </svg>
@@ -85,10 +84,10 @@
                             </button>
                             @if(request()->anyFilled(['search', 'status']))
                                 <a href="{{ route('instructor.incidents.index') }}"
-                                    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-gray-700 dark:text-gray-200
-                                                  bg-gray-100 hover:bg-gray-200 dark:bg-[#3A3B3C] dark:hover:bg-gray-600
-                                                  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500
-                                                  dark:focus:ring-offset-gray-800 shadow-sm hover:shadow-md transition-all">
+                                    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium
+                                                          bg-[#1A202C] hover:bg-[#2D3748]
+                                                          focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500
+                                                          dark:focus:ring-offset-gray-800 shadow-sm hover:shadow-md transition-all">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -110,8 +109,8 @@
                             </div>
                             <a href="{{ route('instructor.incidents.create') }}"
                                 class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium
-                                      bg-[#4F46E5] hover:bg-[#4338CA]
-                                      focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4F46E5]
+                                      bg-[#1A202C] hover:bg-[#2D3748] text-white
+                                      focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-200
                                       dark:focus:ring-offset-[#18191A] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -203,7 +202,7 @@
                                         <div
                                             class="flex items-center justify-end gap-1.5 opacity-80 group-hover:opacity-100 transition-opacity">
                                             <a href="{{ route('instructor.incidents.show', $incident->id) }}"
-                                                class="inline-flex items-center gap-1.5 px-4 py-2 bg-slate-100 dark:bg-[#3A3B3C] hover:bg-slate-200/80 text-slate-600 dark:text-gray-300 hover:text-slate-800 dark:text-gray-100 text-[0.8rem] font-semibold rounded-lg transition-colors"
+                                                class="inline-flex items-center gap-1.5 px-4 py-2 bg-[#1A202C] hover:bg-[#2D3748] text-white text-[0.8rem] font-semibold rounded-lg transition-colors shadow-sm focus:ring-2 focus:ring-slate-200"
                                                 title="Ver detalle">
                                                 <svg class="w-[1.1rem] h-[1.1rem]" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24">
@@ -233,7 +232,7 @@
                                                 <p class="text-gray-600 dark:text-gray-300 dark:text-gray-400 mb-4">No hay
                                                     reportes que coincidan con los filtros aplicados.</p>
                                                 <a href="{{ route('instructor.incidents.index') }}"
-                                                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-white font-medium bg-[#1A202C] hover:bg-[#2D3748] dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100 transition-all shadow-sm focus:ring-2 focus:ring-slate-200">
+                                                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-white font-medium bg-[#1A202C] hover:bg-[#2D3748] transition-all shadow-sm focus:ring-2 focus:ring-slate-200">
                                                     <svg class="w-5 h-5 !text-white dark:!text-gray-900" fill="none"
                                                         stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -247,7 +246,7 @@
                                                 <p class="text-gray-500 dark:text-[#B0B3B8] mb-6">Comienza reportando una nueva
                                                     falla.</p>
                                                 <a href="{{ route('instructor.incidents.create') }}"
-                                                    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-white bg-[#1A202C] hover:bg-[#2D3748] dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100 shadow-sm transition-all focus:ring-2 focus:ring-slate-200">
+                                                    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-white bg-[#1A202C] hover:bg-[#2D3748] shadow-sm transition-all focus:ring-2 focus:ring-slate-200">
                                                     <svg class="w-5 h-5 !text-white dark:!text-gray-900" fill="none"
                                                         stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
