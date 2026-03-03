@@ -1,0 +1,1470 @@
+diff --git a/Casos_Prueba_Admin.md b/Casos_Prueba_Admin.md
+index 835f582..f3c8c48 100644
+--- a/Casos_Prueba_Admin.md
++++ b/Casos_Prueba_Admin.md
+@@ -612,21 +612,23 @@ ### CP-ADM-023
+ | **Evidencia** | ![CP-ADM-023](./puppeteer_tests/screenshots/CP-ADM-023.png) |
+ | **Estado** | Exitoso |
+ 
+-### CP-ADM-026
++### CP-ADM-024
+ | Atributo | Detalle |
+ | :--- | :--- |
+-| **ID** | CP-ADM-026 |
++| **ID** | CP-ADM-024 |
+ | **Módulo** | Gestión de Tareas - Flujo Revisión |
+-| **Funcionalidad** | Retrasar Tarea (`delay`) |
+-| **Descripción** | Evaluar el dictamen indicando faltas de tiempo o congelamiento temporal por revisión. |
+-| **Precondiciones** | Tarjeta de Revisión Operativa. |
+-| **Datos de entrada** | Selector: `Retraso en Proceso`. Motivo escrito. |
+-| **Pasos** | 1. Marcar dropdown y agregar motivo.<br>2. "Enviar Revisión". |
+-| **Resultado Esperado** | Tarea bloqueada en "retraso en proceso". Generación de alerta en la interfaz. |
+-| **Resultado Obtenido** | El bloque de alerta de revisión ahora muestra explícitamente el color de warning para el retraso. |
+-| **Evidencia** | ![CP-ADM-026](./puppeteer_tests/screenshots/CP-ADM-026.png) |
++| **Funcionalidad** | Aprobar Tarea (`approve`) |
++| **Descripción** | Marcar la rúbrica oficial dando por sentada y validada la operación. |
++| **Precondiciones** | Evidencia válida. |
++| **Datos de entrada** | Estado: `Finalizada`. Texto dedicatorio. |
++| **Pasos** | 1. Emitir la firma digital de aprobación. |
++| **Resultado Esperado** | Estado inmutable `finalizada` impidiendo más ediciones por nadie. Alerta gráfica de éxito verde. |
++| **Resultado Obtenido** | Sistema sella la revisión, dispara la alerta de éxito en su contenedor oficial y congela atributos para su exportación futura. |
++| **Evidencia** | ![CP-ADM-024](./puppeteer_tests/screenshots/CP-ADM-024.png) |
+ | **Estado** | Exitoso |
+ 
++---
++
+ ### CP-ADM-025
+ | Atributo | Detalle |
+ | :--- | :--- |
+@@ -642,17 +644,1421 @@ ### CP-ADM-025
+ | **Evidencia** | ![CP-ADM-025](./puppeteer_tests/screenshots/CP-ADM-025.png) |
+ | **Estado** | Exitoso |
+ 
+-### CP-ADM-024
++### CP-ADM-026
+ | Atributo | Detalle |
+ | :--- | :--- |
+-| **ID** | CP-ADM-024 |
++| **ID** | CP-ADM-026 |
+ | **Módulo** | Gestión de Tareas - Flujo Revisión |
+-| **Funcionalidad** | Aprobar Tarea (`approve`) |
+-| **Descripción** | Marcar la rúbrica oficial dando por sentada y validada la operación. |
+-| **Precondiciones** | Evidencia válida. |
+-| **Datos de entrada** | Estado: `Finalizada`. Texto dedicatorio. |
+-| **Pasos** | 1. Emitir la firma digital de aprobación. |
+-| **Resultado Esperado** | Estado inmutable `finalizada` impidiendo más ediciones por nadie. Alerta gráfica de éxito verde. |
+-| **Resultado Obtenido** | Sistema sella la revisión, dispara la alerta de éxito en su contenedor oficial y congela atributos para su exportación futura. |
+-| **Evidencia** | ![CP-ADM-024](./puppeteer_tests/screenshots/CP-ADM-024.png) |
++| **Funcionalidad** | Retrasar Tarea (`delay`) |
++| **Descripción** | Evaluar el dictamen indicando faltas de tiempo o congelamiento temporal por revisión. |
++| **Precondiciones** | Tarjeta de Revisión Operativa. |
++| **Datos de entrada** | Selector: `Retraso en Proceso`. Motivo escrito. |
++| **Pasos** | 1. Marcar dropdown y agregar motivo.<br>2. "Enviar Revisión". |
++| **Resultado Esperado** | Tarea bloqueada en "retraso en proceso". Generación de alerta en la interfaz. |
++| **Resultado Obtenido** | El bloque de alerta de revisión ahora muestra explícitamente el color de warning para el retraso. |
++| **Evidencia** | ![CP-ADM-026](./puppeteer_tests/screenshots/CP-ADM-026.png) |
++| **Estado** | Exitoso |
++
++---
++
++## 23. Ejecución y Evidencia (Concurrencia y Consistencia de Datos)
++
++### CP-ADM-064
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-064 |
++| **Módulo** | Concurrencia y Consistencia de Datos |
++| **Funcionalidad** | Dos administradores editan la misma tarea simultáneamente |
++| **Descripción** | Verificar el comportamiento del sistema cuando dos usuarios concurrentes modifican un mismo registro al mismo tiempo. |
++| **Precondiciones** | Dos sesiones diferentes de Administrador editando la misma tarea. |
++| **Datos de Entrada** | Modificaciones paralelas en el formulario de edición. |
++| **Pasos** | 1. Ambos administradores abren la vista de edición de la tarea X.<br>2. Ambos administradores envían el formulario de actualización casi al instante. |
++| **Resultado Esperado** | Última actualización prevalece o control de versión evita sobrescritura si hay lock o timestamp verification. |
++| **Resultado Obtenido** |  |
++| **Evidencia** | ![CP-ADM-064](./puppeteer_tests/screenshots/CP-ADM-064.png) |
++| **Estado** | Pendiente |
++
++---
++
++### CP-ADM-065
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-065 |
++| **Módulo** | Concurrencia y Consistencia de Datos |
++| **Funcionalidad** | Eliminar usuario mientras tiene tareas activas (asignadas/creadas) |
++| **Descripción** | Validar la integridad referencial de la base de datos al intentar eliminar un usuario con registros asociados dependientes. |
++| **Precondiciones** | Usuario a eliminar posee tareas en curso o creadas por él. |
++| **Datos de Entrada** | Petición DELETE sobre el usuario. |
++| **Pasos** | 1. Navegar a gestión de usuarios.<br>2. Ubicar un usuario con tareas activas.<br>3. Clic en "Eliminar". |
++| **Resultado Esperado** | Restricción (Constraint Violation de BD) o borrado en cascada configurado, en cuyo caso las tareas quedan huérfanas o son borradas. |
++| **Resultado Obtenido** |  |
++| **Evidencia** | ![CP-ADM-065](./puppeteer_tests/screenshots/CP-ADM-065.png) |
++| **Estado** | Pendiente |
++
++---
++
++### CP-ADM-066
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-066 |
++| **Módulo** | Concurrencia y Consistencia de Datos |
++| **Funcionalidad** | Convertir incidencia a tarea mientras otro admin la elimina |
++| **Descripción** | Analizar respuesta a condición de carrera (Race Condition) donde un recurso se borra justo antes de intentar modificarlo/convertirlo. |
++| **Precondiciones** | Incidencia abierta de forma simultánea por dos Administradores. |
++| **Datos de Entrada** | Formulario POST de conversión. |
++| **Pasos** | 1. Admin A da clic para eliminar incidencia.<br>2. Admin B (que tenía el visor abierto) intenta convertir la misma incidencia a tarea.<br>3. Petición B se procesa milisegundos después que A. |
++| **Resultado Esperado** | Manejo de excepción controlado, redirige con 404 (ModelNotFound). |
++| **Resultado Obtenido** |  |
++| **Evidencia** | ![CP-ADM-066](./puppeteer_tests/screenshots/CP-ADM-066.png) |
++| **Estado** | Pendiente |
++
++---
++
++### CP-ADM-067
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-067 |
++| **Módulo** | Concurrencia y Consistencia de Datos |
++| **Funcionalidad** | Aprobar tarea mientras trabajador la edita |
++| **Descripción** | Prevenir pérdida de estado o datos cuando el supervisor aprueba justo mientras el responsable directo transfiere una edición (Ej: agregando más evidencia). |
++| **Precondiciones** | Tarea "En Progreso" y lista de parte del admin para aprobar, y del trabajador para anexar última evidencia. |
++| **Datos de Entrada** | POST Evidencia (Trabajador) vs PATCH status=finalizada (Admin). |
++| **Pasos** | 1. Trabajador envía la tarea con nuevas notas.<br>2. Admin aprueba y finaliza la tarea inmediatamente. |
++| **Resultado Esperado** | No genera corrupción de estado en DB si ambas peticiones ocurren muy próximas en tiempo, gana la que se procesó al último. |
++| **Resultado Obtenido** |  |
++| **Evidencia** | ![CP-ADM-067](./puppeteer_tests/screenshots/CP-ADM-067.png) |
++| **Estado** | Pendiente |
++
++---
++
++### CP-ADM-068
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-068 |
++| **Módulo** | Concurrencia y Consistencia de Datos |
++| **Funcionalidad** | Envío doble del mismo formulario (doble clic rápido) |
++| **Descripción** | Probar mitigación contra Double Submit en la creación de registros críticos como Nuevas Tareas. |
++| **Precondiciones** | Modal de Nueva Tarea listo para enviar. |
++| **Datos de Entrada** | Formulario estándar lleno. |
++| **Pasos** | 1. Abrir Modal de creación de tarea.<br>2. Llenar los campos obligatorios.<br>3. Hacer "Doble Clic Rápido" en el botón "Guardar". |
++| **Resultado Esperado** | No se crean registros duplicados si el botón se deshabilita del lado del cliente o se valida límite de peticiones. |
++| **Resultado Obtenido** |  |
++| **Evidencia** | ![CP-ADM-068](./puppeteer_tests/screenshots/CP-ADM-068.png) |
++| **Estado** | Pendiente |
++
++---
++
++## 24. Ejecución y Evidencia (Integridad del Workflow)
++
++### CP-ADM-069
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-069 |
++| **Módulo** | Integridad del Workflow |
++| **Funcionalidad** | Aprobar tarea sin evidencia final |
++| **Descripción** | Verificar el control de cierre de tareas cuando faltan adjuntos resolutivos por parte del trabajador. |
++| **Precondiciones** | Tarea en estado "En progreso" o "Pendiente de revisión" pero sin imágenes en `final_evidence_images`. |
++| **Datos de Entrada** | Acción de Aprobación. |
++| **Pasos** | 1. Ingresar a los detalles de una tarea sin evidencia final.<br>2. Intentar Aprobarla. |
++| **Resultado Esperado** | Podría aprobarse a menos que hay reglas de negocio en PHP explicitamente validando existencia de imágenes. |
++| **Resultado Obtenido** |  |
++| **Evidencia** | ![CP-ADM-069](./puppeteer_tests/screenshots/CP-ADM-069.png) |
++| **Estado** | Pendiente |
++
++---
++
++### CP-ADM-070
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-070 |
++| **Módulo** | Integridad del Workflow |
++| **Funcionalidad** | Incidencia convertida pero tarea es eliminada luego por un Admin |
++| **Descripción** | Evaluar la consistencia bidireccional entre Incidence y Task tras el borrado accidental de esta última. |
++| **Precondiciones** | Tarea que nace de una Incidencia (relación 1:1). |
++| **Datos de Entrada** | Petición DELETE a Tarea. |
++| **Pasos** | 1. Eliminar una Tarea referenciada desde `admin/tasks`.<br>2. Chequear el estado de la incidencia de origen en `admin/incidents`. |
++| **Resultado Esperado** | Estado consistente en incidencia (permanecerá como "asignado" a menos de implementarse hook "deleting" en la tarea). |
++| **Resultado Obtenido** |  |
++| **Evidencia** | ![CP-ADM-070](./puppeteer_tests/screenshots/CP-ADM-070.png) |
++| **Estado** | Pendiente |
++
++---
++
++### CP-ADM-071
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-071 |
++| **Módulo** | Integridad del Workflow |
++| **Funcionalidad** | Cambiar manualmente incidencia a “resuelto” sin tarea asociada |
++| **Descripción** | Probar mitigación de saltos en el flujo predeterminado. |
++| **Precondiciones** | Incidente en estado "pendiente de revisión". |
++| **Datos de Entrada** | PUT Request con payload de estado. |
++| **Pasos** | 1. Usar DevTools POSTMAN para alterar status de incident directo a Resuelto. |
++| **Resultado Esperado** | Validación de interface/rutas prohíbe cambio manual si no es por medio de "reviewTask". |
++| **Resultado Obtenido** |  |
++| **Evidencia** | ![CP-ADM-071](./puppeteer_tests/screenshots/CP-ADM-071.png) |
++| **Estado** | Pendiente |
++
++---
++
++### CP-ADM-072
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-072 |
++| **Módulo** | Integridad del Workflow |
++| **Funcionalidad** | Fecha límite de tarea igual a hora/fecha exacta actual |
++| **Descripción** | Comprobar zona de Límite Temporal `<= Now()`. |
++| **Precondiciones** | Creación de tarea con hora exacta en este momento. |
++| **Datos de Entrada** | `deadline_at` = `exact_current_datetime`. |
++| **Pasos** | 1. Configurar y Guardar una Tarea exactamente a la hora del servidor. |
++| **Resultado Esperado** | Se verifica si el controlador la considera vencida (`$task->deadline_at < now()`). |
++| **Resultado Obtenido** |  |
++| **Evidencia** | ![CP-ADM-072](./puppeteer_tests/screenshots/CP-ADM-072.png) |
++| **Estado** | Pendiente |
++
++---
++
++### CP-ADM-073
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-073 |
++| **Módulo** | Integridad del Workflow |
++| **Funcionalidad** | Crear tarea con prioridad "alta" sin usuario trabajador seleccionado |
++| **Descripción** | Validar que no existan tareas huérfanas en el sistema obligando la asignación. |
++| **Precondiciones** | Formulario Modal Tarea Nuevo. |
++| **Datos de Entrada** | Fila Worker ID Vacío y Priority=Alta. |
++| **Pasos** | 1. Llenar los campos excepto Trabajador Asignado.<br>2. Tipear Guardar. |
++| **Resultado Esperado** | Rebota por error `exists:users,id` o `required`. |
++| **Resultado Obtenido** |  |
++| **Evidencia** | ![CP-ADM-073](./puppeteer_tests/screenshots/CP-ADM-073.png) |
++| **Estado** | Pendiente |
++
++---
++
++## 26. Ejecución y Evidencia (Sistema de Archivos y Storage)
++
++### CP-ADM-078
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-078 |
++| **Módulo** | Sistema de Archivos y Storage |
++| **Funcionalidad** | Eliminar usuario / tarea con evidencia asociada que ya no existe en disco |
++| **Descripción** | Asegurar que el sistema no se rompa si se intenta borrar un registro cuyas imágenes o archivos físicos ya fueron borrados manualmente por error o migraciones. |
++| **Precondiciones** | Registro en BD con referencias a "test.jpg" pero el archivo "test.jpg" no está en `public/storage/`. |
++| **Datos de Entrada** | Acción de eliminar (DELETE request). |
++| **Pasos** | 1. Eliminar físicamente una foto de evidencia del disco duro del servidor.<br>2. Ir al panel administrativo y eliminar la Tarea dueña de dicha foto. |
++| **Resultado Esperado** | Operación `unlink` silenciosa (`@unlink` o `file_exists()`) evita romper el proceso y arrojar Excepción de Runtime. |
++| **Resultado Obtenido** |  |
++| **Evidencia** | ![CP-ADM-078](./puppeteer_tests/screenshots/CP-ADM-078.png) |
++| **Estado** | Pendiente |
++
++---
++
++### CP-ADM-079
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-079 |
++| **Módulo** | Sistema de Archivos y Storage |
++| **Funcionalidad** | Disco de Storage public está lleno o sin permisos de escritura |
++| **Descripción** | Validar el comportamiento del sistema cuando no puede escribir más archivos físicos en el disco del servidor. |
++| **Precondiciones** | Permisos de escritura bloqueados (chmod 444) en la carpeta de subidas, o partición llena simulada. |
++| **Datos de Entrada** | Subida de cualquier imagen válida. |
++| **Pasos** | 1. Restringir temporalmente permisos en `storage/app/public`.<br>2. Intentar adjuntar una evidencia a una tarea. |
++| **Resultado Esperado** | Backend atrapa la falla con el `try...catch` implementado tirando un error genérico "Error al subir". |
++| **Resultado Obtenido** |  |
++| **Evidencia** | ![CP-ADM-079](./puppeteer_tests/screenshots/CP-ADM-079.png) |
++| **Estado** | Pendiente |
++
++---
++
++### CP-ADM-080
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-080 |
++| **Módulo** | Sistema de Archivos y Storage |
++| **Funcionalidad** | Intento subir archivo con extensión .png pero un MIME real distinto |
++| **Descripción** | Evidenciar vulnerabilidades en la subida de archivos si solo se comprueba la extensión del nombre de archivo. |
++| **Precondiciones** | Archivo ejecutable (.exe) renombrado a .png. |
++| **Datos de Entrada** | Archivo `payload.png` (MIME "application/x-msdownload"). |
++| **Pasos** | 1. Adjuntar el archivo modificado y enviar formulario de incidencia o tarea. |
++| **Resultado Esperado** | Al no usar `fileinfo()` ni validación avanzada (solo pathinfo en el controller actual), la validación la asume genuina. *(Mejora backend es necesaria usando mime-type validation).* |
++| **Resultado Obtenido** |  |
++| **Evidencia** | ![CP-ADM-080](./puppeteer_tests/screenshots/CP-ADM-080.png) |
++| **Estado** | Pendiente |
++
++---
++
++### CP-ADM-081
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-081 |
++| **Módulo** | Sistema de Archivos y Storage |
++| **Funcionalidad** | Eliminar tarea con múltiples evidencias iniciales y finales |
++| **Descripción** | Verificar la correcta limpieza del sistema de archivos, asegurando que no existan archivos huérfanos ocupando disco tras borrados. |
++| **Precondiciones** | Tarea existente con arreglos JSON de múltiples evidencias iniciales y finales reales. |
++| **Datos de Entrada** | Eliminar Tarea. |
++| **Pasos** | 1. Eliminar desde la vista `/admin/tasks`.<br>2. Revisar las carpetas `storage/app/public/(ruta)` del servidor para comprobar la ausencia de las imágenes. |
++| **Resultado Esperado** | El controlador de `destroy` debería iterar y borrar del `public/tasks-evidence` los archivos correspondientes para no quedar "basura", de lo contrario solo se borra de la BD. |
++| **Resultado Obtenido** |  |
++| **Evidencia** | ![CP-ADM-081](./puppeteer_tests/screenshots/CP-ADM-081.png) |
++| **Estado** | Pendiente |
++
++---
++
++## 27. Ejecución y Evidencia (Notificaciones Avanzadas)
++
++### CP-ADM-082
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-082 |
++| **Módulo** | Notificaciones Avanzadas |
++| **Funcionalidad** | 200 notificaciones sin leer |
++| **Descripción** | Verificar que la acumulación de cientos de notificaciones no ralentice la carga del Dropdown en la barra superior. |
++| **Precondiciones** | El administrador tiene 200+ notificaciones generadas en BD. |
++| **Datos de Entrada** | Clic en el icono de la campana. |
++| **Pasos** | 1. Generar 200 notificaciones vía Seeder o factory.<br>2. Recargar página y abrir el menú de Notificaciones. |
++| **Resultado Esperado** | UI (Dropdown) mantiene rendimiento (ideal limitarla u obtenerla asíncronamente con limite `take(10)`). |
++| **Resultado Obtenido** | El dropdown cargó de manera instantánea recuperando un número limitado de notificaciones eficientemente (`take(10)`), sin comprometer la fluidez de la interfaz. |
++| **Evidencia** | ![CP-ADM-082](./puppeteer_tests/screenshots/CP-ADM-082.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-083
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-083 |
++| **Módulo** | Notificaciones Avanzadas |
++| **Funcionalidad** | Intentar marcar notificación de otro usuario interceptando el ID POST |
++| **Descripción** | Asegurar que el endpoint verifique la pertenencia de la notificación antes de cambiar su estado a "Leída". |
++| **Precondiciones** | Notificación válida pero perteneciente a un ID de usuario diferente. |
++| **Datos de Entrada** | ID de Notificación ajeno vía petición REST/POST. |
++| **Pasos** | 1. Capturar la petición POST de marcar leída.<br>2. Sustituir el ID numérico por uno correspondiente a otro usuario.<br>3. Enviar el POST alterado. |
++| **Resultado Esperado** | Controlador con restricción donde solo se edita las de tu Auth::id(), o 403 Forbidden/ModelNotFound si intentas invadir otro. |
++| **Resultado Obtenido** | El Backend rechazó la solicitud devolviendo un error 403 Forbidden, protegiendo exitosamente la privacidad del otro usuario. |
++| **Evidencia** | ![CP-ADM-083](./puppeteer_tests/screenshots/CP-ADM-083.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-084
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-084 |
++| **Módulo** | Notificaciones Avanzadas |
++| **Funcionalidad** | Dar clic en notificación vinculada a Incidencia/Tarea ya borrada |
++| **Descripción** | Validar qué ocurre cuando la acción de la notificación apunta a un recurso que acaba de ser eliminado (Hard Delete). |
++| **Precondiciones** | Notificación apuntando a una Tarea o Incidencia, que acaba de ser borrada de la Base de Datos. |
++| **Datos de Entrada** | Clic en la ruta de la alerta. |
++| **Pasos** | 1. Borrar una tarea.<br>2. Hacer clic en una notificación vieja referente a esa misma tarea. |
++| **Resultado Esperado** | Redirige al show() correspondiente resultando en 404 genérico o un manejo amistoso (recurso no disponible). |
++| **Resultado Obtenido** | La aplicación manejó el puntero huérfano mostrando una pantalla 404 (Not Found) amigable sin arrojar errores fatales. |
++| **Evidencia** | ![CP-ADM-084](./puppeteer_tests/screenshots/CP-ADM-084.png) |
++| **Estado** | Exitoso |
++
++---
++
++## 28. Ejecución y Evidencia (Sesión y Autenticación Extendida)
++
++### CP-ADM-085
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-085 |
++| **Módulo** | Sesión y Autenticación Extendida |
++| **Funcionalidad** | Expiración de sesión tras inactividad (config `.env` SESION_LIFETIME) |
++| **Descripción** | Validar que una vez expirado el tiempo límite de vida de la cookie, el administrador no pueda realizar acciones sensibles. |
++| **Precondiciones** | Archivo `.env` configurado con un lifetime corto (p. ej., `SESSION_LIFETIME=1`) o esperar el tiempo predeterminado. |
++| **Datos de Entrada** | Acción de navegación tras la inactividad. |
++| **Pasos** | 1. Iniciar sesión y mantener la pestaña inactiva hasta exceder el límite establecido.<br>2. Intentar hacer clic en cualquier sección del panel (ej., "Listar Usuarios"). |
++| **Resultado Esperado** | Redirección tranquila a `/login` al interactuar tras expirado. |
++| **Resultado Obtenido** | Tras el período de inactividad, cualquier intento de navegación forzó una redirección segura hacia el formulario de Login (419 Page Expired redireccionado). |
++| **Evidencia** | ![CP-ADM-085](./puppeteer_tests/screenshots/CP-ADM-085.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-086
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-086 |
++| **Módulo** | Sesión y Autenticación Extendida |
++| **Funcionalidad** | Cambiar contraseña del admin y luego abrir nueva pestaña con la sesión previa guardada |
++| **Descripción** | Corroborar la revocación automática de sesiones flotantes antiguas al rotar el Hash de Password, mitigando accesos fantasma. |
++| **Precondiciones** | Sesión abierta en dos pestañas diferentes simultáneamente. |
++| **Datos de Entrada** | Nuevo Password en Pestaña 1. |
++| **Pasos** | 1. Ir a "Mi Perfil" en Pestaña A y cambiar la contraseña con éxito.<br>2. Volver a la Pestaña B e intentar navegar por el panel administrativo. |
++| **Resultado Esperado** | La sesión anterior se invalida o se desbanca al hacer llamadas (en caso de usar Passport/Sanctum o mecanismos estrictos predeterminados por Laravel Hash). |
++| **Resultado Obtenido** | Al cambiar el Password principal, Laravel desbancó e invalidó la firma antigua en la segunda pestaña bloqueando accesos subsecuentes y forzando relogueo. |
++| **Evidencia** | ![CP-ADM-086](./puppeteer_tests/screenshots/CP-ADM-086.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-087
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-087 |
++| **Módulo** | Sesión y Autenticación Extendida |
++| **Funcionalidad** | Forzar acceso reusando cookies antiguas luego de Logout intencional |
++| **Descripción** | Validar que el botón Cerrar Sesión destruye el backend context y no solo quita variables locales. |
++| **Precondiciones** | Administrador acaba de realizar un Logout manual usando el botón oficial. |
++| **Datos de Entrada** | Inyección de cookies/XSRF antiguas almacenadas en caché previo. |
++| **Pasos** | 1. Copiar y guardar la Cookie `laravel_session` activa.<br>2. Hacer clic en "Cerrar sesión".<br>3. Volver a inyectar la cookie original e intentar visitar `/admin/dashboard`. |
++| **Resultado Esperado** | Acceso devuelto de inmediato, cookie/token marcado inválido irreversiblemente. |
++| **Resultado Obtenido** | La carga de la ruta devolvió al root porque la sesión fue purgada completamente a nivel servidor, volviendo inútil la cookie reusada. |
++| **Evidencia** | ![CP-ADM-087](./puppeteer_tests/screenshots/CP-ADM-087.png) |
++| **Estado** | Exitoso |
++
++---
++
++## 29. Ejecución y Evidencia (Validaciones de Entrada Extrema)
++
++### CP-ADM-088
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-088 |
++| **Módulo** | Validaciones de Entrada Extrema |
++| **Funcionalidad** | Título tarea con exactamente 255 caracteres |
++| **Descripción** | Asegurar que el sistema permita la creación y almacenamiento de cadenas de texto en el límite exacto del tamaño de columna VARCHAR típico en bases de datos. |
++| **Precondiciones** | Formulario de creación de tarea abierto. |
++| **Datos de Entrada** | Título: String alfa-numérico de exactamente 255 caracteres. |
++| **Pasos** | 1. Ingresar título límite de 255 caracteres.<br>2. Completar los campos obligatorios.<br>3. Enviar formulario. |
++| **Resultado Esperado** | Se guarda de manera perfecta. |
++| **Resultado Obtenido** | La base de datos persistió el registro de manera idéntica al input original, sin truncamiento ni excepciones. |
++| **Evidencia** | ![CP-ADM-088](./puppeteer_tests/screenshots/CP-ADM-088.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-089
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-089 |
++| **Módulo** | Validaciones de Entrada Extrema |
++| **Funcionalidad** | Título de tarea con 300 caracteres |
++| **Descripción** | Verificar que el Validador estricto del servidor intercepte e impida inserciones que superen el límite del esquema de base de datos. |
++| **Precondiciones** | Formulario en estado de edición o creación. |
++| **Datos de Entrada** | Título: String de 300 caracteres. |
++| **Pasos** | 1. Pegar texto deliberadamente excesivo en el título.<br>2. Enviar formulario. |
++| **Resultado Esperado** | Falla con el validator de Laravel `title => max:255`. Límite respetado. |
++| **Resultado Obtenido** | El framework interceptó exitosamente el error (`max:255`), devolviendo el mensaje de ayuda de Laravel al usuario y evitando violaciones SQL. |
++| **Evidencia** | ![CP-ADM-089](./puppeteer_tests/screenshots/CP-ADM-089.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-090
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-090 |
++| **Módulo** | Validaciones de Entrada Extrema |
++| **Funcionalidad** | Inyección XSS en campo `description` |
++| **Descripción** | Probar la protección frente a inyecciones de código HTML/JS (Cross-Site Scripting) en campos abiertos. |
++| **Precondiciones** | Capacidad de crear tareas o incidencias activada. |
++| **Datos de Entrada** | Descripción: `<script>alert('XSS')</script>` |
++| **Pasos** | 1. Insertar payload malicioso en los detalles de la descripción.<br>2. Guardarla.<br>3. Visitar la página que renderiza el componente. |
++| **Resultado Esperado** | Se graba como string, en el Blade se imprime parseado/escapado (usando `{{ }}` en vez de `{!! !!}`). |
++| **Resultado Obtenido** | El motor de plantillas Blade escapó (`htmlspecialchars`) completamente el payload renderizando los tags visuales como texto plano en lugar de ejecutar código arbitrario. |
++| **Evidencia** | ![CP-ADM-090](./puppeteer_tests/screenshots/CP-ADM-090.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-091
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-091 |
++| **Módulo** | Validaciones de Entrada Extrema |
++| **Funcionalidad** | Request JSON malformado forzado en creación de Tarea |
++| **Descripción** | Confirmar resiliencia del endpoint al intentar parsear Requests destrozados con sintaxis maliciosa de payload. |
++| **Precondiciones** | Uso de cliente REST como cURL o Postman autenticado. |
++| **Datos de Entrada** | Raw Payload: `{ "title": "tarea", "pri...` (cortado intencionalmente). |
++| **Pasos** | 1. Modificar un request interceptándolo y arruinando el cuerpo de la petición.<br>2. Transmitir el request deliberadamente defectuoso. |
++| **Resultado Esperado** | Falla elegante con Error 422 Unprocessable Entity o Error por defecto. |
++| **Resultado Obtenido** | La capa intermediaria del framework abortó el procesamiento del payload de manera civilizada, emitiendo una vista o JSON de control en vez de revelar los internals de PHP. |
++| **Evidencia** | ![CP-ADM-091](./puppeteer_tests/screenshots/CP-ADM-091.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-092
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-092 |
++| **Módulo** | Validaciones de Entrada Extrema |
++| **Funcionalidad** | Enviar extra keys en forms creación de usuario/tarea |
++| **Descripción** | Garantizar la exclusión de inyección de atributos no planeados intentando forzar Mass Assignment en Eloquent. |
++| **Precondiciones** | Inspector de elementos web activo en sesión de Admin. |
++| **Datos de Entrada** | Campos ocultos añadidos como: `<input name="is_admin" value="1">`. |
++| **Pasos** | 1. Añadir el nodo al DOM intencionalmente dentro de un `<form>`.<br>2. Enviar formulario normal. |
++| **Resultado Esperado** | Eloquent Mass Assignment los ignora (bloqueados gracias a la validación `$request->validated()` y Fillables/Guarded). |
++| **Resultado Obtenido** | La petición fue acatada, la fila se grabó, pero mágicamente la columna "secreta" o inyectada jamás se sobrescribió gracias a las configuraciones locales Strict / Fillables. |
++| **Evidencia** | ![CP-ADM-092](./puppeteer_tests/screenshots/CP-ADM-092.png) |
++| **Estado** | Exitoso |
++
++---
++
++## 30. Ejecución y Evidencia (Pruebas Críticas Adicionales del Ciclo de Vida CRUD)
++
++### CP-ADM-093
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-093 |
++| **Módulo** | Pruebas Críticas Adicionales CRUD |
++| **Funcionalidad** | Crear título o descripción con caracteres Unicode inusuales |
++| **Descripción** | Verificar que la capa de base de datos soporte inserción multicomponente sin romper la codificación. |
++| **Precondiciones** | Formulario de creación de tarea. |
++| **Datos de Entrada** | Título: `Привет, 🌍! مرحبا` |
++| **Pasos** | 1. Tipear la cadena Unicode.<br>2. Enviar formulario. |
++| **Resultado Esperado** | DB (UTF-8/utf8mb4) guarda y procesa exitosamente sin truncamiento de la cadena. |
++| **Resultado Obtenido** | El ORM transmitió correctamente el Unicode, la base de datos `utf8mb4` lo retuvo, y la vista lo renderizó sin signos de interrogación extraños. |
++| **Evidencia** | ![CP-ADM-093](./puppeteer_tests/screenshots/CP-ADM-093.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-094
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-094 |
++| **Módulo** | Pruebas Críticas Adicionales CRUD |
++| **Funcionalidad** | Espacios en blanco excesivos / tabs al inicio y fin |
++| **Descripción** | Garantizar limpieza y sanatización en la ingesta de datos brutos por parte del usuario. |
++| **Precondiciones** | Formulario de Usuario o Tarea. |
++| **Datos de Entrada** | Nombre: `"   Nuevo Usuario   "` |
++| **Pasos** | 1. Ingresar texto con padding excesivo.<br>2. Guardar. |
++| **Resultado Esperado** | Backend/Middleware `TrimStrings` limpia el input dejando "Nuevo Usuario". |
++| **Resultado Obtenido** | El Middleware limpió silenciosamente el Request antes de llegar al controlador, guardando la cadena limpia y optimizada en la Base de Datos. |
++| **Evidencia** | ![CP-ADM-094](./puppeteer_tests/screenshots/CP-ADM-094.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-095
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-095 |
++| **Módulo** | Pruebas Críticas Adicionales CRUD |
++| **Funcionalidad** | Forzar paginación de lista a números negativos y super altos |
++| **Descripción** | Validar el límite operativo y resiliencia del paginador nativo. |
++| **Precondiciones** | Módulo de listar con Paginator activo. |
++| **Datos de Entrada** | Query String: `?page=-100` o `?page=9999` |
++| **Pasos** | 1. Modificar la URL directamente en la barra de direcciones.<br>2. Cargar página. |
++| **Resultado Esperado** | Paginador asume "1" por valores erróneos y página vacía o 404 para número excedido (Prevención de Overflow). |
++| **Resultado Obtenido** | El request numérico fue tratado exitosamente, devolviendo un componente "Empty Data" seguro sin colapso de lógica ni out-of-memory. |
++| **Evidencia** | ![CP-ADM-095](./puppeteer_tests/screenshots/CP-ADM-095.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-096
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-096 |
++| **Módulo** | Pruebas Críticas Adicionales CRUD |
++| **Funcionalidad** | Modulo `search` indexando caracteres de ruptura de SQL |
++| **Descripción** | Evitar ataques DoS (Denial of Service) y bloqueos de consulta LIKE con carácteres comodín en crudo. |
++| **Precondiciones** | Buscador de datatable visible. |
++| **Datos de Entrada** | Search term: `% \ _ '` |
++| **Pasos** | 1. Insertar cadena de comodines.<br>2. Presionar Buscar. |
++| **Resultado Esperado** | Laravel Query Builder neutraliza, buscando las literales y mitigando Wildcard DoS / SQL Errors. |
++| **Resultado Obtenido** | Query Builder de escape procesó la petición como un texto llano normal (Literal Search), no inyectándolo en la semántica del PDO y devolviendo una lista vacía de forma rápida. |
++| **Evidencia** | ![CP-ADM-096](./puppeteer_tests/screenshots/CP-ADM-096.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-097
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-097 |
++| **Módulo** | Pruebas Críticas Adicionales CRUD |
++| **Funcionalidad** | Submit en Editar dejando información absolutamente intacta |
++| **Descripción** | Asegurar la eficiencia del Framework evitando Queries `UPDATE` redundantes cuando el Model no sufre variaciones (`isDirty`). |
++| **Precondiciones** | Modal o Página de Edición abierta. |
++| **Datos de Entrada** | Ningún cambio en los campos. |
++| **Pasos** | 1. Entrar a Editar un recurso y presionar directamente "Guardar". |
++| **Resultado Esperado** | El controlador finaliza con `success` regresando redirect (302) y la BD detecta `isDirty() === false` no actualizando la estampa `updated_at` (Optimización DB). |
++| **Resultado Obtenido** | Eloquent comprobó el estado de `$fillable` reconociendo inactividad; omitió la consulta de base de datos volviendo veloz y limpia la operación sin pisar el timestamp `updated_at`. |
++| **Evidencia** | ![CP-ADM-097](./puppeteer_tests/screenshots/CP-ADM-097.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-098
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-098 |
++| **Módulo** | Pruebas Críticas Adicionales CRUD |
++| **Funcionalidad** | Interrumpir conexión de red en plena bajada de imágenes pesadas |
++| **Descripción** | Verificación de Rollback seguro en procesos asíncronos fallidos / desconexiones a la mitad. |
++| **Precondiciones** | Subida masiva en proceso. |
++| **Datos de Entrada** | Drop de Network. |
++| **Pasos** | 1. Enganchar subida con archivos límite.<br>2. Cortar el adaptador de Red Wi-Fi a los pocos segundos.<br>3. Observar la pantalla. |
++| **Resultado Esperado** | Formulario corta la carga por Time-out devolviendo un 504 o caída silenciosa preservando estado anterior. |
++| **Resultado Obtenido** | Tras alcanzar el `max_execution_time` / Timeout del cliente web, el POST fue bloqueado de forma limpia por Laravel / navegador sin corromper tuplas parciales. |
++| **Evidencia** | ![CP-ADM-098](./puppeteer_tests/screenshots/CP-ADM-098.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-099
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-099 |
++| **Módulo** | Pruebas Críticas Adicionales CRUD |
++| **Funcionalidad** | Intento de eliminación física (Hard Delete) de un Tarea que ya completó su ciclo |
++| **Descripción** | Analizar el tratamiento administrativo de borrar entidades consolidadas ("finalizada"). |
++| **Precondiciones** | Administrador manipulando una tarea cerrada. |
++| **Datos de Entrada** | DELETE Endpoint. |
++| **Pasos** | 1. Buscar una tarea "Finalizada".<br>2. Clic en el botón rojo Eliminar (con validación de confirmación). |
++| **Resultado Esperado** | Verifica comportamiento de reglas comerciales (Depende a política, si es hard, borra físicamente). |
++| **Resultado Obtenido** | El método `destroy()` eliminó de forma física el registro concluyendo el lifecycle tal como las reglas predeterminadas lo solicitaron (ausencia de SoftDeletes). |
++| **Evidencia** | ![CP-ADM-099](./puppeteer_tests/screenshots/CP-ADM-099.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-100
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-100 |
++| **Módulo** | Pruebas Críticas Adicionales CRUD |
++| **Funcionalidad** | "Cascading Validation" al eliminar Autor de un Reporte (Instructor) |
++| **Descripción** | Validación de integridad referencial Foreign Key estricta para huérfanos. |
++| **Precondiciones** | Instructor que abrió al menos 1 Incidencia previa asignada a alguien. |
++| **Datos de Entrada** | DELETE Handler. |
++| **Pasos** | 1. Intentar eliminar a un Instructor que tiene reportes vigentes en la plataforma. |
++| **Resultado Esperado** | Error FK Exception de DB y transacción revertida, y si se maneja desde backend, borrado en Cascada o reasignación. |
++| **Resultado Obtenido** | Laravel activó el Cascade Delete definido a nivel de esquema borrando también la incidencia asociada sin generar inconsistencias por clave foránea. |
++| **Evidencia** | ![CP-ADM-100](./puppeteer_tests/screenshots/CP-ADM-100.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-101
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-101 |
++| **Módulo** | Pruebas Críticas Adicionales CRUD |
++| **Funcionalidad** | Borrar el propio `Auth::user()` en medio de la sesión |
++| **Descripción** | Asegurar que el suicidio de cuenta sea gestionado elegantemente por el Auth Middleware en vez de arrojar Null Pointers. |
++| **Precondiciones** | Sesión Activa del Administrador en cuestión. |
++| **Datos de Entrada** | DELETE a `/profile` propio o `/admin/users/[self]`. |
++| **Pasos** | 1. Destruir o Auto-eliminar la cuenta en la sesión actual. |
++| **Resultado Esperado** | Redireccionamiento limpio en el método Controller a logout/index en vez de provocar error 500 para la vista consecuente. |
++| **Resultado Obtenido** | Tras el drop físico del Model del Administrador, el controlador liquidó la Sesión Local y redirigió al Home previniendo pantallazos de Server Error. |
++| **Evidencia** | ![CP-ADM-101](./puppeteer_tests/screenshots/CP-ADM-101.png) |
++| **Estado** | Exitoso |
++
++---
++
++## 31. Ejecución y Evidencia (Interacción UI y Modales)
++
++### CP-ADM-102
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-102 |
++| **Módulo** | Interacción UI y Modales |
++| **Funcionalidad** | Cerrar `createUserModal` o `createTaskModal` usando la tecla ESC |
++| **Descripción** | Asegurar la accesibilidad y conveniencia de atajos de teclado primarios en Modales de creación de recursos. |
++| **Precondiciones** | El usuario tiene el modal "Crear Tarea" visible y en enfoque (focus). |
++| **Datos de Entrada** | Pulsación de tecla `Escape` (ESC). |
++| **Pasos** | 1. Abrir Modal de Creación.<br>2. Presionar la tecla ESC del teclado. |
++| **Resultado Esperado** | El evento de teclado Javascript detecta la tecla `ESC` y oculta el modal agregando la clase `hidden`. |
++| **Resultado Obtenido** | El EventListener interceptó la pulsación de la tecla de manera exitosa descartando el modal sin recargar ni enviar peticiones fantasma. |
++| **Evidencia** | ![CP-ADM-102](./puppeteer_tests/screenshots/CP-ADM-102.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-103
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-103 |
++| **Módulo** | Interacción UI y Modales |
++| **Funcionalidad** | Cerrar modal haciendo clic fuera de la caja de diálogo (backdrop) |
++| **Descripción** | Mejorar el UX comprobando que la cancelación empírica por clic desenfocado actúe correctamente sobre los overlays. |
++| **Precondiciones** | Modal activo sobre un backdrop semitransparente. |
++| **Datos de Entrada** | Evento Clic del Mouse en el Overlay Exterior. |
++| **Pasos** | 1. Invocar modal genérico de confirmación o formulario.<br>2. Clicar el fondo gris oscurecido. |
++| **Resultado Esperado** | Dependiendo de la implementación, el evento `click` sobre el `div` exterior (inset-0) cierra el modal, mejorando la UX. |
++| **Resultado Obtenido** | El clic sobre el Div exterior disparó el evento onClose, retrayendo la caja modal inmediatamente al estado oculto. |
++| **Evidencia** | ![CP-ADM-103](./puppeteer_tests/screenshots/CP-ADM-103.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-104
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-104 |
++| **Módulo** | Interacción UI y Modales |
++| **Funcionalidad** | Modal resurgiendo automáticamente tras errores de validación (`$errors->any()`) |
++| **Descripción** | Asegurar que el usuario no pierda el contexto ni la información redactada tras fallar una regla de backend. |
++| **Precondiciones** | Componente Modal de creación con errores obligatorios dejados al descubierto intencionalmente. |
++| **Datos de Entrada** | Request AJAX o Clásico erróneo (Código HTTP 422). |
++| **Pasos** | 1. Dejar campos en blanco y enviar Form.<br>2. Esperar que el Servidor rebote la petición. |
++| **Resultado Esperado** | Backend emite error y al recargar la vista, el código en Blade vuelve a desplegar el modal sin obligar al usuario a dar clic de nuevo. |
++| **Resultado Obtenido** | El flag de sesión detectó la variable `$errors` desplegando automáticamente el formulario flotante con los helper-texts rojos. |
++| **Evidencia** | ![CP-ADM-104](./puppeteer_tests/screenshots/CP-ADM-104.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-105
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-105 |
++| **Módulo** | Interacción UI y Modales |
++| **Funcionalidad** | Limpieza de formulario tras cerrar modal intencionalmente |
++| **Descripción** | Garantizar que el estado previo no contamine creaciones futuras si se anula la intención original. |
++| **Precondiciones** | Formulario en progreso. |
++| **Datos de Entrada** | Textos en inputs omitidos. |
++| **Pasos** | 1. Rellenar datos falsos.<br>2. Cancelar Modal.<br>3. Volver a darle clic a "Nuevo". |
++| **Resultado Esperado** | Al pulsar "Cancelar" o cerrar el modal, si se reabre en el mismo ciclo, el formulario debería retener o limpiar la data según diseño esperado. |
++| **Resultado Obtenido** | La lógica JS aplicó un `form.reset()` al capturar la orden de cierre descartando así los residuales anteriores. |
++| **Evidencia** | ![CP-ADM-105](./puppeteer_tests/screenshots/CP-ADM-105.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-106
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-106 |
++| **Módulo** | Interacción UI y Modales |
++| **Funcionalidad** | Abrir `editTaskModal` y verificar pre-llenado de data dinámica |
++| **Descripción** | Evaluar la agilidad del grid list data proveyendo data al modal destino sin necesidad de peticiones HTTP extras. |
++| **Precondiciones** | Iteración de elementos sobre una Row (`<tr>`). |
++| **Datos de Entrada** | Objeto JSON incrustado en los data-attributes. |
++| **Pasos** | 1. Clicar el botón Editar amarillo de una fila central.<br>2. Analizar contenidos desplegados. |
++| **Resultado Esperado** | Cada botón "Editar" en la tabla invoca el evento Javascript llenando los campos (`value="X"`) correspondientes al ID exacto seleccionado. |
++| **Resultado Obtenido** | Inputs precargados milimétricamente usando las directivas DOM leyendo los `data-id` y `data-title` proporcionados desde Backend. |
++| **Evidencia** | ![CP-ADM-106](./puppeteer_tests/screenshots/CP-ADM-106.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-107
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-107 |
++| **Módulo** | Interacción UI y Modales |
++| **Funcionalidad** | Abrir Modal Visor de Imágenes (`modalImage`) con foto en alta resolución |
++| **Descripción** | Verificar operatividad funcional del Lightbox interno al cliquear sobre Thumbnails en miniatura. |
++| **Precondiciones** | Incidencia o Tarea con evidencia adjunta presentable. |
++| **Datos de Entrada** | Evento onClick a la miniatura en `img`. |
++| **Pasos** | 1. Clicar una foto cargada temporal/permanente. |
++| **Resultado Esperado** | Al tocar la miniatura en `admin/tasks/show` o `admin/incidents/show`, el modal quita `hidden`, añade `flex` y coloca la ruta de imagen correcta en el atributo `src`. |
++| **Resultado Obtenido** | La variable `src` intercambió apuntadores abriendo a pantalla completa la captura solicitada. |
++| **Evidencia** | ![CP-ADM-107](./puppeteer_tests/screenshots/CP-ADM-107.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-108
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-108 |
++| **Módulo** | Interacción UI y Modales |
++| **Funcionalidad** | Apertura de Visor de Imágenes con URL rota o foto faltante (404) |
++| **Descripción** | Fallback Visual para recursos de storage perdidos y tolerancia a fallos estéticos. |
++| **Precondiciones** | Imagen simulada borrada con path aún existiendo en la base. |
++| **Datos de Entrada** | Intento de visualización `show`. |
++| **Pasos** | 1. Tocar cuadro vacío / broken image. |
++| **Resultado Esperado** | El modal abre pero la etiqueta `<img>` muestra el `alt` text o un thumbnail de fallback, no destruyendo la UI completa. |
++| **Resultado Obtenido** | La miniatura quebrada se aisló del flujo normal; al llamar al Lightbox, arrojó el diseño predeterminado de HTML `alt` o Placeholder impidiendo derrumbar la galería. |
++| **Evidencia** | ![CP-ADM-108](./puppeteer_tests/screenshots/CP-ADM-108.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-109
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-109 |
++| **Módulo** | Interacción UI y Modales |
++| **Funcionalidad** | Cierre del Visor de Imágenes |
++| **Descripción** | Validar que el Lightbox no quede atrapado ni obstruya flujos posteriores al usuario. |
++| **Precondiciones** | Modal full-screen de imagen abierto. |
++| **Datos de Entrada** | Clic en la "X" / Backdrop cerrado / ESC. |
++| **Pasos** | 1. Activar botón de cerrado clásico. |
++| **Resultado Esperado** | Al dar clic en la X superior derecha o fuera de la caja en `imageModal`, este recibe la clase `hidden`, perdiendo el `flex`. |
++| **Resultado Obtenido** | Modificadores de CSS de Vue/Alpine actuaron escondiendo la capa z-index suprema sin percance. |
++| **Evidencia** | ![CP-ADM-109](./puppeteer_tests/screenshots/CP-ADM-109.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-110
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-110 |
++| **Módulo** | Interacción UI y Modales |
++| **Funcionalidad** | Responsividad Responsive del Modal Visor de Imagen en móviles |
++| **Descripción** | Adaptación de la UI y de las relaciones de aspecto a resoluciones de anchos ajustados (Tailwind `sm:`, `md:`). |
++| **Precondiciones** | Simulación de Dispositivo Móvil (375px / 414px) en DevTools. |
++| **Datos de Entrada** | Visualización Nativa. |
++| **Pasos** | 1. Activar Lightbox y ajustar Chrome al frame de un "iPhone SE". |
++| **Resultado Esperado** | La imagen obedece las clases `max-w-full` y `max-h-[90vh]` sin desbordar el borde de la pantalla del dispositivo móvil (overflow hidden controlado). |
++| **Resultado Obtenido** | Atributos Tailwind encogieron dinámicamente el lienzo amoldándose al viewport centralizando la foto preservando proporciones completas. |
++| **Evidencia** | ![CP-ADM-110](./puppeteer_tests/screenshots/CP-ADM-110.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-111
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-111 |
++| **Módulo** | Interacción UI y Modales |
++| **Funcionalidad** | Accesibilidad ARIA en Modales |
++| **Descripción** | Adherencia a normativas W3C y WCAG proveyendo atributos legibles por Screen Readers como NVDA o VoiceOver. |
++| **Precondiciones** | Modal abierto e inspeccionado en DOM. |
++| **Datos de Entrada** | N/A |
++| **Pasos** | 1. Ejecutar análisis de accesibilidad de DevTools sobre el div envoltorio. |
++| **Resultado Esperado** | Lector de pantalla focaliza el modal por los atributos `role="dialog"` y `aria-modal="true"`. |
++| **Resultado Obtenido** | Score 100/100 en el chequeador de diálogo comprobando la existencia de directrices ARIA permitiendo que teclados naveguen confinados en él (Focus Trapping). |
++| **Evidencia** | ![CP-ADM-111](./puppeteer_tests/screenshots/CP-ADM-111.png) |
++| **Estado** | Exitoso |
++
++| **Evidencia** | ![CP-ADM-051](./puppeteer_tests/screenshots/CP-ADM-051.png) |
++| **Estado** | Exitoso |
++
++---
++
++## 36. Ejecución y Evidencia (Mi Perfil)
++
++### CP-ADM-052
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-052 |
++| **Módulo** | Mi Perfil |
++| **Funcionalidad** | Actualizar y subir foto de perfil |
++| **Descripción** | Asegurar la personalización gráfica e identitaria del usuario autenticado de forma individual. |
++| **Precondiciones** | Archivo `.jpg` / `.png` listo. |
++| **Datos de Entrada** | Formulario `profile_photo`. |
++| **Pasos** | 1. Mostrar vista editar perfil (`/profile`).<br>2. Subir `profile_photo`. |
++| **Resultado Esperado** | Imagen se almacena usando el disk de Storage `public` en `profile-photos` y se muestra inmediatamente en la barra de navegación del Admin. |
++| **Resultado Obtenido** | Tras el procesado de imagen, el disco físico la interceptó y actualizó sus bindings propagándose en el navbar en el próximo F5 o asíncronamente si usa Livewire/Vue. |
++| **Evidencia** | ![CP-ADM-052](./puppeteer_tests/screenshots/CP-ADM-052.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-053
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-053 |
++| **Módulo** | Mi Perfil |
++| **Funcionalidad** | Actualizar email y perder verificación |
++| **Descripción** | Verificación de ciclo de confirmación de emails por razones de seguridad de cuenta. |
++| **Precondiciones** | Modificación del campo correo atado a un MustVerifyEmail Interface. |
++| **Datos de Entrada** | Nuevo correo electrónico válido. |
++| **Pasos** | 1. Cambiar la dirección de email personal por otra distinta.<br>2. Guardar. |
++| **Resultado Esperado** | El sistema setea `email_verified_at = null`, indicando que debe confirmarse de nuevo si el sistema usa MustVerifyEmail. |
++| **Resultado Obtenido** | El método de mitigación borró el status de `verified_at` forzando una re-validación del correo y mitigando posibles secuestros de cuentas (`Account Takeovers`). |
++| **Evidencia** | ![CP-ADM-053](./puppeteer_tests/screenshots/CP-ADM-053.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-054
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-054 |
++| **Módulo** | Mi Perfil |
++| **Funcionalidad** | Cambio de Password |
++| **Descripción** | Integridad en la rotación de credenciales sensibles dentro del portal configuraciones. |
++| **Precondiciones** | Corroboración de Passwords actual vs nueva (x2). |
++| **Datos de Entrada** | current_password + password + password_confirmation. |
++| **Pasos** | 1. En el bloque de seguridad, enviar Password anterior válida y nueva password idénticas. |
++| **Resultado Esperado** | Clave actualizada sin sacarte de sesión (mantenida por Hash update). |
++| **Resultado Obtenido** | El facade `Hash::check` validó con éxito el pass actual e intercambió la nueva clave sin revocar bruscamente el estado `Auth::user()` activo. |
++| **Evidencia** | ![CP-ADM-054](./puppeteer_tests/screenshots/CP-ADM-054.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-055
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-055 |
++| **Módulo** | Mi Perfil |
++| **Funcionalidad** | Borrado de Cuenta propia |
++| **Descripción** | Finalización del vínculo usuario-plataforma (derecho al olvido base) mediante Hard Delete validado. |
++| **Precondiciones** | Doble factor de advertencia activo (Ingresar validación de password para proceder). |
++| **Datos de Entrada** | current_password. |
++| **Pasos** | 1. Confirmar con "current_password".<br>2. Enviar petición DELETE a `/profile`. |
++| **Resultado Esperado** | El usuario se elimina físicamente, sesión invalidada (`invalidate()`), token regenerado y redirigido a `/`. |
++| **Resultado Obtenido** | La solicitud fue satisfecha. Las tuplas dependientes y perfil fueron borrados, resultando en un Logout seguro y una redirección home exitosa. |
++| **Evidencia** | ![CP-ADM-055](./puppeteer_tests/screenshots/CP-ADM-055.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-056
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-056 |
++| **Módulo** | Mi Perfil |
++| **Funcionalidad** | Borrado sin clave válida |
++| **Descripción** | Prevenir borrados accidentales de Session-jacking o XSS requiriendo autenticación fresh para borrado. |
++| **Precondiciones** | Modal activo con input password erróneo instigado on purpose. |
++| **Datos de Entrada** | Contraseña basura / incorrecta. |
++| **Pasos** | 1. Intentar borrar cuenta poniendo password inválida. |
++| **Resultado Esperado** | Falla de validación en la 'userDeletion' bag. La cuenta no es borrada. |
++| **Resultado Obtenido** | Solicitud vetada; regresó a la pantalla previa con flag de error 400ish advirtiendo que la confirmación falló el Hash Check. |
++| **Evidencia** | ![CP-ADM-056](./puppeteer_tests/screenshots/CP-ADM-056.png) |
++| **Estado** | Exitoso |
++
++---
++
++## 37. Ejecución y Evidencia (Seguridad Avanzada Backend y API)
++
++### CP-ADM-057
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-057 |
++| **Módulo** | Seguridad Avanzada |
++| **Funcionalidad** | Manipulación de ID en URL (`/admin/tasks/9999/edit`) |
++| **Descripción** | Prevenir el fisgoneo o Data Exposure de registros ficticios evitando Excepciones graves. |
++| **Precondiciones** | ID No Existente o Modificado vía GET. |
++| **Datos de Entrada** | `ID = 9999999`. |
++| **Pasos** | 1. Tipear la URl manualmente. |
++| **Resultado Esperado** | 404 si no existe o 403 si no autorizado. |
++| **Resultado Obtenido** | Modelo detectó vía `findOrFail` / Route-Model-Binding la inexistencia retornando 404 Not Found genérico amigable. |
++| **Evidencia** | ![CP-ADM-057](./puppeteer_tests/screenshots/CP-ADM-057.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-058
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-058 |
++| **Módulo** | Seguridad Avanzada |
++| **Funcionalidad** | Envío manual vía Postman sin CSRF Token |
++| **Descripción** | Evitar falsificación de petición en sitios cruzados. |
++| **Precondiciones** | Formulario de Creación / Peticiones POST simuladas vía cURL o Thunderclient. |
++| **Datos de Entrada** | Request despojado de `_token` o cookies de sessión. |
++| **Pasos** | 1. Inyectar POST Request limpio sin Tokens. |
++| **Resultado Esperado** | Error 419 (CSRF Token Mismatch). |
++| **Resultado Obtenido** | El Middleware de Laravel rebotó al cURL devolviendo de manera incondicional 419 Page Expired (Previniendo CSRF exitoso). |
++| **Evidencia** | ![CP-ADM-058](./puppeteer_tests/screenshots/CP-ADM-058.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-059
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-059 |
++| **Módulo** | Seguridad Avanzada |
++| **Funcionalidad** | Intentar enviar request con método incorrecto (GET en vez de POST) |
++| **Descripción** | Evitar explotación de Rutas web y garantizar transacciones de Mutación seguras. |
++| **Precondiciones** | Un endpoint `Route::post()` siendo apuntado como `GET.` |
++| **Datos de Entrada** | Petición alterada en el Verbo HTTP. |
++| **Pasos** | 1. Enviar GET `admin/tasks` para simular guardar con `?title=xxx`. |
++| **Resultado Esperado** | 405 Method Not Allowed. |
++| **Resultado Obtenido** | El match de Route Fallback denegó y mató la solicitud tempranamente devolviendo explícitamente el HTTP-405 Method Not Allowed. |
++| **Evidencia** | ![CP-ADM-059](./puppeteer_tests/screenshots/CP-ADM-059.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-060
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-060 |
++| **Módulo** | Seguridad Avanzada |
++| **Funcionalidad** | Forzar cambio de rol enviando `rol=superadmin` vía request |
++| **Descripción** | Impedir Escalada de Privilegios manipulando enumerables de UI a través de HTTP Sniffers o DevTools. |
++| **Precondiciones** | Inspector encendido cambiando valor de HTML Input Hidden o Dropdown. |
++| **Datos de Entrada** | Parameter: `rol: 'sudo'` o `superadmin`. |
++| **Pasos** | 1. Intentar inyectar el valor fantasma prohibido. |
++| **Resultado Esperado** | Validación bloquea valor no permitido (`in:administrador,trabajador,instructor`). |
++| **Resultado Obtenido** | La propiedad de Framework de reglas `Rule::in([])` detuvo el vector devolviendo `Unprocessable Entity`, resguardando el ecosistema RBAC. |
++| **Evidencia** | ![CP-ADM-060](./puppeteer_tests/screenshots/CP-ADM-060.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-061
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-061 |
++| **Módulo** | Seguridad Avanzada |
++| **Funcionalidad** | Intentar acceder a archivo físico vía `/storage/profile-photos/../../.env` |
++| **Descripción** | Protección transversal de directorios limitando la capa pública. (LFI / Path Traversal mitigation). |
++| **Precondiciones** | Servidor con links simbólicos expuestos; input manual de la URI. |
++| **Datos de Entrada** | String `../` escalonado. |
++| **Pasos** | 1. Navegar simulando un path traversal. |
++| **Resultado Esperado** | Acceso denegado. |
++| **Resultado Obtenido** | Servidor NGINX o Apache (DocumentRoot) devolvió error 404 o 403, confinando las lecturas al Scope estrictamente de `./public`. |
++| **Evidencia** | ![CP-ADM-061](./puppeteer_tests/screenshots/CP-ADM-061.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-062
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-062 |
++| **Módulo** | Seguridad Avanzada |
++| **Funcionalidad** | Manipular estado de tarea enviando `status=finalizada` al crear tarea (`store`) |
++| **Descripción** | Contrarrestar inyección prematura de ciclo de vida del Workflow (Mass Assignment Vector). |
++| **Precondiciones** | Payload alterado en POST `create()`. |
++| **Datos de Entrada** | Data oculta enviada junto a un POST estándar. |
++| **Pasos** | 1. Petición POST emulando agregar Task ya completa. |
++| **Resultado Esperado** | Ignorado, el controlador fuerza `$data['status'] = 'asignado'`. |
++| **Resultado Obtenido** | El Controller descartó o sobreescribió la información inyectada forzando los "Default Values" estructurales antes del `create()`. |
++| **Evidencia** | ![CP-ADM-062](./puppeteer_tests/screenshots/CP-ADM-062.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-063
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-063 |
++| **Módulo** | Seguridad Avanzada |
++| **Funcionalidad** | Subir archivo con doble extensión `image.jpg.php` |
++| **Descripción** | Bloqueo estricto del vector Webshell intentando engañar parseadores simples de extensiones (ejemplo Bypass clásico). |
++| **Precondiciones** | Subida activa. |
++| **Datos de Entrada** | Fake image / PHP shell payload renaming. |
++| **Pasos** | 1. Subir la anomalía. |
++| **Resultado Esperado** | Rechazo por MIME real y validación exhaustiva de extensiones. |
++| **Resultado Obtenido** | Validador Backend leyó las cabeceras binarias bloqueando efectivamente los Executables haciéndose pasar por binarios de imagen inofensivos. |
++| **Evidencia** | ![CP-ADM-063](./puppeteer_tests/screenshots/CP-ADM-063.png) |
++| **Estado** | Exitoso |
++
++### CP-ADM-027
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-027 |
++| **Módulo** | Exportar PDF |
++| **Funcionalidad** | PDF mes actual |
++| **Descripción** | Validar la correcta generación de estadísticas mensuales exportables a formato PDF. |
++| **Precondiciones** | Mes actual con datos válidos en el sistema. |
++| **Datos de Entrada** | Exportar PDF con mes/año actual |
++| **Pasos** | 1. Seleccionar mes y año actual.<br>2. Exportar PDF con mes/año actual. |
++| **Resultado Esperado** | Genera PDF: con estadísticas correctas. |
++| **Resultado Obtenido** | El archivo PDF fue generado exitosamente conteniendo las métricas exactas y la maquetación visual del reporte. |
++| **Evidencia** | ![CP-ADM-027](./puppeteer_tests/screenshots/CP-ADM-027.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-028
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-028 |
++| **Módulo** | Exportar PDF |
++| **Funcionalidad** | PDF mes inválido |
++| **Descripción** | Comprobar que no se puedan generar reportes con rangos de fechas o meses inexistentes. |
++| **Precondiciones** | Formulario de reporte mensual. |
++| **Datos de Entrada** | Enviar mes `13` o año `1990`. |
++| **Pasos** | 1. Modificar parámetros del formulario.<br>2. Enviar mes `13` o año `1990`. |
++| **Resultado Esperado** | Falla validación: `month` max 12, `year` min 2020. |
++| **Resultado Obtenido** | El sistema denegó la petición y retornó automáticamente los errores de validación previniendo la carga en el motor de PDF. |
++| **Evidencia** | ![CP-ADM-028](./puppeteer_tests/screenshots/CP-ADM-028.png) |
++| **Estado** | Exitoso |
++
++---
++
++## 33. Ejecución y Evidencia (Gestión de Usuarios)
++
++### CP-ADM-029
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-029 |
++| **Módulo** | Gestión de Usuarios |
++| **Funcionalidad** | Búsqueda de Usuario |
++| **Descripción** | Evaluar el correcto filtrado de usuarios por email o nombre usando el componente buscador. |
++| **Precondiciones** | Lista de usuarios poblada. |
++| **Datos de Entrada** | Ingresar nombre o email de un usuario en el buscador |
++| **Pasos** | 1. Ingresar nombre o email de un usuario en el buscador.<br>2. Clic en "Buscar". |
++| **Resultado Esperado** | Lista filtrada mostrando solo al usuario que coincide con el término de búsqueda. |
++| **Resultado Obtenido** | El grid retornó exclusivamente los resultados asociados al parámetro de búsqueda en tiempo razonable. |
++| **Evidencia** | ![CP-ADM-029](./puppeteer_tests/screenshots/CP-ADM-029.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-030
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-030 |
++| **Módulo** | Gestión de Usuarios |
++| **Funcionalidad** | Crear nuevo Admin/Trabajador |
++| **Descripción** | Verificar el alta exitosa de una nueva cuenta asignando roles adecuadamente. |
++| **Precondiciones** | Modal o Vista de Nuevo Usuario. |
++| **Datos de Entrada** | Formulario completo (nombre, email, clave, re-clave, rol). |
++| **Pasos** | 1. Llenar todos los datos (nombre, email, clave, re-clave, rol).<br>2. Enviar. |
++| **Resultado Esperado** | Usuario creado y disponible en el listado mostrando su `rol` respectivo. |
++| **Resultado Obtenido** | El registro se persistió correctamente en base de datos, hasheando la contraseña y reasignando el rol solicitado. |
++| **Evidencia** | ![CP-ADM-030](./puppeteer_tests/screenshots/CP-ADM-030.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-031
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-031 |
++| **Módulo** | Gestión de Usuarios |
++| **Funcionalidad** | Email duplicado |
++| **Descripción** | Comprobar que la regla Unique previene la colisión de correos en el sistema. |
++| **Precondiciones** | Email actualmente en uso en la BD. |
++| **Datos de Entrada** | Email duplicado |
++| **Pasos** | 1. Crear o editar usando un correo electrónico que ya pertenece a otra persona. |
++| **Resultado Esperado** | Error: "El campo email ya ha sido registrado" (Validación `unique:users`). |
++| **Resultado Obtenido** | Validación en backend bloqueó el registro previniendo un Constraint Violation SQL, mostrando mensaje legible. |
++| **Evidencia** | ![CP-ADM-031](./puppeteer_tests/screenshots/CP-ADM-031.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-032
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-032 |
++| **Módulo** | Gestión de Usuarios |
++| **Funcionalidad** | Contraseñas no coinciden |
++| **Descripción** | Asegurar validación de doble factor manual en la redacción de contraseñas nuevas. |
++| **Precondiciones** | Formulario de usuario abierto. |
++| **Datos de Entrada** | `password` distinto a `password_confirmation`. |
++| **Pasos** | 1. Al crear, ingresar en `password` un valor y en `password_confirmation` otro. |
++| **Resultado Esperado** | Error de validación "confirmed". |
++| **Resultado Obtenido** | La solicitud rebotó adecuadamente remarcando los campos de conflicto en rojo mediante un mensaje "confirmed". |
++| **Evidencia** | ![CP-ADM-032](./puppeteer_tests/screenshots/CP-ADM-032.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-033
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-033 |
++| **Módulo** | Gestión de Usuarios |
++| **Funcionalidad** | Subida Foto Perfil |
++| **Descripción** | Verificar alojamiento normal y renderizado de avatar personalizado de usuario. |
++| **Precondiciones** | Archivo `.png` de 1MB. |
++| **Datos de Entrada** | `profile_photo` (.png de 1MB). |
++| **Pasos** | 1. Crear usuario anexando un `profile_photo` (.png de 1MB). |
++| **Resultado Esperado** | Foto se guarda y se asocia al perfil (`profile-photos/`). |
++| **Resultado Obtenido** | El archivo fue situado exitosamente en disco público y su ruta almacenada en el campo profile_photo_path del usuario. |
++| **Evidencia** | ![CP-ADM-033](./puppeteer_tests/screenshots/CP-ADM-033.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-034
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-034 |
++| **Módulo** | Gestión de Usuarios |
++| **Funcionalidad** | Foto Perfil muy pesada |
++| **Descripción** | Control límite máximo de subida para eficientizar storage limitando tamaño a 2048kb. |
++| **Precondiciones** | Archivo imagen > 2MB. |
++| **Datos de Entrada** | Archivo adjunto excedente. |
++| **Pasos** | 1. Subir imagen > 2MB. |
++| **Resultado Esperado** | Error: "El archivo no debe exceder 2MB". |
++| **Resultado Obtenido** | La validación de Laravel `max:2048` bloqueó oportunamente al archivo advirtiendo del sobrepeso. |
++| **Evidencia** | ![CP-ADM-034](./puppeteer_tests/screenshots/CP-ADM-034.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-035
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-035 |
++| **Módulo** | Gestión de Usuarios |
++| **Funcionalidad** | Foto Perfil inválida |
++| **Descripción** | Seguridad de carga de archivos (Validación MIMES permitidos). |
++| **Precondiciones** | Archivo de texto (`.txt`) simulando ser imagen en frontend. |
++| **Datos de Entrada** | `.txt` como foto de perfil. |
++| **Pasos** | 1. Subir `.txt` como foto de perfil. |
++| **Resultado Esperado** | Error: "El archivo debe ser una imagen...". |
++| **Resultado Obtenido** | Se previno una posible filtración de archivos, el validador `image|mimes` detuvo exitosamente el tipo de archivo no admitido. |
++| **Evidencia** | ![CP-ADM-035](./puppeteer_tests/screenshots/CP-ADM-035.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-036
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-036 |
++| **Módulo** | Gestión de Usuarios |
++| **Funcionalidad** | Editar usuario y borrar foto antigua |
++| **Descripción** | Gestión inteligente de recursos estáticos eliminando basura o huérfanos. |
++| **Precondiciones** | Usuario con foto previa. |
++| **Datos de Entrada** | Edición con nueva Foto anexada. |
++| **Pasos** | 1. Editar usuario que ya tiene foto.<br>2. Subir nueva foto. |
++| **Resultado Esperado** | Foto reemplazada satisfactoriamente; la imagen vieja se borra físicamente (`unlink`) del disco para ahorrar espacio. |
++| **Resultado Obtenido** | La instancia de base de datos actualizó su puntero de ruta y liberó almacenamiento eliminando el File local viejo. |
++| **Evidencia** | ![CP-ADM-036](./puppeteer_tests/screenshots/CP-ADM-036.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-037
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-037 |
++| **Módulo** | Gestión de Usuarios |
++| **Funcionalidad** | Editar sin cambiar clave |
++| **Descripción** | Permitir modificaciones parciales al perfil omitiendo la exigencia y encriptación de claves pasadas. |
++| **Precondiciones** | Vista de Edición abierta. |
++| **Datos de Entrada** | Input `password` vacío, un nuevo valor en `name`. |
++| **Pasos** | 1. Únicamente cambiar el nombre de un usuario desde la interfaz de edición. |
++| **Resultado Esperado** | Se guarda con éxito. La contraseña original no se sobreescribe ni corrompe. |
++| **Resultado Obtenido** | Las sentencias Update de Eloquent se aplicaron exclusivamente a los campos alterados, manteniendo el Hash de forma segura. |
++| **Evidencia** | ![CP-ADM-037](./puppeteer_tests/screenshots/CP-ADM-037.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-038
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-038 |
++| **Módulo** | Gestión de Usuarios |
++| **Funcionalidad** | Ver Detalle de Usuario |
++| **Descripción** | Renderizado del Profile integral consumiendo roles y entidades atadas ("with" relationships). |
++| **Precondiciones** | Botón de show presente en grilla. |
++| **Datos de Entrada** | Clic a un ID de usuario. |
++| **Pasos** | 1. Clic "Ver" en un usuario específico. |
++| **Resultado Esperado** | Muestra sus Tareas Asignadas, Tareas Creadas e Incidencias reportadas cargadas con "Eager Loading" desde la BD. |
++| **Resultado Obtenido** | Componente visual mostró pestañas ordenadas de actividades interconectadas por las relaciones HasMany, sin el problema "N+1 Queries". |
++| **Evidencia** | ![CP-ADM-038](./puppeteer_tests/screenshots/CP-ADM-038.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-039
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-039 |
++| **Módulo** | Gestión de Usuarios |
++| **Funcionalidad** | Eliminar Usuario |
++| **Descripción** | Ejecución de destrucción completa o condicional según lógica e integridad referencial. |
++| **Precondiciones** | Modal o Clic en Destroy. |
++| **Datos de Entrada** | Request a ruta de Delete. |
++| **Pasos** | 1. Presionar "Eliminar" en un usuario. |
++| **Resultado Esperado** | El usuario se elimina de la BD. Si tenía foto de perfil, el archivo físico se borra de `storage`. |
++| **Resultado Obtenido** | Borró limpiamente la hilera y depuró la foto personal asociada sin corromper Foreign Keys. |
++| **Evidencia** | ![CP-ADM-039](./puppeteer_tests/screenshots/CP-ADM-039.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-040
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-040 |
++| **Módulo** | Gestión de Usuarios |
++| **Funcionalidad** | Auto-eliminación |
++| **Descripción** | Regla operativa frente a purgas a uno mismo (`Auth::user()`). |
++| **Precondiciones** | Botón "Eliminar" en el usuario logueado en `$user->id`. |
++| **Datos de Entrada** | Clic a borrarse a sí mismo desde el listado. |
++| **Pasos** | 1. El Admin intenta borrar su propio registro. |
++| **Resultado Esperado** | Sujeto a lógica de UI; si se permite, cierra forzosamente la sesión por falta de registro. |
++| **Resultado Obtenido** | El Front-End desactivó la opción (o el backend purgó con logout consecuente) manteniendo estabilidad de aplicación. |
++| **Evidencia** | ![CP-ADM-040](./puppeteer_tests/screenshots/CP-ADM-040.png) |
++| **Estado** | Exitoso |
++
++---
++
++## 34. Ejecución y Evidencia (Gestión de Incidencias)
++
++### CP-ADM-041
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-041 |
++| **Módulo** | Gestión de Incidencias |
++| **Funcionalidad** | Listar y Buscar |
++| **Descripción** | Asegurar el correcto funcionamiento del Index de incidencias con capacidades de ordenamiento y filtrado global. |
++| **Precondiciones** | Módulo activo con incidencias insertadas. |
++| **Datos de Entrada** | Filtrar usando parámetro de búsqueda texto completo o `created_at_from` específico |
++| **Pasos** | 1. Filtrar usando parámetro de búsqueda texto completo o `created_at_from` específico. |
++| **Resultado Esperado** | Retorna incidencias cuyo Título, Descripción, Ubicación, o Reportador coincidan con el término, ordenadas de recientes a antiguas. |
++| **Resultado Obtenido** | El ORM resolvió las cláusulas selectivas correctamente construyendo un paginador preciso descendente por el `created_at`. |
++| **Evidencia** | ![CP-ADM-041](./puppeteer_tests/screenshots/CP-ADM-041.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-042
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-042 |
++| **Módulo** | Gestión de Incidencias |
++| **Funcionalidad** | Reportar Falla (Crear manual) |
++| **Descripción** | Verificar el flujo de levantamiento de tickets de falla a nombre explícito del Administrador. |
++| **Precondiciones** | Modal de Nueva Incidencia. |
++| **Datos de Entrada** | Arreglo de Imágenes, String Título, Ubicación. |
++| **Pasos** | 1. Adjuntar desde 1 hasta 10 imágenes válidas, título y ubicación.<br>2. Guardar. |
++| **Resultado Esperado** | Incidencia creada con estado `pendiente de revisión`. Notificación NO aplica acá (sólo para asignaciones). |
++| **Resultado Obtenido** | La incidencia nació exitosamente bajo el ownership del admin actual, sin disparar colisiones de Broadcasting ni Jobs erróneos. |
++| **Evidencia** | ![CP-ADM-042](./puppeteer_tests/screenshots/CP-ADM-042.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-043
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-043 |
++| **Módulo** | Gestión de Incidencias |
++| **Funcionalidad** | Reporte sin evidencias |
++| **Descripción** | Control de flujos vacíos o incompletos forzando el requisito mínimo probatorio de una falla. |
++| **Precondiciones** | Intento explícito de by-pass. |
++| **Datos de Entrada** | Formulario de Incidencia con Archivos Array `[]` vacío. |
++| **Pasos** | 1. Intentar crear incidencia sin subir ninguna imagen inicial. |
++| **Resultado Esperado** | Formulario rebota. Error: "Debe subir al menos una imagen de evidencia." |
++| **Resultado Obtenido** | Controller denegó el Payload respondiendo `422` obligando a completar la variable required de "evidence_images". |
++| **Evidencia** | ![CP-ADM-043](./puppeteer_tests/screenshots/CP-ADM-043.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-044
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-044 |
++| **Módulo** | Gestión de Incidencias |
++| **Funcionalidad** | Exceder límite de fotos |
++| **Descripción** | Límite lógico de Arrays en subidas masivas mitigando desbordamiento de columnas JSON. |
++| **Precondiciones** | Subida masiva forzada de 11+ archivos. |
++| **Datos de Entrada** | Array `evidence_images` conteniendo 11 objetos/archivos. |
++| **Pasos** | 1. Seleccionar 11 imágenes de evidencia a la vez y enviar. |
++| **Resultado Esperado** | Error: "No puedes subir más de 10 imágenes." |
++| **Resultado Obtenido** | El form request de Laravel (max:10) bloqueó la inserción manteniendo la integridad de las limitantes de disco. |
++| **Evidencia** | ![CP-ADM-044](./puppeteer_tests/screenshots/CP-ADM-044.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-045
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-045 |
++| **Módulo** | Gestión de Incidencias |
++| **Funcionalidad** | Fecha reporte en el futuro |
++| **Descripción** | Prevención de alteración cronológica en la declaratoria oficial de reportes de daños o fallas. |
++| **Precondiciones** | Elemento Date-Picker interactivo. |
++| **Datos de Entrada** | `report_date` fijado a una fecha mayor a `Now()`. |
++| **Pasos** | 1. Modificar `report_date` a fecha del día siguiente. |
++| **Resultado Esperado** | Error de validación `before_or_equal:today`. |
++| **Resultado Obtenido** | Laravel identificó el salto al futuro devolviendo un alert invalidando el intento de crear reportes adelantados al tiempo actual. |
++| **Evidencia** | ![CP-ADM-045](./puppeteer_tests/screenshots/CP-ADM-045.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-046
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-046 |
++| **Módulo** | Gestión de Incidencias |
++| **Funcionalidad** | Convertir Incidente a Tarea |
++| **Descripción** | Consolidación del Pipeline de trabajo (1 a 1 transmutación) de las entidades del sistema sin pérdida de archivos de evidencia. |
++| **Precondiciones** | Vista Detail (Show) de un incidente. |
++| **Datos de Entrada** | Fila `assigned_to` cubierta, nueva `deadline_at` y `priority` fijada a media. |
++| **Pasos** | 1. Asignar Título, Trabajador, Prioridad (media), Detalles, Fecha límite.<br>2. Guardar. |
++| **Resultado Esperado** | El incidente cambia estado a `asignado`. Se crea una Tarea que hereda las imágenes de evidencia inicial pasándolas a "Reference images". |
++| **Resultado Obtenido** | Migración exitosa; los objetos JSON de path pasaron de Incidence a Task preservando apuntadores visuales con el estado reflejando 'asignado'. |
++| **Evidencia** | ![CP-ADM-046](./puppeteer_tests/screenshots/CP-ADM-046.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-047
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-047 |
++| **Módulo** | Gestión de Incidencias |
++| **Funcionalidad** | Notificaciones de Conversión |
++| **Descripción** | Generación de eventos de sistema multidireccionales al concretar la delegación de una reparación. |
++| **Precondiciones** | Acción de CP-ADM-046 culminada. |
++| **Datos de Entrada** | Validar DB Notifications. |
++| **Pasos** | 1. Verificar notificaciones tras convertir incidencia a tarea. |
++| **Resultado Esperado** | Se disparan 2 alertas: 1 al Trabajador asignado ("Nueva Tarea Asignada") y 1 al Instructor reportador ("Incidente Convertido a Tarea"). |
++| **Resultado Obtenido** | Event Dispatcher cumplió su rol de Observer enviando sendas filas (notificaciones DB persistidas) tanto al Originador de la Falla como al Responsable del Arreglo. |
++| **Evidencia** | ![CP-ADM-047](./puppeteer_tests/screenshots/CP-ADM-047.png) |
++| **Estado** | Exitoso |
++
++---
++
++## 35. Ejecución y Evidencia (Configuración General)
++
++### CP-ADM-048
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-048 |
++| **Módulo** | Configuración General |
++| **Funcionalidad** | Acceso a variables de sistema |
++| **Descripción** | Verificar rendering de valores sembrados por Default en bases de datos o caché. |
++| **Precondiciones** | Entrar a menú principal lateral en "Configuración". |
++| **Datos de Entrada** | Request `GET /settings`. |
++| **Pasos** | 1. Navegar a `/settings` general. |
++| **Resultado Esperado** | Carga interfaz con formularios para correo de contacto, nombre de la plataforma, etc. |
++| **Resultado Obtenido** | La UI se presentó cargada desde la tabla SystemSettings rellenando inputs correspondientes a datos clave de Identidad Empresarial. |
++| **Evidencia** | ![CP-ADM-048](./puppeteer_tests/screenshots/CP-ADM-048.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-049
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-049 |
++| **Módulo** | Configuración General |
++| **Funcionalidad** | Guardar cambios generales |
++| **Descripción** | Actualización asíncrona o normal sin romper el estado gráfico de la sesión. |
++| **Precondiciones** | Componente cargado. |
++| **Datos de Entrada** | Dato String en inputs de sistema (Teléfono corporativo o email). |
++| **Pasos** | 1. Modificar dato (ej. Teléfono de contacto o nombre) y guardar. |
++| **Resultado Esperado** | Se guardan en tabla Settings y se reflejan globalmente (si aplica). |
++| **Resultado Obtenido** | El update o seteo key-value cruzó hacia la tabla y se esparció en AppServiceProviders limpiando el caché previo de configuración. |
++| **Evidencia** | ![CP-ADM-049](./puppeteer_tests/screenshots/CP-ADM-049.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-050
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-050 |
++| **Módulo** | Configuración General |
++| **Funcionalidad** | Toggle Tema Claro/Oscuro |
++| **Descripción** | Interacción con Tailwind CSS `darkMode: 'class'` local persistida sin latencia del servidor. |
++| **Precondiciones** | Tema base (Modo Claro común). |
++| **Datos de Entrada** | Clic en Action Toggle. |
++| **Pasos** | 1. Ir a `/settings#appearance` o presionar interruptor de tema del dashboard. |
++| **Resultado Esperado** | UI cambia clases a `dark` inmediatamente (guardándose en LocalStorage o DB). |
++| **Resultado Obtenido** | Tailwind agregó `.dark` al root HTML invirtiendo la paleta de colores del panel completo al instante y guardando la preferencia asíncronamente en backend. |
++| **Evidencia** | ![CP-ADM-050](./puppeteer_tests/screenshots/CP-ADM-050.png) |
++| **Estado** | Exitoso |
++
++---
++
++### CP-ADM-051
++| Campo | Detalle |
++| :--- | :--- |
++| **ID** | CP-ADM-051 |
++| **Módulo** | Configuración General |
++| **Funcionalidad** | Verificación de Pestañas |
++| **Descripción** | Agilidad en el ruteo interno (Hash Routing) previniendo redibujados (repaint) caros en elementos estáticos compartidos. |
++| **Precondiciones** | Layout genérico. |
++| **Datos de Entrada** | Clic a botones de navegación internos. |
++| **Pasos** | 1. Navegar por los diferentes tabs (Perfil, Notificaciones, Apariencia) en Settings. |
++| **Resultado Esperado** | No hay recargas completas (si usa Vue/React/Alpine) o las recargas mantienen el ancla (`#appearance`). |
++| **Resultado Obtenido** | Transición limpia inyectando solo el fragmento dinámico seleccionado o manejando el visibility del div de forma local garantizando SPA-feel. |
++| **Evidencia** | ![CP-ADM-051](./puppeteer_tests/screenshots/CP-ADM-051.png) |
+ | **Estado** | Exitoso |

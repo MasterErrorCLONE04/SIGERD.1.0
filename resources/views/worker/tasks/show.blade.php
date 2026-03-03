@@ -98,8 +98,10 @@
                     <div class="flex items-start space-x-3 text-slate-600 dark:text-gray-300 dark:text-gray-400">
                         <span class="material-symbols-outlined text-indigo-600 text-xl mt-0.5">description</span>
                         <div class="flex-1">
-                            <h3 class="font-semibold text-slate-800 dark:text-gray-100 dark:text-gray-200 mb-1">Descripción y Actividades</h3>
-                            <p class="text-sm leading-relaxed whitespace-pre-wrap">{{ $task->description ?: 'Sin descripción detallada.' }}
+                            <h3 class="font-semibold text-slate-800 dark:text-gray-100 dark:text-gray-200 mb-1">
+                                Descripción y Actividades</h3>
+                            <p class="text-sm leading-relaxed whitespace-pre-wrap">
+                                {{ $task->description ?: 'Sin descripción detallada.' }}
                             </p>
                         </div>
                     </div>
@@ -110,15 +112,18 @@
                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-8 bg-slate-50/50 dark:bg-[#18191A] dark:bg-gray-900/50">
                     <div
                         class="bg-white dark:bg-[#242526] dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
-                        <div class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
+                        <div
+                            class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
                             <span class="material-symbols-outlined text-sm">place</span>
                             <span class="text-xs font-medium uppercase tracking-wider">Ubicación</span>
                         </div>
-                        <p class="font-semibold text-slate-800 dark:text-gray-100 dark:text-white">{{ $task->location }}</p>
+                        <p class="font-semibold text-slate-800 dark:text-gray-100 dark:text-white">{{ $task->location }}
+                        </p>
                     </div>
                     <div
                         class="bg-white dark:bg-[#242526] dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
-                        <div class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
+                        <div
+                            class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
                             <span class="material-symbols-outlined text-sm">event</span>
                             <span class="text-xs font-medium uppercase tracking-wider">Fecha Límite</span>
                         </div>
@@ -128,7 +133,8 @@
                     </div>
                     <div
                         class="bg-white dark:bg-[#242526] dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
-                        <div class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
+                        <div
+                            class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
                             <span class="material-symbols-outlined text-sm">engineering</span>
                             <span class="text-xs font-medium uppercase tracking-wider">Rol</span>
                         </div>
@@ -138,7 +144,8 @@
                     </div>
                     <div
                         class="bg-white dark:bg-[#242526] dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
-                        <div class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
+                        <div
+                            class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
                             <span class="material-symbols-outlined text-sm">schedule</span>
                             <span class="text-xs font-medium uppercase tracking-wider">Asignado por</span>
                         </div>
@@ -163,7 +170,8 @@
                                     <p class="font-medium text-indigo-600">{{ $task->incident->title }}</p>
                                 </div>
                             </div>
-                            <a href="#" class="text-indigo-600 hover:bg-indigo-600/10 px-4 py-2 rounded-lg transition-colors text-sm font-semibold pointer-events-none opacity-50">
+                            <a href="#"
+                                class="text-indigo-600 hover:bg-indigo-600/10 px-4 py-2 rounded-lg transition-colors text-sm font-semibold pointer-events-none opacity-50">
                                 Ver Incidente
                             </a>
                         </div>
@@ -180,7 +188,8 @@
                                 class="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
                                 <div class="flex items-center space-x-2">
                                     <span class="material-symbols-outlined text-indigo-600">image</span>
-                                    <h3 class="font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200">Imágenes de Referencia</h3>
+                                    <h3 class="font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200">Imágenes
+                                        de Referencia</h3>
                                 </div>
                             </div>
 
@@ -228,7 +237,8 @@
                             <div
                                 class="flex items-center space-x-2 pb-2 border-b border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
                                 <span class="material-symbols-outlined text-blue-500">pending_actions</span>
-                                <h3 class="font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200">Evidencia Inicial</h3>
+                                <h3 class="font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200">Evidencia
+                                    Inicial</h3>
                             </div>
 
                             @php $initialCount = count($task->initial_evidence_images ?? []); @endphp
@@ -278,7 +288,8 @@
                             <div
                                 class="flex items-center space-x-2 pb-2 border-b border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
                                 <span class="material-symbols-outlined text-green-500">task_alt</span>
-                                <h3 class="font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200">Evidencia Final</h3>
+                                <h3 class="font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200">Evidencia
+                                    Final</h3>
                             </div>
 
                             @php $finalCount = count($task->final_evidence_images ?? []); @endphp
@@ -332,7 +343,8 @@
                     <div class="p-8 border-t border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
                         <div class="flex items-center space-x-2 mb-4">
                             <span class="material-symbols-outlined text-slate-400 dark:text-[#9CA3AF]">rate_review</span>
-                            <h3 class="font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200">Descripción Final del Trabajo</h3>
+                            <h3 class="font-bold text-slate-800 dark:text-gray-100 dark:text-gray-200">Descripción Final del
+                                Trabajo</h3>
                         </div>
                         <div
                             class="p-5 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-800/50">
@@ -345,13 +357,16 @@
 
                 {{-- Actualizar Tarea (Worker Only Section) --}}
                 @if ($task->status === 'asignado' || $task->status === 'en progreso')
-                    <div class="p-8 border-t border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700 bg-slate-50/20 dark:bg-[#18191A]">
-                        <h3 class="text-lg font-bold text-slate-800 dark:text-gray-100 dark:text-white mb-6 flex items-center gap-2">
+                    <div
+                        class="p-8 border-t border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700 bg-slate-50/20 dark:bg-[#18191A]">
+                        <h3
+                            class="text-lg font-bold text-slate-800 dark:text-gray-100 dark:text-white mb-6 flex items-center gap-2">
                             <span class="material-symbols-outlined text-indigo-600">edit_square</span>
                             Actualizar Tarea
                         </h3>
                         <form method="POST" action="{{ route('worker.tasks.update', $task->id) }}"
-                            enctype="multipart/form-data">
+                            enctype="multipart/form-data" x-data="{ submitting: false }"
+                            x-on:submit="if (submitting) { $event.preventDefault(); return; } submitting = true;">
                             @csrf
                             @method('PUT')
 
@@ -402,20 +417,25 @@
                                     class="px-5 py-2.5 bg-white border border-slate-300 hover:bg-slate-50 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 text-slate-700 dark:text-gray-200 font-semibold rounded-lg transition-colors text-sm">
                                     Cancelar
                                 </a>
-                                <x-primary-button class="px-5 py-2.5 text-sm">
-                                    {{ __('Enviar Evidencia') }}
+                                <x-primary-button class="px-5 py-2.5 text-sm" x-bind:disabled="submitting"
+                                    x-bind:class="{ 'opacity-50 cursor-not-allowed': submitting }">
+                                    <span x-show="!submitting">{{ __('Enviar Evidencia') }}</span>
+                                    <span x-show="submitting">{{ __('Enviando...') }}</span>
                                 </x-primary-button>
                             </div>
                         </form>
                     </div>
                 @else
-                    <div class="p-8 border-t border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700 bg-slate-50/20 dark:bg-[#18191A]">
-                        <div class="flex items-center gap-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800/50 rounded-lg">
+                    <div
+                        class="p-8 border-t border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700 bg-slate-50/20 dark:bg-[#18191A]">
+                        <div
+                            class="flex items-center gap-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800/50 rounded-lg">
                             <span class="material-symbols-outlined text-yellow-600 dark:text-yellow-400">info</span>
                             <p class="text-sm text-yellow-800 dark:text-yellow-300">
                                 <strong class="font-medium">Nota:</strong> Esta tarea tiene un estado que no permite
                                 actualizaciones desde tu perfil (Estado actual: <span
-                                    class="font-semibold uppercase tracking-wide">"{{ $task->status }}"</span>). Contacta al administrador si requiere correcciones.
+                                    class="font-semibold uppercase tracking-wide">"{{ $task->status }}"</span>). Contacta al
+                                administrador si requiere correcciones.
                             </p>
                         </div>
                     </div>
@@ -426,18 +446,20 @@
             <div id="imageModal"
                 class="fixed inset-0 bg-slate-900/95 backdrop-blur-sm z-[100] hidden items-center justify-center p-4 transition-all duration-300"
                 onclick="closeImageModal()">
-                <div class="relative max-w-7xl max-h-full flex items-center justify-center" onclick="event.stopPropagation()">
+                <div class="relative max-w-7xl max-h-full flex items-center justify-center"
+                    onclick="event.stopPropagation()">
                     <img id="modalImage" src="" alt="Ampliada"
                         class="max-w-full max-h-[90vh] rounded-xl shadow-2xl object-contain border border-white/10 ring-1 ring-white/10">
-                    
+
                     <button onclick="closeImageModal()"
                         class="absolute -top-4 -right-4 md:top-4 md:right-4 text-white hover:text-red-400 bg-black/50 hover:bg-black/80 rounded-full p-2.5 transition-all hover:scale-110">
                         <span class="material-symbols-outlined text-xl">close</span>
                     </button>
-                    
+
                     <a id="downloadButton" href="" download
                         class="absolute bottom-4 right-4 text-white bg-indigo-600 hover:bg-indigo-700 rounded-full p-3 transition-all hover:scale-110 shadow-lg flex items-center justify-center group/btn">
-                        <span class="material-symbols-outlined text-xl group-hover/btn:-translate-y-0.5 transition-transform">download</span>
+                        <span
+                            class="material-symbols-outlined text-xl group-hover/btn:-translate-y-0.5 transition-transform">download</span>
                     </a>
                 </div>
             </div>
@@ -447,10 +469,10 @@
                     const modal = document.getElementById('imageModal');
                     const img = document.getElementById('modalImage');
                     const btn = document.getElementById('downloadButton');
-                    
+
                     img.src = imageSrc;
                     btn.href = imageSrc;
-                    
+
                     modal.classList.remove('hidden');
                     modal.classList.add('flex');
                     document.body.style.overflow = 'hidden';

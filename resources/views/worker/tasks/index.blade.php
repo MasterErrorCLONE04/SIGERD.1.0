@@ -271,7 +271,9 @@
                     </table>
                 </div>
 
-
+                <div class="p-6 border-t border-slate-200 dark:border-[#3A3B3C]">
+                    {{ $tasks->links() }}
+                </div>
             </div>
         </div>
     </div>

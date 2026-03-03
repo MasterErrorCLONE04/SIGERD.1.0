@@ -477,9 +477,31 @@ class TaskController extends Controller
                         'link' => route('instructor.incidents.show', $task->incident_id),
                     ]);
                 }
+
+                // Notificar al trabajador que su tarea fue aprobada
+                if ($task->assigned_to) {
+                    \App\Models\Notification::create([
+                        'user_id' => $task->assigned_to,
+                        'type' => 'task_approved',
+                        'title' => 'Tarea Aprobada',
+                        'message' => '¡Felicidades! Tu trabajo en la tarea "' . $task->title . '" ha sido aprobado.',
+                        'link' => route('worker.tasks.show', $task->id),
+                    ]);
+                }
                 break;
             case 'reject':
                 $task->status = 'en progreso'; // Regresa a en progreso para corrección
+
+                // Notificar al trabajador que su tarea fue rechazada
+                if ($task->assigned_to) {
+                    \App\Models\Notification::create([
+                        'user_id' => $task->assigned_to,
+                        'type' => 'task_rejected',
+                        'title' => 'Tarea Rechazada',
+                        'message' => 'Tu trabajo en la tarea "' . $task->title . '" requiere correcciones.',
+                        'link' => route('worker.tasks.show', $task->id),
+                    ]);
+                }
                 break;
             case 'delay':
                 $task->status = 'retraso en proceso'; // Pasa a retraso en proceso
