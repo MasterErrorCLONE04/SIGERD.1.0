@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:administrador'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/users', \App\Http\Controllers\Admin\UserController::class);
-    Route::resource('/tasks', \App\Http\Controllers\Admin\TaskController::class);
+    Route::resource('/tasks', \App\Http\Controllers\Admin\TaskController::class)->except(['create']);
     Route::get('/tasks-export-pdf', [\App\Http\Controllers\Admin\TaskController::class, 'exportPDF'])->name('tasks.export-pdf');
     Route::put('/tasks/{task}/review', [\App\Http\Controllers\Admin\TaskController::class, 'reviewTask'])->name('tasks.review');
     Route::resource('/incidents', IncidentController::class)->only(['index', 'show', 'store']);

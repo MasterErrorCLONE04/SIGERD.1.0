@@ -37,16 +37,6 @@ class TaskController extends Controller
         return view('admin.tasks.index', compact('tasks', 'workers', 'priorities'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        $workers = User::where('role', 'trabajador')->get();
-        $priorities = ['baja', 'media', 'alta'];
-
-        return view('admin.tasks.create', compact('workers', 'priorities'));
-    }
 
     /**
      * Store a newly created resource in storage.

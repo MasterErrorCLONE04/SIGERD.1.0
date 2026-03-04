@@ -124,7 +124,25 @@ class UserController extends Controller
             'reportedIncidents' => function ($query) {
                 $query->orderBy('created_at', 'desc');
             }
-        ])->findOrFail($id);
+        ])
+            ->withCount([
+                'assignedTasks',
+                'assignedTasks as finished_tasks_count' => function ($query) {
+                    $query->where('status', 'finalizada');
+                },
+                'assignedTasks as pending_tasks_count' => function ($query) {
+                    $query->whereIn('status', ['pendiente', 'asignado', 'en progreso', 'retraso en proceso']);
+                },
+                'reportedIncidents',
+                'reportedIncidents as resolved_incidents_count' => function ($query) {
+                    $query->where('status', 'resuelto');
+                },
+                'reportedIncidents as pending_incidents_count' => function ($query) {
+                    $query->whereIn('status', ['pendiente de revisión', 'asignado']);
+                },
+                'createdTasks'
+            ])
+            ->findOrFail($id);
 
         $assignedTasks = collect();
         if ($user->role === 'trabajador') {

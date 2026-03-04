@@ -101,20 +101,24 @@
                                     </div>
                                     <div class="p-4 text-center">
                                         <div class="text-[1.35rem] mb-1 font-bold text-blue-500 dark:text-blue-400">
-                                            @if($user->role === 'trabajador')
-                                                {{ $assignedTasks->total() }}
-                                            @elseif($user->role === 'instructor')
-                                                {{ $user->reportedIncidents->count() }}
+                                            @if($user->isTrabajador())
+                                                {{ $user->assigned_tasks_count }}
+                                            @elseif($user->isInstructor())
+                                                {{ $user->reported_incidents_count }}
+                                            @elseif($user->isAdmin())
+                                                {{ $user->created_tasks_count }}
                                             @else
                                                 -
                                             @endif
                                         </div>
                                         <div
                                             class="text-[10px] font-bold text-slate-400 dark:text-[#B0B3B8] uppercase tracking-wider">
-                                            @if($user->role === 'trabajador')
+                                            @if($user->isTrabajador())
                                                 Tareas Total
-                                            @elseif($user->role === 'instructor')
-                                                Incidentes
+                                            @elseif($user->isInstructor())
+                                                Incidentes Total
+                                            @elseif($user->isAdmin())
+                                                Tareas Creadas
                                             @else
                                                 -
                                             @endif
@@ -123,20 +127,24 @@
                                     <div class="p-4 text-center">
                                         <div
                                             class="text-[1.35rem] mb-1 font-bold text-emerald-500 dark:text-emerald-400">
-                                            @if($user->role === 'trabajador')
-                                                {{ $user->assignedTasks()->where('status', 'completada')->count() }}
-                                            @elseif($user->role === 'instructor')
-                                                {{ $user->reportedIncidents->where('status', 'resuelto')->count() }}
+                                            @if($user->isTrabajador())
+                                                {{ $user->finished_tasks_count }}
+                                            @elseif($user->isInstructor())
+                                                {{ $user->resolved_incidents_count }}
+                                            @elseif($user->isAdmin())
+                                                {{ $user->reported_incidents_count }}
                                             @else
-                                                -
+                                                {{ $user->reportedIncidents->where('status', 'resuelto')->count() }}
                                             @endif
                                         </div>
                                         <div
                                             class="text-[10px] font-bold text-slate-400 dark:text-[#B0B3B8] uppercase tracking-wider">
-                                            @if($user->role === 'trabajador')
+                                            @if($user->isTrabajador())
                                                 Completadas
-                                            @elseif($user->role === 'instructor')
+                                            @elseif($user->isInstructor())
                                                 Resueltos
+                                            @elseif($user->isAdmin())
+                                                Incidentes Report.
                                             @else
                                                 -
                                             @endif
@@ -144,20 +152,24 @@
                                     </div>
                                     <div class="p-4 text-center">
                                         <div class="text-[1.35rem] mb-1 font-bold text-amber-500 dark:text-amber-400">
-                                            @if($user->role === 'trabajador')
-                                                {{ $user->assignedTasks()->where('status', 'pendiente')->count() }}
-                                            @elseif($user->role === 'instructor')
-                                                {{ $user->reportedIncidents->where('status', 'abierto')->count() }}
+                                            @if($user->isTrabajador())
+                                                {{ $user->pending_tasks_count }}
+                                            @elseif($user->isInstructor())
+                                                {{ $user->pending_incidents_count }}
+                                            @elseif($user->isAdmin())
+                                                {{ $user->reported_incidents_count - $user->resolved_incidents_count }}
                                             @else
                                                 -
                                             @endif
                                         </div>
                                         <div
                                             class="text-[10px] font-bold text-slate-400 dark:text-[#B0B3B8] uppercase tracking-wider">
-                                            @if($user->role === 'trabajador')
+                                            @if($user->isTrabajador())
                                                 Pendientes
-                                            @elseif($user->role === 'instructor')
+                                            @elseif($user->isInstructor())
                                                 Abiertos
+                                            @elseif($user->isAdmin())
+                                                Incid. Pendientes
                                             @else
                                                 -
                                             @endif
