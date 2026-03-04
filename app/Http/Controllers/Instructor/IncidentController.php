@@ -19,10 +19,10 @@ class IncidentController extends Controller
         // Aplicar búsqueda si se proporciona
         if ($request->filled('search')) {
             $search = $request->input('search');
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%")
-                  ->orWhere('location', 'like', "%{$search}%");
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhere('location', 'like', "%{$search}%");
             });
         }
 
@@ -32,7 +32,7 @@ class IncidentController extends Controller
         }
 
         // Ordenar por fecha de creación (más recientes primero)
-        $incidents = $query->orderBy('created_at', 'desc')->get();
+        $incidents = $query->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
 
         return view('instructor.incidents.index', compact('incidents'));
     }

@@ -14,178 +14,186 @@
         </div>
     </x-slot>
 
-    <div class="py-8 bg-slate-50 dark:bg-[#18191A] dark:bg-gray-900 min-h-screen">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+    <div class="py-6 bg-slate-50/50 dark:bg-[#18191A] min-h-screen">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
 
-            {{-- Tarjetas de estadísticas --}}
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-                {{-- Total de reportes --}}
+            {{-- Top Row: Acceso Rápido and Metrics --}}
+            <div class="flex flex-col xl:flex-row gap-6">
+                {{-- Acceso rápido --}}
                 <div
-                    class="bg-white dark:bg-[#242526] dark:bg-gray-800 rounded-2xl shadow-sm border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-700 p-6">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm font-medium text-gray-600 dark:text-gray-300 dark:text-gray-400">Total de
-                                Reportes</p>
-                            <p class="text-3xl font-bold text-gray-900 dark:text-gray-100 dark:text-white mt-2">
-                                {{ $totalIncidents }}
-                            </p>
-                        </div>
-                        <div class="p-3 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-xl">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-slate-200/60 dark:border-[#3A3B3C] p-6 flex-1">
+                    <h3 class="text-lg font-bold text-slate-800 dark:text-gray-100 mb-5">Acceso Rápido</h3>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="{{ route('instructor.incidents.create') }}"
+                            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold rounded-xl text-sm transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 focus:outline-none">
+                            <svg class="w-5 h-5 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4v16m8-8H4" />
+                            </svg>
+                            Reportar Nueva Falla
+                        </a>
+                        <a href="{{ route('instructor.incidents.index') }}"
+                            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold rounded-xl text-sm transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 focus:outline-none">
+                            <svg class="w-5 h-5 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
-                        </div>
+                            Ver Todos mis Reportes
+                        </a>
                     </div>
                 </div>
 
-
-                {{-- Asignados --}}
-                <div
-                    class="bg-white dark:bg-[#242526] dark:bg-gray-800 rounded-2xl shadow-sm border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-700 p-6">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm font-medium text-gray-600 dark:text-gray-300 dark:text-gray-400">Asignados
-                            </p>
-                            <p class="text-3xl font-bold text-gray-900 dark:text-gray-100 dark:text-white mt-2">
-                                {{ $assignedIncidents }}
-                            </p>
+                {{-- Tarjetas de métricas (compactas on the right) --}}
+                <div class="flex flex-col sm:flex-row gap-6 xl:w-[480px]">
+                    {{-- Total de reportes --}}
+                    <div
+                        class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-slate-200/60 dark:border-[#3A3B3C] p-6 flex-1 flex flex-col justify-between">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <p class="text-[13px] font-medium text-slate-500 dark:text-gray-400">Total de Reportes
+                                </p>
+                                <p class="text-3xl font-bold text-slate-800 dark:text-white mt-2">
+                                    {{ $totalIncidents }}
+                                </p>
+                            </div>
+                            <div class="p-2 bg-slate-50 dark:bg-gray-800 rounded-lg text-slate-700 dark:text-gray-200">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                            </div>
                         </div>
-                        <div class="p-3 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-xl">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                            </svg>
+                    </div>
+
+                    {{-- Asignados --}}
+                    <div
+                        class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-slate-200/60 dark:border-[#3A3B3C] p-6 flex-1 flex flex-col justify-between">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <p class="text-[13px] font-medium text-slate-500 dark:text-gray-400">Asignados</p>
+                                <p class="text-3xl font-bold text-slate-800 dark:text-white mt-2">
+                                    {{ $assignedIncidents }}
+                                </p>
+                            </div>
+                            <div class="p-2 bg-slate-50 dark:bg-gray-800 rounded-lg text-slate-700 dark:text-gray-200">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5h6m-6 4h6m-6 4h6" />
+                                </svg>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
 
+            {{-- Bottom Row: Two Columns --}}
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {{-- Reportes pendientes de revisión --}}
+                {{-- Pendientes de revisión --}}
                 <div
-                    class="bg-white dark:bg-[#242526] dark:bg-gray-800 rounded-2xl shadow-sm border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-700 overflow-hidden">
-                    <div class="p-6 border-b border-slate-200 dark:border-[#3A3B3C] dark:border-gray-700">
-                        <h3
-                            class="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-white flex items-center gap-2">
-                            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-slate-200/60 dark:border-[#3A3B3C] flex flex-col min-h-[500px]">
+                    <div class="px-6 py-5 border-b border-slate-100 dark:border-[#3A3B3C]">
+                        <h3 class="text-[15px] font-bold text-slate-800 dark:text-gray-100 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-slate-800 dark:text-gray-100" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             Pendientes de Revisión
                         </h3>
                     </div>
-                    <div class="p-6">
+                    <div class="p-6 flex-1 flex flex-col">
                         @forelse($pendingIncidents as $incident)
                             <div
-                                class="mb-4 last:mb-0 p-4 bg-yellow-50 dark:bg-yellow-900/10 rounded-lg border border-yellow-200 dark:border-yellow-800">
+                                class="mb-4 last:mb-0 p-5 bg-white border border-slate-100 dark:bg-[#18191A] dark:border-[#3A3B3C] rounded-2xl hover:shadow-sm transition-shadow">
                                 <div class="flex items-start justify-between">
-                                    <div class="flex-1">
-                                        <h4 class="font-semibold text-gray-900 dark:text-gray-100 dark:text-white">
+                                    <div class="pr-4">
+                                        <h4 class="font-semibold text-slate-800 dark:text-gray-100 text-[15px]">
                                             {{ $incident->title }}
                                         </h4>
-                                        <p class="text-sm text-gray-600 dark:text-gray-300 dark:text-gray-400 mt-1">
-                                            {{ Str::limit($incident->description, 60) }}
+                                        <p class="text-[14px] text-slate-500 dark:text-gray-400 mt-1 leading-relaxed">
+                                            {{ Str::limit($incident->description, 70) }}
                                         </p>
-                                        <p
-                                            class="text-xs text-gray-500 dark:text-[#B0B3B8] dark:text-gray-500 dark:text-[#B0B3B8] mt-1">
-                                            {{ $incident->created_at->diffForHumans() }}
-                                        </p>
+                                        <div class="flex items-center gap-3 mt-3">
+                                            <span class="text-[13px] text-slate-400 dark:text-gray-500">
+                                                No revisado aún
+                                            </span>
+                                            <span class="text-[13px] text-slate-400 dark:text-gray-500">
+                                                {{ $incident->created_at->diffForHumans() }}
+                                            </span>
+                                        </div>
                                     </div>
                                     <a href="{{ route('instructor.incidents.show', $incident->id) }}"
-                                        class="ml-4 px-3 py-1.5 bg-[#1A202C] hover:bg-[#2D3748] text-white text-sm font-medium rounded-lg transition">
+                                        class="flex-shrink-0 px-4 py-2 bg-[#1A202C] hover:bg-[#2D3748] text-white text-[13px] font-semibold rounded-lg transition-colors focus:ring-2 focus:ring-slate-200 focus:outline-none">
                                         Ver
                                     </a>
                                 </div>
                             </div>
                         @empty
-                            <p class="text-gray-500 dark:text-[#B0B3B8] dark:text-gray-400 text-center py-8">No tienes
-                                reportes pendientes de revisión</p>
+                            <div
+                                class="h-full flex-1 flex flex-col items-center justify-center text-slate-400 dark:text-gray-500 min-h-[250px]">
+                                <p class="text-[14.5px]">No tienes reportes pendientes de revisión</p>
+                            </div>
                         @endforelse
                     </div>
                 </div>
 
                 {{-- Reportes recientes --}}
                 <div
-                    class="bg-white dark:bg-[#242526] dark:bg-gray-800 rounded-2xl shadow-sm border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-700 overflow-hidden">
-                    <div class="p-6 border-b border-slate-200 dark:border-[#3A3B3C] dark:border-gray-700">
-                        <h3
-                            class="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-white flex items-center gap-2">
-                            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-slate-200/60 dark:border-[#3A3B3C] flex flex-col min-h-[500px]">
+                    <div class="px-6 py-5 border-b border-slate-100 dark:border-[#3A3B3C]">
+                        <h3 class="text-[15px] font-bold text-slate-800 dark:text-gray-100 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-slate-800 dark:text-gray-100" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             Reportes Recientes
                         </h3>
                     </div>
-                    <div class="p-6">
+                    <div class="p-6 flex-1 flex flex-col">
                         @forelse($recentIncidents as $incident)
                             <div
-                                class="mb-4 last:mb-0 p-4 bg-gray-50 dark:bg-[#18191A] rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                class="mb-4 last:mb-0 p-5 bg-white border border-slate-100 dark:bg-[#18191A] dark:border-[#3A3B3C] rounded-2xl hover:shadow-sm transition-shadow">
                                 <div class="flex items-start justify-between">
-                                    <div class="flex-1">
-                                        <h4 class="font-semibold text-gray-900 dark:text-gray-100 dark:text-white">
+                                    <div class="pr-4">
+                                        <h4 class="font-semibold text-slate-800 dark:text-gray-100 text-[15px]">
                                             {{ $incident->title }}
                                         </h4>
-                                        <p class="text-sm text-gray-600 dark:text-gray-300 dark:text-gray-400 mt-1">
-                                            {{ Str::limit($incident->description, 60) }}
+                                        <p class="text-[14px] text-slate-500 dark:text-gray-400 mt-1 leading-relaxed">
+                                            {{ Str::limit($incident->description, 70) }}
                                         </p>
-                                        <div class="flex items-center gap-3 mt-2">
+                                        <div class="flex items-center gap-3 mt-3">
                                             @php
                                                 $statusColors = [
-                                                    'pendiente de revisión' => 'bg-yellow-100 text-yellow-800 dark:bg-yellow-500/20 dark:text-yellow-300',
-                                                    'asignado' => 'bg-blue-100 text-blue-800 dark:bg-blue-500/20 dark:text-blue-300',
-                                                    'resuelto' => 'bg-indigo-100 text-indigo-800 dark:bg-indigo-500/20 dark:text-indigo-300',
-                                                    'cerrado' => 'bg-green-100 text-green-800 dark:bg-green-500/20 dark:text-green-300',
+                                                    'pendiente de revisión' => 'bg-yellow-50 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400',
+                                                    'asignado' => 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
+                                                    'resuelto' => 'bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400',
+                                                    'cerrado' => 'bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-400',
                                                 ];
-                                                $color = $statusColors[$incident->status] ?? 'bg-gray-100 text-gray-800 dark:text-gray-100 dark:bg-gray-500/20 dark:text-gray-300';
+                                                $color = $statusColors[$incident->status] ?? 'bg-slate-100 text-slate-700 dark:bg-gray-800 dark:text-gray-300';
                                             @endphp
                                             <span
-                                                class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium {{ $color }}">
+                                                class="inline-flex items-center px-2 py-0.5 rounded text-[12px] font-medium {{ $color }}">
                                                 {{ ucfirst($incident->status) }}
                                             </span>
-                                            <span
-                                                class="text-xs text-gray-500 dark:text-[#B0B3B8] dark:text-gray-500 dark:text-[#B0B3B8]">
+                                            <span class="text-[13px] text-slate-400 dark:text-gray-500">
                                                 {{ $incident->created_at->diffForHumans() }}
                                             </span>
                                         </div>
                                     </div>
                                     <a href="{{ route('instructor.incidents.show', $incident->id) }}"
-                                        class="ml-4 px-3 py-1.5 bg-[#1A202C] hover:bg-[#2D3748] text-white text-sm font-medium rounded-lg transition">
+                                        class="flex-shrink-0 px-4 py-2 bg-[#1A202C] hover:bg-[#2D3748] text-white text-[13px] font-semibold rounded-lg transition-colors focus:ring-2 focus:ring-slate-200 focus:outline-none">
                                         Ver
                                     </a>
                                 </div>
                             </div>
                         @empty
-                            <p class="text-gray-500 dark:text-[#B0B3B8] dark:text-gray-400 text-center py-8">No tienes
-                                reportes recientes</p>
+                            <div
+                                class="h-full flex-1 flex flex-col items-center justify-center text-slate-400 dark:text-gray-500 min-h-[250px]">
+                                <p class="text-[14.5px]">No tienes reportes recientes</p>
+                            </div>
                         @endforelse
                     </div>
-                </div>
-            </div>
-
-            {{-- Acceso rápido --}}
-            <div
-                class="bg-white dark:bg-[#242526] dark:bg-gray-800 rounded-2xl shadow-sm border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-700 p-6">
-                <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-white mb-4">Acceso Rápido</h3>
-                <div class="flex flex-wrap gap-4">
-                    <a href="{{ route('instructor.incidents.create') }}"
-                        class="inline-flex items-center gap-2 px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold rounded-xl transition-all shadow-sm focus:ring-2 focus:ring-slate-200">
-                        <svg class="w-5 h-5 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                        </svg>
-                        Reportar Nueva Falla
-                    </a>
-                    <a href="{{ route('instructor.incidents.index') }}"
-                        class="inline-flex items-center gap-2 px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold rounded-xl transition-all shadow-sm focus:ring-2 focus:ring-slate-200">
-                        <svg class="w-5 h-5 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                        Ver Todos mis Reportes
-                    </a>
                 </div>
             </div>
 

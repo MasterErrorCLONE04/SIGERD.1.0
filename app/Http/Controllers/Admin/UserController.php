@@ -118,9 +118,6 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user = User::with([
-            'assignedTasks' => function ($query) {
-                $query->with('createdBy')->orderBy('created_at', 'desc');
-            },
             'createdTasks' => function ($query) {
                 $query->with('assignedTo')->orderBy('created_at', 'desc');
             },
@@ -129,7 +126,16 @@ class UserController extends Controller
             }
         ])->findOrFail($id);
 
-        return view('admin.users.show', compact('user'));
+        $assignedTasks = collect();
+        if ($user->role === 'trabajador') {
+            $assignedTasks = $user->assignedTasks()
+                ->with('createdBy')
+                ->orderBy('created_at', 'desc')
+                ->paginate(10)
+                ->withQueryString();
+        }
+
+        return view('admin.users.show', compact('user', 'assignedTasks'));
     }
 
     /**

@@ -131,31 +131,32 @@
                                 </div>
                             </div>
 
-                            {{-- Usuario Dropdown --}}
+                            {{-- Usuario Dropdown Button --}}
                             <div x-data="{ userMenuOpen: false }" class="relative">
                                 <button @click="userMenuOpen = !userMenuOpen"
-                                    class="hidden md:flex items-center gap-2 px-3 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200 group">
-                                    <div class="text-right">
+                                    class="hidden md:flex items-center gap-3 pl-3 pr-4 py-2 bg-slate-50 dark:bg-gray-700/50 rounded-xl hover:bg-slate-100 dark:hover:bg-gray-600 transition-colors duration-200 group focus:outline-none">
+                                    <div class="text-right flex flex-col justify-center">
                                         <p
-                                            class="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover:text-gray-900 dark:group-hover:text-white transition">
+                                            class="text-[14px] font-semibold text-slate-700 dark:text-gray-200 group-hover:text-slate-900 dark:group-hover:text-white transition leading-none mb-1">
                                             {{ Auth::user()->name }}
                                         </p>
-                                        <p class="text-xs text-gray-500 dark:text-gray-400">
+                                        <p class="text-[12px] text-slate-500 dark:text-gray-400 leading-none">
                                             {{ ucfirst(Auth::user()->role) }}
                                         </p>
                                     </div>
-                                    @if (Auth::user()->hasProfilePhoto())
-                                        <img src="{{ asset('storage/' . Auth::user()->profile_photo) }}"
-                                            alt="{{ Auth::user()->name }}"
-                                            class="w-10 h-10 rounded-full object-cover ring-2 ring-transparent group-hover:ring-blue-500 transition">
-                                    @else
-                                        <div
-                                            class="w-10 h-10 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-full flex items-center justify-center text-white font-bold ring-2 ring-transparent group-hover:ring-blue-500 transition">
-                                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-                                        </div>
-                                    @endif
+                                    <div class="relative">
+                                        @if (Auth::user()->hasProfilePhoto())
+                                            <img src="{{ asset('storage/' . Auth::user()->profile_photo) }}"
+                                                alt="{{ Auth::user()->name }}" class="w-10 h-10 rounded-full object-cover">
+                                        @else
+                                            <div
+                                                class="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                                {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                                            </div>
+                                        @endif
+                                    </div>
                                     {{-- Chevron icon --}}
-                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400 transition-transform duration-200"
+                                    <svg class="w-4 h-4 text-slate-600 dark:text-gray-400 transition-transform duration-200"
                                         :class="{ 'rotate-180': userMenuOpen }" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -171,34 +172,41 @@
                                     x-transition:leave="transition ease-in duration-150"
                                     x-transition:leave-start="opacity-100 scale-100"
                                     x-transition:leave-end="opacity-0 scale-95"
-                                    class="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 z-50 overflow-hidden"
+                                    class="absolute right-0 mt-3 w-72 bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] border border-slate-200/80 dark:border-[#3A3B3C] z-50 overflow-hidden"
                                     style="display: none;">
 
                                     {{-- User Info Header --}}
-                                    <div
-                                        class="px-4 py-3 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-700 dark:to-gray-800 border-b border-gray-200 dark:border-gray-700">
-                                        <div class="flex items-center gap-3">
-                                            @if (Auth::user()->hasProfilePhoto())
-                                                <img src="{{ asset('storage/' . Auth::user()->profile_photo) }}"
-                                                    alt="{{ Auth::user()->name }}"
-                                                    class="w-12 h-12 rounded-full object-cover">
-                                            @else
-                                                <div
-                                                    class="w-12 h-12 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                                                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-                                                </div>
-                                            @endif
-                                            <div class="flex-1 min-w-0">
-                                                <p class="text-sm font-semibold text-gray-900 dark:text-white truncate">
+                                    <div class="px-5 py-5 border-b border-slate-100 dark:border-[#3A3B3C]">
+                                        <div class="flex items-center gap-4">
+                                            <div class="relative">
+                                                @if (Auth::user()->hasProfilePhoto())
+                                                    <img src="{{ asset('storage/' . Auth::user()->profile_photo) }}"
+                                                        alt="{{ Auth::user()->name }}"
+                                                        class="w-14 h-14 rounded-full object-cover">
+                                                @else
+                                                    <div
+                                                        class="w-14 h-14 bg-indigo-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                                                        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                                                    </div>
+                                                @endif
+                                                <span
+                                                    class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white dark:border-[#242526] rounded-full"></span>
+                                            </div>
+                                            <div class="flex-1 min-w-0 flex flex-col justify-center">
+                                                <p
+                                                    class="text-[15px] font-bold text-slate-800 dark:text-white truncate">
                                                     {{ Auth::user()->name }}
                                                 </p>
-                                                <p class="text-xs text-gray-600 dark:text-gray-400 truncate">
+                                                <p
+                                                    class="text-[12px] text-slate-500 dark:text-gray-400 truncate mt-0.5 mb-1.5">
                                                     {{ Auth::user()->email }}
                                                 </p>
-                                                <span
-                                                    class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 mt-1">
-                                                    {{ ucfirst(Auth::user()->role) }}
-                                                </span>
+                                                <div>
+                                                    <span
+                                                        class="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold tracking-wider uppercase bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
+                                                        {{ Auth::user()->role }}
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -207,30 +215,33 @@
                                     <div class="py-2">
                                         {{-- Ver Perfil --}}
                                         <a href="{{ route('profile.edit') }}"
-                                            class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                            class="flex items-center gap-4 px-5 py-2.5 hover:bg-slate-50 dark:hover:bg-[#3A3B3C]/50 transition border-l-2 border-transparent hover:border-slate-800 dark:hover:border-gray-300">
                                             <div
-                                                class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                                                <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none"
-                                                    stroke="currentColor" viewBox="0 0 24 24">
+                                                class="w-9 h-9 bg-slate-100 dark:bg-[#3A3B3C] rounded-xl flex items-center justify-center">
+                                                <svg class="w-[18px] h-[18px] text-slate-700 dark:text-gray-200"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2"
                                                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                                 </svg>
                                             </div>
-                                            <div>
-                                                <p class="font-medium">Mi Perfil</p>
-                                                <p class="text-xs text-gray-500 dark:text-gray-400">Ver y editar
-                                                    información</p>
+                                            <div class="flex flex-col justify-center">
+                                                <p
+                                                    class="text-[14px] font-semibold text-slate-800 dark:text-gray-100 leading-tight">
+                                                    Mi Perfil</p>
+                                                <p
+                                                    class="text-[11px] font-medium text-slate-400 dark:text-gray-500 leading-tight mt-0.5">
+                                                    Ver e información</p>
                                             </div>
                                         </a>
 
                                         {{-- Configuración --}}
                                         <a href="{{ route('settings.index') }}"
-                                            class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                            class="flex items-center gap-4 px-5 py-2.5 hover:bg-slate-50 dark:hover:bg-[#3A3B3C]/50 transition border-l-2 border-transparent hover:border-slate-800 dark:hover:border-gray-300">
                                             <div
-                                                class="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
-                                                <svg class="w-4 h-4 text-purple-600 dark:text-purple-400" fill="none"
-                                                    stroke="currentColor" viewBox="0 0 24 24">
+                                                class="w-9 h-9 bg-slate-100 dark:bg-[#3A3B3C] rounded-xl flex items-center justify-center">
+                                                <svg class="w-[18px] h-[18px] text-slate-700 dark:text-gray-200"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2"
                                                         d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -238,54 +249,64 @@
                                                         stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                                 </svg>
                                             </div>
-                                            <div>
-                                                <p class="font-medium">Configuración</p>
-                                                <p class="text-xs text-gray-500 dark:text-gray-400">Preferencias de
-                                                    cuenta</p>
+                                            <div class="flex flex-col justify-center">
+                                                <p
+                                                    class="text-[14px] font-semibold text-slate-800 dark:text-gray-100 leading-tight">
+                                                    Configuración</p>
+                                                <p
+                                                    class="text-[11px] font-medium text-slate-400 dark:text-gray-500 leading-tight mt-0.5">
+                                                    Ajustes de cuenta</p>
                                             </div>
                                         </a>
 
-                                        {{-- Ayuda --}}
+                                        {{-- Soporte --}}
                                         <a href="{{ route('support.index') }}"
-                                            class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                            class="flex items-center gap-4 px-5 py-2.5 hover:bg-slate-50 dark:hover:bg-[#3A3B3C]/50 transition border-l-2 border-transparent hover:border-slate-800 dark:hover:border-gray-300">
                                             <div
-                                                class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
-                                                <svg class="w-4 h-4 text-green-600 dark:text-green-400" fill="none"
-                                                    stroke="currentColor" viewBox="0 0 24 24">
+                                                class="w-9 h-9 bg-slate-100 dark:bg-[#3A3B3C] rounded-xl flex items-center justify-center">
+                                                <svg class="w-[18px] h-[18px] text-slate-700 dark:text-gray-200"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2"
                                                         d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                 </svg>
                                             </div>
-                                            <div>
-                                                <p class="font-medium">Ayuda y Soporte</p>
-                                                <p class="text-xs text-gray-500 dark:text-gray-400">Centro de ayuda</p>
+                                            <div class="flex flex-col justify-center">
+                                                <p
+                                                    class="text-[14px] font-semibold text-slate-800 dark:text-gray-100 leading-tight">
+                                                    Soporte</p>
+                                                <p
+                                                    class="text-[11px] font-medium text-slate-400 dark:text-gray-500 leading-tight mt-0.5">
+                                                    Centro de ayuda</p>
                                             </div>
                                         </a>
                                     </div>
 
                                     {{-- Divider --}}
-                                    <div class="border-t border-gray-200 dark:border-gray-700"></div>
+                                    <div class="border-t border-slate-100 dark:border-[#3A3B3C]"></div>
 
                                     {{-- Cerrar Sesión --}}
                                     <div class="py-2">
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
                                             <button type="submit"
-                                                class="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition">
+                                                class="flex items-center gap-4 w-full px-5 py-2.5 hover:bg-rose-50/50 dark:hover:bg-rose-900/10 transition border-l-2 border-transparent hover:border-rose-400 focus:outline-none text-left">
                                                 <div
-                                                    class="w-8 h-8 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center">
-                                                    <svg class="w-4 h-4 text-red-600 dark:text-red-400" fill="none"
-                                                        stroke="currentColor" viewBox="0 0 24 24">
+                                                    class="w-9 h-9 bg-rose-50 dark:bg-rose-900/30 rounded-xl flex items-center justify-center">
+                                                    <svg class="w-[18px] h-[18px] text-rose-500 dark:text-rose-400"
+                                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             stroke-width="2"
                                                             d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                                                     </svg>
                                                 </div>
-                                                <div class="text-left">
-                                                    <p class="font-medium">Cerrar Sesión</p>
-                                                    <p class="text-xs text-red-500 dark:text-red-400">Salir de tu cuenta
-                                                    </p>
+                                                <div class="flex flex-col justify-center">
+                                                    <p
+                                                        class="text-[14px] font-semibold text-rose-500 dark:text-rose-400 leading-tight">
+                                                        Cerrar Sesión</p>
+                                                    <p
+                                                        class="text-[10px] uppercase font-bold tracking-wider text-rose-400 dark:text-rose-500 leading-tight mt-0.5">
+                                                        DESCONECTAR</p>
                                                 </div>
                                             </button>
                                         </form>
