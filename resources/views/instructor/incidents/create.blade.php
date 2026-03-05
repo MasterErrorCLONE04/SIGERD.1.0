@@ -103,7 +103,7 @@
                             </a>
                             <button type="submit"
                                 class="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold rounded-lg transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 focus:outline-none">
-                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 !text-white" fill="none" stroke="white" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 4v16m8-8H4" />
                                 </svg>

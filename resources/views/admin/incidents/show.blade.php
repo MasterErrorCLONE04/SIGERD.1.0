@@ -318,16 +318,16 @@
                                     <x-input-error :messages="$errors->get('location')" class="mt-2" />
                                 </div>
 
-                                <div class="flex items-center justify-end gap-4 pt-4 border-t border-gray-200 dark:border-[#3A3B3C] dark:border-gray-700">
+                                <div class="flex items-center justify-end gap-4 mt-4">
                                     <a href="{{ route('admin.incidents.index') }}" 
                                        class="px-6 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 dark:text-gray-300 font-semibold rounded-lg transition">
                                         Cancelar
                                     </a>
-                                    <x-primary-button class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700">
-                                        <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <x-primary-button class="px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] uppercase tracking-widest text-white transition-colors">
+                                        <svg class="w-5 h-5 mr-2 inline !text-white" fill="none" stroke="white" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                                         </svg>
-                                        {{ __('Convertir a Tarea') }}
+                                        {{ __('CONVERTIR A TAREA') }}
                                     </x-primary-button>
                                 </div>
                             </form>
@@ -344,7 +344,7 @@
                     @endif
 
                     {{-- Botones de acción --}}
-                    <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200 dark:border-[#3A3B3C] dark:border-gray-700">
+                    <div class="flex flex-col sm:flex-row gap-4 mt-6 pt-2">
                         <a href="{{ route('admin.incidents.index') }}" 
                            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 dark:text-gray-300 font-semibold rounded-lg transition shadow-sm hover:shadow-md">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

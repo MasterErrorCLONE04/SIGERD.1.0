@@ -99,9 +99,8 @@
                         <span class="material-symbols-outlined text-indigo-600 text-xl mt-0.5">description</span>
                         <div class="flex-1">
                             <h3 class="font-semibold text-slate-800 dark:text-gray-100 dark:text-gray-200 mb-1">
-                                Descripción y Actividades</h3>
-                            <p class="text-sm leading-relaxed whitespace-pre-wrap">
-                                {{ $task->description ?: 'Sin descripción detallada.' }}
+                                Descripción</h3>
+                            <p class="text-sm leading-relaxed">{{ $task->description ?: 'Sin descripción detallada.' }}
                             </p>
                         </div>
                     </div>

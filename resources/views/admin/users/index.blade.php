@@ -179,11 +179,11 @@
                                     </td>
                                     <td class="px-8 py-5">
                                         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-[0.8rem] font-semibold tracking-wide
-                                                                        @if($user->role === 'admin') bg-[#F5F3FF] text-[#6D28D9]
-                                                                        @elseif($user->role === 'coordinador') bg-[#EFF6FF] text-[#2563EB]
-                                                                        @elseif($user->role === 'instructor') bg-[#F1F5F9] text-[#475569]
-                                                                        @else bg-[#F1F5F9] text-[#475569]
-                                                                        @endif">
+                                                                                    @if($user->role === 'admin') bg-[#F5F3FF] text-[#6D28D9]
+                                                                                    @elseif($user->role === 'coordinador') bg-[#EFF6FF] text-[#2563EB]
+                                                                                    @elseif($user->role === 'instructor') bg-[#F1F5F9] text-[#475569]
+                                                                                    @else bg-[#F1F5F9] text-[#475569]
+                                                                                    @endif">
                                             @if($user->role === 'admin' || $user->role === 'administrador')
                                                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                                                     <path fill-rule="evenodd"
@@ -411,8 +411,9 @@
                     <!-- Header del Modal -->
                     <div class="flex items-center justify-between mb-8">
                         <div class="flex items-center space-x-4">
-                            <div class="p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-lg">
-                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="p-3 bg-[#1A202C] dark:bg-gray-700 rounded-xl shadow-lg">
+                                <svg class="w-8 h-8 !text-white !stroke-white" fill="none" stroke="white"
+                                    viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                 </svg>
@@ -439,16 +440,42 @@
                         class="space-y-6">
                         @csrf
 
+                        {{-- Validation Errors Banner --}}
+                        @if ($errors->any() && !old('_method'))
+                            <div
+                                class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 mt-0.5">
+                                        <svg class="w-5 h-5 text-red-600 dark:text-red-400" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3">
+                                        <h3 class="text-sm font-semibold text-red-800 dark:text-red-200">Por favor corrige
+                                            los siguientes errores:</h3>
+                                        <ul
+                                            class="mt-2 text-sm text-red-700 dark:text-red-300 list-disc list-inside space-y-1">
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
                         <!-- Foto de perfil -->
                         <div class="space-y-4">
                             <label
                                 class="block text-sm font-bold text-gray-700 dark:text-gray-200 dark:text-gray-300">Foto
                                 de
-                                Perfil</label>
+                                Perfil *</label>
                             <div class="flex items-start space-x-6">
                                 <div class="shrink-0">
                                     <div id="imagePreview"
-                                        class="h-24 w-24 rounded-2xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-lg shadow-lg ring-4 ring-white/50 dark:ring-gray-700/50 overflow-hidden">
+                                        class="h-24 w-24 rounded-2xl bg-[#1A202C] dark:bg-gray-700 flex items-center justify-center text-white font-bold text-lg shadow-lg ring-4 ring-white/50 dark:ring-gray-700/50 overflow-hidden">
                                         <span id="initialsPlaceholder">?</span>
                                         <img id="previewImg" class="h-full w-full object-cover hidden" alt="Preview">
                                     </div>
@@ -456,7 +483,7 @@
                                 <div class="flex-1">
                                     <div class="relative">
                                         <input type="file" id="profile_photo" name="profile_photo" accept="image/*"
-                                            class="hidden" onchange="previewImage(this)">
+                                            required class="hidden" onchange="previewImage(this)">
                                         <label for="profile_photo"
                                             class="inline-flex items-center px-4 py-2 bg-white dark:bg-[#242526] dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl font-medium text-gray-700 dark:text-gray-200 dark:text-gray-300 shadow-sm hover:bg-gray-50 dark:hover:bg-[#3A3B3C] dark:hover:bg-gray-600 cursor-pointer transition-all duration-200">
                                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor"
@@ -469,8 +496,7 @@
                                         </label>
                                     </div>
                                     <p class="mt-2 text-sm text-gray-500 dark:text-[#B0B3B8] dark:text-gray-400">JPG,
-                                        PNG, GIF hasta 2MB.
-                                        Opcional.</p>
+                                        PNG, GIF hasta 2MB.</p>
                                 </div>
                             </div>
                         </div>
@@ -534,7 +560,7 @@
                             <button type="button" onclick="closeModal('createUserModal')"
                                 class="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 dark:text-gray-300 bg-white dark:bg-[#242526] dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-[#3A3B3C] dark:hover:bg-gray-600 rounded-xl font-semibold transition-all shadow-sm">Cancelar</button>
                             <button type="submit"
-                                class="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all shadow-lg transform hover:scale-105">Crear
+                                class="px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold rounded-xl transition-all shadow-lg transform hover:scale-105">Crear
                                 Usuario</button>
                         </div>
                     </form>

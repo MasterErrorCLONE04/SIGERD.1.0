@@ -486,26 +486,37 @@
                     }
                 });
 
-                // Preview de imagen para usuario
-                function previewUserImage(input) {
-                    const preview = document.getElementById('userPreviewImg');
-                    const placeholder = document.getElementById('userInitialsPlaceholder');
+                // Mostrar el modal si hay errores de validación
+                @if ($errors->any())
+                    window.onload = function () {
+                        @if(old('role'))
+                            openModal('createUserModal');
+                        @elseif(old('title'))
+                            openModal('createTaskModal');
+                        @endif
+                            };
+                @endif
 
-                    if (input.files && input.files[0]) {
-                        const reader = new FileReader();
+                    // Preview de imagen para usuario
+                    function previewUserImage(input) {
+                        const preview = document.getElementById('userPreviewImg');
+                        const placeholder = document.getElementById('userInitialsPlaceholder');
 
-                        reader.onload = function (e) {
-                            preview.src = e.target.result;
-                            preview.classList.remove('hidden');
-                            placeholder.classList.add('hidden');
-                        };
+                        if (input.files && input.files[0]) {
+                            const reader = new FileReader();
 
-                        reader.readAsDataURL(input.files[0]);
-                    } else {
-                        preview.classList.add('hidden');
-                        placeholder.classList.remove('hidden');
+                            reader.onload = function (e) {
+                                preview.src = e.target.result;
+                                preview.classList.remove('hidden');
+                                placeholder.classList.add('hidden');
+                            };
+
+                            reader.readAsDataURL(input.files[0]);
+                        } else {
+                            preview.classList.add('hidden');
+                            placeholder.classList.remove('hidden');
+                        }
                     }
-                }
 
                 function updateUserInitials(name) {
                     const placeholder = document.getElementById('userInitialsPlaceholder');
@@ -540,8 +551,8 @@
                         <div class="bg-white dark:bg-[#242526] dark:bg-gray-800 px-6 pt-6 pb-4">
                             <div class="flex items-center justify-between mb-6">
                                 <div class="flex items-center space-x-3">
-                                    <div class="p-2 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl">
-                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
+                                    <div class="p-2 bg-[#1A202C] dark:bg-gray-700 rounded-xl">
+                                        <svg class="w-6 h-6 !text-white !stroke-white" fill="none" stroke="white"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z">
@@ -564,21 +575,47 @@
                                 class="space-y-4">
                                 @csrf
 
+                                {{-- Validation Errors Banner --}}
+                                @if ($errors->any() && old('role'))
+                                    <div
+                                        class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 mb-4">
+                                        <div class="flex items-start">
+                                            <div class="flex-shrink-0 mt-0.5">
+                                                <svg class="w-5 h-5 text-red-600 dark:text-red-400" fill="none"
+                                                    stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </div>
+                                            <div class="ml-3">
+                                                <h3 class="text-sm font-semibold text-red-800 dark:text-red-200">Por favor
+                                                    corrige los siguientes errores:</h3>
+                                                <ul
+                                                    class="mt-2 text-sm text-red-700 dark:text-red-300 list-disc list-inside space-y-1">
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+
                                 <!-- Foto de perfil -->
                                 <div class="space-y-2">
                                     <label
                                         class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300">
-                                        Foto de Perfil (Opcional)
+                                        Foto de Perfil *
                                     </label>
                                     <div class="flex items-center space-x-4">
                                         <div id="userImagePreview"
-                                            class="h-16 w-16 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold shadow-lg overflow-hidden">
+                                            class="h-16 w-16 rounded-xl bg-[#1A202C] dark:bg-gray-700 flex items-center justify-center text-white font-bold shadow-lg overflow-hidden">
                                             <span id="userInitialsPlaceholder">?</span>
                                             <img id="userPreviewImg" class="h-full w-full object-cover hidden"
                                                 alt="Preview">
                                         </div>
                                         <div class="flex-1">
-                                            <input type="file" id="user_profile_photo" name="profile_photo"
+                                            <input type="file" id="user_profile_photo" name="profile_photo" required
                                                 accept="image/*" class="hidden" onchange="previewUserImage(this)">
                                             <label for="user_profile_photo"
                                                 class="inline-flex items-center px-3 py-2 bg-white dark:bg-[#242526] dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-200 dark:text-gray-300 shadow-sm hover:bg-gray-50 dark:hover:bg-[#3A3B3C] dark:hover:bg-gray-600 cursor-pointer">
@@ -668,7 +705,7 @@
                                         Cancelar
                                     </button>
                                     <button type="submit"
-                                        class="px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all shadow-lg">
+                                        class="px-4 py-2 bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold rounded-lg transition-all shadow-lg">
                                         Crear Usuario
                                     </button>
                                 </div>
@@ -716,6 +753,32 @@
                                 class="space-y-4">
                                 @csrf
 
+                                {{-- Validation Errors Banner --}}
+                                @if ($errors->any() && old('title'))
+                                    <div
+                                        class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 mb-4">
+                                        <div class="flex items-start">
+                                            <div class="flex-shrink-0 mt-0.5">
+                                                <svg class="w-5 h-5 text-red-600 dark:text-red-400" fill="none"
+                                                    stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </div>
+                                            <div class="ml-3">
+                                                <h3 class="text-sm font-semibold text-red-800 dark:text-red-200">Por favor
+                                                    corrige los siguientes errores:</h3>
+                                                <ul
+                                                    class="mt-2 text-sm text-red-700 dark:text-red-300 list-disc list-inside space-y-1">
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+
                                 <!-- Título -->
                                 <div>
                                     <label for="task_title"
@@ -746,6 +809,7 @@
                                             Fecha Límite *
                                         </label>
                                         <input id="task_deadline" name="deadline_at" type="date" required
+                                            min="{{ date('Y-m-d') }}"
                                             class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500">
                                     </div>
 
@@ -780,9 +844,9 @@
                                     <div>
                                         <label for="task_assigned_to"
                                             class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">
-                                            Asignar a
+                                            Asignar a *
                                         </label>
-                                        <select id="task_assigned_to" name="assigned_to"
+                                        <select id="task_assigned_to" name="assigned_to" required
                                             class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500">
                                             <option value="">Selecciona un trabajador</option>
                                             @foreach ($workers as $worker)
@@ -796,9 +860,9 @@
                                 <div>
                                     <label for="task_reference_images"
                                         class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">
-                                        Imágenes de Referencia (Opcional)
+                                        Imágenes de Referencia *
                                     </label>
-                                    <input id="task_reference_images" name="reference_images[]" type="file"
+                                    <input id="task_reference_images" name="reference_images[]" type="file" required
                                         accept="image/*" multiple
                                         class="block w-full text-sm text-gray-900 dark:text-gray-100 dark:text-gray-400 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 focus:outline-none">
                                     <p class="mt-1 text-xs text-gray-500 dark:text-[#B0B3B8] dark:text-gray-400">PNG,
@@ -830,21 +894,21 @@
 
                 {{-- Datos del servidor en formato JSON --}}
                 <script id="dashboard-tasks-status-data" type="application/json">
-                                            {!! json_encode($tasksByStatus) !!}
-                                        </script>
+                                                    {!! json_encode($tasksByStatus) !!}
+                                                </script>
                 <script id="dashboard-tasks-priority-data" type="application/json">
-                                            {!! json_encode($tasksByPriority) !!}
-                                        </script>
+                                                    {!! json_encode($tasksByPriority) !!}
+                                                </script>
                 <script id="dashboard-incidents-status-data" type="application/json">
-                                            {!! json_encode($incidentsByStatus) !!}
-                                        </script>
+                                                    {!! json_encode($incidentsByStatus) !!}
+                                                </script>
                 <script id="dashboard-users-data" type="application/json">
-                                            {
-                                                "admin": {{ $adminUsers }},
-                                                "worker": {{ $workerUsers }},
-                                                "instructor": {{ $instructorUsers }}
-                                            }
-                                        </script>
+                                                    {
+                                                        "admin": {{ $adminUsers }},
+                                                        "worker": {{ $workerUsers }},
+                                                        "instructor": {{ $instructorUsers }}
+                                                    }
+                                                </script>
 
                 {{-- Script principal de gráficos --}}
                 <script type="text/javascript">

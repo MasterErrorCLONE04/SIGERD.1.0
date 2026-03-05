@@ -47,12 +47,22 @@ class TaskController extends Controller
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
-            'deadline_at' => ['required', 'date'],
+            'deadline_at' => ['required', 'date', 'after_or_equal:today'],
             'location' => ['required', 'string', 'max:255'],
             'priority' => ['required', 'string', 'in:baja,media,alta'],
             'status' => ['nullable', 'string', 'in:pendiente,asignado,en progreso,realizada,finalizada,cancelada,incompleta,retraso en proceso'],
-            'assigned_to' => ['nullable', 'exists:users,id'],
+            'assigned_to' => ['required', 'exists:users,id'],
             'final_description' => ['nullable', 'string'],
+            'reference_images' => ['required', 'array', 'min:1'],
+            'reference_images.*' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+        ], [
+            'reference_images.required' => 'Las imágenes de referencia son obligatorias para crear la tarea.',
+            'reference_images.min' => 'Se requiere al menos una imagen de referencia.',
+            'reference_images.*.image' => 'El archivo debe ser una imagen válida.',
+            'reference_images.*.mimes' => 'Formatos permitidos: jpeg, png, jpg, gif.',
+            'reference_images.*.max' => 'Cada imagen no debe exceder los 2MB.',
+            'deadline_at.after_or_equal' => 'La fecha límite no puede ser anterior al día de hoy.',
+            'assigned_to.required' => 'Debes asignar un trabajador a la tarea.',
         ]);
 
         $data = $request->except(['initial_evidence_images', 'final_evidence_images', 'reference_images']);

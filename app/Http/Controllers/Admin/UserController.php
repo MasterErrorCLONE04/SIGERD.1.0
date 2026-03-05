@@ -43,19 +43,21 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => ['required', 'string', 'in:administrador,trabajador,instructor'],
+            'profile_photo' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ];
 
         // Validar campos básicos primero
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required', 'string', 'in:administrador,trabajador,instructor'],
+        $request->validate($rules, [
+            'profile_photo.required' => 'La foto de perfil es obligatoria.',
+            'profile_photo.image' => 'El archivo debe ser una imagen válida.',
+            'profile_photo.mimes' => 'Formatos permitidos: jpeg, png, jpg, gif.',
+            'profile_photo.max' => 'La imagen no debe exceder los 2MB.',
         ]);
 
         $profilePhotoPath = null;
 
         // Manejar la subida de la foto de perfil usando $_FILES directamente (sin fileinfo)
+        // Ya validado por Laravel, pero mantenemos la lógica de guardado
         if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] === UPLOAD_ERR_OK) {
             $file = $_FILES['profile_photo'];
             $allowedExtensions = ['jpeg', 'jpg', 'png', 'gif'];

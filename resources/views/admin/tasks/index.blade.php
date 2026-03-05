@@ -373,6 +373,27 @@
                     <form method="POST" action="{{ route('admin.tasks.store') }}" enctype="multipart/form-data"
                         class="space-y-4">
                         @csrf
+                        
+                        {{-- Validation Errors Banner --}}
+                        @if ($errors->any() && !old('_method'))
+                            <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 mt-0.5">
+                                        <svg class="w-5 h-5 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3">
+                                        <h3 class="text-sm font-semibold text-red-800 dark:text-red-200">Por favor corrige los siguientes errores:</h3>
+                                        <ul class="mt-2 text-sm text-red-700 dark:text-red-300 list-disc list-inside space-y-1">
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
 
                         <div>
                             <label for="task_title"
@@ -396,7 +417,7 @@
                                 <label for="task_deadline"
                                     class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">Fecha
                                     Límite *</label>
-                                <input id="task_deadline" name="deadline_at" type="date" required
+                                <input id="task_deadline" name="deadline_at" type="date" required min="{{ date('Y-m-d') }}"
                                     class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500">
                             </div>
                             <div>
@@ -424,8 +445,8 @@
                             <div>
                                 <label for="task_assigned_to"
                                     class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">Asignar
-                                    a</label>
-                                <select id="task_assigned_to" name="assigned_to"
+                                    a *</label>
+                                <select id="task_assigned_to" name="assigned_to" required
                                     class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500">
                                     <option value="">Selecciona un trabajador</option>
                                     @foreach ($workers as $worker)
@@ -438,9 +459,9 @@
                         <div>
                             <label for="task_reference_images"
                                 class="block text-sm font-semibold text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-1">Imágenes de
-                                Referencia (Opcional)</label>
+                                Referencia *</label>
                             <input id="task_reference_images" name="reference_images[]" type="file" accept="image/*"
-                                multiple
+                                multiple required
                                 class="block w-full text-sm text-gray-900 dark:text-gray-100 dark:text-gray-400 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 focus:outline-none">
                             <p class="mt-1 text-xs text-gray-500 dark:text-[#B0B3B8] dark:text-gray-400">PNG, JPG, GIF hasta 2MB cada una.
                             </p>
@@ -615,6 +636,13 @@
                 closeModal('editTaskModal');
             }
         });
+
+        // Reabrir modal de crear tarea si hay errores de validación (solo si no es edición)
+        @if ($errors->any() && !old('_method'))
+            document.addEventListener('DOMContentLoaded', function() {
+                openModal('createTaskModal');
+            });
+        @endif
 
         // Store tasks in a global variable for easy access
         const tasksData = @json($tasks->items());
