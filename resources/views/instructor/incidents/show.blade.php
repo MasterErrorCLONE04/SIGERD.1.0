@@ -111,21 +111,43 @@
                             </p>
                         </div>
 
-                        {{-- Reportado por --}}
-                        <div
-                            class="bg-slate-50 dark:bg-[#18191A] rounded-xl p-4 border border-slate-100 dark:border-[#3A3B3C]">
-                            <h4
-                                class="text-sm font-semibold text-gray-600 dark:text-gray-300 dark:text-gray-400 mb-2 flex items-center gap-2">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                </svg>
-                                Reportado por
-                            </h4>
-                            <p class="text-gray-900 dark:text-gray-100 dark:text-white font-medium">
-                                {{ $incident->reportedBy->name }}
-                            </p>
-                        </div>
+                        @php
+                            $assignedWorker = null;
+                            if ($incident->status === 'asignado' || $incident->status === 'resuelto') {
+                                // Buscamos la primera tarea (por ahora un incidente suele tener una)
+                                $task = $incident->tasks->first();
+                                if ($task && $task->assignedTo) {
+                                    $assignedWorker = $task->assignedTo;
+                                }
+                            }
+                        @endphp
+
+                        @if($assignedWorker)
+                            {{-- Asignado a --}}
+                            <div
+                                class="bg-slate-50 dark:bg-[#18191A] rounded-xl p-4 border border-slate-100 dark:border-[#3A3B3C]">
+                                <h4
+                                    class="text-sm font-semibold text-gray-600 dark:text-gray-300 dark:text-gray-400 mb-2 flex items-center gap-2">
+                                    Asignado a
+                                </h4>
+                                <p class="text-gray-900 dark:text-gray-100 dark:text-white font-medium">
+                                    {{ $assignedWorker->name }}
+                                </p>
+                            </div>
+                        @else
+                            {{-- Reportado por --}}
+                            <div
+                                class="bg-slate-50 dark:bg-[#18191A] rounded-xl p-4 border border-slate-100 dark:border-[#3A3B3C]">
+                                <h4
+                                    class="text-sm font-semibold text-gray-600 dark:text-gray-300 dark:text-gray-400 mb-2 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-sm">person</span>
+                                    Reportado por
+                                </h4>
+                                <p class="text-gray-900 dark:text-gray-100 dark:text-white font-medium">
+                                    {{ $incident->reportedBy->name }}
+                                </p>
+                            </div>
+                        @endif
 
                         {{-- ID del reporte --}}
                         <div

@@ -64,7 +64,7 @@ class TaskController extends Controller
      */
     public function show(string $id)
     {
-        $task = Task::where('assigned_to', Auth::id())->with(['assignedTo', 'createdBy'])->findOrFail($id);
+        $task = Task::where('assigned_to', Auth::id())->with(['assignedTo', 'createdBy', 'incident.reportedBy'])->findOrFail($id);
         $statuses = ['pendiente', 'en progreso', 'finalizada', 'cancelada'];
 
         return view('worker.tasks.show', compact('task', 'statuses'));

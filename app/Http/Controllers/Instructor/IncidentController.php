@@ -141,7 +141,7 @@ class IncidentController extends Controller
      */
     public function show(string $id)
     {
-        $incident = Incident::where('reported_by', Auth::id())->findOrFail($id);
+        $incident = Incident::where('reported_by', Auth::id())->with(['tasks.assignedTo'])->findOrFail($id);
 
         return view('instructor.incidents.show', compact('incident'));
     }

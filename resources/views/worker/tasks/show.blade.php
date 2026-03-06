@@ -130,17 +130,19 @@
                             {{ $task->deadline_at ? $task->deadline_at->format('d/m/Y H:i') : 'No establecida' }}
                         </p>
                     </div>
-                    <div
-                        class="bg-white dark:bg-[#242526] dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
+                    @if($task->incident)
                         <div
-                            class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
-                            <span class="material-symbols-outlined text-sm">engineering</span>
-                            <span class="text-xs font-medium uppercase tracking-wider">Rol</span>
+                            class="bg-white dark:bg-[#242526] dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
+                            <div
+                                class="flex items-center space-x-2 text-slate-500 dark:text-[#B0B3B8] dark:text-gray-400 mb-2">
+                                <span class="material-symbols-outlined text-sm">person</span>
+                                <span class="text-xs font-medium uppercase tracking-wider">Reportada por</span>
+                            </div>
+                            <p class="font-semibold text-slate-800 dark:text-gray-100 dark:text-white">
+                                {{ $task->incident->reportedBy->name ?? 'Instructor' }}
+                            </p>
                         </div>
-                        <p class="font-semibold text-slate-800 dark:text-gray-100 dark:text-white">
-                            Trabajador / Organizador
-                        </p>
-                    </div>
+                    @endif
                     <div
                         class="bg-white dark:bg-[#242526] dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700">
                         <div
