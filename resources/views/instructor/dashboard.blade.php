@@ -24,7 +24,7 @@
                     class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-slate-200/60 dark:border-[#3A3B3C] p-6 flex-1">
                     <h3 class="text-lg font-bold text-slate-800 dark:text-gray-100 mb-5">Acceso Rápido</h3>
                     <div class="flex flex-wrap gap-4">
-                        <a href="{{ route('instructor.incidents.create') }}"
+                        <a href="javascript:void(0)" onclick="openModal('createIncidentModal')"
                             class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold rounded-xl text-sm transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 focus:outline-none">
                             <svg class="w-5 h-5 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -195,8 +195,17 @@
                         @endforelse
                     </div>
                 </div>
-            </div>
+                @include('modals.instructor-create-incident')
 
-        </div>
-    </div>
+                @push('scripts')
+                    <script>
+                        function openModal(modalId) {
+                            document.getElementById(modalId).classList.remove('hidden');
+                        }
+
+                        function closeModal(modalId) {
+                            document.getElementById(modalId).classList.add('hidden');
+                        }
+                    </script>
+                @endpush
 </x-app-layout>

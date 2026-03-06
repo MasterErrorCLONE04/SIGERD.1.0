@@ -71,7 +71,7 @@
 
                         <!-- Action Buttons -->
                         <div class="flex items-center gap-2 w-full lg:w-auto lg:pl-4 lg:border-l border-slate-200 dark:border-[#3A3B3C] flex-shrink-0">
-                            <a href="{{ route('instructor.incidents.create') }}" class="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] text-white px-5 py-2.5 rounded-xl text-[0.85rem] font-medium transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 whitespace-nowrap">
+                            <a href="javascript:void(0)" onclick="openModal('createIncidentModal')" class="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] text-white px-5 py-2.5 rounded-xl text-[0.85rem] font-medium transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 whitespace-nowrap">
                                 <svg class="w-4 h-4 !text-white dark:!text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                 </svg>
@@ -159,7 +159,7 @@
                                                 <a href="{{ route('instructor.incidents.index') }}" class="text-[#E11D48] hover:text-[#BE123C] font-semibold text-sm">Limpiar filtros</a>
                                             @else
                                                 <p class="text-[0.85rem] text-slate-500 dark:text-[#9CA3AF] mb-4">Aún no has registrado ninguna incidencia o falla.</p>
-                                                <a href="{{ route('instructor.incidents.create') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-[#1A202C] hover:bg-[#2D3748] text-white rounded-lg transition-colors font-medium text-sm">
+                                                <a href="javascript:void(0)" onclick="openModal('createIncidentModal')" class="inline-flex items-center gap-2 px-4 py-2 bg-[#1A202C] hover:bg-[#2D3748] text-white rounded-lg transition-colors font-medium text-sm">
                                                     Reportar Primera Falla
                                                 </a>
                                             @endif
@@ -211,8 +211,17 @@
                     </div>
                 </div>
                 @endif
-            </div>
+    @include('modals.instructor-create-incident')
 
-        </div>
-    </div>
+    @push('scripts')
+        <script>
+            function openModal(modalId) {
+                document.getElementById(modalId).classList.remove('hidden');
+            }
+
+            function closeModal(modalId) {
+                document.getElementById(modalId).classList.add('hidden');
+            }
+        </script>
+    @endpush
 </x-app-layout>

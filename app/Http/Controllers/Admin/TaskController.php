@@ -229,8 +229,10 @@ class TaskController extends Controller
     {
         $task = Task::with(['assignedTo', 'createdBy', 'incident'])->findOrFail($id);
         $statuses = ['asignado', 'en progreso', 'realizada', 'finalizada', 'cancelada', 'incompleta', 'retraso en proceso'];
+        $workers = User::where('role', 'trabajador')->get();
+        $priorities = ['baja', 'media', 'alta', 'critica'];
 
-        return view('admin.tasks.show', compact('task', 'statuses'));
+        return view('admin.tasks.show', compact('task', 'statuses', 'workers', 'priorities'));
     }
 
     /**

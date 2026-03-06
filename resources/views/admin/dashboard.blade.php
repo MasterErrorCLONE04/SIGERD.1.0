@@ -494,7 +494,7 @@
                         @elseif(old('title'))
                             openModal('createTaskModal');
                         @endif
-                                    };
+                                        };
                 @endif
 
                 // Eventos para cerrar al hacer clic en el overlay ya están in-line en el HTML
@@ -511,21 +511,21 @@
 
                 {{-- Datos del servidor en formato JSON --}}
                 <script id="dashboard-tasks-status-data" type="application/json">
-                                                            {!! json_encode($tasksByStatus) !!}
-                                                        </script>
+                                                                {!! json_encode($tasksByStatus) !!}
+                                                            </script>
                 <script id="dashboard-tasks-priority-data" type="application/json">
-                                                            {!! json_encode($tasksByPriority) !!}
-                                                        </script>
+                                                                {!! json_encode($tasksByPriority) !!}
+                                                            </script>
                 <script id="dashboard-incidents-status-data" type="application/json">
-                                                            {!! json_encode($incidentsByStatus) !!}
-                                                        </script>
+                                                                {!! json_encode($incidentsByStatus) !!}
+                                                            </script>
                 <script id="dashboard-users-data" type="application/json">
-                                                            {
-                                                                "admin": {{ $adminUsers }},
-                                                                "worker": {{ $workerUsers }},
-                                                                "instructor": {{ $instructorUsers }}
-                                                            }
-                                                        </script>
+                                                                {
+                                                                    "admin": {{ $adminUsers }},
+                                                                    "worker": {{ $workerUsers }},
+                                                                    "instructor": {{ $instructorUsers }}
+                                                                }
+                                                            </script>
 
                 {{-- Script principal de gráficos --}}
                 <script type="text/javascript">
@@ -609,7 +609,11 @@
                                 scales: {
                                     y: {
                                         beginAtZero: true,
-                                        ticks: { color: labelColor },
+                                        ticks: {
+                                            color: labelColor,
+                                            stepSize: 1, // Require integer steps
+                                            precision: 0 // Do not allow decimals
+                                        },
                                         grid: { color: gridColor }
                                     },
                                     x: {

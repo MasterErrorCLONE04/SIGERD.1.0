@@ -376,6 +376,17 @@
                     }
                 }
 
+                // Cargar imágenes de referencia existentes a AlpineJS
+                let existingImages = [];
+                if (task.reference_images && Array.isArray(task.reference_images)) {
+                    existingImages = task.reference_images.map(path => {
+                        return { url: `/storage/${path}` };
+                    });
+                }
+                window.dispatchEvent(new CustomEvent('loadEditTaskImages', {
+                    detail: { images: existingImages }
+                }));
+
                 openModal('editTaskModal');
             } catch (error) {
                 console.error('Error in startEditTask:', error);

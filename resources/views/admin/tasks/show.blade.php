@@ -198,7 +198,7 @@
                                     scrollRight() { this.$refs.grid.scrollBy({ left: 200, behavior: 'smooth' }) }
                                  }" class="relative group">
                                 <div x-ref="grid"
-                                    class="flex gap-3 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-2">
+                                    class="flex gap-3 overflow-x-auto snap-x snap-mandatory custom-scrollbar pb-2">
                                     @if($refCount > 0)
                                         @foreach ($task->reference_images as $imagePath)
                                             <div class="w-48 h-48 flex-shrink-0 relative group/item overflow-hidden rounded-xl bg-slate-100 dark:bg-[#3A3B3C] dark:bg-gray-700 cursor-pointer border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-600 snap-start"
@@ -214,7 +214,7 @@
                                         @endforeach
                                     @endif
                                 </div>
-                                @if($refCount > 3)
+                                @if($refCount > 2)
                                     <button @click="scrollLeft()"
                                         class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#242526] dark:bg-gray-800 border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-700 shadow-lg flex items-center justify-center text-slate-600 dark:text-gray-300 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
                                         <span class="material-symbols-outlined text-sm">chevron_left</span>
@@ -242,7 +242,7 @@
                                     scrollRight() { this.$refs.grid.scrollBy({ left: 200, behavior: 'smooth' }) }
                                  }" class="relative group">
                                 <div x-ref="grid"
-                                    class="flex gap-3 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-2">
+                                    class="flex gap-3 overflow-x-auto snap-x snap-mandatory custom-scrollbar pb-2">
                                     @if($initialCount > 0)
                                         @foreach ($task->initial_evidence_images as $imagePath)
                                             <div class="w-48 h-48 flex-shrink-0 relative group/item rounded-xl overflow-hidden border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700 cursor-pointer snap-start"
@@ -265,7 +265,7 @@
                                             Sin registros iniciales</div>
                                     @endif
                                 </div>
-                                @if($initialCount > 3)
+                                @if($initialCount > 2)
                                     <button @click="scrollLeft()"
                                         class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#242526] dark:bg-gray-800 border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-700 shadow-lg flex items-center justify-center text-slate-600 dark:text-gray-300 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
                                         <span class="material-symbols-outlined text-sm">chevron_left</span>
@@ -293,7 +293,7 @@
                                     scrollRight() { this.$refs.grid.scrollBy({ left: 200, behavior: 'smooth' }) }
                                  }" class="relative group">
                                 <div x-ref="grid"
-                                    class="flex gap-3 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-2">
+                                    class="flex gap-3 overflow-x-auto snap-x snap-mandatory custom-scrollbar pb-2">
                                     @if($finalCount > 0)
                                         @foreach ($task->final_evidence_images as $imagePath)
                                             <div class="w-48 h-48 flex-shrink-0 relative group/item rounded-xl overflow-hidden border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700 cursor-pointer snap-start"
@@ -318,7 +318,7 @@
                                             Sin registros finales</div>
                                     @endif
                                 </div>
-                                @if($finalCount > 3)
+                                @if($finalCount > 2)
                                     <button @click="scrollLeft()"
                                         class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#242526] dark:bg-gray-800 border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-700 shadow-lg flex items-center justify-center text-slate-600 dark:text-gray-300 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
                                         <span class="material-symbols-outlined text-sm">chevron_left</span>
@@ -390,11 +390,11 @@
                         <span>Volver a la Lista</span>
                     </a>
                     @if(empty($task->initial_evidence_images) && empty($task->final_evidence_images))
-                        <a href="{{ route('admin.tasks.edit', $task->id) }}"
-                            class="w-full sm:w-auto px-8 py-3 rounded-xl bg-indigo-600 text-white font-semibold hover:shadow-lg hover:shadow-indigo-600/30 transition-all flex items-center justify-center space-x-2">
+                        <button type="button" onclick="startEditSingleTask()"
+                            class="w-full sm:w-auto px-8 py-3 rounded-xl bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold hover:shadow-lg transition-all flex items-center justify-center space-x-2">
                             <span class="material-symbols-outlined text-xl">edit</span>
                             <span>Editar Tarea</span>
-                        </a>
+                        </button>
                     @else
                         <button disabled
                             class="w-full sm:w-auto px-8 py-3 rounded-xl bg-slate-200 dark:bg-gray-700 text-slate-400 dark:text-[#9CA3AF] dark:text-gray-500 dark:text-[#B0B3B8] font-semibold cursor-not-allowed flex items-center justify-center space-x-2 border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-600"
@@ -415,4 +415,105 @@
 
     {{-- Modal para ver imagen en grande --}}
     @include('modals.image-viewer')
+
+    {{-- Modal para Editar Tarea --}}
+    @include('modals.admin-edit-task')
+
+    <script>
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Reabrir modal si hay errores de validación
+        @if ($errors->any() && old('_method') === 'PUT')
+            document.addEventListener('DOMContentLoaded', function () {
+                openModal('editTaskModal');
+            });
+        @endif
+
+        function startEditSingleTask() {
+            try {
+                const task = @json($task);
+
+                const isFinished = task.status.toLowerCase() === 'finalizada';
+                const form = document.getElementById('editTaskForm');
+                const title = document.getElementById('editTaskModalTitle');
+                const submitBtn = document.getElementById('editTaskSubmitBtn');
+
+                if (!form) return;
+
+                form.action = `/admin/tasks/${task.id}`;
+
+                if (isFinished) {
+                    title.innerText = 'Ver Tarea (Finalizada)';
+                    if (submitBtn) submitBtn.classList.add('hidden');
+                } else {
+                    title.innerText = 'Editar Tarea';
+                    if (submitBtn) submitBtn.classList.remove('hidden');
+                }
+
+                // Enable/Disable all form fields
+                const fields = form.querySelectorAll('input, select, textarea');
+                fields.forEach(field => {
+                    field.disabled = isFinished;
+                });
+
+                document.getElementById('edit_task_title').value = task.title;
+                document.getElementById('edit_task_description').value = task.description || '';
+
+                if (task.deadline_at) {
+                    try {
+                        const date = new Date(task.deadline_at);
+                        if (!isNaN(date.getTime())) {
+                            document.getElementById('edit_task_deadline').value = date.toISOString().split('T')[0];
+                        }
+                    } catch (e) { }
+                }
+
+                document.getElementById('edit_task_location').value = task.location;
+
+                const prioritySelect = document.getElementById('edit_task_priority');
+                if (prioritySelect) prioritySelect.value = task.priority;
+
+                const statusSelect = document.getElementById('edit_task_status');
+                if (statusSelect) statusSelect.value = task.status;
+
+                const workerSelect = document.getElementById('edit_task_assigned_to');
+                if (workerSelect) {
+                    if (task.assigned_to && typeof task.assigned_to === 'object') {
+                        workerSelect.value = task.assigned_to.id;
+                    } else {
+                        workerSelect.value = task.assigned_to || '';
+                    }
+                }
+
+                let existingImages = [];
+                if (task.reference_images && Array.isArray(task.reference_images)) {
+                    existingImages = task.reference_images.map(path => {
+                        return { url: `/storage/${path}` };
+                    });
+                }
+                window.dispatchEvent(new CustomEvent('loadEditTaskImages', {
+                    detail: { images: existingImages }
+                }));
+
+                openModal('editTaskModal');
+            } catch (error) {
+                console.error('Error in startEditSingleTask:', error);
+                alert('Error al abrir el modal de edición.');
+            }
+        }
+    </script>
 </x-app-layout>

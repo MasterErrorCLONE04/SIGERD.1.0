@@ -198,7 +198,7 @@
                                     scrollRight() { this.$refs.grid.scrollBy({ left: 200, behavior: 'smooth' }) }
                                  }" class="relative group">
                                 <div x-ref="grid"
-                                    class="flex gap-3 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-2">
+                                    class="flex gap-3 overflow-x-auto snap-x snap-mandatory custom-scrollbar pb-2">
                                     @if($refCount > 0)
                                         @foreach ($task->reference_images as $imagePath)
                                             <div class="w-48 h-48 flex-shrink-0 relative group/item overflow-hidden rounded-xl bg-slate-100 dark:bg-[#3A3B3C] dark:bg-gray-700 cursor-pointer border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-600 snap-start"
@@ -218,7 +218,7 @@
                                             Sin referencias</div>
                                     @endif
                                 </div>
-                                @if($refCount > 3)
+                                @if($refCount > 2)
                                     <button @click="scrollLeft()"
                                         class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#242526] dark:bg-gray-800 border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-700 shadow-lg flex items-center justify-center text-slate-600 dark:text-gray-300 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
                                         <span class="material-symbols-outlined text-sm">chevron_left</span>
@@ -246,7 +246,7 @@
                                     scrollRight() { this.$refs.grid.scrollBy({ left: 200, behavior: 'smooth' }) }
                                  }" class="relative group">
                                 <div x-ref="grid"
-                                    class="flex gap-3 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-2">
+                                    class="flex gap-3 overflow-x-auto snap-x snap-mandatory custom-scrollbar pb-2">
                                     @if($initialCount > 0)
                                         @foreach ($task->initial_evidence_images as $imagePath)
                                             <div class="w-48 h-48 flex-shrink-0 relative group/item rounded-xl overflow-hidden border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700 cursor-pointer snap-start"
@@ -269,7 +269,7 @@
                                             Sin registros iniciales</div>
                                     @endif
                                 </div>
-                                @if($initialCount > 3)
+                                @if($initialCount > 2)
                                     <button @click="scrollLeft()"
                                         class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#242526] dark:bg-gray-800 border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-700 shadow-lg flex items-center justify-center text-slate-600 dark:text-gray-300 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
                                         <span class="material-symbols-outlined text-sm">chevron_left</span>
@@ -297,7 +297,7 @@
                                     scrollRight() { this.$refs.grid.scrollBy({ left: 200, behavior: 'smooth' }) }
                                  }" class="relative group">
                                 <div x-ref="grid"
-                                    class="flex gap-3 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-2">
+                                    class="flex gap-3 overflow-x-auto snap-x snap-mandatory custom-scrollbar pb-2">
                                     @if($finalCount > 0)
                                         @foreach ($task->final_evidence_images as $imagePath)
                                             <div class="w-48 h-48 flex-shrink-0 relative group/item rounded-xl overflow-hidden border border-slate-100 dark:border-[#3A3B3C] dark:border-gray-700 cursor-pointer snap-start"
@@ -322,7 +322,7 @@
                                             Sin registros finales</div>
                                     @endif
                                 </div>
-                                @if($finalCount > 3)
+                                @if($finalCount > 2)
                                     <button @click="scrollLeft()"
                                         class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#242526] dark:bg-gray-800 border border-slate-200 dark:border-[#3A3B3C] dark:border-gray-700 shadow-lg flex items-center justify-center text-slate-600 dark:text-gray-300 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
                                         <span class="material-symbols-outlined text-sm">chevron_left</span>
