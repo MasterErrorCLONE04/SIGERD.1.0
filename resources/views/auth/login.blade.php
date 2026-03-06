@@ -77,7 +77,7 @@
                             <div>
                                 <h3 class="font-bold text-slate-900 dark:text-white text-sm">Seguro y Confiable</h3>
                                 <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">Tu información
-                                    protegida bajo estándares bancarios.</p>
+                                    protegida.</p>
                             </div>
                         </div>
                     </div>

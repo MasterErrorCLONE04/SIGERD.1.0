@@ -276,7 +276,7 @@
                     </div>
                     <h4 class="text-xl font-bold text-[#0B1F33] mb-4 uppercase tracking-tighter">Evidencia Visual</h4>
                     <p class="text-sm text-[#4A5A6A] leading-relaxed">Documentación fotográfica de incidentes y
-                        resoluciones con marca de agua y ubicación GPS.</p>
+                        resoluciones con marca de agua y ubicación.</p>
                 </div>
 
                 <!-- Feature 2 -->
@@ -291,7 +291,7 @@
                     </div>
                     <h4 class="text-xl font-bold text-[#0B1F33] mb-4 uppercase tracking-tighter">Motor de Tareas</h4>
                     <p class="text-sm text-[#4A5A6A] leading-relaxed">Asignación dinámica basada en disponibilidad
-                        técnica y categorización automática de prioridad.</p>
+                        técnica y categorización de prioridad.</p>
                 </div>
 
                 <!-- Feature 3 -->
