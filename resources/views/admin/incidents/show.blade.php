@@ -61,7 +61,9 @@
                             </svg>
                             Descripción del Problema
                         </h3>
-                        <p class="text-gray-700 dark:text-gray-200 dark:text-gray-300 leading-relaxed whitespace-pre-wrap">{{ $incident->description }}</p>
+                        <p class="text-gray-700 dark:text-gray-200 dark:text-gray-300 leading-relaxed">
+                            {!! nl2br(e(trim($incident->description))) !!}
+                        </p>
                     </div>
 
                     {{-- Información adicional --}}
@@ -182,7 +184,9 @@
                                         </svg>
                                         Descripción de la Solución Aplicada
                                     </h4>
-                                    <p class="text-gray-800 dark:text-gray-100 dark:text-gray-200 leading-relaxed whitespace-pre-wrap">{{ $incident->resolution_description }}</p>
+                                    <p class="text-gray-800 dark:text-gray-100 dark:text-gray-200 leading-relaxed">
+                                        {!! nl2br(e(trim($incident->resolution_description))) !!}
+                                    </p>
                                 </div>
                             @endif
 
