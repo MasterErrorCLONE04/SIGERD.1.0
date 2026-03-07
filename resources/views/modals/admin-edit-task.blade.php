@@ -207,7 +207,7 @@
 
                                 <label for="edit_task_reference_images"
                                     class="flex flex-col items-center justify-center w-full h-32 px-4 transition-all bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-xl cursor-pointer hover:bg-indigo-50 dark:hover:bg-gray-700/50 hover:border-indigo-400 dark:hover:border-indigo-500 group-hover:bg-gray-50"
-                                    :class="{'bg-indigo-50 dark:bg-indigo-900/20 border-indigo-500' : dragover}">
+                                    :class="{'bg-indigo-50 dark:bg-[#3A3B3C] border-indigo-500' : dragover}">
                                     <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                         <div
                                             class="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-full mb-2 text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform">

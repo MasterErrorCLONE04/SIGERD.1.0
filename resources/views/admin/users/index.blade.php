@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center gap-4">
             <div
-                class="w-12 h-12 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
+                class="w-12 h-12 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
@@ -28,7 +28,7 @@
                         <!-- Info Section -->
                         <div class="flex items-center gap-3 px-2 w-full xl:w-auto">
                             <div
-                                class="p-2 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-xl text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
+                                class="p-2 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-xl text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -269,7 +269,7 @@
                                     <td colspan="4" class="px-8 py-24 text-center">
                                         <div class="flex flex-col items-center justify-center">
                                             <div
-                                                class="w-24 h-24 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-[1.5rem] flex items-center justify-center mb-6 ring-4 ring-[#F4F6FF]/50 dark:ring-indigo-900/10 transition-transform hover:scale-105 duration-300">
+                                                class="w-24 h-24 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-[1.5rem] flex items-center justify-center mb-6 ring-4 ring-[#F4F6FF]/50 dark:ring-indigo-900/10 transition-transform hover:scale-105 duration-300">
                                                 @if(request('search'))
                                                     <svg class="w-12 h-12 text-[#4F46E5] dark:text-indigo-400" fill="none"
                                                         stroke="currentColor" viewBox="0 0 24 24">

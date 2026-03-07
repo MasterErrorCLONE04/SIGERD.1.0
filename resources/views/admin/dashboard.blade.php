@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center gap-4">
             <div
-                class="w-12 h-12 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
+                class="w-12 h-12 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
                 <svg class="w-6 h-6 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -70,7 +70,7 @@
                     class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 flex flex-col justify-between group hover:shadow-md transition-shadow">
                     <div class="flex items-center justify-between mb-4">
                         <div
-                            class="w-12 h-12 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            class="w-12 h-12 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
@@ -94,7 +94,7 @@
                     class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 flex flex-col justify-between group hover:shadow-md transition-shadow">
                     <div class="flex items-center justify-between mb-4">
                         <div
-                            class="w-12 h-12 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            class="w-12 h-12 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
@@ -118,7 +118,7 @@
                     class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 flex flex-col justify-between group hover:shadow-md transition-shadow">
                     <div class="flex items-center justify-between mb-4">
                         <div
-                            class="w-12 h-12 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            class="w-12 h-12 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -141,7 +141,7 @@
                     class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 flex flex-col justify-between group hover:shadow-md transition-shadow">
                     <div class="flex items-center justify-between mb-4">
                         <div
-                            class="w-12 h-12 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            class="w-12 h-12 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -167,7 +167,7 @@
                     class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 md:p-8 flex flex-col h-full hover:shadow-md transition-shadow">
                     <div class="flex items-start gap-4 mb-6">
                         <div
-                            class="w-14 h-14 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            class="w-14 h-14 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center flex-shrink-0">
                             <svg class="w-7 h-7 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
@@ -221,7 +221,7 @@
                     class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 md:p-8 flex flex-col h-full hover:shadow-md transition-shadow">
                     <div class="flex items-start gap-4 mb-6">
                         <div
-                            class="w-14 h-14 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            class="w-14 h-14 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center flex-shrink-0">
                             <svg class="w-7 h-7 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
@@ -270,7 +270,7 @@
                     class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 md:p-8 flex flex-col h-full hover:shadow-md transition-shadow">
                     <div class="flex items-start gap-4 mb-6">
                         <div
-                            class="w-14 h-14 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            class="w-14 h-14 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center flex-shrink-0">
                             <svg class="w-7 h-7 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
@@ -326,7 +326,7 @@
                     class="bg-white dark:bg-[#242526] rounded-[1.25rem] shadow-sm border border-slate-200/60 dark:border-[#3A3B3C] p-6 md:p-8 flex flex-col h-full hover:shadow-md transition-shadow">
                     <div class="flex items-start gap-4 mb-6">
                         <div
-                            class="w-14 h-14 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            class="w-14 h-14 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center flex-shrink-0">
                             <svg class="w-7 h-7 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
@@ -394,7 +394,7 @@
                         <button onclick="openModal('createUserModal')"
                             class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 p-5 bg-white dark:bg-[#242526] border border-slate-200/60 dark:border-[#3A3B3C] hover:border-indigo-300 hover:shadow-md rounded-2xl transition-all group">
                             <div
-                                class="w-12 h-12 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-xl flex items-center justify-center group-hover:bg-[#F4F6FF] group-hover:dark:bg-indigo-900/30 transition-colors shrink-0">
+                                class="w-12 h-12 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-xl flex items-center justify-center group-hover:bg-[#F4F6FF] group-hover:dark:bg-indigo-900/30 transition-colors shrink-0">
                                 <svg class="w-5 h-5 dark:text-white" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
@@ -412,7 +412,7 @@
                         <button onclick="openModal('createTaskModal')"
                             class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 p-5 bg-white dark:bg-[#242526] border border-slate-200/60 dark:border-[#3A3B3C] hover:border-green-300 hover:shadow-md rounded-2xl transition-all group">
                             <div
-                                class="w-12 h-12 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-xl flex items-center justify-center group-hover:bg-[#F4F6FF] group-hover:dark:bg-indigo-900/30 transition-colors shrink-0">
+                                class="w-12 h-12 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-xl flex items-center justify-center group-hover:bg-[#F4F6FF] group-hover:dark:bg-indigo-900/30 transition-colors shrink-0">
                                 <svg class="w-5 h-5 dark:text-white" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
@@ -431,7 +431,7 @@
                         <a href="{{ route('admin.incidents.index') }}"
                             class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 p-5 bg-white dark:bg-[#242526] border border-slate-200/60 dark:border-[#3A3B3C] hover:border-amber-300 hover:shadow-md rounded-2xl transition-all group">
                             <div
-                                class="w-12 h-12 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-xl flex items-center justify-center group-hover:bg-[#F4F6FF] group-hover:dark:bg-indigo-900/30 transition-colors shrink-0">
+                                class="w-12 h-12 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-xl flex items-center justify-center group-hover:bg-[#F4F6FF] group-hover:dark:bg-indigo-900/30 transition-colors shrink-0">
                                 <svg class="w-5 h-5 dark:text-white" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
@@ -450,7 +450,7 @@
                         <a href="#"
                             class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 p-5 bg-white dark:bg-[#242526] border border-slate-200/60 dark:border-[#3A3B3C] hover:border-purple-300 hover:shadow-md rounded-2xl transition-all group">
                             <div
-                                class="w-12 h-12 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-xl flex items-center justify-center group-hover:bg-[#F4F6FF] group-hover:dark:bg-indigo-900/30 transition-colors shrink-0">
+                                class="w-12 h-12 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-xl flex items-center justify-center group-hover:bg-[#F4F6FF] group-hover:dark:bg-indigo-900/30 transition-colors shrink-0">
                                 <svg class="w-5 h-5 dark:text-white" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"

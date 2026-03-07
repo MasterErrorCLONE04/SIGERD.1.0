@@ -27,8 +27,8 @@
                             class="text-xl font-extrabold text-[#1E293B] dark:text-white tracking-tight leading-none text-left">
                             SIGERD</h1>
                         <p
-                            class="text-[0.65rem] text-slate-500 dark:text-[#E4E6EB] font-medium tracking-wide mt-1 text-left">
-                            Sistema de Gestión</p>
+                            class="text-[0.65rem] text-slate-500 dark:text-[#E4E6EB] font-medium tracking-wide mt-1 text-left leading-tight">
+                            Sistema de Gestión de<br>Reportes de Daños</p>
                     </div>
                 </div>
             </div>
@@ -42,8 +42,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
                     </svg>
-                    <svg x-show="sidebarCollapsed" class="w-5 h-5 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        style="display: none;">
+                    <svg x-show="sidebarCollapsed" class="w-5 h-5 dark:text-white" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" style="display: none;">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M13 5l7 7-7 7M5 5l7 7-7 7" />
                     </svg>

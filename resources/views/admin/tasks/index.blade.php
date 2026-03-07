@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center gap-4">
-            <div class="w-12 h-12 bg-[#F4F6FF] dark:bg-indigo-900/20 rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
+            <div class="w-12 h-12 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
                 </svg>
@@ -60,7 +60,7 @@
                                 
                                 <!-- Clear Button -->
                                 @if(request()->anyFilled(['search', 'priority']))
-                                    <a href="{{ route('admin.tasks.index') }}" class="flex items-center justify-center px-4 py-2.5 bg-[#F4F6FF] hover:bg-[#E0E7FF] dark:bg-indigo-900/20 dark:hover:bg-indigo-900/40 text-[#4F46E5] dark:text-indigo-400 rounded-xl transition-colors font-medium text-[0.85rem] gap-1.5 shadow-sm flex-shrink-0" title="Limpiar filtros">
+                                    <a href="{{ route('admin.tasks.index') }}" class="flex items-center justify-center px-4 py-2.5 bg-[#F4F6FF] hover:bg-[#E0E7FF] dark:bg-[#3A3B3C] dark:hover:bg-indigo-900/40 text-[#4F46E5] dark:text-indigo-400 rounded-xl transition-colors font-medium text-[0.85rem] gap-1.5 shadow-sm flex-shrink-0" title="Limpiar filtros">
                                         <svg class="w-4 h-4 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
                                         Limpiar
                                     </a>
