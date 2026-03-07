@@ -26,7 +26,7 @@
     </script>
 </head>
 
-<body class="font-sans antialiased bg-gray-50 dark:bg-gray-900">
+<body class="font-sans antialiased bg-gray-50 dark:bg-[#18191A]">
     <div class="flex h-screen overflow-hidden">
         {{-- Sidebar --}}
         @include('layouts.sidebar')
@@ -35,7 +35,7 @@
         <div class="flex-1 flex flex-col overflow-hidden">
             {{-- Top Bar (opcional para breadcrumbs, notificaciones, etc.) --}}
             <header
-                class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 relative z-40">
+                class="bg-white dark:bg-[#18191A] shadow-sm border-b border-gray-200 dark:border-[#3A3B3C] relative z-40">
                 <div class="px-4 py-4 pl-14 lg:pl-8 lg:px-8">
                     <div class="flex items-center justify-between">
                         {{-- Page Heading --}}
@@ -54,8 +54,8 @@
                             {{-- Notificaciones --}}
                             <div x-data="notificationDropdown()" x-init="init()" class="relative">
                                 <button @click="open = !open"
-                                    class="relative p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    class="relative p-2 text-gray-600 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition">
+                                    <svg class="w-6 h-6 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                                     </svg>
@@ -71,12 +71,12 @@
                                     x-transition:leave="transition ease-in duration-150"
                                     x-transition:leave-start="opacity-100 scale-100"
                                     x-transition:leave-end="opacity-0 scale-95"
-                                    class="absolute right-0 mt-2 w-96 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 z-50"
+                                    class="absolute right-0 mt-2 w-96 bg-white dark:bg-[#18191A] rounded-xl shadow-2xl border border-gray-200 dark:border-[#3A3B3C] z-50"
                                     style="display: none;">
 
                                     {{-- Header --}}
                                     <div
-                                        class="px-4 py-3 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+                                        class="px-4 py-3 border-b border-gray-200 dark:border-[#3A3B3C] flex items-center justify-between">
                                         <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Notificaciones
                                         </h3>
                                         <button @click="markAllAsRead()"
@@ -89,35 +89,35 @@
                                     <div class="max-h-96 overflow-y-auto">
                                         <template x-if="notifications.length === 0">
                                             <div class="px-4 py-8 text-center">
-                                                <svg class="w-12 h-12 mx-auto text-gray-400 mb-2" fill="none"
+                                                <svg class="w-12 h-12 mx-auto text-gray-400 mb-2 dark:text-white" fill="none"
                                                     stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2"
                                                         d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                                                 </svg>
-                                                <p class="text-sm text-gray-500 dark:text-gray-400">No tienes
+                                                <p class="text-sm text-gray-500 dark:text-[#B0B3B8]">No tienes
                                                     notificaciones</p>
                                             </div>
                                         </template>
 
                                         <template x-for="notification in notifications" :key="notification.id">
                                             <div @click="markAsRead(notification.id, notification.link)"
-                                                :class="notification.read ? 'bg-white dark:bg-gray-800' : 'bg-blue-50 dark:bg-blue-900/20'"
-                                                class="px-4 py-3 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer transition">
+                                                :class="notification.read ? 'bg-white dark:bg-[#18191A]' : 'bg-blue-50 dark:bg-blue-900/20'"
+                                                class="px-4 py-3 border-b border-gray-200 dark:border-[#3A3B3C] hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer transition">
                                                 <div class="flex items-start gap-3">
                                                     <div class="flex-shrink-0">
                                                         <div :class="getIconColor(notification.type)"
                                                             class="w-10 h-10 rounded-lg flex items-center justify-center">
                                                             <svg x-html="getIcon(notification.type)"
-                                                                class="w-5 h-5"></svg>
+                                                                class="w-5 h-5 dark:text-white"></svg>
                                                         </div>
                                                     </div>
                                                     <div class="flex-1 min-w-0">
                                                         <p class="text-sm font-medium text-gray-900 dark:text-white"
                                                             x-text="notification.title"></p>
-                                                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1"
+                                                        <p class="text-xs text-gray-500 dark:text-[#B0B3B8] mt-1"
                                                             x-text="notification.message"></p>
-                                                        <p class="text-xs text-gray-400 dark:text-gray-500 mt-1"
+                                                        <p class="text-xs text-gray-400 dark:text-[#B0B3B8] mt-1"
                                                             x-text="formatDate(notification.created_at)"></p>
                                                     </div>
                                                     <div class="flex-shrink-0">
@@ -134,13 +134,13 @@
                             {{-- Usuario Dropdown Button --}}
                             <div x-data="{ userMenuOpen: false }" class="relative">
                                 <button @click="userMenuOpen = !userMenuOpen"
-                                    class="hidden md:flex items-center gap-3 pl-3 pr-4 py-2 bg-slate-50 dark:bg-gray-700/50 rounded-xl hover:bg-slate-100 dark:hover:bg-gray-600 transition-colors duration-200 group focus:outline-none">
+                                    class="hidden md:flex items-center gap-3 pl-3 pr-4 py-2 bg-slate-50 dark:bg-[#242526] rounded-xl hover:bg-slate-100 dark:hover:bg-gray-600 transition-colors duration-200 group focus:outline-none">
                                     <div class="text-right flex flex-col justify-center">
                                         <p
-                                            class="text-[14px] font-semibold text-slate-700 dark:text-gray-200 group-hover:text-slate-900 dark:group-hover:text-white transition leading-none mb-1">
+                                            class="text-[14px] font-semibold text-slate-700 dark:text-white group-hover:text-slate-900 dark:group-hover:text-white transition leading-none mb-1">
                                             {{ Auth::user()->name }}
                                         </p>
-                                        <p class="text-[12px] text-slate-500 dark:text-gray-400 leading-none">
+                                        <p class="text-[12px] text-slate-500 dark:text-[#B0B3B8] leading-none">
                                             {{ ucfirst(Auth::user()->role) }}
                                         </p>
                                     </div>
@@ -156,7 +156,7 @@
                                         @endif
                                     </div>
                                     {{-- Chevron icon --}}
-                                    <svg class="w-4 h-4 text-slate-600 dark:text-gray-400 transition-transform duration-200"
+                                    <svg class="w-4 h-4 text-slate-600 dark:text-[#B0B3B8] transition-transform duration-200"
                                         :class="{ 'rotate-180': userMenuOpen }" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -198,7 +198,7 @@
                                                     {{ Auth::user()->name }}
                                                 </p>
                                                 <p
-                                                    class="text-[12px] text-slate-500 dark:text-gray-400 truncate mt-0.5 mb-1.5">
+                                                    class="text-[12px] text-slate-500 dark:text-[#B0B3B8] truncate mt-0.5 mb-1.5">
                                                     {{ Auth::user()->email }}
                                                 </p>
                                                 <div>
@@ -218,7 +218,7 @@
                                             class="flex items-center gap-4 px-5 py-2.5 hover:bg-slate-50 dark:hover:bg-[#3A3B3C]/50 transition border-l-2 border-transparent hover:border-slate-800 dark:hover:border-gray-300">
                                             <div
                                                 class="w-9 h-9 bg-slate-100 dark:bg-[#3A3B3C] rounded-xl flex items-center justify-center">
-                                                <svg class="w-[18px] h-[18px] text-slate-700 dark:text-gray-200"
+                                                <svg class="w-[18px] h-[18px] text-slate-700 dark:text-white"
                                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2"
@@ -230,7 +230,7 @@
                                                     class="text-[14px] font-semibold text-slate-800 dark:text-gray-100 leading-tight">
                                                     Mi Perfil</p>
                                                 <p
-                                                    class="text-[11px] font-medium text-slate-400 dark:text-gray-500 leading-tight mt-0.5">
+                                                    class="text-[11px] font-medium text-slate-400 dark:text-[#B0B3B8] leading-tight mt-0.5">
                                                     Ver e información</p>
                                             </div>
                                         </a>
@@ -240,7 +240,7 @@
                                             class="flex items-center gap-4 px-5 py-2.5 hover:bg-slate-50 dark:hover:bg-[#3A3B3C]/50 transition border-l-2 border-transparent hover:border-slate-800 dark:hover:border-gray-300">
                                             <div
                                                 class="w-9 h-9 bg-slate-100 dark:bg-[#3A3B3C] rounded-xl flex items-center justify-center">
-                                                <svg class="w-[18px] h-[18px] text-slate-700 dark:text-gray-200"
+                                                <svg class="w-[18px] h-[18px] text-slate-700 dark:text-white"
                                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2"
@@ -254,7 +254,7 @@
                                                     class="text-[14px] font-semibold text-slate-800 dark:text-gray-100 leading-tight">
                                                     Configuración</p>
                                                 <p
-                                                    class="text-[11px] font-medium text-slate-400 dark:text-gray-500 leading-tight mt-0.5">
+                                                    class="text-[11px] font-medium text-slate-400 dark:text-[#B0B3B8] leading-tight mt-0.5">
                                                     Ajustes de cuenta</p>
                                             </div>
                                         </a>
@@ -264,7 +264,7 @@
                                             class="flex items-center gap-4 px-5 py-2.5 hover:bg-slate-50 dark:hover:bg-[#3A3B3C]/50 transition border-l-2 border-transparent hover:border-slate-800 dark:hover:border-gray-300">
                                             <div
                                                 class="w-9 h-9 bg-slate-100 dark:bg-[#3A3B3C] rounded-xl flex items-center justify-center">
-                                                <svg class="w-[18px] h-[18px] text-slate-700 dark:text-gray-200"
+                                                <svg class="w-[18px] h-[18px] text-slate-700 dark:text-white"
                                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2"
@@ -276,7 +276,7 @@
                                                     class="text-[14px] font-semibold text-slate-800 dark:text-gray-100 leading-tight">
                                                     Soporte</p>
                                                 <p
-                                                    class="text-[11px] font-medium text-slate-400 dark:text-gray-500 leading-tight mt-0.5">
+                                                    class="text-[11px] font-medium text-slate-400 dark:text-[#B0B3B8] leading-tight mt-0.5">
                                                     Centro de ayuda</p>
                                             </div>
                                         </a>
@@ -319,7 +319,7 @@
             </header>
 
             {{-- Page Content --}}
-            <main class="flex-1 overflow-y-auto bg-gray-50 dark:bg-gray-900">
+            <main class="flex-1 overflow-y-auto bg-gray-50 dark:bg-[#18191A]">
                 {{ $slot }}
             </main>
         </div>
@@ -423,7 +423,7 @@
                         'task_completed': 'bg-green-100 text-green-600',
                         'incident_converted': 'bg-purple-100 text-purple-600',
                     };
-                    return colors[type] || 'bg-gray-100 text-gray-600';
+                    return colors[type] || 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-white';
                 },
 
                 formatDate(dateString) {

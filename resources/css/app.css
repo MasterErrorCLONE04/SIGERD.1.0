@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  svg {
-    color: #000000 !important;
-  }
-
   .dark {
     /* Facebook professional dark mode palette */
     --color-gray-900: #18191a;

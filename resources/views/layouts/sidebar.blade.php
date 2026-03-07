@@ -12,12 +12,12 @@
         x-transition:enter="transition-transform duration-300 ease-in-out" x-transition:enter-start="-translate-x-full"
         x-transition:enter-end="translate-x-0" x-transition:leave="transition-transform duration-300 ease-in-out"
         x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full"
-        class="fixed inset-y-0 left-0 bg-white dark:bg-gray-800 border-r border-slate-100 dark:border-gray-700 flex flex-col transition-all duration-300 lg:translate-x-0 lg:static h-screen shadow-[4px_0_24px_rgba(0,0,0,0.02)] dark:shadow-none"
+        class="fixed inset-y-0 left-0 bg-white dark:bg-[#18191A] border-r border-slate-100 dark:border-[#3A3B3C] flex flex-col transition-all duration-300 lg:translate-x-0 lg:static h-screen shadow-[4px_0_24px_rgba(0,0,0,0.02)] dark:shadow-none"
         style="display: flex;">
 
         {{-- Header del Sidebar --}}
         <div
-            class="flex items-center justify-between h-[84px] px-6 border-b border-slate-100 dark:border-gray-700 flex-shrink-0">
+            class="flex items-center justify-between h-[84px] px-6 border-b border-slate-100 dark:border-[#3A3B3C] flex-shrink-0">
             <div class="flex items-center gap-3 min-w-0" x-show="!sidebarCollapsed" x-transition>
                 <div class="min-w-0 flex items-center gap-3">
                     <img src="{{ asset('logo/logo-minimalista.webp') }}" alt="SIGERD Logo"
@@ -27,7 +27,7 @@
                             class="text-xl font-extrabold text-[#1E293B] dark:text-white tracking-tight leading-none text-left">
                             SIGERD</h1>
                         <p
-                            class="text-[0.65rem] text-slate-500 dark:text-gray-400 font-medium tracking-wide mt-1 text-left">
+                            class="text-[0.65rem] text-slate-500 dark:text-[#E4E6EB] font-medium tracking-wide mt-1 text-left">
                             Sistema de Gestión</p>
                     </div>
                 </div>
@@ -36,13 +36,13 @@
             <div class="flex items-center gap-2 flex-shrink-0">
                 {{-- Toggle Desktop --}}
                 <button @click="sidebarCollapsed = !sidebarCollapsed"
-                    class="hidden lg:flex p-1.5 rounded-lg text-slate-400 dark:text-gray-500 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-600 dark:hover:text-gray-300 transition-colors">
-                    <svg x-show="!sidebarCollapsed" class="w-5 h-5" fill="none" stroke="currentColor"
+                    class="hidden lg:flex p-1.5 rounded-lg text-slate-400 dark:text-[#B0B3B8] hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-600 dark:hover:text-gray-300 transition-colors">
+                    <svg x-show="!sidebarCollapsed" class="w-5 h-5 dark:text-white" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
                     </svg>
-                    <svg x-show="sidebarCollapsed" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    <svg x-show="sidebarCollapsed" class="w-5 h-5 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         style="display: none;">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M13 5l7 7-7 7M5 5l7 7-7 7" />
@@ -50,8 +50,8 @@
                 </button>
                 {{-- Close Mobile --}}
                 <button @click="sidebarOpen = false"
-                    class="lg:hidden p-1.5 rounded-lg text-slate-400 dark:text-gray-500 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-600 dark:hover:text-gray-300 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    class="lg:hidden p-1.5 rounded-lg text-slate-400 dark:text-[#B0B3B8] hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-600 dark:hover:text-gray-300 transition-colors">
+                    <svg class="w-5 h-5 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -60,7 +60,7 @@
         </div>
 
         {{-- Perfil de Usuario --}}
-        <div class="px-6 py-6 border-b border-slate-100 dark:border-gray-700 flex-shrink-0">
+        <div class="px-6 py-6 border-b border-slate-100 dark:border-[#3A3B3C] flex-shrink-0">
             <div class="flex items-center gap-4" :class="sidebarCollapsed ? 'justify-center w-full ml-[-8px]' : ''">
                 <div class="relative flex-shrink-0">
                     @if (Auth::user()->hasProfilePhoto())
@@ -68,8 +68,8 @@
                             class="w-11 h-11 rounded-full object-cover ring-2 ring-[#FEF0C7]/50 dark:ring-gray-600">
                     @else
                         <div
-                            class="w-11 h-11 bg-[#F5E6CC] dark:bg-gray-700 text-[#B88746] dark:text-gray-300 rounded-full flex items-center justify-center font-bold text-lg ring-2 ring-[#FEF0C7]/50 dark:ring-gray-600">
-                            <svg class="w-6 h-6 opacity-60" fill="currentColor" viewBox="0 0 24 24">
+                            class="w-11 h-11 bg-[#F5E6CC] dark:bg-[#3A3B3C] text-[#B88746] dark:text-gray-300 rounded-full flex items-center justify-center font-bold text-lg ring-2 ring-[#FEF0C7]/50 dark:ring-gray-600">
+                            <svg class="w-6 h-6 opacity-60 dark:text-white" fill="currentColor" viewBox="0 0 24 24">
                                 <path
                                     d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                             </svg>
@@ -98,9 +98,9 @@
                 {{-- Navegación para ADMINISTRADOR --}}
                 @if (Auth::user()->isAdmin())
                     <a href="{{ route('admin.dashboard') }}" :title="sidebarCollapsed ? 'Dashboard' : ''"
-                        class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('admin.dashboard') ? 'bg-[#F2F5F8] dark:bg-gray-700 text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
+                        class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('admin.dashboard') ? 'bg-[#F2F5F8] dark:bg-[#3A3B3C] text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-[#E4E6EB] hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
                         :class="sidebarCollapsed ? 'justify-center' : ''">
-                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('admin.dashboard') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-gray-500' }}"
+                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('admin.dashboard') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-white' }}"
                             :class="!sidebarCollapsed ? 'mr-3.5' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
@@ -114,9 +114,9 @@
                     </a>
 
                     <a href="{{ route('admin.users.index') }}" :title="sidebarCollapsed ? 'Usuarios' : ''"
-                        class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('admin.users.*') ? 'bg-[#F2F5F8] dark:bg-gray-700 text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
+                        class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('admin.users.*') ? 'bg-[#F2F5F8] dark:bg-[#3A3B3C] text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-[#E4E6EB] hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
                         :class="sidebarCollapsed ? 'justify-center' : ''">
-                        <svg class="w-[1.25rem] h-[1.25rem] flex-shrink-0 {{ request()->routeIs('admin.users.*') ? '!text-[#1E293B] dark:!text-white' : '!text-slate-400 dark:!text-gray-500' }}"
+                        <svg class="w-[1.25rem] h-[1.25rem] flex-shrink-0 {{ request()->routeIs('admin.users.*') ? '!text-[#1E293B] dark:!text-white' : '!text-slate-400 dark:!text-white' }}"
                             :class="!sidebarCollapsed ? 'mr-3.5' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -130,9 +130,9 @@
                     </a>
 
                     <a href="{{ route('admin.tasks.index') }}" :title="sidebarCollapsed ? 'Tareas' : ''"
-                        class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('admin.tasks.*') ? 'bg-[#F2F5F8] dark:bg-gray-700 text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
+                        class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('admin.tasks.*') ? 'bg-[#F2F5F8] dark:bg-[#3A3B3C] text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-[#E4E6EB] hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
                         :class="sidebarCollapsed ? 'justify-center' : ''">
-                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('admin.tasks.*') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-gray-500' }}"
+                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('admin.tasks.*') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-white' }}"
                             :class="!sidebarCollapsed ? 'mr-3.5' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -146,9 +146,9 @@
                     </a>
 
                     <a href="{{ route('admin.incidents.index') }}" :title="sidebarCollapsed ? 'Incidentes' : ''"
-                        class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('admin.incidents.*') ? 'bg-[#F2F5F8] dark:bg-gray-700 text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
+                        class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('admin.incidents.*') ? 'bg-[#F2F5F8] dark:bg-[#3A3B3C] text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-[#E4E6EB] hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
                         :class="sidebarCollapsed ? 'justify-center' : ''">
-                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('admin.incidents.*') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-gray-500' }}"
+                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('admin.incidents.*') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-white' }}"
                             :class="!sidebarCollapsed ? 'mr-3.5' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -165,9 +165,9 @@
                 {{-- Navegación para INSTRUCTOR --}}
                 @if (Auth::user()->isInstructor())
                     <a href="{{ route('instructor.dashboard') }}" :title="sidebarCollapsed ? 'Dashboard' : ''"
-                        class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('instructor.dashboard') ? 'bg-[#F2F5F8] dark:bg-gray-700 text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
+                        class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('instructor.dashboard') ? 'bg-[#F2F5F8] dark:bg-[#3A3B3C] text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-[#E4E6EB] hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
                         :class="sidebarCollapsed ? 'justify-center' : ''">
-                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('instructor.dashboard') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-gray-500' }}"
+                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('instructor.dashboard') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-white' }}"
                             :class="!sidebarCollapsed ? 'mr-3.5' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
@@ -181,9 +181,9 @@
                     </a>
 
                     <a href="{{ route('instructor.incidents.index') }}" :title="sidebarCollapsed ? 'Mis Reportes' : ''"
-                        class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('instructor.incidents.*') && !request()->routeIs('instructor.incidents.create') ? 'bg-[#F2F5F8] dark:bg-gray-700 text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
+                        class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('instructor.incidents.*') && !request()->routeIs('instructor.incidents.create') ? 'bg-[#F2F5F8] dark:bg-[#3A3B3C] text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-[#E4E6EB] hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
                         :class="sidebarCollapsed ? 'justify-center' : ''">
-                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('instructor.incidents.*') && !request()->routeIs('instructor.incidents.create') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-gray-500' }}"
+                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('instructor.incidents.*') && !request()->routeIs('instructor.incidents.create') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-white' }}"
                             :class="!sidebarCollapsed ? 'mr-3.5' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -200,9 +200,9 @@
                 {{-- Navegación para TRABAJADOR --}}
                 @if (Auth::user()->isTrabajador())
                     <a href="{{ route('worker.dashboard') }}" :title="sidebarCollapsed ? 'Dashboard' : ''"
-                        class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('worker.dashboard') ? 'bg-[#F2F5F8] dark:bg-gray-700 text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
+                        class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('worker.dashboard') ? 'bg-[#F2F5F8] dark:bg-[#3A3B3C] text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-[#E4E6EB] hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
                         :class="sidebarCollapsed ? 'justify-center' : ''">
-                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('worker.dashboard') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-gray-500' }}"
+                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('worker.dashboard') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-white' }}"
                             :class="!sidebarCollapsed ? 'mr-3.5' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
@@ -216,9 +216,9 @@
                     </a>
 
                     <a href="{{ route('worker.tasks.index') }}" :title="sidebarCollapsed ? 'Mis Tareas' : ''"
-                        class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('worker.tasks.*') ? 'bg-[#F2F5F8] dark:bg-gray-700 text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
+                        class="relative flex items-center px-4 py-[0.85rem] rounded-[10px] transition-colors {{ request()->routeIs('worker.tasks.*') ? 'bg-[#F2F5F8] dark:bg-[#3A3B3C] text-[#1E293B] dark:text-white font-semibold' : 'text-[#64748B] dark:text-[#E4E6EB] hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-slate-800 dark:hover:text-white font-medium' }}"
                         :class="sidebarCollapsed ? 'justify-center' : ''">
-                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('worker.tasks.*') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-gray-500' }}"
+                        <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 {{ request()->routeIs('worker.tasks.*') ? '!text-[#475569] dark:!text-white' : '!text-slate-400 dark:!text-white' }}"
                             :class="!sidebarCollapsed ? 'mr-3.5' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -235,11 +235,11 @@
         </nav>
 
         {{-- Footer del Sidebar --}}
-        <div class="px-4 py-6 border-t border-slate-100 dark:border-gray-700 flex-shrink-0 space-y-2">
+        <div class="px-4 py-6 border-t border-slate-100 dark:border-[#3A3B3C] flex-shrink-0 space-y-2">
             <a href="{{ route('settings.index') }}" :title="sidebarCollapsed ? 'Configuración' : ''"
-                class="flex items-center px-4 py-2.5 rounded-lg text-[#64748B] dark:text-gray-400 hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-[#1E293B] dark:hover:text-white font-medium transition-colors"
+                class="flex items-center px-4 py-2.5 rounded-lg text-[#64748B] dark:text-[#E4E6EB] hover:bg-slate-50 dark:hover:bg-gray-700 hover:text-[#1E293B] dark:hover:text-white font-medium transition-colors"
                 :class="sidebarCollapsed ? 'justify-center' : ''">
-                <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 text-slate-400 dark:text-gray-500"
+                <svg class="w-[1.15rem] h-[1.15rem] flex-shrink-0 text-slate-400 dark:text-[#B0B3B8]"
                     :class="!sidebarCollapsed ? 'mr-3.5' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -269,7 +269,7 @@
     {{-- Botón para abrir sidebar en móviles --}}
     <button @click="sidebarOpen = true; sidebarCollapsed = false" x-show="!sidebarOpen" x-transition
         class="lg:hidden fixed top-4 left-4 z-50 p-2.5 bg-white text-slate-700 rounded-lg shadow-sm border border-slate-200 hover:bg-slate-50 transition-colors">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-6 h-6 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
     </button>

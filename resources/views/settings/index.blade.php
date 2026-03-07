@@ -16,9 +16,11 @@
                         class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
                         <nav class="flex flex-col">
                             <a href="#notifications" @click="activeTab = 'notifications'"
-                                :class="activeTab === 'notifications' ? 'font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50/50 dark:bg-indigo-900/20 border-indigo-600' : 'font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white border-transparent'"
+                                :class="activeTab === 'notifications' ? 'font-semibold text-[#5B4EFF] dark:text-white bg-indigo-50/50 dark:bg-[#5B4EFF]/20 border-[#5B4EFF] dark:border-[#5B4EFF]' : 'font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white border-transparent'"
                                 class="px-6 py-4 flex items-center gap-4 text-sm transition-colors border-l-4">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 flex-shrink-0 dark:text-white"
+                                    :class="activeTab === 'notifications' ? 'text-[#5B4EFF] dark:text-white' : 'dark:text-white'"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
                                     </path>
@@ -26,9 +28,11 @@
                                 Notificaciones
                             </a>
                             <a href="#appearance" @click="activeTab = 'appearance'"
-                                :class="activeTab === 'appearance' ? 'font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50/50 dark:bg-indigo-900/20 border-indigo-600' : 'font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white border-transparent'"
+                                :class="activeTab === 'appearance' ? 'font-semibold text-[#5B4EFF] dark:text-white bg-indigo-50/50 dark:bg-[#5B4EFF]/20 border-[#5B4EFF] dark:border-[#5B4EFF]' : 'font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white border-transparent'"
                                 class="px-6 py-4 flex items-center gap-4 text-sm transition-colors border-l-4">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 flex-shrink-0 dark:text-white"
+                                    :class="activeTab === 'appearance' ? 'text-[#5B4EFF] dark:text-white' : 'dark:text-white'"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01">
                                     </path>
@@ -36,9 +40,11 @@
                                 Apariencia
                             </a>
                             <a href="#privacy" @click="activeTab = 'privacy'"
-                                :class="activeTab === 'privacy' ? 'font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50/50 dark:bg-indigo-900/20 border-indigo-600' : 'font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white border-transparent'"
+                                :class="activeTab === 'privacy' ? 'font-semibold text-[#5B4EFF] dark:text-white bg-indigo-50/50 dark:bg-[#5B4EFF]/20 border-[#5B4EFF] dark:border-[#5B4EFF]' : 'font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white border-transparent'"
                                 class="px-6 py-4 flex items-center gap-4 text-sm transition-colors border-l-4">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 flex-shrink-0 dark:text-white"
+                                    :class="activeTab === 'privacy' ? 'text-[#5B4EFF] dark:text-white' : 'dark:text-white'" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
                                     </path>
@@ -143,16 +149,16 @@
                                 <h4 class="text-sm font-semibold text-gray-900 dark:text-white mb-4">Tema</h4>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <button @click="updateTheme('light')"
-                                        :class="theme === 'light' ? 'border-[#5B4EFF] dark:border-indigo-400' : 'border-gray-200 dark:border-gray-700'"
+                                        :class="theme === 'light' ? 'border-[#5B4EFF] dark:border-[#5B4EFF]' : 'border-gray-200 dark:border-gray-700'"
                                         class="relative rounded-xl border-2 bg-white dark:bg-gray-700 p-4 text-center transition h-32 flex flex-col items-center justify-center gap-4 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <div
                                             class="h-8 w-4/5 rounded border border-gray-100 dark:border-gray-600 bg-gray-50 dark:bg-gray-800">
                                         </div>
                                         <span class="text-sm font-semibold text-gray-900 dark:text-white">Claro</span>
                                         <div x-show="theme === 'light'"
-                                            class="absolute -top-2.5 -right-2.5 h-6 w-6 rounded-full bg-[#5B4EFF] dark:bg-indigo-500 text-white flex items-center justify-center border-2 border-white dark:border-gray-800 shadow-sm"
+                                            class="absolute -top-2.5 -right-2.5 h-6 w-6 rounded-full bg-[#5B4EFF] dark:bg-[#5B4EFF] text-white flex items-center justify-center border-2 border-white dark:border-[#242526] shadow-sm"
                                             x-cloak>
-                                            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                            <svg class="h-3 w-3 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                                 stroke-width="4">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7">
                                                 </path>
@@ -161,16 +167,16 @@
                                     </button>
 
                                     <button @click="updateTheme('dark')"
-                                        :class="theme === 'dark' ? 'border-[#5B4EFF] dark:border-indigo-400' : 'border-gray-200 dark:border-gray-700'"
+                                        :class="theme === 'dark' ? 'border-[#5B4EFF] dark:border-[#5B4EFF]' : 'border-gray-200 dark:border-gray-700'"
                                         class="relative rounded-xl border-2 bg-[#141A29] dark:bg-gray-900 p-4 text-center transition h-32 flex flex-col items-center justify-center gap-4 hover:opacity-90">
                                         <div
                                             class="h-8 w-4/5 rounded border border-gray-700 bg-[#1E2536] dark:bg-gray-800">
                                         </div>
                                         <span class="text-sm font-semibold text-white">Oscuro</span>
                                         <div x-show="theme === 'dark'"
-                                            class="absolute -top-2.5 -right-2.5 h-6 w-6 rounded-full bg-[#5B4EFF] dark:bg-indigo-500 text-white flex items-center justify-center border-2 border-white dark:border-gray-800 shadow-sm"
+                                            class="absolute -top-2.5 -right-2.5 h-6 w-6 rounded-full bg-[#5B4EFF] dark:bg-[#5B4EFF] text-white flex items-center justify-center border-2 border-white dark:border-[#242526] shadow-sm"
                                             x-cloak>
-                                            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                            <svg class="h-3 w-3 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                                 stroke-width="4">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7">
                                                 </path>
@@ -179,16 +185,16 @@
                                     </button>
 
                                     <button @click="updateTheme('system')"
-                                        :class="theme === 'system' ? 'border-[#5B4EFF] dark:border-indigo-400' : 'border-gray-200 dark:border-gray-700'"
+                                        :class="theme === 'system' ? 'border-[#5B4EFF] dark:border-[#5B4EFF]' : 'border-gray-200 dark:border-gray-700'"
                                         class="relative rounded-xl border-2 bg-gradient-to-r from-gray-100 to-[#141A29] dark:from-gray-700 dark:to-gray-900 p-4 text-center transition h-32 flex flex-col items-center justify-center gap-4 hover:opacity-90">
                                         <div
                                             class="h-8 w-4/5 rounded border border-gray-300 dark:border-gray-600 bg-gradient-to-r from-gray-50 to-gray-600 dark:from-gray-600 dark:to-gray-800">
                                         </div>
                                         <span class="text-sm font-semibold text-gray-900 dark:text-white">Sistema</span>
                                         <div x-show="theme === 'system'"
-                                            class="absolute -top-2.5 -right-2.5 h-6 w-6 rounded-full bg-[#5B4EFF] dark:bg-indigo-500 text-white flex items-center justify-center border-2 border-white dark:border-gray-800 shadow-sm"
+                                            class="absolute -top-2.5 -right-2.5 h-6 w-6 rounded-full bg-[#5B4EFF] dark:bg-[#5B4EFF] text-white flex items-center justify-center border-2 border-white dark:border-[#242526] shadow-sm"
                                             x-cloak>
-                                            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                            <svg class="h-3 w-3 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                                 stroke-width="4">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7">
                                                 </path>
@@ -211,7 +217,7 @@
                         <div class="p-6 md:p-8 flex flex-col items-center justify-center text-center py-12">
                             <div
                                 class="w-16 h-16 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 rounded-full flex items-center justify-center mb-4">
-                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-8 h-8 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
                                     </path>
