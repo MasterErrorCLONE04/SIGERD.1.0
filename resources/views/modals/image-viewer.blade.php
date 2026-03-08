@@ -10,13 +10,17 @@
 
         <button onclick="closeImageModal()"
             class="absolute top-4 right-4 text-white/40 hover:text-white transition-all duration-300 hover:scale-110 active:scale-90">
-            <span class="material-symbols-outlined text-4xl">close</span>
+            <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
         </button>
 
         {{-- Botón de descarga --}}
         <a id="downloadButton" href="" download
             class="mt-12 flex items-center gap-4 bg-white dark:bg-[#242526] text-indigo-900 px-10 py-4 rounded-[1.5rem] font-bold uppercase tracking-[0.2em] text-xs transition-all hover:scale-105 active:scale-95 shadow-2xl">
-            <span class="material-symbols-outlined">download</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
             Descargar Archivo
         </a>
     </div>

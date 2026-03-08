@@ -75,7 +75,7 @@
                         <!-- Action Buttons -->
                         <div class="flex items-center gap-2 w-full lg:w-auto lg:pl-4 lg:border-l border-slate-200 dark:border-[#3A3B3C] flex-shrink-0">
                             <a href="javascript:void(0)" onclick="openModal('createIncidentModal')" class="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white px-5 py-2.5 rounded-xl text-[0.85rem] font-medium transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 whitespace-nowrap">
-                                <svg class="w-4 h-4 !text-white dark:!text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-4 h-4 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                 </svg>
                                 Reportar Nueva Falla
@@ -105,9 +105,9 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-100/70">
+                        <tbody class="divide-y divide-slate-100/70 dark:divide-[#3A3B3C]">
                             @forelse ($incidents as $incident)
-                                <tr class="hover:bg-slate-50 dark:hover:bg-[#3A3B3C]/50 dark:bg-[#18191A] transition-colors group">
+                                <tr class="hover:bg-slate-50 dark:hover:bg-[#3A3B3C]/50 transition-colors group">
                                     <td class="px-6 py-5 relative">
                                         <div class="text-[0.95rem] font-bold text-slate-800 dark:text-gray-100 pr-4">{{ $incident->title }}</div>
                                         <div class="text-[0.8rem] text-slate-500 dark:text-[#B0B3B8] mt-1 line-clamp-2 pr-4 leading-relaxed" title="{{ $incident->description }}">{{ $incident->description }}</div>

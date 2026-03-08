@@ -239,7 +239,7 @@
                                 </svg>
                                 Convertir a Tarea
                             </h3>
-                            <form method="POST" action="{{ route('admin.incidents.convert-to-task', $incident->id) }}" class="space-y-6">
+                            <form id="convert-to-task-{{ $incident->id }}" method="POST" action="{{ route('admin.incidents.convert-to-task', $incident->id) }}" class="space-y-6">
                                 @csrf
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -327,12 +327,20 @@
                                        class="px-6 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 dark:text-gray-300 font-semibold rounded-lg transition">
                                         Cancelar
                                     </a>
-                                    <x-primary-button class="px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] uppercase tracking-widest text-white transition-colors">
-                                        <svg class="w-5 h-5 mr-2 inline !text-white" fill="none" stroke="white" viewBox="0 0 24 24">
+                                    <button type="button"
+                                        @click="$dispatch('confirm-action', {
+                                            title: '¿Convertir a tarea?',
+                                            message: 'El reporte \'{{ addslashes($incident->title) }}\' será convertido en una tarea y asignado al trabajador seleccionado. El estado del incidente cambiará.',
+                                            variant: 'warning',
+                                            confirmText: 'Sí, convertir',
+                                            formId: 'convert-to-task-{{ $incident->id }}'
+                                        })"
+                                        class="px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] uppercase tracking-widest text-white font-bold rounded-lg transition-colors text-sm inline-flex items-center gap-2">
+                                        <svg class="w-5 h-5 !text-white" fill="none" stroke="white" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                                         </svg>
                                         {{ __('CONVERTIR A TAREA') }}
-                                    </x-primary-button>
+                                    </button>
                                 </div>
                             </form>
                         </div>

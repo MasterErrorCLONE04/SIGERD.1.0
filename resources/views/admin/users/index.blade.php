@@ -179,11 +179,11 @@
                                     <td class="px-8 py-5">
                                         <div
                                             class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-[0.8rem] font-semibold tracking-wide
-                                                                                                                    @if($user->role === 'admin') bg-[#F5F3FF] text-[#6D28D9]
-                                                                                                                    @elseif($user->role === 'coordinador') bg-[#EFF6FF] text-[#2563EB]
-                                                                                                                    @elseif($user->role === 'instructor') bg-[#F1F5F9] text-[#475569]
-                                                                                                                    @else bg-[#F1F5F9] text-[#475569]
-                                                                                                                    @endif">
+                                                                                                                        @if($user->role === 'admin') bg-[#F5F3FF] text-[#6D28D9]
+                                                                                                                        @elseif($user->role === 'coordinador') bg-[#EFF6FF] text-[#2563EB]
+                                                                                                                        @elseif($user->role === 'instructor') bg-[#F1F5F9] text-[#475569]
+                                                                                                                        @else bg-[#F1F5F9] text-[#475569]
+                                                                                                                        @endif">
                                             @if($user->role === 'admin' || $user->role === 'administrador')
                                                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                                                     <path fill-rule="evenodd"
@@ -244,12 +244,18 @@
                                                     </path>
                                                 </svg>
                                             </button>
-                                            <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
-                                                class="inline-block"
-                                                onsubmit="return confirm('¿Estás seguro de que quieres eliminar este usuario?');">
+                                            <form id="delete-user-{{ $user->id }}"
+                                                action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
+                                                class="inline-block">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit"
+                                                <button type="button" @click="$dispatch('confirm-action', {
+                                                            title: '¿Eliminar este usuario?',
+                                                            message: 'El usuario \'{{ addslashes($user->name) }}\' será eliminado permanentemente junto con todos sus datos asociados. Esta acción no se puede deshacer.',
+                                                            variant: 'danger',
+                                                            confirmText: 'Sí, eliminar',
+                                                            formId: 'delete-user-{{ $user->id }}'
+                                                        })"
                                                     class="p-2 hover:bg-[#FEF2F2] hover:text-[#DC2626] rounded-lg transition-colors cursor-pointer"
                                                     title="Eliminar usuario">
                                                     <svg class="w-[1.1rem] h-[1.1rem]" fill="none" stroke="currentColor"
@@ -472,7 +478,7 @@
                 @else
                     openModal('createUserModal');
                 @endif
-                                    };
+                                        };
         @endif
     </script>
 </x-app-layout>
