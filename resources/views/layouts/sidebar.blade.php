@@ -68,11 +68,8 @@
                             class="w-11 h-11 rounded-full object-cover ring-2 ring-[#FEF0C7]/50 dark:ring-gray-600">
                     @else
                         <div
-                            class="w-11 h-11 bg-[#F5E6CC] dark:bg-[#3A3B3C] text-[#B88746] dark:text-gray-300 rounded-full flex items-center justify-center font-bold text-lg ring-2 ring-[#FEF0C7]/50 dark:ring-gray-600">
-                            <svg class="w-6 h-6 opacity-60 dark:text-white" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                            </svg>
+                            class="w-11 h-11 bg-indigo-500 rounded-full flex items-center justify-center text-white font-bold text-lg ring-2 ring-indigo-300/50 dark:ring-gray-600">
+                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                         </div>
                     @endif
                     <div
