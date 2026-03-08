@@ -4,7 +4,7 @@
     @endphp
     <x-slot name="header">
         <div class="flex items-center gap-4">
-            <div class="w-12 h-12 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
+            <div class="w-12 h-12 bg-[#F1F2F4] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-black dark:text-[#E6E9ED] flex-shrink-0">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
                 </svg>
@@ -74,7 +74,7 @@
 
                         <!-- Action Buttons -->
                         <div class="flex items-center gap-2 w-full lg:w-auto lg:pl-4 lg:border-l border-slate-200 dark:border-[#3A3B3C] flex-shrink-0">
-                            <a href="javascript:void(0)" onclick="openModal('createIncidentModal')" class="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] text-white px-5 py-2.5 rounded-xl text-[0.85rem] font-medium transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 whitespace-nowrap">
+                            <a href="javascript:void(0)" onclick="openModal('createIncidentModal')" class="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white px-5 py-2.5 rounded-xl text-[0.85rem] font-medium transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 whitespace-nowrap">
                                 <svg class="w-4 h-4 !text-white dark:!text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                 </svg>
@@ -162,7 +162,7 @@
                                                 <a href="{{ route('instructor.incidents.index') }}" class="text-[#E11D48] hover:text-[#BE123C] font-semibold text-sm">Limpiar filtros</a>
                                             @else
                                                 <p class="text-[0.85rem] text-slate-500 dark:text-[#9CA3AF] mb-4">Aún no has registrado ninguna incidencia o falla.</p>
-                                                <a href="javascript:void(0)" onclick="openModal('createIncidentModal')" class="inline-flex items-center gap-2 px-4 py-2 bg-[#1A202C] hover:bg-[#2D3748] text-white rounded-lg transition-colors font-medium text-sm">
+                                                <a href="javascript:void(0)" onclick="openModal('createIncidentModal')" class="inline-flex items-center gap-2 px-4 py-2 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white rounded-lg transition-colors font-medium text-sm">
                                                     Reportar Primera Falla
                                                 </a>
                                             @endif
@@ -195,7 +195,7 @@
                         <div class="flex items-center gap-1.5 mx-1">
                             @foreach ($incidents->getUrlRange(max(1, $incidents->currentPage() - 1), min($incidents->lastPage(), $incidents->currentPage() + 1)) as $page => $url)
                                 @if ($page == $incidents->currentPage())
-                                    <span class="w-9 h-9 flex items-center justify-center rounded-lg bg-[#1A202C] text-white text-[0.85rem] font-bold shadow-sm">{{ $page }}</span>
+                                    <span class="w-9 h-9 flex items-center justify-center rounded-lg bg-[#1A202C] dark:bg-[#3A3B3C] text-white text-[0.85rem] font-bold shadow-sm">{{ $page }}</span>
                                 @else
                                     <a href="{{ $url }}" class="w-9 h-9 flex items-center justify-center rounded-lg border border-transparent text-slate-600 dark:text-gray-300 hover:border-slate-200 dark:border-[#3A3B3C] hover:bg-slate-50 dark:hover:bg-[#3A3B3C] dark:bg-[#18191A] text-[0.85rem] font-semibold transition-colors">{{ $page }}</a>
                                 @endif

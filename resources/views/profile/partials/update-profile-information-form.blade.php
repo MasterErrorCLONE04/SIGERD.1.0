@@ -25,7 +25,7 @@
                         class="h-24 w-24 rounded-2xl object-cover border-4 border-white dark:border-gray-700 shadow-md">
                 @else
                     <div
-                        class="h-24 w-24 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-3xl border-4 border-white dark:border-gray-700 shadow-md">
+                        class="h-24 w-24 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-[#3A3B3C] dark:to-[#3A3B3C] flex items-center justify-center text-white font-bold text-3xl border-4 border-white dark:border-gray-700 shadow-md">
                         {{ $user->initials }}
                     </div>
                 @endif

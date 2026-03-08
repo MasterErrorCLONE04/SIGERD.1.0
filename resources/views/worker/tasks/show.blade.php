@@ -415,7 +415,7 @@
 
                             <div class="flex items-center justify-end gap-3 mt-8">
                                 <a href="{{ route('worker.tasks.index') }}"
-                                    class="px-5 py-2.5 bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold rounded-lg transition-colors text-sm shadow-sm focus:ring-2 focus:ring-slate-200">
+                                    class="px-5 py-2.5 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white font-semibold rounded-lg transition-colors text-sm shadow-sm focus:ring-2 focus:ring-slate-200">
                                     Cancelar
                                 </a>
                                 <x-primary-button class="px-5 py-2.5 text-sm" x-bind:disabled="submitting"
@@ -458,7 +458,7 @@
                     </button>
 
                     <a id="downloadButton" href="" download
-                        class="absolute bottom-4 right-4 text-white bg-[#1A202C] hover:bg-[#2D3748] rounded-full p-3 transition-all hover:scale-110 shadow-lg flex items-center justify-center group/btn focus:ring-2 focus:ring-slate-200">
+                        class="absolute bottom-4 right-4 text-white bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] rounded-full p-3 transition-all hover:scale-110 shadow-lg flex items-center justify-center group/btn focus:ring-2 focus:ring-slate-200">
                         <span
                             class="material-symbols-outlined text-xl group-hover/btn:-translate-y-0.5 transition-transform">download</span>
                     </a>

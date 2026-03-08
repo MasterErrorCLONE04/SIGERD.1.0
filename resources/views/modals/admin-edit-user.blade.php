@@ -142,7 +142,7 @@
                         <button type="button" onclick="closeModal('editUserModal')"
                             class="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 dark:text-gray-300 bg-white dark:bg-[#242526] dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-[#3A3B3C] dark:hover:bg-gray-600 rounded-xl font-semibold transition-all shadow-sm">Cancelar</button>
                         <button type="submit"
-                            class="px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold rounded-xl transition-all shadow-lg transform hover:scale-105">Actualizar
+                            class="px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white font-semibold rounded-xl transition-all shadow-lg transform hover:scale-105">Actualizar
                             Usuario</button>
                     </div>
                 </form>

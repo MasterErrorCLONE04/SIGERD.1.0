@@ -18,7 +18,7 @@
                                     class="h-40 w-40 rounded-3xl object-cover shadow-xl ring-4 ring-white/50 dark:ring-gray-700/50">
                             @else
                                 <div
-                                    class="h-40 w-40 rounded-3xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-5xl shadow-xl ring-4 ring-white/50 dark:ring-gray-700/50">
+                                    class="h-40 w-40 rounded-3xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 dark:from-[#3A3B3C] dark:via-[#3A3B3C] dark:to-[#4E4F50] flex items-center justify-center text-white font-bold text-5xl shadow-xl ring-4 ring-white/50 dark:ring-gray-700/50">
                                     {{ $user->initials }}
                                 </div>
                             @endif

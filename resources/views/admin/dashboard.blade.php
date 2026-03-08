@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center gap-4">
             <div
-                class="w-12 h-12 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
+                class="w-12 h-12 bg-[#F1F2F4] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-black dark:text-[#E6E9ED] flex-shrink-0">
                 <svg class="w-6 h-6 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -23,7 +23,7 @@
                     <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                         <div class="flex items-center gap-5">
                             <div
-                                class="w-16 h-16 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-gray-200 flex-shrink-0">
+                                class="w-16 h-16 bg-[#F1F2F4] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-black dark:text-gray-200 flex-shrink-0">
                                 <svg class="w-8 h-8 drop-shadow-sm dark:text-white" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -42,7 +42,7 @@
                         </div>
                         <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
                             <button onclick="openModal('createTaskModal')"
-                                class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] text-white px-5 py-2.5 rounded-xl text-sm font-medium transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 whitespace-nowrap">
+                                class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white px-5 py-2.5 rounded-xl text-sm font-medium transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 whitespace-nowrap">
                                 <svg class="w-4 h-4 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                         d="M12 4v16m8-8H4" />
@@ -242,7 +242,7 @@
                             <div
                                 class="text-[0.65rem] font-bold text-slate-400 dark:text-[#9CA3AF] uppercase tracking-wider mb-0.5">
                                 Administradores</div>
-                            <div class="text-[1.3rem] font-black text-[#4F46E5]">{{ $adminUsers }}</div>
+                            <div class="text-[1.3rem] font-black text-black dark:text-gray-200">{{ $adminUsers }}</div>
                         </div>
                         <div
                             class="bg-slate-50/80 dark:bg-[#3A3B3C] rounded-xl p-3 border border-slate-100/80 dark:border-[#4E4F50] text-center flex flex-col items-center justify-center">
@@ -499,7 +499,7 @@
                         @elseif(old('title'))
                             openModal('createTaskModal');
                         @endif
-                                            };
+                                                            };
                 @endif
 
                 // Eventos para cerrar al hacer clic en el overlay ya están in-line en el HTML
@@ -516,21 +516,21 @@
 
                 {{-- Datos del servidor en formato JSON --}}
                 <script id="dashboard-tasks-status-data" type="application/json">
-                                                                    {!! json_encode($tasksByStatus) !!}
-                                                                </script>
+                                                                                    {!! json_encode($tasksByStatus) !!}
+                                                                                </script>
                 <script id="dashboard-tasks-priority-data" type="application/json">
-                                                                    {!! json_encode($tasksByPriority) !!}
-                                                                </script>
+                                                                                    {!! json_encode($tasksByPriority) !!}
+                                                                                </script>
                 <script id="dashboard-incidents-status-data" type="application/json">
-                                                                    {!! json_encode($incidentsByStatus) !!}
-                                                                </script>
+                                                                                    {!! json_encode($incidentsByStatus) !!}
+                                                                                </script>
                 <script id="dashboard-users-data" type="application/json">
-                                                                    {
-                                                                        "admin": {{ $adminUsers }},
-                                                                        "worker": {{ $workerUsers }},
-                                                                        "instructor": {{ $instructorUsers }}
-                                                                    }
-                                                                </script>
+                                                                                    {
+                                                                                        "admin": {{ $adminUsers }},
+                                                                                        "worker": {{ $workerUsers }},
+                                                                                        "instructor": {{ $instructorUsers }}
+                                                                                    }
+                                                                                </script>
 
                 {{-- Script principal de gráficos --}}
                 <script type="text/javascript">

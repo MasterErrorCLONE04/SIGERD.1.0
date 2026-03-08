@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SIGERD - Enterprise Management System</title>
+    <title>SIGERD - Sistema de Gestión de Reportes de Daños</title>
     <link rel="icon" href="{{ asset('logo/logo-minimalista.webp') }}" type="image/webp">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
@@ -117,13 +117,8 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="flex justify-between items-center py-5">
                 <!-- Logo -->
-                <div class="flex items-center gap-3">
-                    <img src="{{ asset('logo/logo-minimalista.webp') }}" alt="SIGERD Logo" class="w-8 h-auto">
-                    <div>
-                        <h1 class="text-lg font-bold text-[#0B1F33] tracking-tight">SIGERD</h1>
-                        <p class="text-[10px] text-[#7A8A9A] font-medium uppercase tracking-[0.2em]">Enterprise
-                            Management</p>
-                    </div>
+                <div class="flex items-center">
+                    <img src="{{ asset('logo/logo.webp') }}" alt="SIGERD Logo" class="h-12 w-auto">
                 </div>
 
                 <!-- Navigation -->

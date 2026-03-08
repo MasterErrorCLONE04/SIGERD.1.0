@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center gap-4">
-            <div class="w-12 h-12 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
+            <div class="w-12 h-12 bg-[#F1F2F4] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-black dark:text-[#E6E9ED] flex-shrink-0">
                 <svg class="w-6 h-6 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
                 </svg>
@@ -68,7 +68,7 @@
                             </button>
 
                             @if(request()->anyFilled(['search', 'status', 'priority']))
-                                <a href="{{ route('worker.tasks.index') }}" class="flex items-center gap-1.5 px-3 py-2.5 bg-[#F4F6FF] hover:bg-[#E0E7FF] dark:bg-[#3A3B3C] dark:hover:bg-indigo-900/40 text-[#4F46E5] dark:text-indigo-400 rounded-xl transition-colors font-medium text-sm shadow-sm" title="Limpiar filtros">
+                                <a href="{{ route('worker.tasks.index') }}" class="flex items-center gap-1.5 px-3 py-2.5 bg-[#F4F6FF] hover:bg-[#E0E7FF] dark:bg-[#3A3B3C] dark:hover:bg-indigo-900/40 text-[#4F46E5] dark:text-[#E6E9ED] rounded-xl transition-colors font-medium text-sm shadow-sm" title="Limpiar filtros">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
                                     Limpiar
                                 </a>
@@ -97,7 +97,7 @@
                                         <div class="text-[0.78rem] text-slate-500 dark:text-[#B0B3B8] mt-1 line-clamp-2 leading-relaxed">{{ $task->description }}</div>
                                         {{-- Mobile: assigned by --}}
                                         <div class="lg:hidden mt-2 flex items-center gap-2">
-                                            <div class="h-6 w-6 rounded-full bg-gradient-to-br from-[#4F46E5] to-[#7C3AED] flex items-center justify-center text-white text-[0.6rem] font-bold">
+                                            <div class="h-6 w-6 rounded-full bg-gradient-to-br from-[#4F46E5] to-[#7C3AED] dark:from-[#3A3B3C] dark:to-[#3A3B3C] flex items-center justify-center text-white text-[0.6rem] font-bold">
                                                 {{ substr($task->createdBy->name ?? 'N', 0, 1) }}
                                             </div>
                                             <span class="text-[0.75rem] font-medium text-slate-600 dark:text-gray-300">{{ $task->createdBy->name ?? '—' }}</span>
@@ -105,7 +105,7 @@
                                     </td>
                                     <td class="px-6 py-5 hidden lg:table-cell">
                                         <div class="flex items-center gap-2.5">
-                                            <div class="h-8 w-8 rounded-full bg-gradient-to-br from-[#4F46E5] to-[#7C3AED] flex items-center justify-center text-white text-[0.7rem] font-bold shadow-sm flex-shrink-0">
+                                            <div class="h-8 w-8 rounded-full bg-gradient-to-br from-[#4F46E5] to-[#7C3AED] dark:from-[#3A3B3C] dark:to-[#3A3B3C] flex items-center justify-center text-white text-[0.7rem] font-bold shadow-sm flex-shrink-0">
                                                 {{ substr($task->createdBy->name ?? 'N', 0, 1) }}
                                             </div>
                                             <span class="text-[0.85rem] font-semibold text-slate-700 dark:text-gray-200">{{ $task->createdBy->name ?? '—' }}</span>
@@ -182,7 +182,7 @@
                                             @if(request()->anyFilled(['search', 'status', 'priority']))
                                                 <h3 class="text-[0.95rem] font-bold text-slate-700 dark:text-gray-200 mb-1">No se encontraron resultados</h3>
                                                 <p class="text-[0.85rem] text-slate-500 dark:text-[#9CA3AF] mb-4">No hay tareas que coincidan con los filtros aplicados.</p>
-                                                <a href="{{ route('worker.tasks.index') }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white bg-[#1A202C] hover:bg-[#2D3748] transition shadow-sm text-sm font-medium">
+                                                <a href="{{ route('worker.tasks.index') }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] transition shadow-sm text-sm font-medium">
                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
                                                     Limpiar filtros
                                                 </a>

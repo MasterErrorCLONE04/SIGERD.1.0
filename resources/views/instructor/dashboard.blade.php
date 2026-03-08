@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center gap-4">
             <div
-                class="w-12 h-12 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
+                class="w-12 h-12 bg-[#F1F2F4] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-black dark:text-[#E6E9ED] flex-shrink-0">
                 <svg class="w-6 h-6 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -25,7 +25,7 @@
                     <h3 class="text-lg font-bold text-slate-800 dark:text-gray-100 mb-5">Acceso Rápido</h3>
                     <div class="flex flex-wrap gap-4">
                         <a href="javascript:void(0)" onclick="openModal('createIncidentModal')"
-                            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold rounded-xl text-sm transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 focus:outline-none">
+                            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white font-semibold rounded-xl text-sm transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 focus:outline-none">
                             <svg class="w-5 h-5 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 4v16m8-8H4" />
@@ -33,7 +33,7 @@
                             Reportar Nueva Falla
                         </a>
                         <a href="{{ route('instructor.incidents.index') }}"
-                            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold rounded-xl text-sm transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 focus:outline-none">
+                            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white font-semibold rounded-xl text-sm transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 focus:outline-none">
                             <svg class="w-5 h-5 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -125,7 +125,7 @@
                                         </div>
                                     </div>
                                     <a href="{{ route('instructor.incidents.show', $incident->id) }}"
-                                        class="flex-shrink-0 px-4 py-2 bg-[#1A202C] hover:bg-[#2D3748] text-white text-[13px] font-semibold rounded-lg transition-colors focus:ring-2 focus:ring-slate-200 focus:outline-none">
+                                        class="flex-shrink-0 px-4 py-2 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white text-[13px] font-semibold rounded-lg transition-colors focus:ring-2 focus:ring-slate-200 focus:outline-none">
                                         Ver
                                     </a>
                                 </div>
@@ -184,7 +184,7 @@
                                         </div>
                                     </div>
                                     <a href="{{ route('instructor.incidents.show', $incident->id) }}"
-                                        class="flex-shrink-0 px-4 py-2 bg-[#1A202C] hover:bg-[#2D3748] text-white text-[13px] font-semibold rounded-lg transition-colors focus:ring-2 focus:ring-slate-200 focus:outline-none">
+                                        class="flex-shrink-0 px-4 py-2 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white text-[13px] font-semibold rounded-lg transition-colors focus:ring-2 focus:ring-slate-200 focus:outline-none">
                                         Ver
                                     </a>
                                 </div>

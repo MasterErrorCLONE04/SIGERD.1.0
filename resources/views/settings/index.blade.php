@@ -43,8 +43,8 @@
                                 :class="activeTab === 'privacy' ? 'font-semibold text-[#5B4EFF] dark:text-white bg-indigo-50/50 dark:bg-[#5B4EFF]/20 border-[#5B4EFF] dark:border-[#5B4EFF]' : 'font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white border-transparent'"
                                 class="px-6 py-4 flex items-center gap-4 text-sm transition-colors border-l-4">
                                 <svg class="w-5 h-5 flex-shrink-0 dark:text-white"
-                                    :class="activeTab === 'privacy' ? 'text-[#5B4EFF] dark:text-white' : 'dark:text-white'" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    :class="activeTab === 'privacy' ? 'text-[#5B4EFF] dark:text-white' : 'dark:text-white'"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
                                     </path>
@@ -158,8 +158,8 @@
                                         <div x-show="theme === 'light'"
                                             class="absolute -top-2.5 -right-2.5 h-6 w-6 rounded-full bg-[#5B4EFF] dark:bg-[#5B4EFF] text-white flex items-center justify-center border-2 border-white dark:border-[#242526] shadow-sm"
                                             x-cloak>
-                                            <svg class="h-3 w-3 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                                stroke-width="4">
+                                            <svg class="h-3 w-3 dark:text-white" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor" stroke-width="4">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7">
                                                 </path>
                                             </svg>
@@ -176,8 +176,8 @@
                                         <div x-show="theme === 'dark'"
                                             class="absolute -top-2.5 -right-2.5 h-6 w-6 rounded-full bg-[#5B4EFF] dark:bg-[#5B4EFF] text-white flex items-center justify-center border-2 border-white dark:border-[#242526] shadow-sm"
                                             x-cloak>
-                                            <svg class="h-3 w-3 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                                stroke-width="4">
+                                            <svg class="h-3 w-3 dark:text-white" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor" stroke-width="4">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7">
                                                 </path>
                                             </svg>
@@ -194,8 +194,8 @@
                                         <div x-show="theme === 'system'"
                                             class="absolute -top-2.5 -right-2.5 h-6 w-6 rounded-full bg-[#5B4EFF] dark:bg-[#5B4EFF] text-white flex items-center justify-center border-2 border-white dark:border-[#242526] shadow-sm"
                                             x-cloak>
-                                            <svg class="h-3 w-3 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                                stroke-width="4">
+                                            <svg class="h-3 w-3 dark:text-white" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor" stroke-width="4">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7">
                                                 </path>
                                             </svg>
@@ -216,8 +216,9 @@
                         </div>
                         <div class="p-6 md:p-8 flex flex-col items-center justify-center text-center py-12">
                             <div
-                                class="w-16 h-16 bg-indigo-50 dark:bg-[#3A3B3C] text-indigo-600 dark:text-indigo-400 rounded-full flex items-center justify-center mb-4">
-                                <svg class="w-8 h-8 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                class="w-16 h-16 bg-indigo-50 dark:bg-[#3A3B3C] text-indigo-600 dark:text-[#E6E9ED] rounded-full flex items-center justify-center mb-4">
+                                <svg class="w-8 h-8 dark:text-white" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
                                     </path>

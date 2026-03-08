@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center gap-4">
             <div
-                class="w-12 h-12 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
+                class="w-12 h-12 bg-[#F1F2F4] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-black dark:text-[#E6E9ED] flex-shrink-0">
                 <span class="material-symbols-outlined">assignment</span>
             </div>
             <h2 class="text-xl font-bold text-slate-800 dark:text-gray-100 tracking-tight">
@@ -391,7 +391,7 @@
                     </a>
                     @if(empty($task->initial_evidence_images) && empty($task->final_evidence_images))
                         <button type="button" onclick="startEditSingleTask()"
-                            class="w-full sm:w-auto px-8 py-3 rounded-xl bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold hover:shadow-lg transition-all flex items-center justify-center space-x-2">
+                            class="w-full sm:w-auto px-8 py-3 rounded-xl bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white font-semibold hover:shadow-lg transition-all flex items-center justify-center space-x-2">
                             <span class="material-symbols-outlined text-xl">edit</span>
                             <span>Editar Tarea</span>
                         </button>

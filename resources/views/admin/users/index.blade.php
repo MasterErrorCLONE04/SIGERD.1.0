@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center gap-4">
             <div
-                class="w-12 h-12 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
+                class="w-12 h-12 bg-[#F1F2F4] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-black dark:text-[#E6E9ED] flex-shrink-0">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
@@ -28,7 +28,7 @@
                         <!-- Info Section -->
                         <div class="flex items-center gap-3 px-2 w-full xl:w-auto">
                             <div
-                                class="p-2 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-xl text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
+                                class="p-2 bg-[#F1F2F4] dark:bg-[#3A3B3C] rounded-xl text-black dark:text-[#E6E9ED] flex-shrink-0">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -78,7 +78,7 @@
                         <!-- Action Buttons -->
                         <div class="flex items-center gap-2 w-full lg:w-auto flex-shrink-0">
                             <button onclick="openModal('createUserModal')"
-                                class="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] text-white px-5 py-2.5 rounded-xl text-[0.85rem] font-medium transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 whitespace-nowrap">
+                                class="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white px-5 py-2.5 rounded-xl text-[0.85rem] font-medium transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 whitespace-nowrap">
                                 <svg class="w-4 h-4 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 4v16m8-8H4"></path>
@@ -137,10 +137,9 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-100/70">
+                        <tbody class="divide-y divide-slate-100/70 dark:divide-[#3A3B3C]">
                             @forelse ($users as $user)
-                                <tr
-                                    class="hover:bg-slate-50 dark:hover:bg-[#3A3B3C]/50 dark:bg-[#18191A] transition-colors group">
+                                <tr class="hover:bg-slate-50 dark:hover:bg-[#3A3B3C]/50 transition-colors group">
                                     <td class="px-8 py-5">
                                         <div class="flex items-center gap-4">
                                             <div class="relative flex-shrink-0">
@@ -178,12 +177,13 @@
                                         </div>
                                     </td>
                                     <td class="px-8 py-5">
-                                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-[0.8rem] font-semibold tracking-wide
-                                                                                            @if($user->role === 'admin') bg-[#F5F3FF] text-[#6D28D9]
-                                                                                            @elseif($user->role === 'coordinador') bg-[#EFF6FF] text-[#2563EB]
-                                                                                            @elseif($user->role === 'instructor') bg-[#F1F5F9] text-[#475569]
-                                                                                            @else bg-[#F1F5F9] text-[#475569]
-                                                                                            @endif">
+                                        <div
+                                            class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-[0.8rem] font-semibold tracking-wide
+                                                                                                                    @if($user->role === 'admin') bg-[#F5F3FF] text-[#6D28D9]
+                                                                                                                    @elseif($user->role === 'coordinador') bg-[#EFF6FF] text-[#2563EB]
+                                                                                                                    @elseif($user->role === 'instructor') bg-[#F1F5F9] text-[#475569]
+                                                                                                                    @else bg-[#F1F5F9] text-[#475569]
+                                                                                                                    @endif">
                                             @if($user->role === 'admin' || $user->role === 'administrador')
                                                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                                                     <path fill-rule="evenodd"
@@ -271,13 +271,13 @@
                                             <div
                                                 class="w-24 h-24 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-[1.5rem] flex items-center justify-center mb-6 ring-4 ring-[#F4F6FF]/50 dark:ring-indigo-900/10 transition-transform hover:scale-105 duration-300">
                                                 @if(request('search'))
-                                                    <svg class="w-12 h-12 text-[#4F46E5] dark:text-indigo-400" fill="none"
+                                                    <svg class="w-12 h-12 text-[#4F46E5] dark:text-[#E6E9ED]" fill="none"
                                                         stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                                     </svg>
                                                 @else
-                                                    <svg class="w-12 h-12 text-[#4F46E5] dark:text-indigo-400" fill="none"
+                                                    <svg class="w-12 h-12 text-[#4F46E5] dark:text-[#E6E9ED]" fill="none"
                                                         stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                                             d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
@@ -308,7 +308,7 @@
                                             </p>
                                             @if(!request('search'))
                                                 <button onclick="openModal('createUserModal')"
-                                                    class="mt-8 inline-flex items-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] text-white px-6 py-3 rounded-xl text-[0.95rem] font-medium transition-all shadow-sm focus:ring-2 focus:ring-slate-200/50 hover:shadow-md hover:-translate-y-0.5">
+                                                    class="mt-8 inline-flex items-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white px-6 py-3 rounded-xl text-[0.95rem] font-medium transition-all shadow-sm focus:ring-2 focus:ring-slate-200/50 hover:shadow-md hover:-translate-y-0.5">
                                                     <svg class="w-5 h-5 !text-white" fill="none" stroke="currentColor"
                                                         viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -362,7 +362,7 @@
                                 @foreach ($users->getUrlRange(max(1, $users->currentPage() - 1), min($users->lastPage(), $users->currentPage() + 1)) as $page => $url)
                                     @if ($page == $users->currentPage())
                                         <span
-                                            class="w-9 h-9 flex items-center justify-center rounded-lg bg-[#1A202C] text-white text-[0.85rem] font-bold shadow-sm">{{ $page }}</span>
+                                            class="w-9 h-9 flex items-center justify-center rounded-lg bg-[#1A202C] dark:bg-[#3A3B3C] text-white text-[0.85rem] font-bold shadow-sm">{{ $page }}</span>
                                     @else
                                         <a href="{{ $url }}"
                                             class="w-9 h-9 flex items-center justify-center rounded-lg border border-transparent text-slate-600 dark:text-gray-300 hover:border-slate-200 dark:border-[#3A3B3C] hover:bg-slate-50 dark:hover:bg-[#3A3B3C] dark:bg-[#18191A] text-[0.85rem] font-semibold transition-colors">{{ $page }}</a>
@@ -434,7 +434,7 @@
             // Actualizar preview y placeholder de la foto si existe
             const previewImg = document.getElementById('editPreviewImg');
             const initialsPlaceholder = document.getElementById('editInitialsPlaceholder');
-            
+
             if (user.profile_photo) {
                 previewImg.src = `/storage/${user.profile_photo}`;
                 previewImg.classList.remove('hidden');
@@ -472,7 +472,7 @@
                 @else
                     openModal('createUserModal');
                 @endif
-            };
+                                    };
         @endif
     </script>
 </x-app-layout>

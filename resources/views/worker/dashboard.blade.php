@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center gap-4">
             <div
-                class="w-12 h-12 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
+                class="w-12 h-12 bg-[#F1F2F4] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-black dark:text-[#E6E9ED] flex-shrink-0">
                 <svg class="w-6 h-6 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -175,7 +175,7 @@
                                         </p>
                                     </div>
                                     <a href="{{ route('worker.tasks.show', $task->id) }}"
-                                        class="ml-4 px-3 py-1.5 bg-[#1A202C] hover:bg-[#2D3748] text-white text-sm font-medium rounded-lg transition">
+                                        class="ml-4 px-3 py-1.5 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white text-sm font-medium rounded-lg transition">
                                         Ver
                                     </a>
                                 </div>
@@ -220,7 +220,7 @@
                                         </p>
                                     </div>
                                     <a href="{{ route('worker.tasks.show', $task->id) }}"
-                                        class="ml-4 px-3 py-1.5 bg-[#1A202C] hover:bg-[#2D3748] text-white text-sm font-medium rounded-lg transition">
+                                        class="ml-4 px-3 py-1.5 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white text-sm font-medium rounded-lg transition">
                                         Ver
                                     </a>
                                 </div>
@@ -239,7 +239,7 @@
                 <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 dark:text-white mb-4">Acceso Rápido</h3>
                 <div class="flex flex-wrap gap-4">
                     <a href="{{ route('worker.tasks.index') }}"
-                        class="inline-flex items-center gap-2 px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold rounded-xl transition-all shadow-sm focus:ring-2 focus:ring-slate-200">
+                        class="inline-flex items-center gap-2 px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white font-semibold rounded-xl transition-all shadow-sm focus:ring-2 focus:ring-slate-200">
                         <svg class="w-5 h-5 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />

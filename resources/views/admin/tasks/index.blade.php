@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center gap-4">
-            <div class="w-12 h-12 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-[#4F46E5] dark:text-indigo-400 flex-shrink-0">
+            <div class="w-12 h-12 bg-[#F1F2F4] dark:bg-[#3A3B3C] rounded-2xl flex items-center justify-center text-black dark:text-[#E6E9ED] flex-shrink-0">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
                 </svg>
@@ -60,7 +60,7 @@
                                 
                                 <!-- Clear Button -->
                                 @if(request()->anyFilled(['search', 'priority']))
-                                    <a href="{{ route('admin.tasks.index') }}" class="flex items-center justify-center px-4 py-2.5 bg-[#F4F6FF] hover:bg-[#E0E7FF] dark:bg-[#3A3B3C] dark:hover:bg-indigo-900/40 text-[#4F46E5] dark:text-indigo-400 rounded-xl transition-colors font-medium text-[0.85rem] gap-1.5 shadow-sm flex-shrink-0" title="Limpiar filtros">
+                                    <a href="{{ route('admin.tasks.index') }}" class="flex items-center justify-center px-4 py-2.5 bg-[#F4F6FF] hover:bg-[#E0E7FF] dark:bg-[#3A3B3C] dark:hover:bg-indigo-900/40 text-[#4F46E5] dark:text-[#E6E9ED] rounded-xl transition-colors font-medium text-[0.85rem] gap-1.5 shadow-sm flex-shrink-0" title="Limpiar filtros">
                                         <svg class="w-4 h-4 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
                                         Limpiar
                                     </a>
@@ -70,13 +70,13 @@
 
                         <!-- Action Buttons -->
                         <div class="flex items-center gap-2 w-full lg:w-auto lg:pl-4 lg:border-l border-slate-200 dark:border-[#3A3B3C] flex-shrink-0">
-                            <button onclick="openExportModal()" class="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-[#10B981] hover:bg-[#059669] text-white px-4 py-2.5 rounded-xl text-[0.85rem] font-medium transition-colors shadow-sm focus:ring-2 focus:ring-[#10B981]/50 whitespace-nowrap">
+                            <button onclick="openExportModal()" class="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-[#10B981] hover:bg-[#059669] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white px-4 py-2.5 rounded-xl text-[0.85rem] font-medium transition-colors shadow-sm focus:ring-2 focus:ring-[#10B981]/50 whitespace-nowrap">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                                 <span class="hidden sm:inline">Exportar PDF</span>
                                 <span class="sm:hidden">Exportar</span>
                             </button>
-                            <button onclick="openModal('createTaskModal')" class="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] text-white px-5 py-2.5 rounded-xl text-[0.85rem] font-medium transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 whitespace-nowrap">
-                                <svg class="w-4 h-4 !text-white dark:!text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <button onclick="openModal('createTaskModal')" class="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white px-5 py-2.5 rounded-xl text-[0.85rem] font-medium transition-colors shadow-sm focus:ring-2 focus:ring-slate-200 whitespace-nowrap">
+                                <svg class="w-4 h-4 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                 </svg>
                                 Crear Tarea
@@ -106,9 +106,9 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-100/70">
+                        <tbody class="divide-y divide-slate-100/70 dark:divide-[#3A3B3C]">
                             @forelse ($tasks as $task)
-                                <tr class="hover:bg-slate-50 dark:hover:bg-[#3A3B3C]/50 dark:bg-[#18191A] transition-colors group">
+                                <tr class="hover:bg-slate-50 dark:hover:bg-[#3A3B3C]/50 transition-colors group">
                                     <td class="px-6 py-5 relative">
                                         <div class="text-[0.95rem] font-bold text-slate-800 dark:text-gray-100 pr-4">{{ $task->title }}</div>
                                         <div class="text-[0.8rem] text-slate-500 dark:text-[#B0B3B8] mt-1 line-clamp-2 pr-4 leading-relaxed" title="{{ $task->description }}">{{ $task->description }}</div>
@@ -223,7 +223,7 @@
                         <div class="flex items-center gap-1.5 mx-1">
                             @foreach ($tasks->getUrlRange(max(1, $tasks->currentPage() - 1), min($tasks->lastPage(), $tasks->currentPage() + 1)) as $page => $url)
                                 @if ($page == $tasks->currentPage())
-                                    <span class="w-9 h-9 flex items-center justify-center rounded-lg bg-[#1A202C] text-white text-[0.85rem] font-bold shadow-sm">{{ $page }}</span>
+                                    <span class="w-9 h-9 flex items-center justify-center rounded-lg bg-[#1A202C] dark:bg-[#3A3B3C] text-white text-[0.85rem] font-bold shadow-sm">{{ $page }}</span>
                                 @else
                                     <a href="{{ $url }}" class="w-9 h-9 flex items-center justify-center rounded-lg border border-transparent text-slate-600 dark:text-gray-300 hover:border-slate-200 dark:border-[#3A3B3C] hover:bg-slate-50 dark:hover:bg-[#3A3B3C] dark:bg-[#18191A] text-[0.85rem] font-semibold transition-colors">{{ $page }}</a>
                                 @endif

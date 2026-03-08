@@ -13,7 +13,8 @@
                 <!-- Header del Modal -->
                 <div class="flex items-center justify-between mb-8">
                     <div class="flex items-center space-x-4">
-                        <div class="p-3 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl shadow-lg">
+                        <div
+                            class="p-3 bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-[#3A3B3C] dark:to-[#3A3B3C] rounded-xl shadow-lg dark:shadow-none">
                             <svg class="w-8 h-8 !text-white !stroke-white" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -210,7 +211,7 @@
                                     :class="{'bg-indigo-50 dark:bg-[#3A3B3C] border-indigo-500' : dragover}">
                                     <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                         <div
-                                            class="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-full mb-2 text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform">
+                                            class="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-full mb-2 text-indigo-600 dark:text-[#E6E9ED] group-hover:scale-110 transition-transform">
                                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12">
@@ -218,7 +219,7 @@
                                             </svg>
                                         </div>
                                         <p class="mb-1 text-sm text-gray-600 dark:text-gray-300 font-medium">
-                                            <span class="text-indigo-600 dark:text-indigo-400 font-bold">Haz clic para
+                                            <span class="text-indigo-600 dark:text-[#E6E9ED] font-bold">Haz clic para
                                                 subir</span> o arrastra y suelta
                                         </p>
                                         <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG o GIF (Max 2MB)</p>
@@ -264,8 +265,9 @@
                             Cancelar
                         </button>
                         <button id="editTaskSubmitBtn" type="submit"
-                            class="px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold rounded-xl transition-all shadow-lg transform hover:scale-105 flex items-center gap-2">
-                            <svg class="w-5 h-5 !text-white !stroke-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            class="px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white font-semibold rounded-xl transition-all shadow-lg transform hover:scale-105 flex items-center gap-2">
+                            <svg class="w-5 h-5 !text-white !stroke-white" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4">
                                 </path>

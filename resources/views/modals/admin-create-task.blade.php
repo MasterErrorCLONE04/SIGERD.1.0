@@ -110,7 +110,8 @@
                                 class="block w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-blue-500/50 focus:border-blue-400 transition-all duration-200 shadow-sm">
                                 @foreach ($priorities as $priority)
                                     <option value="{{ $priority }}" {{ old('priority') == $priority ? 'selected' : '' }}>
-                                        {{ ucfirst($priority) }}</option>
+                                        {{ ucfirst($priority) }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -148,7 +149,7 @@
                         <button type="button" onclick="closeModal('createTaskModal')"
                             class="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 dark:text-gray-300 bg-white dark:bg-[#242526] dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-[#3A3B3C] dark:hover:bg-gray-600 rounded-xl font-semibold transition-all shadow-sm">Cancelar</button>
                         <button type="submit"
-                            class="px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] text-white font-semibold rounded-xl transition-all shadow-lg transform hover:scale-105">Crear
+                            class="px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white font-semibold rounded-xl transition-all shadow-lg transform hover:scale-105">Crear
                             Tarea</button>
                     </div>
                 </form>

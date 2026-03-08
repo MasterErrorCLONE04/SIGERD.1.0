@@ -12,7 +12,7 @@
                 <!-- Opciones Rápidas -->
                 <div class="lg:col-span-1 space-y-6">
                     <div
-                        class="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl p-6 text-white text-center shadow-lg">
+                        class="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-[#3A3B3C] dark:to-[#3A3B3C] rounded-2xl p-6 text-white text-center shadow-lg dark:shadow-none">
                         <div
                             class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
