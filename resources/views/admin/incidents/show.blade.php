@@ -239,7 +239,7 @@
                                 </svg>
                                 Convertir a Tarea
                             </h3>
-                            <form id="convert-to-task-{{ $incident->id }}" method="POST" action="{{ route('admin.incidents.convert-to-task', $incident->id) }}" class="space-y-6">
+                            <form x-data id="convert-to-task-{{ $incident->id }}" method="POST" action="{{ route('admin.incidents.convert-to-task', $incident->id) }}" class="space-y-6">
                                 @csrf
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -328,13 +328,15 @@
                                         Cancelar
                                     </a>
                                     <button type="button"
-                                        @click="$dispatch('confirm-action', {
-                                            title: '¿Convertir a tarea?',
-                                            message: 'El reporte \'{{ addslashes($incident->title) }}\' será convertido en una tarea y asignado al trabajador seleccionado. El estado del incidente cambiará.',
-                                            variant: 'warning',
-                                            confirmText: 'Sí, convertir',
-                                            formId: 'convert-to-task-{{ $incident->id }}'
-                                        })"
+                                        @click="if($el.closest('form').reportValidity()) { 
+                                            $dispatch('confirm-action', {
+                                                title: '¿Convertir a tarea?',
+                                                message: 'El reporte \'{{ addslashes($incident->title) }}\' será convertido en una tarea y asignado al trabajador seleccionado. El estado del incidente cambiará.',
+                                                variant: 'warning',
+                                                confirmText: 'Sí, convertir',
+                                                formId: 'convert-to-task-{{ $incident->id }}'
+                                            })
+                                        }"
                                         class="px-6 py-3 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] uppercase tracking-widest text-white font-bold rounded-lg transition-colors text-sm inline-flex items-center gap-2">
                                         <svg class="w-5 h-5 !text-white" fill="none" stroke="white" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>

@@ -54,13 +54,13 @@ class TaskController extends Controller
             'assigned_to' => ['required', 'exists:users,id'],
             'final_description' => ['nullable', 'string'],
             'reference_images' => ['required', 'array', 'min:1'],
-            'reference_images.*' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'reference_images.*' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:10240'],
         ], [
             'reference_images.required' => 'Las imágenes de referencia son obligatorias para crear la tarea.',
             'reference_images.min' => 'Se requiere al menos una imagen de referencia.',
             'reference_images.*.image' => 'El archivo debe ser una imagen válida.',
             'reference_images.*.mimes' => 'Formatos permitidos: jpeg, png, jpg, gif.',
-            'reference_images.*.max' => 'Cada imagen no debe exceder los 2MB.',
+            'reference_images.*.max' => 'Cada imagen no debe exceder los 10MB.',
             'deadline_at.after_or_equal' => 'La fecha límite no puede ser anterior al día de hoy.',
             'assigned_to.required' => 'Debes asignar un trabajador a la tarea.',
         ]);
@@ -70,7 +70,7 @@ class TaskController extends Controller
         $data['status'] = 'asignado'; // Default status for direct creation
 
         $allowedExtensions = ['jpeg', 'jpg', 'png', 'gif'];
-        $maxSizeBytes = 2048 * 1024; // 2MB en bytes
+        $maxSizeBytes = 10240 * 1024; // 10MB en bytes
 
         // Función helper para validar y guardar imágenes
         $processImages = function ($files, $fieldName, $folder) use ($allowedExtensions, $maxSizeBytes) {
@@ -93,7 +93,7 @@ class TaskController extends Controller
 
                         // Validar tamaño
                         if ($fileSize > $maxSizeBytes) {
-                            throw new \Exception("El archivo {$fileName} no debe exceder 2MB.");
+                            throw new \Exception("El archivo {$fileName} no debe exceder 10MB.");
                         }
 
                         // Generar nombre único
@@ -128,7 +128,7 @@ class TaskController extends Controller
 
                 // Validar tamaño
                 if ($fileSize > $maxSizeBytes) {
-                    throw new \Exception("El archivo {$fileName} no debe exceder 2MB.");
+                    throw new \Exception("El archivo {$fileName} no debe exceder 10MB.");
                 }
 
                 // Generar nombre único
@@ -270,7 +270,7 @@ class TaskController extends Controller
         $updateData = $request->except(['initial_evidence_images', 'final_evidence_images', 'reference_images']);
 
         $allowedExtensions = ['jpeg', 'jpg', 'png', 'gif'];
-        $maxSizeBytes = 2048 * 1024; // 2MB en bytes
+        $maxSizeBytes = 10240 * 1024; // 10MB en bytes
 
         // Función helper para validar y guardar imágenes
         $processImages = function ($files, $fieldName, $folder) use ($allowedExtensions, $maxSizeBytes) {
@@ -293,7 +293,7 @@ class TaskController extends Controller
 
                         // Validar tamaño
                         if ($fileSize > $maxSizeBytes) {
-                            throw new \Exception("El archivo {$fileName} no debe exceder 2MB.");
+                            throw new \Exception("El archivo {$fileName} no debe exceder 10MB.");
                         }
 
                         // Generar nombre único
@@ -328,7 +328,7 @@ class TaskController extends Controller
 
                 // Validar tamaño
                 if ($fileSize > $maxSizeBytes) {
-                    throw new \Exception("El archivo {$fileName} no debe exceder 2MB.");
+                    throw new \Exception("El archivo {$fileName} no debe exceder 10MB.");
                 }
 
                 // Generar nombre único
