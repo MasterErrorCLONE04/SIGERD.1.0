@@ -518,6 +518,9 @@ class TaskController extends Controller
     /**
      * Export tasks to PDF for a specific month
      */
+    /**
+     * Export tasks to PDF for a specific month
+     */
     public function exportPDF(Request $request)
     {
         $request->validate([
@@ -530,63 +533,77 @@ class TaskController extends Controller
 
         // Obtener el nombre del mes en español
         $monthNames = [
-            1 => 'Enero',
-            2 => 'Febrero',
-            3 => 'Marzo',
-            4 => 'Abril',
-            5 => 'Mayo',
-            6 => 'Junio',
-            7 => 'Julio',
-            8 => 'Agosto',
-            9 => 'Septiembre',
-            10 => 'Octubre',
-            11 => 'Noviembre',
-            12 => 'Diciembre'
+            1 => 'Enero', 2 => 'Febrero', 3 => 'Marzo', 4 => 'Abril',
+            5 => 'Mayo', 6 => 'Junio', 7 => 'Julio', 8 => 'Agosto',
+            9 => 'Septiembre', 10 => 'Octubre', 11 => 'Noviembre', 12 => 'Diciembre'
         ];
         $monthName = $monthNames[$month];
 
-        // Filtrar tareas finalizadas en el mes especificado
-        $tasks = Task::with(['assignedTo', 'createdBy'])
-            ->whereYear('updated_at', $year)
-            ->whereMonth('updated_at', $month)
-            ->where('status', 'finalizada')
-            ->orderBy('updated_at', 'desc')
+        // Obtener TODAS las tareas del mes para estadísticas completas
+        $allMonthlyTasks = Task::with(['assignedTo', 'createdBy'])
+            ->whereYear('created_at', $year)
+            ->whereMonth('created_at', $month)
             ->get();
 
-        // Estadísticas del mes
-        $totalTasks = $tasks->count();
+        // Tareas finalizadas (para el listado detallado y promedio)
+        $finishedTasks = $allMonthlyTasks->where('status', 'finalizada')->sortByDesc('updated_at');
+
+        // Estadísticas generales
+        $totalTasks = $allMonthlyTasks->count();
+        $totalFinished = $finishedTasks->count();
+        
+        // Tasa de cumplimiento
+        $completionRate = $totalTasks > 0 ? round(($totalFinished / $totalTasks) * 100, 1) : 0;
+
+        // Distribución por Prioridad (de todas las tareas del mes)
         $tasksByPriority = [
-            'alta' => $tasks->where('priority', 'alta')->count(),
-            'media' => $tasks->where('priority', 'media')->count(),
-            'baja' => $tasks->where('priority', 'baja')->count(),
+            'alta' => $allMonthlyTasks->where('priority', 'alta')->count(),
+            'media' => $allMonthlyTasks->where('priority', 'media')->count(),
+            'baja' => $allMonthlyTasks->where('priority', 'baja')->count(),
+            'critica' => $allMonthlyTasks->where('priority', 'critica')->count(),
         ];
 
-        // Calcular tiempo promedio de finalización
+        // Distribución por Estado
+        $tasksByStatus = [
+            'pendiente' => $allMonthlyTasks->where('status', 'pendiente')->count(),
+            'asignado' => $allMonthlyTasks->where('status', 'asignado')->count(),
+            'en progreso' => $allMonthlyTasks->where('status', 'en progreso')->count(),
+            'realizada' => $allMonthlyTasks->where('status', 'realizada')->count(),
+            'finalizada' => $allMonthlyTasks->where('status', 'finalizada')->count(),
+            'cancelada' => $allMonthlyTasks->where('status', 'cancelada')->count(),
+            'incompleta' => $allMonthlyTasks->where('status', 'incompleta')->count(),
+        ];
+
+        // Calcular tiempo promedio de finalización (solo de las finalizadas)
         $avgCompletionDays = 0;
-        if ($totalTasks > 0) {
+        if ($totalFinished > 0) {
             $totalDays = 0;
-            foreach ($tasks as $task) {
+            foreach ($finishedTasks as $task) {
                 if ($task->created_at && $task->updated_at) {
                     $totalDays += $task->created_at->diffInDays($task->updated_at);
                 }
             }
-            $avgCompletionDays = round($totalDays / $totalTasks, 1);
+            $avgCompletionDays = round($totalDays / $totalFinished, 1);
         }
 
-        // Tareas por trabajador
-        $tasksByWorker = $tasks->groupBy('assigned_to')->map(function ($workerTasks) {
+        // Tareas por trabajador (Top 5)
+        $tasksByWorker = $allMonthlyTasks->whereNotNull('assigned_to')->groupBy('assigned_to')->map(function ($workerTasks) {
             return [
                 'worker' => $workerTasks->first()->assignedTo,
                 'count' => $workerTasks->count(),
+                'finished' => $workerTasks->where('status', 'finalizada')->count(),
             ];
         })->sortByDesc('count')->take(5);
 
         $data = [
             'month' => $monthName,
             'year' => $year,
-            'tasks' => $tasks,
+            'tasks' => $finishedTasks,
             'totalTasks' => $totalTasks,
+            'totalFinished' => $totalFinished,
+            'completionRate' => $completionRate,
             'tasksByPriority' => $tasksByPriority,
+            'tasksByStatus' => $tasksByStatus,
             'avgCompletionDays' => $avgCompletionDays,
             'tasksByWorker' => $tasksByWorker,
             'generatedDate' => now()->format('d/m/Y H:i'),
@@ -594,11 +611,11 @@ class TaskController extends Controller
 
         $pdf = Pdf::loadView('admin.tasks.pdf', $data)
             ->setPaper('a4', 'portrait')
-            ->setOption('margin-top', 10)
-            ->setOption('margin-bottom', 10)
-            ->setOption('margin-left', 10)
-            ->setOption('margin-right', 10);
+            ->setOption('margin-top', 0)
+            ->setOption('margin-bottom', 0)
+            ->setOption('margin-left', 0)
+            ->setOption('margin-right', 0);
 
-        return $pdf->download("reporte-tareas-{$monthName}-{$year}.pdf");
+        return $pdf->download("reporte-mensual-SIGERD-{$monthName}-{$year}.pdf");
     }
 }

@@ -2,745 +2,470 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reporte de Tareas - {{ $month }} {{ $year }}</title>
+    <title>Reporte Mensual SIGERD - {{ $month }} {{ $year }}</title>
     <style>
-        * {
+        @page {
             margin: 0;
-            padding: 0;
-            box-sizing: border-box;
         }
 
-        /* Normas APA - Tipografía y Espaciado */
         body {
-            font-family: 'DejaVu Serif', 'Times New Roman', Times, serif;
-            font-size: 12pt;
-            color: #000000;
-            line-height: 2;
-            background: #ffffff;
-        }
-
-        .page-wrapper {
-            padding: 0;
+            font-family: 'Helvetica', 'Arial', sans-serif;
             margin: 0;
-        }
-
-        /* Numeración de Página (APA) */
-        .page-number {
-            position: fixed;
-            top: 15mm;
-            right: 20mm;
-            font-size: 11pt;
-            color: #333333;
-        }
-
-        /* Portada APA */
-        .title-page {
-            text-align: center;
-            margin-top: 100mm;
-            page-break-after: always;
-        }
-
-        .title-page h1 {
-            font-size: 16pt;
-            font-weight: bold;
-            margin-bottom: 20pt;
-            color: #000000;
-        }
-
-        .title-page .subtitle {
-            font-size: 14pt;
-            margin-bottom: 40pt;
-            color: #333333;
-        }
-
-        .title-page .institution {
-            font-size: 12pt;
-            margin-bottom: 10pt;
-            color: #000000;
-        }
-
-        .title-page .date {
-            font-size: 12pt;
-            color: #333333;
-        }
-
-        /* Header de Contenido (APA) */
-        .content-header {
-            text-align: center;
-            padding: 20mm 0 10mm 0;
-            border-bottom: 2px solid #000000;
-            margin-bottom: 15mm;
-        }
-
-        .content-header h1 {
-            font-size: 16pt;
-            font-weight: bold;
-            margin-bottom: 5pt;
-            color: #000000;
-        }
-
-        .content-header .period {
-            font-size: 12pt;
-            color: #333333;
-            font-style: italic;
-        }
-
-        /* Resumen Ejecutivo (APA) */
-        .executive-summary {
-            margin: 0 20mm 15mm 20mm;
-            text-align: justify;
-            text-indent: 12.7mm;
-            line-height: 2;
-        }
-
-        .executive-summary p {
-            margin-bottom: 10pt;
-            font-size: 12pt;
-            color: #000000;
-        }
-
-        .executive-summary strong {
-            font-weight: bold;
-        }
-
-        /* Sección (APA - Nivel 1) */
-        .section-level-1 {
-            font-size: 14pt;
-            font-weight: bold;
-            text-align: center;
-            margin: 20pt 0 10pt 0;
-            color: #000000;
-        }
-
-        /* Sección (APA - Nivel 2) */
-        .section-level-2 {
-            font-size: 12pt;
-            font-weight: bold;
-            text-align: left;
-            margin: 15pt 0 8pt 0;
-            color: #000000;
-        }
-
-        /* Contenedor de Gráficos */
-        .charts-container {
-            margin: 15mm 20mm;
-        }
-
-        /* Cuadro de Estadísticas Clave */
-        .key-metrics {
-            width: calc(100% - 40mm);
-            border: 2px solid #000000;
-            margin: 10mm 20mm;
-            border-collapse: collapse;
-            table-layout: fixed;
-        }
-
-        .key-metrics tr {
-            border: 1px solid #666666;
-        }
-
-        .key-metrics td {
-            padding: 8pt 12pt;
-            border: 1px solid #666666;
-        }
-
-        .metric-label {
-            background: #f5f5f5;
-            font-weight: bold;
-            width: 65%;
-            font-size: 11pt;
-            vertical-align: middle;
-        }
-
-        .metric-value {
-            text-align: center;
-            font-size: 14pt;
-            font-weight: bold;
-            width: 35%;
-            background: #ffffff;
-            vertical-align: middle;
-        }
-
-        /* Gráfico de Barras Horizontal */
-        .bar-chart {
-            margin: 15mm 20mm;
-            padding: 10mm;
-            border: 1px solid #cccccc;
-            background: #fafafa;
-            width: calc(100% - 40mm);
-            box-sizing: border-box;
-        }
-
-        .chart-title {
-            font-size: 12pt;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 10pt;
-            color: #000000;
-        }
-
-        .chart-subtitle {
-            font-size: 10pt;
-            text-align: center;
-            margin-bottom: 15pt;
-            color: #666666;
-            font-style: italic;
-        }
-
-        .bar-item {
-            margin-bottom: 12pt;
-        }
-
-        .bar-label-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            margin-bottom: 4pt;
-        }
-
-        .bar-label {
-            font-size: 10pt;
-            font-weight: bold;
-            color: #000000;
-            flex: 0 0 auto;
-        }
-
-        .bar-value {
-            text-align: right;
-            font-size: 11pt;
-            font-weight: bold;
-            flex: 0 0 auto;
-        }
-
-        .bar-container {
-            width: 100%;
-            height: 20pt;
-            background: #e0e0e0;
-            border: 1px solid #999999;
-            position: relative;
-        }
-
-        .bar-fill {
-            height: 100%;
-            background: #2563eb;
-            position: relative;
-        }
-
-        .bar-fill-alta {
-            background: #dc2626;
-        }
-
-        .bar-fill-media {
-            background: #f59e0b;
-        }
-
-        .bar-fill-baja {
-            background: #059669;
-        }
-
-        .bar-percentage {
-            position: absolute;
-            right: 5pt;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #ffffff;
-            font-size: 9pt;
-            font-weight: bold;
-        }
-
-        /* Gráfico Circular (Pie Chart) */
-        .pie-chart-container {
-            text-align: center;
-            margin: 15mm 20mm;
-            padding: 10mm;
-            border: 1px solid #cccccc;
-            background: #fafafa;
-            width: calc(100% - 40mm);
-            box-sizing: border-box;
-        }
-
-        .pie-chart {
-            display: inline-block;
-            width: 150pt;
-            height: 150pt;
-            border-radius: 50%;
-            margin: 10pt auto;
-        }
-
-        .pie-legend {
-            margin-top: 15pt;
-            text-align: left;
-            display: inline-block;
-        }
-
-        .legend-item {
-            margin-bottom: 8pt;
-            font-size: 10pt;
-        }
-
-        .legend-color {
-            display: inline-block;
-            width: 12pt;
-            height: 12pt;
-            margin-right: 6pt;
-            border: 1px solid #666666;
-            vertical-align: middle;
-        }
-
-        .legend-alta {
-            background: #dc2626;
-        }
-
-        .legend-media {
-            background: #f59e0b;
-        }
-
-        .legend-baja {
-            background: #059669;
-        }
-
-        .legend-text {
-            vertical-align: middle;
-            font-weight: bold;
-        }
-
-        .legend-percentage {
-            color: #666666;
-            font-size: 9pt;
-        }
-
-        /* Tabla de Desempeño de Trabajadores (APA) */
-        .worker-performance-table {
-            margin: 10mm auto;
-            width: calc(100% - 40mm);
-            border-collapse: collapse;
-            border: 2px solid #000000;
-            table-layout: fixed;
-        }
-
-        .worker-performance-table thead {
-            background: #e0e0e0;
-        }
-
-        .worker-performance-table th {
-            padding: 8pt;
-            border: 1px solid #666666;
-            font-size: 11pt;
-            font-weight: bold;
-            text-align: left;
-            vertical-align: middle;
-        }
-
-        .worker-performance-table td {
-            padding: 8pt;
-            border: 1px solid #666666;
-            font-size: 10pt;
-            vertical-align: middle;
-        }
-
-        .worker-performance-table .rank-cell {
-            text-align: center;
-            font-weight: bold;
-            background: #f5f5f5;
-        }
-
-        .worker-performance-table .count-cell {
-            text-align: center;
-            font-weight: bold;
-        }
-
-        /* Tabla de Tareas Detallada (APA) */
-        .table-container {
-            margin: 10mm 20mm;
-            width: calc(100% - 40mm);
-        }
-
-        .tasks-table {
-            width: 100%;
-            border-collapse: collapse;
-            border: 2px solid #000000;
-            table-layout: fixed;
-        }
-
-        .tasks-table thead {
-            background: #d0d0d0;
-        }
-
-        .tasks-table th {
-            padding: 8pt;
-            text-align: left;
-            font-size: 10pt;
-            font-weight: bold;
-            border: 1px solid #666666;
-            vertical-align: middle;
-        }
-
-        .tasks-table td {
-            padding: 6pt 8pt;
-            border: 1px solid #666666;
-            font-size: 9pt;
+            padding: 0;
+            color: #1a202c;
             line-height: 1.5;
-            vertical-align: middle;
-            word-wrap: break-word;
+            background-color: #ffffff;
         }
 
-        .tasks-table tbody tr:nth-child(even) {
-            background: #f5f5f5;
+        /* Utilidades */
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .text-bold { font-weight: bold; }
+        .uppercase { text-transform: uppercase; }
+        .text-slate-500 { color: #64748b; }
+        .text-slate-400 { color: #94a3b8; }
+        
+        /* Portada */
+        .cover-page {
+            height: 100%;
+            position: relative;
+            background-color: #ffffff;
+            color: #1a202c;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid #e2e8f0; /* Borde sutil para delimitar la portada en blanco */
         }
 
-        .table-caption {
-            font-size: 11pt;
-            font-style: italic;
-            text-align: left;
-            margin-bottom: 5pt;
-            margin-left: 20mm;
+        .cover-logo {
+            margin-top: 100px;
+            margin-bottom: 40px;
         }
 
-        /* Badges Profesionales */
-        .badge {
+        .cover-logo img {
+            height: 100px;
+            width: auto;
+        }
+
+        .cover-title {
+            font-size: 32pt;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+            color: #1a202c;
+        }
+
+        .cover-subtitle {
+            font-size: 18pt;
+            font-weight: 400;
+            color: #64748b;
+            margin-bottom: 60px;
+        }
+
+        .cover-details {
+            margin-top: 100px;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 40px;
             display: inline-block;
-            padding: 2pt 6pt;
-            border: 1px solid #000000;
-            font-size: 8pt;
-            font-weight: bold;
-            text-transform: uppercase;
+            width: 80%;
         }
 
-        .badge-alta {
-            background: #ffcccc;
-            color: #000000;
-        }
-
-        .badge-media {
-            background: #ffe5cc;
-            color: #000000;
-        }
-
-        .badge-baja {
-            background: #ccffcc;
-            color: #000000;
-        }
-
-        /* Figura */
-        .figure {
-            margin: 15mm 20mm;
-            text-align: center;
-        }
-
-        .figure-caption {
-            font-size: 10pt;
-            font-style: italic;
-            margin-top: 8pt;
-            text-align: center;
-        }
-
-        /* Referencias y Notas (APA) */
-        .references {
-            margin: 20mm 20mm 10mm 20mm;
-            page-break-before: always;
-        }
-
-        .reference-entry {
-            margin-bottom: 10pt;
-            text-indent: -12.7mm;
-            padding-left: 12.7mm;
-            line-height: 2;
+        .cover-detail-item {
+            margin-bottom: 15px;
             font-size: 12pt;
         }
 
-        /* Notas al pie */
-        .footnote {
+        .cover-footer {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            right: 0;
             font-size: 10pt;
-            margin-top: 15mm;
-            padding-top: 5mm;
-            border-top: 1px solid #000000;
+            color: #64748b;
         }
 
-        .no-tasks {
-            text-align: center;
-            padding: 40mm 20mm;
-            font-size: 12pt;
-            color: #666666;
+        /* Estructura de Páginas Internas */
+        .page {
+            padding: 2.54cm;
+            position: relative;
         }
 
         .page-break {
             page-break-after: always;
         }
 
-        /* Configuración de Página APA */
-        @page {
-            margin: 25.4mm;
-            margin-top: 25.4mm;
-            margin-bottom: 25.4mm;
+        .header {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
         }
 
-        /* Párrafos con sangría APA */
-        .paragraph {
-            text-indent: 12.7mm;
-            text-align: justify;
-            margin-bottom: 0;
-            line-height: 2;
+        .header-logo {
+            float: left;
+            height: 35px;
         }
 
-        .paragraph-no-indent {
-            text-indent: 0;
-            text-align: justify;
-            margin-bottom: 0;
-            line-height: 2;
+        .header-text {
+            float: right;
+            text-align: right;
+            font-size: 9pt;
+            color: #64748b;
         }
 
-        /* Espaciado entre secciones */
-        .section-spacing {
-            margin-bottom: 15mm;
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .section-title {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #1a202c;
+            margin-bottom: 20px;
+            border-left: 4px solid #1a202c;
+            padding-left: 15px;
+        }
+
+        /* Métricas */
+        .metrics-grid {
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            width: 22%;
+            float: left;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-right: 2%;
+            text-align: center;
+        }
+
+        .metric-card:last-child {
+            margin-right: 0;
+        }
+
+        .metric-label {
+            font-size: 8pt;
+            color: #64748b;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .metric-value {
+            font-size: 18pt;
+            font-weight: 800;
+            color: #1e293b;
+        }
+
+        /* Gráficos */
+        .chart-box {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .chart-header {
+            font-size: 11pt;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #475569;
+        }
+
+        .bar-row {
+            margin-bottom: 12px;
+        }
+
+        .bar-info {
+            font-size: 9pt;
+            margin-bottom: 4px;
+        }
+
+        .bar-label { float: left; font-weight: 600; }
+        .bar-count { float: right; color: #64748b; }
+
+        .bar-outer {
+            height: 12px;
+            background-color: #f1f5f9;
+            border-radius: 6px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .bar-inner {
+            height: 100%;
+            border-radius: 6px;
+        }
+
+        .bg-critica { background-color: #991b1b; }
+        .bg-alta { background-color: #dc2626; }
+        .bg-media { background-color: #d97706; }
+        .bg-baja { background-color: #059669; }
+        .bg-primary { background-color: #1a202c; }
+
+        /* Tabla de Tareas */
+        .tasks-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 9pt;
+        }
+
+        .tasks-table th {
+            background-color: #ffffff;
+            color: #1a202c;
+            font-weight: bold;
+            text-align: left;
+            padding: 10px;
+            border-bottom: 2px solid #1a202c;
+        }
+
+        .tasks-table td {
+            padding: 10px;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: middle;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 7pt;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .badge-critica { background-color: #fee2e2; color: #991b1b; }
+        .badge-alta { background-color: #fee2e2; color: #b91c1c; }
+        .badge-media { background-color: #fef3c7; color: #92400e; }
+        .badge-baja { background-color: #dcfce7; color: #166534; }
+
+        /* Firmas */
+        .signatures {
+            margin-top: 60px;
+        }
+
+        .signature-box {
+            width: 40%;
+            float: left;
+            text-align: center;
+        }
+
+        .signature-line {
+            border-top: 1px solid #1a202c;
+            margin-top: 40px;
+            padding-top: 10px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 40px;
+            left: 2.54cm;
+            right: 2.54cm;
+            font-size: 8pt;
+            color: #94a3b8;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 10px;
         }
     </style>
 </head>
 <body>
-    {{-- PORTADA (Página 1) --}}
-    <div class="title-page">
-        <h1>INFORME DE GESTIÓN DE TAREAS</h1>
-        <div class="subtitle">Análisis del Período {{ $month }} {{ $year }}</div>
-        <div class="institution">SIGERD</div>
-        <div class="institution">Sistema de Gestión de Reportes y Documentación</div>
-        <div class="date">{{ $generatedDate }}</div>
-    </div>
-
-    {{-- CONTENIDO (Página 2 en adelante) --}}
-    <div class="content-header">
-        <h1>Informe de Tareas Finalizadas</h1>
-        <div class="period">{{ $month }} {{ $year }}</div>
-    </div>
-
-    @if($totalTasks > 0)
-        {{-- RESUMEN EJECUTIVO --}}
-        <h2 class="section-level-1">Resumen Ejecutivo</h2>
-        
-        <div class="executive-summary">
-            <p>El presente informe detalla el análisis de las tareas finalizadas durante el período de {{ $month }} {{ $year }}, en el marco del Sistema de Gestión de Reportes y Documentación (SIGERD). El estudio comprende un total de <strong>{{ $totalTasks }} tareas completadas</strong>, con una participación de <strong>{{ $tasksByWorker->count() }} trabajadores</strong> y un tiempo promedio de ejecución de <strong>{{ $avgCompletionDays }} días</strong>.</p>
-            
-            <p>Los datos recopilados muestran la distribución por niveles de prioridad, el desempeño individual de los trabajadores y las tendencias operacionales del período. Este documento se estructura siguiendo las normas de presentación profesional y académica, facilitando la comprensión objetiva de los resultados obtenidos.</p>
+    <!-- PÁGINA 1: PORTADA -->
+    <div class="cover-page page-break">
+        <div class="cover-logo">
+            <img src="{{ public_path('logo/logo.jpg') }}" alt="SIGERD">
         </div>
-
-        {{-- MÉTRICAS CLAVE --}}
-        <h2 class="section-level-1 section-spacing">Indicadores Clave de Desempeño</h2>
-
-        <table class="key-metrics">
-            <tr>
-                <td class="metric-label">Total de Tareas Finalizadas</td>
-                <td class="metric-value">{{ $totalTasks }}</td>
-            </tr>
-            <tr>
-                <td class="metric-label">Tiempo Promedio de Ejecución (días)</td>
-                <td class="metric-value">{{ $avgCompletionDays }}</td>
-            </tr>
-            <tr>
-                <td class="metric-label">Trabajadores Participantes</td>
-                <td class="metric-value">{{ $tasksByWorker->count() }}</td>
-            </tr>
-            <tr>
-                <td class="metric-label">Tasa de Cumplimiento</td>
-                <td class="metric-value">100%</td>
-            </tr>
-        </table>
-
-        {{-- ANÁLISIS DE DISTRIBUCIÓN POR PRIORIDAD --}}
-        <div class="page-break"></div>
+        <h1 class="cover-title">INFORME MENSUAL DE GESTIÓN</h1>
+        <p class="cover-subtitle">Sistema de Gestión de Reportes y Documentación</p>
         
-        <h2 class="section-level-1">Análisis de Distribución por Prioridad</h2>
-
-        <p class="paragraph-no-indent" style="margin: 10mm 20mm 15mm 20mm;">La clasificación de tareas según su nivel de prioridad permite identificar la distribución de esfuerzos y recursos durante el período analizado. La Figura 1 presenta la distribución porcentual de las tareas finalizadas según tres categorías: alta, media y baja prioridad.</p>
-
-        {{-- Gráfico de Barras Horizontales --}}
-        <div class="figure">
-            <div class="bar-chart">
-                <div class="chart-title">Distribución de Tareas por Nivel de Prioridad</div>
-                <div class="chart-subtitle">n = {{ $totalTasks }} tareas</div>
-                
-                @php
-                    $maxTasks = max($tasksByPriority['alta'], $tasksByPriority['media'], $tasksByPriority['baja']);
-                    $totalForPercentage = $totalTasks > 0 ? $totalTasks : 1;
-                    $percentageAlta = round(($tasksByPriority['alta'] / $totalForPercentage) * 100, 1);
-                    $percentageMedia = round(($tasksByPriority['media'] / $totalForPercentage) * 100, 1);
-                    $percentageBaja = round(($tasksByPriority['baja'] / $totalForPercentage) * 100, 1);
-                @endphp
-
-                <div class="bar-item">
-                    <div class="bar-label-row">
-                        <div class="bar-label">Alta Prioridad</div>
-                        <div class="bar-value" style="color: #dc2626;">{{ $tasksByPriority['alta'] }} tareas ({{ $percentageAlta }}%)</div>
-                    </div>
-                    <div class="bar-container">
-                        <div class="bar-fill bar-fill-alta" style="width: {{ $maxTasks > 0 ? ($tasksByPriority['alta'] / $maxTasks * 100) : 0 }}%;">
-                            <span class="bar-percentage">{{ $percentageAlta }}%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bar-item">
-                    <div class="bar-label-row">
-                        <div class="bar-label">Media Prioridad</div>
-                        <div class="bar-value" style="color: #f59e0b;">{{ $tasksByPriority['media'] }} tareas ({{ $percentageMedia }}%)</div>
-                    </div>
-                    <div class="bar-container">
-                        <div class="bar-fill bar-fill-media" style="width: {{ $maxTasks > 0 ? ($tasksByPriority['media'] / $maxTasks * 100) : 0 }}%;">
-                            <span class="bar-percentage">{{ $percentageMedia }}%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bar-item">
-                    <div class="bar-label-row">
-                        <div class="bar-label">Baja Prioridad</div>
-                        <div class="bar-value" style="color: #059669;">{{ $tasksByPriority['baja'] }} tareas ({{ $percentageBaja }}%)</div>
-                    </div>
-                    <div class="bar-container">
-                        <div class="bar-fill bar-fill-baja" style="width: {{ $maxTasks > 0 ? ($tasksByPriority['baja'] / $maxTasks * 100) : 0 }}%;">
-                            <span class="bar-percentage">{{ $percentageBaja }}%</span>
-                        </div>
-                    </div>
-                </div>
+        <div class="cover-details">
+            <div class="cover-detail-item">
+                <span class="text-slate-400">PERÍODO:</span> 
+                <span class="text-bold">{{ $month }} {{ $year }}</span>
             </div>
-            <div class="figure-caption">Figura 1. Distribución porcentual de tareas finalizadas según nivel de prioridad.</div>
+            <div class="cover-detail-item">
+                <span class="text-slate-400">FECHA DE EMISIÓN:</span> 
+                <span class="text-bold">{{ $generatedDate }}</span>
+            </div>
+            <div class="cover-detail-item">
+                <span class="text-slate-400">ESTADO DEL SISTEMA:</span> 
+                <span class="text-bold">OPERATIVO</span>
+            </div>
         </div>
 
-        @php
-            if($tasksByPriority['alta'] >= $tasksByPriority['media'] && $tasksByPriority['alta'] >= $tasksByPriority['baja']) {
-                $priorityText = "la mayoría de las tareas finalizadas corresponden a alta prioridad ({$percentageAlta}%), lo que refleja una gestión enfocada en la atención de asuntos críticos";
-            } elseif($tasksByPriority['media'] >= $tasksByPriority['alta'] && $tasksByPriority['media'] >= $tasksByPriority['baja']) {
-                $priorityText = "la mayoría de las tareas finalizadas corresponden a media prioridad ({$percentageMedia}%), lo que sugiere un balance operacional";
-            } else {
-                $priorityText = "la mayoría de las tareas finalizadas corresponden a baja prioridad ({$percentageBaja}%), indicando un enfoque en mantenimiento preventivo";
-            }
-        @endphp
-        <p class="paragraph" style="margin: 10mm 20mm;">Los resultados indican que {{ $priorityText }} durante el período analizado.</p>
+        <div class="cover-footer">
+            SIGERD v2.0 &copy; {{ date('Y') }} - Documento de Uso Administrativo
+        </div>
+    </div>
 
-        {{-- DESEMPEÑO DE TRABAJADORES --}}
+    <!-- PÁGINA 2: RESUMEN Y ESTADÍSTICAS -->
+    <div class="page page-break">
+        <div class="header clearfix">
+            <img src="{{ public_path('logo/logo.jpg') }}" class="header-logo">
+            <div class="header-text">
+                Reporte de Gestión - {{ $month }} {{ $year }}<br>
+                SIGERD | Página 2
+            </div>
+        </div>
+
+        <h2 class="section-title">Resumen de Indicadores Clave (KPIs)</h2>
+        
+        <div class="metrics-grid clearfix">
+            <div class="metric-card">
+                <div class="metric-label">Total Tareas</div>
+                <div class="metric-value">{{ $totalTasks }}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Finalizadas</div>
+                <div class="metric-value">{{ $totalFinished }}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Cumplimiento</div>
+                <div class="metric-value">{{ $completionRate }}%</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Eficiencia (Días)</div>
+                <div class="metric-value">{{ $avgCompletionDays }}</div>
+            </div>
+        </div>
+
+        <div class="chart-box">
+            <div class="chart-header">Desglose por Prioridad del Mes</div>
+            @php
+                $maxPriority = max((array)$tasksByPriority) ?: 1;
+            @endphp
+            
+            @foreach($tasksByPriority as $priority => $count)
+                <div class="bar-row">
+                    <div class="bar-info clearfix">
+                        <span class="bar-label uppercase">{{ $priority }}</span>
+                        <span class="bar-count">{{ $count }} tareas</span>
+                    </div>
+                    <div class="bar-outer">
+                        <div class="bar-inner bg-{{ $priority }}" style="width: {{ ($count / $maxPriority) * 100 }}%"></div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+        <div class="chart-box">
+            <div class="chart-header">Estado Actual del Flujo de Trabajo</div>
+            @php
+                $maxStatus = max((array)$tasksByStatus) ?: 1;
+            @endphp
+            
+            @foreach($tasksByStatus as $status => $count)
+                @if($count > 0)
+                <div class="bar-row">
+                    <div class="bar-info clearfix">
+                        <span class="bar-label uppercase">{{ $status }}</span>
+                        <span class="bar-count">{{ $count }} tareas</span>
+                    </div>
+                    <div class="bar-outer">
+                        <div class="bar-inner bg-primary" style="width: {{ ($count / $maxStatus) * 100 }}%"></div>
+                    </div>
+                </div>
+                @endif
+            @endforeach
+        </div>
+
+        <div class="footer">
+            SIGERD - Documento generado automáticamente por el sistema de gestión.
+        </div>
+    </div>
+
+    <!-- PÁGINA 3: DESEMPEÑO Y DETALLE -->
+    <div class="page">
+        <div class="header clearfix">
+            <img src="{{ public_path('logo/logo.jpg') }}" class="header-logo">
+            <div class="header-text">
+                Reporte de Gestión - {{ $month }} {{ $year }}<br>
+                SIGERD | Página 3
+            </div>
+        </div>
+
+        <h2 class="section-title">Análisis de Desempeño Técnico</h2>
+        
         @if($tasksByWorker->count() > 0)
-            <h2 class="section-level-1 section-spacing">Análisis de Desempeño del Personal</h2>
-
-            <p class="paragraph-no-indent" style="margin: 10mm 20mm 15mm 20mm;">La Tabla 1 presenta el ranking de trabajadores según el número de tareas finalizadas durante el período. Este indicador permite identificar los niveles de productividad individual y la contribución de cada miembro del equipo a los objetivos organizacionales.</p>
-
-            <div class="table-caption">Tabla 1</div>
-            <div class="table-caption" style="margin-bottom: 8pt;">Desempeño de Trabajadores por Número de Tareas Finalizadas</div>
-
-            <table class="worker-performance-table">
+            <table class="tasks-table">
                 <thead>
                     <tr>
-                        <th style="width: 10%; text-align: center;">Ranking</th>
-                        <th style="width: 50%;">Nombre del Trabajador</th>
-                        <th style="width: 20%; text-align: center;">Tareas Completadas</th>
-                        <th style="width: 20%; text-align: center;">Porcentaje (%)</th>
+                        <th style="width: 10%">Rank</th>
+                        <th style="width: 40%">Técnico Responsable</th>
+                        <th style="width: 25%; text-align: center;">T. Asignadas</th>
+                        <th style="width: 25%; text-align: center;">T. Finalizadas</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($tasksByWorker as $index => $item)
-                        @php
-                            $workerPercentage = $totalTasks > 0 ? round(($item['count'] / $totalTasks) * 100, 1) : 0;
-                        @endphp
                         <tr>
-                            <td class="rank-cell">{{ $index + 1 }}</td>
-                            <td>{{ $item['worker']->name ?? 'Sin asignar' }}</td>
-                            <td class="count-cell">{{ $item['count'] }}</td>
-                            <td class="count-cell">{{ $workerPercentage }}%</td>
+                            <td class="text-bold">#{{ $loop->iteration }}</td>
+                            <td>{{ $item['worker']->name ?? 'N/A' }}</td>
+                            <td class="text-center">{{ $item['count'] }}</td>
+                            <td class="text-center text-bold">{{ $item['finished'] }}</td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-
-            @php
-                $workerCountText = $tasksByWorker->count() > 3 ? "un nivel equilibrado de participación" : "un grupo reducido de colaboradores";
-            @endphp
-            <p class="paragraph" style="margin: 10mm 20mm;">Los datos reflejan que el trabajador con mayor desempeño completó {{ $tasksByWorker->first()['count'] ?? 0 }} tareas durante el período, representando un {{ $totalTasks > 0 ? round(($tasksByWorker->first()['count'] / $totalTasks) * 100, 1) : 0 }}% del total. La distribución del trabajo entre el personal muestra {{ $workerCountText }} en la ejecución de las tareas asignadas.</p>
+        @else
+            <p class="text-slate-500">No hay datos de trabajadores registrados para este periodo.</p>
         @endif
 
-        {{-- REGISTRO DETALLADO DE TAREAS --}}
-        <div class="page-break"></div>
+        <h2 class="section-title" style="margin-top: 40px;">Registro de Tareas Finalizadas</h2>
         
-        <h2 class="section-level-1">Registro Detallado de Tareas</h2>
-
-        <p class="paragraph-no-indent" style="margin: 10mm 20mm 15mm 20mm;">A continuación se presenta el registro completo de las tareas finalizadas durante el período de {{ $month }} {{ $year }}. La Tabla 2 incluye información sobre el título de cada tarea, el personal responsable, la ubicación de ejecución, el nivel de prioridad asignado y las fechas de inicio y finalización.</p>
-
-        <div class="table-caption">Tabla 2</div>
-        <div class="table-caption" style="margin-bottom: 8pt;">Registro Completo de Tareas Finalizadas en {{ $month }} {{ $year }}</div>
-
-        <div class="table-container">
-            <table class="tasks-table">
-                <thead>
+        <table class="tasks-table">
+            <thead>
+                <tr>
+                    <th style="width: 35%">Descripción</th>
+                    <th style="width: 25%">Técnico</th>
+                    <th style="width: 20%; text-align: center;">Prioridad</th>
+                    <th style="width: 20%; text-align: center;">Finalización</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($tasks->take(15) as $task)
                     <tr>
-                        <th style="width: 4%; text-align: center;">N°</th>
-                        <th style="width: 30%;">Descripción de la Tarea</th>
-                        <th style="width: 18%;">Responsable</th>
-                        <th style="width: 16%;">Ubicación</th>
-                        <th style="width: 10%; text-align: center;">Prioridad</th>
-                        <th style="width: 11%; text-align: center;">F. Inicio</th>
-                        <th style="width: 11%; text-align: center;">F. Término</th>
+                        <td class="text-bold">{{ Str::limit($task->title, 40) }}</td>
+                        <td>{{ $task->assignedTo->name ?? 'N/A' }}</td>
+                        <td class="text-center">
+                            <span class="badge badge-{{ $task->priority }}">{{ $task->priority }}</span>
+                        </td>
+                        <td class="text-center">{{ $task->updated_at->format('d/m/Y') }}</td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach($tasks as $index => $task)
-                        <tr>
-                            <td style="text-align: center;">{{ $index + 1 }}</td>
-                            <td>{{ \Illuminate\Support\Str::limit($task->title, 50) }}</td>
-                            <td>{{ $task->assignedTo->name ?? 'No asignado' }}</td>
-                            <td>{{ \Illuminate\Support\Str::limit($task->location, 25) }}</td>
-                            <td style="text-align: center;">
-                                <span class="badge badge-{{ $task->priority }}">
-                                    {{ strtoupper($task->priority) }}
-                                </span>
-                            </td>
-                            <td style="text-align: center;">{{ $task->created_at->format('d/m/Y') }}</td>
-                            <td style="text-align: center;">{{ $task->updated_at->format('d/m/Y') }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-
-        <p class="paragraph" style="margin: 10mm 20mm;">El análisis del registro permite observar la cronología de ejecución de las tareas y su distribución temporal durante el mes. Los datos presentados constituyen la base para la evaluación del cumplimiento de objetivos y la planificación de períodos futuros.</p>
-
-        {{-- CONCLUSIONES --}}
-        <div class="page-break"></div>
+                @empty
+                    <tr>
+                        <td colspan="4" class="text-center text-slate-400">No hay tareas finalizadas registradas para listar.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
         
-        <h2 class="section-level-1">Conclusiones</h2>
+        @if($tasks->count() > 15)
+            <p style="font-size: 8pt; color: #94a3b8; margin-top: 10px;">* Se muestran solo las últimas 15 tareas finalizadas. Para el registro completo, consulte el panel administrativo.</p>
+        @endif
 
-        <p class="paragraph-no-indent" style="margin: 10mm 20mm;">El análisis del período de {{ $month }} {{ $year }} permite extraer las siguientes conclusiones:</p>
-
-        @php
-            if($tasksByPriority['alta'] >= $tasksByPriority['media'] && $tasksByPriority['alta'] >= $tasksByPriority['baja']) {
-                $conclusionPriority = "un enfoque predominante en tareas de alta prioridad";
-            } elseif($tasksByPriority['media'] >= $tasksByPriority['alta'] && $tasksByPriority['media'] >= $tasksByPriority['baja']) {
-                $conclusionPriority = "un balance operacional centrado en tareas de prioridad media";
-            } else {
-                $conclusionPriority = "una gestión orientada a tareas de mantenimiento y prioridad baja";
-            }
-        @endphp
-        <p class="paragraph" style="margin: 5mm 20mm;">Se registró un total de {{ $totalTasks }} tareas finalizadas, con un tiempo promedio de ejecución de {{ $avgCompletionDays }} días. La distribución por prioridad muestra {{ $conclusionPriority }}, lo que refleja las demandas operacionales del período.</p>
-
-        @php
-            $workerParticipation = $tasksByWorker->count() > 0 
-                ? "una participación de {$tasksByWorker->count()} trabajadores en la ejecución de las tareas asignadas"
-                : "la ausencia de asignaciones específicas durante el período";
-        @endphp
-        <p class="paragraph" style="margin: 5mm 20mm;">El desempeño del personal evidencia {{ $workerParticipation }}. Los indicadores presentados proporcionan una base objetiva para la evaluación del rendimiento organizacional y la planificación de acciones futuras.</p>
-
-        <p class="paragraph" style="margin: 5mm 20mm;">Los datos recopilados constituyen un insumo relevante para la toma de decisiones gerenciales y el mejoramiento continuo de los procesos operativos del sistema SIGERD.</p>
-
-        {{-- NOTAS AL PIE --}}
-        <div class="footnote" style="margin: 20mm 20mm 10mm 20mm;">
-            <p style="font-size: 10pt; margin-bottom: 5pt;"><strong>Notas:</strong></p>
-            <p style="font-size: 10pt; line-height: 1.5;">Este informe fue generado automáticamente por el Sistema de Gestión de Reportes y Documentación (SIGERD) el {{ $generatedDate }}. Los datos presentados corresponden exclusivamente al período de {{ $month }} {{ $year }} y están sujetos a las condiciones operacionales vigentes durante dicho período.</p>
-            <p style="font-size: 10pt; margin-top: 8pt; text-align: center; color: #666666;">___</p>
-            <p style="font-size: 9pt; text-align: center; margin-top: 10pt; color: #666666;">© {{ date('Y') }} SIGERD - Documento de uso interno exclusivo</p>
+        <div class="signatures clearfix">
+            <div class="signature-box" style="margin-right: 20%;">
+                <div class="signature-line">
+                    <span class="text-bold">Administrador General</span><br>
+                    <span style="font-size: 8pt;">Control y Supervisión</span>
+                </div>
+            </div>
+            <div class="signature-box">
+                <div class="signature-line">
+                    <span class="text-bold">Responsable de Mantenimiento</span><br>
+                    <span style="font-size: 8pt;">Validación Técnica</span>
+                </div>
+            </div>
         </div>
-    @else
-        {{-- Sin Tareas --}}
-        <div class="no-tasks">
-            <h2 class="section-level-1">Sin Datos Disponibles</h2>
-            <p style="margin: 20mm 20mm; text-align: center;">No se registraron tareas finalizadas durante el período de {{ $month }} {{ $year }}.</p>
-            <p style="margin: 10mm 20mm; text-align: center; font-style: italic;">Para generar un informe con datos, seleccione un período que contenga tareas completadas.</p>
+
+        <div class="footer">
+            SIGERD - Documento generado automáticamente por el sistema de gestión.
         </div>
-    @endif
+    </div>
 </body>
 </html>
