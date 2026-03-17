@@ -179,7 +179,7 @@
                                             @endif
                                             <form id="delete-task-{{ $task->id }}" action="{{ route('admin.tasks.destroy', $task->id) }}" method="POST" class="inline-block">
                                                 @csrf @method('DELETE')
-                                                <button type="button"
+                                                <button type="button" x-data
                                                     @click="$dispatch('confirm-action', {
                                                         title: '¿Eliminar esta tarea?',
                                                         message: 'La tarea \'{{ addslashes($task->title) }}\' será eliminada permanentemente. Esta acción no se puede deshacer.',

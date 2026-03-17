@@ -249,7 +249,7 @@
                                                 class="inline-block">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" @click="$dispatch('confirm-action', {
+                                                <button type="button" x-data @click="$dispatch('confirm-action', {
                                                             title: '¿Eliminar este usuario?',
                                                             message: 'El usuario \'{{ addslashes($user->name) }}\' será eliminado permanentemente junto con todos sus datos asociados. Esta acción no se puede deshacer.',
                                                             variant: 'danger',

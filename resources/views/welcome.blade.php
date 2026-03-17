@@ -127,12 +127,6 @@
             <div class="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
                 <!-- Left Content -->
                 <div class="space-y-8 opacity-0 animate-fadeInUp">
-                    <div
-                        class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 border border-emerald-200 rounded-full">
-                        <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-                        <span class="text-xs font-semibold text-emerald-700">Sistema Activo · v1.0</span>
-                    </div>
-
                     <div class="space-y-5">
                         <h1
                             class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#1A202C] leading-[1.1] tracking-tight">
