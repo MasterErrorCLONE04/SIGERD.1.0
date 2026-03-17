@@ -42,7 +42,6 @@ end note
 :¿El administrador decide guardar los cambios?;
 if () then (No)
   :El sistema cierra el modal sin cambios;
-  stop
 else (Sí)
   :El sistema procesa la solicitud;
   
@@ -51,15 +50,15 @@ else (Sí)
     :El sistema redirige de vuelta;
     :Reabre automáticamente el modal;
     :Muestra errores de validación;
-    kill
   else (Sí)
     :El sistema crea el usuario;
     :Guarda la foto de perfil (si aplica);
     :Redirige al listado de usuarios;
     :Muestra mensaje: "Usuario creado exitosamente";
-    stop
   endif
 endif
+
+stop
 
 @enduml
 ```

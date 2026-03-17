@@ -34,7 +34,6 @@ start
 :¿El trabajador posee al menos una tarea asignada?;
 if () then (No)
   :Mostrar mensaje: "No existen tareas asignadas a tu cuenta";
-  stop
 else (Sí)
   :Generar tabla (10 ítems/página) \nordenada por fecha límite (próximas primero);
   :Adjuntar componentes Badge \npara Estado y Prioridad;

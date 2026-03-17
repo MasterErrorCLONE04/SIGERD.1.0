@@ -32,12 +32,10 @@ start
 :¿Faltan datos en campos obligatorios?;
 if () then (Sí)
   :Mostrar errores de validación y \ndetener conversión;
-  kill
 else (No)
   :¿La fecha límite es anterior al día actual?;
   if () then (Sí)
     :Mostrar error de validación de fecha;
-    kill
   else (No)
     :El sistema crea la tarea con estado "Asignado";
     :Asigna las imágenes del incidente a \nla tarea automáticamente;
@@ -50,9 +48,9 @@ else (No)
     end fork
     
     :Redirigir al listado de tareas con \nmensaje: "Incidente convertido en tarea";
-    stop
   endif
 endif
 
+stop
 @enduml
 ```

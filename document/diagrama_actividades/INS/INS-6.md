@@ -35,7 +35,6 @@ start
 if () then (No)
   :Mostrar mensaje: "No existen reportes";
   :Mostrar botón "Reportar primera falla";
-  stop
 else (Sí)
   :Cargar tabla (10 filas/página) ordenada por fecha desc.;
   :Renderizar en cada fila su respectivo Badge de estado coloreado;

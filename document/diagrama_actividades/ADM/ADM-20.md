@@ -29,7 +29,6 @@ start
 :¿Existen incidentes reportados en el sistema?;
 if () then (No)
   :Mostrar mensaje: "No hay incidentes registrados";
-  stop
 else (Sí)
   :Cargar tabla (10 incidentes/página) ordenada \npor fecha de creación descendente;
   

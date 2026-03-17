@@ -25,7 +25,6 @@ start
 :¿El administrador confirma la eliminación\nen el diálogo emergente?;
 if () then (No)
   :Cancelar eliminación;
-  stop
 else (Sí)
   :El sistema procesa la eliminación;
   
@@ -38,8 +37,8 @@ else (Sí)
   :Eliminar registro del usuario en la base de datos;
   :Redirigir al listado de usuarios;
   :Mostrar mensaje: "Usuario eliminado exitosamente";
-  stop
 endif
 
+stop
 @enduml
 ```

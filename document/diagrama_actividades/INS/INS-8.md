@@ -33,7 +33,6 @@ start
 if () then (No)
   :Denegar acceso a los datos;
   :Retornar página de Error 404 (No encontrado);
-  stop
 else (Sí)
   :Cargar la información base y fotos de la primera fase;
   

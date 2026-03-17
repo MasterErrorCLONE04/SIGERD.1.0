@@ -30,7 +30,6 @@ start
 :¿Existen tareas registradas?;
 if () then (No)
   :Mostrar mensaje: "No hay tareas registradas";
-  stop
 else (Sí)
   :Cargar tabla ordenada por fecha de \ncreación descendente;
   

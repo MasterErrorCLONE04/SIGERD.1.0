@@ -29,14 +29,12 @@ start
 :¿El email pertenece a otro usuario registrado?;
 if () then (Sí)
   :Mostrar error: "El email ya está registrado";
-  kill
 else (No)
   :¿El administrador seleccionó una nueva foto?;
   if () then (Sí)
     :¿El formato de imagen es permitido y\nno supera los 2MB?;
     if () then (No)
       :Mostrar error de validación de imagen;
-      kill
     else (Sí)
       :Eliminar la imagen anterior del servidor;
       :Guardar la nueva imagen;
@@ -47,8 +45,8 @@ else (No)
   
   :El sistema guarda los cambios en la base de datos;
   :Muestra mensaje: "Usuario actualizado exitosamente";
-  stop
 endif
 
+stop
 @enduml
 ```

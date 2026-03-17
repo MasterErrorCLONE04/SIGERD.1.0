@@ -33,7 +33,6 @@ start
 if () then (No)
   :Denegar acceso e información;
   :Lanzar página de Error 404;
-  stop
 else (Sí)
   :Cargar datos técnicos (título, prioridad, \nfechas límite, descripción, ubicación);
   

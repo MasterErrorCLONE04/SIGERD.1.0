@@ -27,18 +27,16 @@ start
 :¿La contraseña actual ingresada es correcta?;
 if () then (No)
   :Mostrar error de validación indicando \nque la contraseña actual es incorrecta;
-  kill
 else (Sí)
   :¿La nueva contraseña y su confirmación coinciden?;
   if () then (No)
     :Mostrar error de validación: \n"Las contraseñas no coinciden";
-    kill
   else (Sí)
     :El sistema actualiza la contraseña en la base de datos;
     :Muestra el mensaje de éxito "password-updated";
-    stop
   endif
 endif
 
+stop
 @enduml
 ```

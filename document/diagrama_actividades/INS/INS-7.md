@@ -32,40 +32,35 @@ start
 :¿Instructor decide cancelar el formulario?;
 if () then (Sí)
   :El sistema cierra el modal sin alterar registros;
-  stop
 else (No)
   :Sistema procesa la información entrante;
   
   :¿Faltan datos obligatorios requeridos (título, descripción, ubicación)?;
   if () then (Sí)
     :Mostrar errores sobre los campos de validación;
-    kill
   else (No)
     :¿La fecha de reporte indicada es posterior a hoy (es futura)?;
     if () then (Sí)
       :Mostrar error de validación de fecha;
-      kill
     else (No)
       :¿El instructor omitió adjuntar imágenes de la falla?;
       if () then (Sí)
         :Mostrar mensaje: "Debe subir al menos una imagen";
-        kill
       else (No)
         :¿Alguna imagen tiene formato inválido o sobrepasa los 2MB?;
         if () then (Sí)
           :Mostrar los errores correspondientes a los archivos;
-          kill
         else (No)
           :Guardar las imágenes e insertar registro en BD;
           :Asignar estado de incidente como "Pendiente de revisión";
           :El sistema notifica el suceso a todos los Administradores;
           :Cerrar modal y mostrar mensaje: "Reporte creado con éxito";
-          stop
         endif
       endif
     endif
   endif
 endif
 
+stop
 @enduml
 ```

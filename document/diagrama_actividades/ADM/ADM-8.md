@@ -29,7 +29,6 @@ start
 :¿Existen usuarios registrados?;
 if () then (No)
   :Mostrar mensaje: "No existen usuarios registrados";
-  stop
 else (Sí)
   :Cargar tabla ordenada por fecha de creación descendente;
   

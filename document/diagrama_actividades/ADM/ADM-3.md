@@ -29,39 +29,35 @@ start
 :¿Campo email vacío?;
 if () then (Sí)
   :Mostrar error de validación: "Campo email es obligatorio";
-  kill
 else (No)
   :¿Email registrado en el sistema?;
   if () then (No)
     :Mostrar mensaje: "No existe cuenta asociada a ese email";
-    kill
   else (Sí)
     :Sistema envía enlace de restablecimiento al correo;
     :Mostrar mensaje: "Enlace enviado";
+    
+    :Administrador accede a /reset-password/{token};
+    
+    :¿Token válido y no expirado?;
+    if () then (No)
+      :Mostrar mensaje: "Token inválido o expirado";
+    else (Sí)
+      :Diligencia nueva contraseña y confirmación;
+      
+      :¿Contraseñas coinciden?;
+      if () then (No)
+        :Mostrar error de validación: "Las contraseñas no coinciden";
+      else (Sí)
+        :Sistema actualiza la contraseña;
+        :Invalida el token;
+        :Redirige a /login;
+        :Mostrar mensaje de éxito;
+      endif
+    endif
   endif
 endif
 
-:Administrador accede a /reset-password/{token};
-
-:¿Token válido y no expirado?;
-if () then (No)
-  :Mostrar mensaje: "Token inválido o expirado";
-  kill
-else (Sí)
-  :Diligencia nueva contraseña y confirmación;
-  
-  :¿Contraseñas coinciden?;
-  if () then (No)
-    :Mostrar error de validación: "Las contraseñas no coinciden";
-    kill
-  else (Sí)
-    :Sistema actualiza la contraseña;
-    :Invalida el token;
-    :Redirige a /login;
-    :Mostrar mensaje de éxito;
-    stop
-  endif
-endif
-
+stop
 @enduml
 ```

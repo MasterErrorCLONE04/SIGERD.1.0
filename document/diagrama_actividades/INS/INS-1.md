@@ -30,7 +30,6 @@ start
 if () then (No)
   :Mostrar mensaje de error;
   :Denegar acceso al sistema;
-  kill
 else (Sí)
   :El sistema autentica al usuario;
   
@@ -39,7 +38,7 @@ else (Sí)
     :Bloquear acceso por permisos insuficientes;
     :Redirigir automáticamente a /instructor/dashboard;
   else (No)
-    :¿El instructor accede a la ruta \ngenérica /dashboard?;
+    :¿El instructor reconoce a la ruta \ngenérica /dashboard?;
     if () then (Sí)
       :Detectar el rol (Instructor);
       :Redirigir automáticamente a /instructor/dashboard;
@@ -47,8 +46,8 @@ else (Sí)
       :Redirigir automáticamente a /instructor/dashboard \ncomo ruta por defecto post-login;
     endif
   endif
-  stop
 endif
 
+stop
 @enduml
 ```

@@ -24,7 +24,6 @@ start
 :¿El administrador confirma la \neliminación en el modal?;
 if () then (No)
   :Cancelar proceso de eliminación;
-  stop
 else (Sí)
   :El sistema procesa la solicitud;
   
@@ -33,9 +32,8 @@ else (Sí)
   
   :Redirigir al listado de tareas;
   :Mostrar mensaje de éxito: \n"Tarea eliminada permanentemente";
-  
-  stop
 endif
 
+stop
 @enduml
 ```

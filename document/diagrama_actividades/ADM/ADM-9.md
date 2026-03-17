@@ -32,39 +32,34 @@ start
 :¿El email ya está registrado en el sistema?;
 if () then (Sí)
   :Mostrar error de validación: "El email ya está en uso";
-  kill
 else (No)
   :¿Las contraseñas coinciden?;
   if () then (No)
     :Mostrar error de validación: "Las contraseñas no coinciden";
-    kill
   else (Sí)
     :¿La foto de perfil fue seleccionada?;
     if () then (No)
       :Mostrar error de validación: "La foto de perfil es obligatoria";
-      kill
     else (Sí)
       :¿El formato de la imagen es válido (jpeg, png, jpg, gif)?;
       if () then (No)
         :Mostrar error: "Formatos permitidos: jpeg, png, jpg, gif";
-        kill
       else (Sí)
         :¿La imagen excede el tamaño máximo (2MB)?;
         if () then (Sí)
           :Mostrar error de validación por tamaño de archivo;
-          kill
         else (No)
           :El sistema crea el usuario en la base de datos;
           :Asigna y guarda el rol seleccionado (limita acceso);
           :Guarda la foto de perfil en el servidor;
           :Redirige al listado de usuarios;
           :Muestra mensaje: "Usuario creado exitosamente";
-          stop
         endif
       endif
     endif
   endif
 endif
 
+stop
 @enduml
 ```

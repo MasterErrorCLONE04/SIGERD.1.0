@@ -33,22 +33,18 @@ start
 :¿Faltan datos en campos obligatorios?;
 if () then (Sí)
   :Mostrar errores de validación;
-  kill
 else (No)
   :¿La fecha límite es anterior al día actual?;
   if () then (Sí)
     :Mostrar error de validación de fecha;
-    kill
   else (No)
     :¿Se adjuntaron imágenes de referencia obligatorias?;
     if () then (No)
       :Mostrar error: "Las imágenes son obligatorias";
-      kill
     else (Sí)
       :¿Los archivos superan 2MB o \ntienen formato inválido?;
       if () then (Sí)
         :Mostrar error de formato o tamaño;
-        kill
       else (No)
         :El sistema crea la tarea en base de datos;
         :Establece estado como "Asignado";
@@ -64,11 +60,11 @@ else (No)
         end fork
         
         :Redirigir al listado con mensaje de éxito;
-        stop
       endif
     endif
   endif
 endif
 
+stop
 @enduml
 ```

@@ -28,24 +28,22 @@ start
 :¿Contraseña actual es correcta?;
 if () then (No)
   :Mostrar error de validación: "La contraseña actual es incorrecta";
-  kill
 else (Sí)
   :¿Contraseña nueva cumple requisitos de seguridad?;
   if () then (No)
     :Mostrar mensaje: "La contraseña no cumple los requisitos mínimos";
-    kill
   else (Sí)
     :¿Contraseña nueva y confirmación coinciden?;
     if () then (No)
       :Mostrar error de validación: "Las contraseñas no coinciden";
-      kill
     else (Sí)
       :Sistema actualiza la contraseña en la base de datos;
       :Mostrar mensaje de éxito en la misma página;
-      stop
     endif
   endif
 endif
+
+stop
 
 @enduml
 ```

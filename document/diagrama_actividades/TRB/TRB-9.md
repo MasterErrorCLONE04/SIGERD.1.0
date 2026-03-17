@@ -33,7 +33,6 @@ if () then (Sí)
   :¿Sus archivos adjuntos infringen las reglas \nde peso (2MB) y tipo (imágenes)?;
   if () then (Sí)
     :Retornar mensajes visuales sobre la regla violada;
-    kill
   else (No)
     :¿Ya existían fotos finales anteriores en el directorio?;
     if () then (Sí)
@@ -44,15 +43,14 @@ if () then (Sí)
     :Registrar la conclusión escrita y material visual;
     :Forzar la transición de estado la Tarea \nhacia la estapa "Realizada" (bajo revisión);
     
-    :Disparar notificación automática al Administrador: \n"Trabajador completó y entregó tarea";
+    :Disparar notification automática al Administrador: \n"Trabajador completó y entregó tarea";
     :Dirigir al operario al dashboard confirmando \nque el acta fue entregada exitosamente;
-    stop
   endif
 else (No)
   :No mostrar formulario para adjuntar imágenes \nfinales ni input de descripción;
   :Desplegar mensaje disuasivo o de read-only;
-  stop
 endif
 
+stop
 @enduml
 ```

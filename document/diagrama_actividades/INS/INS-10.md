@@ -37,21 +37,17 @@ fork again
   :¿El nombre está vacío?;
   if () then (Sí)
     :Mostrar error: "Nombre obligatorio";
-    kill
   else (No)
     :¿El email tiene formato inválido?;
     if () then (Sí)
       :Mostrar error de sintaxis de email;
-      kill
     else (No)
       :¿El email está registrado a nombre de otro usuario?;
       if () then (Sí)
         :Mostrar error: "Email en uso por otro";
-        kill
       else (No)
         :Actualizar perfil;
         :Mostrar mensaje "profile-updated";
-        stop
       endif
     endif
   endif
@@ -66,7 +62,6 @@ fork again
     :El sistema elimina su registro permanentemente;
     :Su sesión actual expira (Logout);
     :Es redirigido a la pantalla web inicial;
-    stop
   endif
 end fork
 

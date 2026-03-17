@@ -27,7 +27,6 @@ start
 :¿Los datos ingresados son válidos?;
 if () then (No)
   :Mostrar errores de validación;
-  kill
 else (Sí)
   :¿El administrador agregó nuevas imágenes?;
   if () then (Sí)
@@ -48,8 +47,8 @@ else (Sí)
   
   :Guardar todos los cambios en la base de datos;
   :Redirigir con mensaje: \n"Tarea actualizada exitosamente";
-  stop
 endif
 
+stop
 @enduml
 ```

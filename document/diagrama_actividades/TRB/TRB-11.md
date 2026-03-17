@@ -36,21 +36,17 @@ fork again
   :¿El campo Nombre ha sido borrado (vacío)?;
   if () then (Sí)
     :Lanzar warning: "Obligatoriedad de nombre";
-    kill
   else (No)
     :¿La estructura en el campo Email es incorrecta?;
     if () then (Sí)
       :Lanzar warning formato inválido;
-      kill
     else (No)
       :¿El sistema detectó otro registro \ncon esa misma dirección de correo (Email duplicado)?;
       if () then (Sí)
         :Denegar actualización: "Email en uso por otro usuario";
-        kill
       else (No)
         :Realizar los commits de la actualización sobre su data;
         :Generar notificación al usuario de "profile-updated";
-        stop
       endif
     endif
   endif
@@ -65,7 +61,6 @@ fork again
     :Extirpar todo el nodo del perfil trabajador desde BD;
     :Anular su token interno de Sesión activa;
     :Redirigir forzosamente fuera del área privada \nhacia URL base / pública;
-    stop
   endif
 end fork
 

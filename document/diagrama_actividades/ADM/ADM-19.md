@@ -30,7 +30,6 @@ start
 :¿El mes y/o año son inválidos o fuera de rango?;
 if () then (Sí)
   :Mostrar error de validación;
-  kill
 else (No)
   :El sistema consulta las tareas "Finalizadas" \ndel periodo y el ranking de trabajadores;
   
@@ -44,9 +43,8 @@ else (No)
   :Configurar estructura de plantilla;
   :Generar archivo PDF \n(reporte-tareas-[Mes]-[Año].pdf);
   :Iniciar descarga local del documento;
-  
-  stop
 endif
 
+stop
 @enduml
 ```

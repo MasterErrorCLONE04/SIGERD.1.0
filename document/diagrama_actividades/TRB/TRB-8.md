@@ -33,19 +33,17 @@ if () then (Sí)
   :¿Algún archivo tiene un formato inválido \no es más grande de 2MB?;
   if () then (Sí)
     :Detener subida y emitir alerta de validación;
-    kill
   else (No)
     :Procesar y alojar las imágenes en el disco;
     :Actualizar el estado general de \nla tarea a "En progreso";
     
     :Disparar evento al Administrador que asignó \nla labor ("El trabajador inició el trabajo");
     :Lanzar redirección al dashboard e \nimprimir mensaje de completado;
-    stop
   endif
 else (No)
   :Ocultar formulario de evidencia inicial y \nmostrar aviso de que no está disponible;
-  stop
 endif
 
+stop
 @enduml
 ```
