@@ -25,8 +25,8 @@ start
 
 :Trabajador visualiza el detalle de su Tarea actual;
 
-:¿Cuál es el estado técnico de la tarea?;
-if () then (En progreso)
+:¿El estado técnico de la tarea es En progreso?;
+if () then (Sí)
   :Mostrar bloque formulario "Evidencia Final" \n(con campos de carga fotográfica \ne input de Descripción de Intervención);
   :El operario sube archivos, digita lo que hizo \ny presiona "Finalizar Tarea";
   
@@ -48,7 +48,7 @@ if () then (En progreso)
     :Dirigir al operario al dashboard confirmando \nque el acta fue entregada exitosamente;
     stop
   endif
-else (Cualquier otro estado)
+else (No)
   :No mostrar formulario para adjuntar imágenes \nfinales ni input de descripción;
   :Desplegar mensaje disuasivo o de read-only;
   stop

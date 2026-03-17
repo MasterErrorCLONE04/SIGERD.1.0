@@ -35,7 +35,7 @@
                         <h4 class="font-bold text-gray-900 dark:text-white mb-4">Manual Técnico</h4>
                         <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Revisa la documentación completa del
                             sistema.</p>
-                        <a href="#"
+                        <a href="{{ asset('manuals/Manual Tecnico SIGERD.pdf') }}" download
                             class="text-indigo-600 hover:text-indigo-700 font-semibold text-sm flex items-center gap-2 transition-colors">
                             Descargar PDF
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -142,6 +142,43 @@
                             </div>
                         </div>
                     </div>
+
+                    @php
+                        $manualFileName = '';
+                        $role = auth()->user()->role ?? '';
+                        
+                        if ($role === 'administrador') {
+                            $manualFileName = 'MANUAL DE USUARIO DEL SISTEMA DE INFORMACIÓN ADMINISTRADOR.pdf';
+                        } elseif ($role === 'instructor') {
+                            $manualFileName = 'MANUAL DE USUARIO DEL SISTEMA DE INFORMACIÓN DEL INSTRUCTOR.pdf';
+                        } elseif ($role === 'trabajador') {
+                            $manualFileName = 'MANUAL DE USUARIO DEL SISTEMA DE INFORMACIÓN DEL TRABAJADOR.pdf';
+                        }
+                    @endphp
+
+                    @if($manualFileName)
+                    <div class="mt-8 bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 dark:text-white">Manual de Usuario ({{ ucfirst($role) }})</h4>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Guía paso a paso adaptada a tus funciones en el sistema.</p>
+                            </div>
+                        </div>
+                        <a href="{{ asset('manuals/' . $manualFileName) }}" download
+                            class="whitespace-nowrap inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 text-white font-semibold text-sm rounded-xl shadow hover:bg-indigo-700 transition-colors focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900">
+                            Descargar Manual
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    @endif
+
                 </div>
 
             </div>

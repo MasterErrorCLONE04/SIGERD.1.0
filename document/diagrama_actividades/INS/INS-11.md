@@ -36,19 +36,23 @@ fork again
 fork again
   :Instructor selecciona opciones de \n"Apariencia";
   
-  :¿Cuál fue la selección efectuada?;
-  if () then (Claro)
+  :¿La selección efectuada fue Claro?;
+  if () then (Sí)
     :Aplicar estilos en tono claro "Light";
     :Almacenar atributo de preferencia en localStorage;
-  else (Oscuro)
+  else (No)
     :¿Se eligió Modo Oscuro?;
     if () then (Sí)
       :Aplicar diseño Darkmode "Oscuro";
       :Almacenar atributo de preferencia en localStorage;
-    else (Sistema)
-      :Detectar perfil configurado en \nel Sistema Operativo local;
-      :Aplicar estilo base;
-      :Guardar configuración y activar listener local "MatchMedia";
+    else (No)
+      :¿Se eligió Tema del Sistema?;
+      if () then (Sí)
+        :Detectar perfil configurado en \nel Sistema Operativo local;
+        :Aplicar estilo base;
+        :Guardar configuración y activar listener local "MatchMedia";
+      else (No)
+      endif
     endif
   endif
 fork again

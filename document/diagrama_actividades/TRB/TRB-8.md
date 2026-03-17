@@ -25,8 +25,8 @@ start
 
 :Trabajador visita vista de detalle de la Tarea;
 
-:¿Cuál es el estado actual de la tarea?;
-if () then (Asignado)
+:¿El estado actual de la tarea es Asignado?;
+if () then (Sí)
   :Renderizar en pantalla el formulario de subida \n"Registrar Evidencia Inicial";
   :Trabajador adjunta imagen(es) y \nhace clic en "Enviar Evidencia";
   
@@ -42,7 +42,7 @@ if () then (Asignado)
     :Lanzar redirección al dashboard e \nimprimir mensaje de completado;
     stop
   endif
-else (Cualquier otro estado)
+else (No)
   :Ocultar formulario de evidencia inicial y \nmostrar aviso de que no está disponible;
   stop
 endif

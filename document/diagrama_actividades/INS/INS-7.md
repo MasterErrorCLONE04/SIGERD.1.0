@@ -29,11 +29,11 @@ start
 :Instructor hace clic en "Reportar Nueva Falla";
 :El sistema abre el modal con el formulario de reporte;
 
-:¿Instructor decide completar o cancelar el formulario?;
-if () then (Cancelar)
+:¿Instructor decide cancelar el formulario?;
+if () then (Sí)
   :El sistema cierra el modal sin alterar registros;
   stop
-else (Completar y Guardar)
+else (No)
   :Sistema procesa la información entrante;
   
   :¿Faltan datos obligatorios requeridos (título, descripción, ubicación)?;

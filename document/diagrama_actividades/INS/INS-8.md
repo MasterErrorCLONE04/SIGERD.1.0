@@ -37,17 +37,21 @@ if () then (No)
 else (Sí)
   :Cargar la información base y fotos de la primera fase;
   
-  :¿Cuál es el estado actual de la incidencia?;
-  if () then (Pendiente)
+  :¿El estado actual de la incidencia es Pendiente?;
+  if () then (Sí)
     :Mostrar aviso: "En revisión por administración";
-  else (Asignado/EnProgreso)
+  else (No)
     :¿El reporte se convirtió en tarea (Asignado/En progreso)?;
     if () then (Sí)
       :Cargar datos del trabajador a cargo;
       :Mostrar aviso: "Trabajo en progreso";
-    else (Resuelto)
-      :Cargar fecha y texto descriptivo de la resolución;
-      :Cargar sección con las evidencias finales del arreglo;
+    else (No)
+      :¿El estado es Resuelto?;
+      if () then (Sí)
+        :Cargar fecha y texto descriptivo de la resolución;
+        :Cargar sección con las evidencias finales del arreglo;
+      else (No)
+      endif
     endif
   endif
   

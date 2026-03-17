@@ -14,17 +14,11 @@ left to right direction
 actor Administrador as Admin
 actor Instructor as Inst
 actor Trabajador as Trab
-actor "Usuario General" as User
-
-' Herencia de Actores (Todos son Usuarios y heredan acceso genérico)
-Admin -|> User
-Inst -|> User
-Trab -|> User
 
 ' Subsistema SIGERD
 rectangle "Sistema SIGERD" {
 
-    ' Módulo de Autenticación y Perfil (Heredado por todos)
+    ' Módulo de Autenticación y Perfil (Común a todos)
     usecase "Iniciar Sesión" as UC_Login
     usecase "Recuperar Contraseña" as UC_Recover
     usecase "Cerrar Sesión" as UC_Logout
@@ -65,12 +59,24 @@ rectangle "Sistema SIGERD" {
 
 ' --------- Conexiones de Actores a Casos de Uso ---------
 
-' Conexiones de Usuario General (Aplica a los 3)
-User --> UC_Login
-User --> UC_Recover
-User --> UC_Logout
-User --> UC_Profile
-User --> UC_Dashboard
+' Conexiones Comunes (Administrador, Instructor, Trabajador)
+Admin --> UC_Login
+Admin --> UC_Recover
+Admin --> UC_Logout
+Admin --> UC_Profile
+Admin --> UC_Dashboard
+
+Inst --> UC_Login
+Inst --> UC_Recover
+Inst --> UC_Logout
+Inst --> UC_Profile
+Inst --> UC_Dashboard
+
+Trab --> UC_Login
+Trab --> UC_Recover
+Trab --> UC_Logout
+Trab --> UC_Profile
+Trab --> UC_Dashboard
 
 ' Conexiones del Administrador
 Admin --> UC_ManageUsers
@@ -97,5 +103,5 @@ Trab --> UC_WorkerNotif
 
 ## Notas del Diagrama
 
-* **Herencia de Actores (`-|>`)**: Se utilizó un actor abstracto llamado "Usuario General" para no repetir las líneas de Iniciar Sesión, Panel, Perfil y Cerrar Sesión hacia los 3 roles, manteniendo el gráfico más limpio. El Administrador, Instructor y Trabajador heredan esas capacidades básicas.
+* **Conexiones Individuales**: Para mantener trazabilidad pura sobre quién puede ejecutar cada acción, los casos de uso básicos (`Iniciar Sesión`, `Recuperar Contraseña`, `Cerrar Sesión`, `Ver y Editar Perfil`, `Ver Panel / Dashboard`) se conectan directamente uno a uno con los actores correspondientes (`Administrador`, `Instructor` y `Trabajador`).
 * **Trazabilidad Pura**: Cada `usecase` expuesto aquí se originó directamente a raíz de las iteraciones sobre el archivo `requisitos_funcionales.md` y respeta las restricciones (como que la inserción de imágenes está incluida dentro de registrar reportes o finalizar tareas con `<<include>>`).

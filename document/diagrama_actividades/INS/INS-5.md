@@ -42,18 +42,18 @@ else (Sí)
     
     :El sistema procesa y renderiza el \nbadge de estado correspondiente a la fila;
     
-    :¿Cuál es el estado del incidente?;
-    if () then (Pendiente)
+    :¿El estado es Pendiente?;
+    if () then (Sí)
       :Mostrar badge Amarillo;
-    else (Asignado)
+    else (No)
       :¿El estado es Asignado?;
       if () then (Sí)
         :Mostrar badge Azul;
-      else (Resuelto)
+      else (No)
         :¿El estado es Resuelto?;
         if () then (Sí)
           :Mostrar badge Índigo;
-        else (Cerrado)
+        else (No)
           :Mostrar badge Verde;
         endif
       endif

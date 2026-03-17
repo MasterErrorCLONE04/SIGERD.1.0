@@ -39,19 +39,23 @@ fork again
 fork again
   :Ingresa a solapa de "Apariencia";
   
-  :¿Qué botón de preferencia temática pulsa?;
-  if () then (Claro)
+  :¿El botón de preferencia temática pulsado es Claro?;
+  if () then (Sí)
     :Remover flag black en etiqueta HTML;
     :Cargar "theme: light" en cache de _localStorage_;
-  else (Oscuro)
+  else (No)
     :¿Escoge Oscuro / Dark Mode?;
     if () then (Sí)
       :Adjuntar clase black en etiqueta padre HTML;
       :Cargar "theme: dark" en cache de _localStorage_;
-    else (Sistema)
-      :Analizar vía window.matchMedia preferencia SO;
-      :Aplicar Dark/Light supeditado al resultado técnico;
-      :Cargar "theme: system" en cache _localStorage_ \n(y prender watcher local);
+    else (No)
+      :¿Escoge Tema del Sistema?;
+      if () then (Sí)
+        :Analizar vía window.matchMedia preferencia SO;
+        :Aplicar Dark/Light supeditado al resultado técnico;
+        :Cargar "theme: system" en cache _localStorage_ \n(y prender watcher local);
+      else (No)
+      endif
     endif
   endif
 fork again
