@@ -40,10 +40,10 @@
                     
                     <!-- Search & Filter Form -->
                     <div class="flex items-center w-full lg:w-auto">
-                        <form method="GET" action="{{ route('admin.incidents.index') }}" class="flex flex-col sm:flex-row items-center gap-3 w-full">
+                        <form method="GET" action="{{ route('admin.incidents.index') }}" class="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto flex-grow lg:flex-none">
                             
                             <!-- Search Input -->
-                            <div class="relative w-full sm:w-72 lg:w-80">
+                            <div class="relative w-full sm:w-64 lg:w-80">
                                 <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                                     <svg class="h-4 w-4 text-slate-400 dark:text-[#9CA3AF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -62,7 +62,7 @@
                             </div>
                             
                             <!-- Date & Actions Group -->
-                            <div class="flex items-center gap-2 w-full sm:w-auto max-sm:mt-1">
+                            <div class="flex items-center gap-2 w-full sm:w-auto max-sm:mt-1 flex-shrink-0">
                                 <!-- Date Input -->
                                 <input type="date" name="created_at_from" value="{{ request('created_at_from') }}" class="w-full sm:w-[140px] px-3.5 py-2.5 bg-slate-50 dark:bg-[#18191A] border border-slate-200/80 dark:border-[#3A3B3C] rounded-xl text-sm text-slate-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/50 focus:border-[#4F46E5] transition-colors shadow-sm dark:[color-scheme:dark]">
                                 
@@ -80,6 +80,16 @@
                                 @endif
                             </div>
                         </form>
+
+                        <!-- Action Button -->
+                        <div class="flex items-center gap-2 w-full lg:w-auto lg:pl-4 lg:border-l border-slate-200 dark:border-[#3A3B3C] flex-shrink-0 mt-3 sm:mt-0">
+                            <button onclick="openModal('createIncidentModal')" class="flex-1 lg:flex-none flex items-center justify-center gap-2 bg-[#1A202C] hover:bg-[#2D3748] dark:bg-[#3A3B3C] dark:hover:bg-[#4E4F50] text-white px-5 py-2.5 rounded-xl text-[0.85rem] font-medium transition-all shadow-sm focus:ring-2 focus:ring-indigo-500 whitespace-nowrap active:scale-95 duration-200">
+                                <svg class="w-4 h-4 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                                Reportar Falla
+                            </button>
+                        </div>
                     </div>
 
                 </div>
@@ -225,4 +235,21 @@
 
         </div>
     </div>
+    @include('modals.instructor-create-incident')
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        @if ($errors->any() && !old('_method') && old('title'))
+            window.addEventListener('DOMContentLoaded', () => {
+                openModal('createIncidentModal');
+            });
+        @endif
+    </script>
 </x-app-layout>

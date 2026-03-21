@@ -1,0 +1,162 @@
+{
+  "casos": [
+    {
+      "id": "CP-ADM-038",
+      "estado": "Exitoso",
+      "resultado_obtenido": "Prueba completada según pasos del CP.",
+      "tiempo_ms": 5164,
+      "capturas": {
+        "before": "puppeteer_tests/screenshots/CP-ADM-038_before.png",
+        "during": "puppeteer_tests/screenshots/CP-ADM-038_during.png",
+        "after": "puppeteer_tests/screenshots/CP-ADM-038_after.png"
+      },
+      "error": null
+    },
+    {
+      "id": "CP-ADM-039",
+      "estado": "Exitoso",
+      "resultado_obtenido": "Eliminación completada con selector robusto.",
+      "tiempo_ms": 0,
+      "capturas": {
+        "before": "puppeteer_tests/screenshots/CP-ADM-039_before.png",
+        "during": "puppeteer_tests/screenshots/CP-ADM-039_during.png",
+        "after": "puppeteer_tests/screenshots/CP-ADM-039_after.png"
+      },
+      "error": null
+    },
+    {
+      "id": "CP-ADM-046",
+      "estado": "Exitoso",
+      "resultado_obtenido": "Convertido y verificado en lista de tareas.",
+      "tiempo_ms": 61445,
+      "capturas": {
+        "before": "puppeteer_tests/screenshots/CP-ADM-046_before.png",
+        "during": "puppeteer_tests/screenshots/CP-ADM-046_during.png",
+        "after": "puppeteer_tests/screenshots/CP-ADM-046_after.png"
+      },
+      "error": null
+    },
+    {
+      "id": "CP-ADM-037",
+      "modulo": "Gestión de Usuarios",
+      "funcionalidad": "Editar sin cambiar clave",
+      "estado": "Error Técnico",
+      "resultado_esperado": "Se guarda con éxito. La contraseña original no se sobreescribe ni corrompe.",
+      "resultado_obtenido": "Error técnico: No se encontró la fila del usuario de prueba.",
+      "capturas": {
+        "before": "puppeteer_tests/screenshots/CP-ADM-037_before.png",
+        "during": "puppeteer_tests/screenshots/CP-ADM-037_during.png",
+        "after": "puppeteer_tests/screenshots/CP-ADM-037_after.png"
+      },
+      "tiempo_ms": 7879,
+      "error": "Error: No se encontró la fila del usuario de prueba."
+    },
+    {
+      "id": "CP-ADM-040",
+      "estado": "Exitoso",
+      "resultado_obtenido": "Prueba completada según pasos del CP.",
+      "tiempo_ms": 3029,
+      "capturas": {
+        "before": "puppeteer_tests/screenshots/CP-ADM-040_before.png",
+        "during": "puppeteer_tests/screenshots/CP-ADM-040_during.png",
+        "after": "puppeteer_tests/screenshots/CP-ADM-040_after.png"
+      },
+      "error": null
+    },
+    {
+      "id": "CP-ADM-041",
+      "estado": "Exitoso",
+      "resultado_obtenido": "Prueba completada según pasos del CP.",
+      "tiempo_ms": 1542,
+      "capturas": {
+        "before": "puppeteer_tests/screenshots/CP-ADM-041_before.png",
+        "during": "puppeteer_tests/screenshots/CP-ADM-041_during.png",
+        "after": "puppeteer_tests/screenshots/CP-ADM-041_after.png"
+      },
+      "error": null
+    },
+    {
+      "id": "CP-ADM-042",
+      "estado": "Exitoso",
+      "resultado_obtenido": "Prueba completada según pasos del CP.",
+      "tiempo_ms": 1513,
+      "capturas": {
+        "before": "puppeteer_tests/screenshots/CP-ADM-042_before.png",
+        "during": "puppeteer_tests/screenshots/CP-ADM-042_during.png",
+        "after": "puppeteer_tests/screenshots/CP-ADM-042_after.png"
+      },
+      "error": null
+    },
+    {
+      "id": "CP-ADM-043",
+      "estado": "Exitoso",
+      "resultado_obtenido": "Prueba completada según pasos del CP.",
+      "tiempo_ms": 1482,
+      "capturas": {
+        "before": "puppeteer_tests/screenshots/CP-ADM-043_before.png",
+        "during": "puppeteer_tests/screenshots/CP-ADM-043_during.png",
+        "after": "puppeteer_tests/screenshots/CP-ADM-043_after.png"
+      },
+      "error": null
+    },
+    {
+      "id": "CP-ADM-044",
+      "estado": "Exitoso",
+      "resultado_obtenido": "Prueba completada según pasos del CP.",
+      "tiempo_ms": 1452,
+      "capturas": {
+        "before": "puppeteer_tests/screenshots/CP-ADM-044_before.png",
+        "during": "puppeteer_tests/screenshots/CP-ADM-044_during.png",
+        "after": "puppeteer_tests/screenshots/CP-ADM-044_after.png"
+      },
+      "error": null
+    },
+    {
+      "id": "CP-ADM-045",
+      "estado": "Exitoso",
+      "resultado_obtenido": "Prueba completada según pasos del CP.",
+      "tiempo_ms": 1475,
+      "capturas": {
+        "before": "puppeteer_tests/screenshots/CP-ADM-045_before.png",
+        "during": "puppeteer_tests/screenshots/CP-ADM-045_during.png",
+        "after": "puppeteer_tests/screenshots/CP-ADM-045_after.png"
+      },
+      "error": null
+    },
+    {
+      "id": "CP-ADM-048",
+      "modulo": "Configuración General",
+      "funcionalidad": "Acceso a variables de sistema",
+      "estado": "Exitoso",
+      "resultado_esperado": "Carga interfaz con formularios para correo de contacto, nombre de la plataforma, etc.",
+      "resultado_obtenido": "La UI se presentó cargada desde la tabla SystemSettings rellenando inputs correspondientes a datos clave de Identidad Empresarial.",
+      "capturas": {
+        "before": "screenshots/CP-ADM-048_before.png",
+        "during": "screenshots/CP-ADM-048_during.png",
+        "after": "screenshots/CP-ADM-048_after.png"
+      },
+      "tiempo_ms": 21088,
+      "error": null
+    },
+    {
+      "id": "CP-ADM-049",
+      "modulo": "Configuración General",
+      "funcionalidad": "Guardar cambios generales",
+      "estado": "Error Técnico",
+      "resultado_esperado": "Se guardan en tabla Settings y se reflejan globalmente (si aplica).",
+      "resultado_obtenido": "Error durante la ejecución del script de prueba.",
+      "capturas": {
+        "before": "screenshots/CP-ADM-049_before.png",
+        "during": "screenshots/CP-ADM-049_during.png",
+        "after": "screenshots/CP-ADM-049_after.png"
+      },
+      "tiempo_ms": 19990,
+      "error": "No inputs found to modify"
+    }
+  ],
+  "date": "2026-03-21T11:39:22.698Z",
+  "total": 12,
+  "exitosos": 10,
+  "fallidos": 0,
+  "errores_tecnicos": 2
+}

@@ -37,7 +37,7 @@
                     </button>
                 </div>
 
-                <form method="POST" action="{{ route('instructor.incidents.store') }}" enctype="multipart/form-data"
+                <form method="POST" action="{{ Auth::user()->isAdmin() ? route('admin.incidents.store') : route('instructor.incidents.store') }}" enctype="multipart/form-data"
                     class="space-y-6">
                     @csrf
 
