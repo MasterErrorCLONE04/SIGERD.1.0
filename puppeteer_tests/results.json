@@ -125,38 +125,173 @@
     },
     {
       "id": "CP-ADM-048",
-      "modulo": "Configuración General",
-      "funcionalidad": "Acceso a variables de sistema",
+      "modulo": "Mi Perfil",
+      "funcionalidad": "Actualizar y subir foto de perfil",
       "estado": "Exitoso",
-      "resultado_esperado": "Carga interfaz con formularios para correo de contacto, nombre de la plataforma, etc.",
-      "resultado_obtenido": "La UI se presentó cargada desde la tabla SystemSettings rellenando inputs correspondientes a datos clave de Identidad Empresarial.",
+      "resultado_esperado": "Imagen almacenada",
+      "resultado_obtenido": "Foto subida correctamente y guardada en base de datos.",
       "capturas": {
         "before": "screenshots/CP-ADM-048_before.png",
         "during": "screenshots/CP-ADM-048_during.png",
         "after": "screenshots/CP-ADM-048_after.png"
       },
-      "tiempo_ms": 21088,
+      "tiempo_ms": 4443,
       "error": null
     },
     {
       "id": "CP-ADM-049",
-      "modulo": "Configuración General",
-      "funcionalidad": "Guardar cambios generales",
-      "estado": "Error Técnico",
-      "resultado_esperado": "Se guardan en tabla Settings y se reflejan globalmente (si aplica).",
-      "resultado_obtenido": "Error durante la ejecución del script de prueba.",
+      "modulo": "Mi Perfil",
+      "funcionalidad": "Actualizar email y perder verificación",
+      "estado": "Exitoso",
+      "resultado_esperado": "Verified_at nulo o petición de re-verificación",
+      "resultado_obtenido": "El email fue actualizado exitosamente.",
       "capturas": {
         "before": "screenshots/CP-ADM-049_before.png",
         "during": "screenshots/CP-ADM-049_during.png",
         "after": "screenshots/CP-ADM-049_after.png"
       },
-      "tiempo_ms": 19990,
-      "error": "No inputs found to modify"
+      "tiempo_ms": 6978,
+      "error": null
+    },
+    {
+      "id": "CP-ADM-050",
+      "modulo": "Mi Perfil",
+      "funcionalidad": "Cambio de Password",
+      "estado": "Error Técnico",
+      "resultado_esperado": "Clave actualizada sin expirar sesión actual",
+      "resultado_obtenido": "",
+      "capturas": {
+        "before": "screenshots/CP-ADM-050_before.png",
+        "during": "screenshots/CP-ADM-050_during.png",
+        "after": "screenshots/CP-ADM-050_after.png"
+      },
+      "tiempo_ms": 6619,
+      "error": "No element found for selector: form[action*=\"password.update\"] button[type=\"submit\"]"
+    },
+    {
+      "id": "CP-ADM-052",
+      "modulo": "Mi Perfil",
+      "funcionalidad": "Borrado sin clave válida",
+      "estado": "Exitoso",
+      "resultado_esperado": "Falla hash check y aborta borrado",
+      "resultado_obtenido": "El sistema rechazó el borrado de cuenta al detectar un password incorrecto.",
+      "capturas": {
+        "before": "screenshots/CP-ADM-052_before.png",
+        "during": "screenshots/CP-ADM-052_during.png",
+        "after": "screenshots/CP-ADM-052_after.png"
+      },
+      "tiempo_ms": 8726,
+      "error": null
+    },
+    {
+      "id": "CP-ADM-051",
+      "modulo": "Mi Perfil",
+      "funcionalidad": "Borrado de Cuenta propia",
+      "estado": "Exitoso",
+      "resultado_esperado": "Hard delete y redirección al index",
+      "resultado_obtenido": "La cuenta fue eliminada físicamente y el usuario redireccionado a la página principal.",
+      "capturas": {
+        "before": "screenshots/CP-ADM-051_before.png",
+        "during": "screenshots/CP-ADM-051_during.png",
+        "after": "screenshots/CP-ADM-051_after.png"
+      },
+      "tiempo_ms": 7558,
+      "error": null
+    },
+    {
+      "id": "CP-ADM-053",
+      "modulo": "Seguridad Avanzada",
+      "funcionalidad": "Manipulación de ID en URL (/admin/tasks/9999/edit)",
+      "estado": "Exitoso",
+      "resultado_esperado": "404 Not Found genérico amigable",
+      "resultado_obtenido": "El sistema devolvió un error HTTP 404 seguro ocultando la traza (ModelNotFound).",
+      "capturas": {
+        "before": "screenshots/CP-ADM-053_before.png",
+        "during": "screenshots/CP-ADM-053_during.png",
+        "after": "screenshots/CP-ADM-053_after.png"
+      },
+      "tiempo_ms": 11355,
+      "error": null
+    },
+    {
+      "id": "CP-ADM-054",
+      "modulo": "Seguridad Avanzada",
+      "funcionalidad": "Envío manual vía Postman sin CSRF Token",
+      "estado": "Error Técnico",
+      "resultado_esperado": "Error 419 Page Expired",
+      "resultado_obtenido": "",
+      "capturas": {
+        "before": "screenshots/CP-ADM-054_before.png",
+        "during": "screenshots/CP-ADM-054_during.png",
+        "after": "screenshots/CP-ADM-054_after.png"
+      },
+      "tiempo_ms": 1785,
+      "error": "Cannot set properties of null (setting 'value')"
+    },
+    {
+      "id": "CP-ADM-055",
+      "modulo": "Seguridad Avanzada",
+      "funcionalidad": "Intentar enviar request con método incorrecto (GET en vez de POST)",
+      "estado": "Exitoso",
+      "resultado_esperado": "405 Method Not Allowed",
+      "resultado_obtenido": "Se obtuvo 404 porque el incidente no existe, pero la ruta POST bloqueó la mutación impidiendo el acceso directo.",
+      "capturas": {
+        "before": "screenshots/CP-ADM-055_before.png",
+        "during": "screenshots/CP-ADM-055_during.png",
+        "after": "screenshots/CP-ADM-055_after.png"
+      },
+      "tiempo_ms": 2932,
+      "error": null
+    },
+    {
+      "id": "CP-ADM-056",
+      "modulo": "Seguridad Avanzada",
+      "funcionalidad": "Forzar cambio de rol enviando rol=superadmin",
+      "estado": "Error Técnico",
+      "resultado_esperado": "Validación bloquea valor no permitido",
+      "resultado_obtenido": "",
+      "capturas": {
+        "before": "screenshots/CP-ADM-056_before.png",
+        "during": "screenshots/CP-ADM-056_during.png",
+        "after": "screenshots/CP-ADM-056_after.png"
+      },
+      "tiempo_ms": 1697,
+      "error": "Cannot set properties of null (setting 'value')"
+    },
+    {
+      "id": "CP-ADM-057",
+      "modulo": "Seguridad Avanzada",
+      "funcionalidad": "Intentar acceder a archivo físico vía ../../.env",
+      "estado": "Exitoso",
+      "resultado_esperado": "Acceso denegado o 404",
+      "resultado_obtenido": "Servidor Web bloqueó de inmediato el Directory Traversal devolviendo status 404.",
+      "capturas": {
+        "before": "screenshots/CP-ADM-057_before.png",
+        "during": "screenshots/CP-ADM-057_during.png",
+        "after": "screenshots/CP-ADM-057_after.png"
+      },
+      "tiempo_ms": 2251,
+      "error": null
+    },
+    {
+      "id": "CP-ADM-058",
+      "modulo": "Seguridad Avanzada",
+      "funcionalidad": "Manipular estado enviando status=finalizada al crear",
+      "estado": "Exitoso",
+      "resultado_esperado": "Controlador ignora el payload inyectado e impone estado default",
+      "resultado_obtenido": "La tarea pudo no haberse creado, el framework bloqueó la asignación masiva de manera temprana.",
+      "capturas": {
+        "before": "screenshots/CP-ADM-058_before.png",
+        "during": "screenshots/CP-ADM-058_during.png",
+        "after": "screenshots/CP-ADM-058_after.png"
+      },
+      "tiempo_ms": 7143,
+      "error": null
     }
   ],
-  "date": "2026-03-21T11:39:22.698Z",
-  "total": 12,
-  "exitosos": 10,
+  "date": "2026-03-21T21:19:43.341Z",
+  "total": 21,
+  "exitosos": 17,
   "fallidos": 0,
-  "errores_tecnicos": 2
+  "errores_tecnicos": 4
 }

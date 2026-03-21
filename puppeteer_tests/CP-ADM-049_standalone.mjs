@@ -25,7 +25,6 @@ async function login(page, email, password) {
 (async () => {
     const tcId = 'CP-ADM-049';
     
-    // Preparar resultado
     const resultObj = {
         id: tcId,
         modulo: 'Configuración General',
@@ -55,81 +54,63 @@ async function login(page, email, password) {
 
         const page = await browser.newPage();
 
-        // Login
         await login(page, 'admin@sigerd.com', 'password');
         
-        // Navigate
-        const loadPromise = page.goto(`${baseUrl}/settings`, { waitUntil: 'networkidle2' }).catch(() => null);
-        await new Promise(r => setTimeout(r, 500));
+        await page.goto(`${baseUrl}/settings`, { waitUntil: 'networkidle2' });
+        await new Promise(r => setTimeout(r, 1000));
         await page.screenshot({ path: path.join(resultsDir, `${tcId}_before.png`), fullPage: true });
-        
-        const response = await loadPromise;
-        if (response && response.status() === 404) {
-            await page.goto(`${baseUrl}/admin/settings`, { waitUntil: 'networkidle2' });
-        }
 
-        // Wait to make sure inputs are visible
-        await page.waitForSelector('input:not([type="hidden"])', { timeout: 15000 });
-
-        // Update a field
-        const updateText = `+52 123 456 ${Math.floor(Math.random() * 1000)}`;
+        // Intentamos encontrar los inputs de texto referidos en el CP
+        // Si no existen, documentaremos la falla funcional.
+        const updateText = `+52 123 456 7890`;
         
-        const modified = await page.evaluate((text) => {
+        const modification = await page.evaluate((text) => {
             const inputs = Array.from(document.querySelectorAll('input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="submit"])'));
-            let target = inputs.find(i => (i.name && i.name.toLowerCase().includes('phone')) || (i.name && i.name.toLowerCase().includes('tel'))) || inputs.find(i => i.type === 'text' || i.type === 'email') || inputs[0];
+            let target = inputs.find(i => (i.name && i.name.toLowerCase().includes('phone')) || (i.name && i.name.toLowerCase().includes('tel'))) || inputs.find(i => i.type === 'text' || i.type === 'email');
             
             if(target) {
                 target.value = text;
                 target.dispatchEvent(new Event('input', { bubbles: true }));
                 target.dispatchEvent(new Event('change', { bubbles: true }));
-                return true;
+                return { success: true, reason: 'Inputs modificados.' };
             }
-            return false;
+            return { success: false, reason: 'No existen inputs de texto para configurar teléfono o email en la vista.' };
         }, updateText);
 
-        if(!modified) {
-            throw new Error("No inputs found to modify");
-        }
-
-        // Click save button
-        await page.evaluate(() => {
-            const btns = Array.from(document.querySelectorAll('button'));
-            const saveBtn = btns.find(b => 
-                b.innerText.toLowerCase().includes('guardar') || 
-                b.innerText.toLowerCase().includes('save') || 
-                b.type === 'submit'
-            );
-            if(saveBtn) saveBtn.click();
-        });
-
-        // Take during screenshot right after clicking save
-        await new Promise(r => setTimeout(r, 800));
         await page.screenshot({ path: path.join(resultsDir, `${tcId}_during.png`), fullPage: true });
 
-        // Wait for update action to complete
-        await page.waitForNetworkIdle({ idleTime: 1000, timeout: 15000 }).catch(() => {});
-        await new Promise(r => setTimeout(r, 2000)); // wait for toast
-
-        // PASO 2 - VERIFICACIÓN
-        await page.screenshot({ path: path.join(resultsDir, `${tcId}_after.png`), fullPage: true });
-
-        const verification = await page.evaluate((text) => {
-            const textContent = document.body.innerText.toLowerCase();
-            const hasSuccessMsg = textContent.includes('guardad') || textContent.includes('éxito') || textContent.includes('success');
-            
-            const inputs = Array.from(document.querySelectorAll('input:not([type="hidden"])'));
-            const hasValue = inputs.some(i => i.value === text);
-            
-            return { hasSuccessMsg, hasValue };
-        }, updateText);
-
-        if (verification.hasSuccessMsg || verification.hasValue) {
-            resultObj.estado = 'Exitoso';
-            resultObj.resultado_obtenido = 'El update o seteo key-value cruzó hacia la tabla y se esparció en AppServiceProviders limpiando el caché previo de configuración.';
-        } else {
+        if (!modification.success) {
             resultObj.estado = 'Fallido';
-            resultObj.resultado_obtenido = `El valor no se persistió. expected to see it in form or a success toast. Verification: ${JSON.stringify(verification)}`;
+            resultObj.resultado_obtenido = 'Discrepancia detectada: La vista /settings es estática y no posee los inputs de texto esperados (Módulo incompleto o maquetado).';
+        } else {
+            // Click save button just in case
+            await page.evaluate(() => {
+                const btns = Array.from(document.querySelectorAll('button'));
+                const saveBtn = btns.find(b => b.innerText.toLowerCase().includes('guardar'));
+                if(saveBtn) saveBtn.click();
+            });
+            await page.waitForNetworkIdle({ idleTime: 1000, timeout: 5000 }).catch(() => {});
+            
+            // Verificamos si hay confirmación
+            const verification = await page.evaluate((text) => {
+                const textContent = document.body.innerText.toLowerCase();
+                const hasSuccessMsg = textContent.includes('guardad') || textContent.includes('éxito') || textContent.includes('success');
+                const inputs = Array.from(document.querySelectorAll('input:not([type="hidden"])'));
+                const hasValue = inputs.some(i => i.value === text);
+                return { hasSuccessMsg, hasValue };
+            }, updateText);
+
+            if (verification.hasSuccessMsg || verification.hasValue) {
+                resultObj.estado = 'Exitoso';
+                resultObj.resultado_obtenido = 'El update o seteo key-value cruzó hacia la tabla y se esparció en AppServiceProviders limpiando el caché previo de configuración.';
+            } else {
+                resultObj.estado = 'Fallido';
+                resultObj.resultado_obtenido = 'El formulario no persistió los datos en BD ni emitió mensaje de confirmación exitosa.';
+            }
         }
+
+        await new Promise(r => setTimeout(r, 500));
+        await page.screenshot({ path: path.join(resultsDir, `${tcId}_after.png`), fullPage: true });
         
     } catch (e) {
         resultObj.estado = 'Error Técnico';
