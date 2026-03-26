@@ -1,0 +1,98 @@
+─────────────────────────────────────
+CASO: CP-ADM-072
+MÓDULO: FileSystem
+FUNCIONALIDAD: Borrado físico de múltiples evidencias
+─────────────────────────────────────
+BEFORE  → puppeteer_tests/screenshots/CP-ADM-072_before.png  ✓
+DURING  → undefined  ✓
+AFTER   → puppeteer_tests/screenshots/CP-ADM-072_after.png   ✓
+─────────────────────────────────────
+RESULTADO ESPERADO: Ficheros eliminados de storage.
+RESULTADO OBTENIDO: Solo se borraron 0/4 archivos.
+ESTADO: ❌ Fallido
+TIEMPO: 3001ms
+─────────────────────────────────────
+─────────────────────────────────────
+CASO: CP-ADM-073
+MÓDULO: Notificaciones
+FUNCIONALIDAD: Rendimiento 200+ notificaciones
+─────────────────────────────────────
+BEFORE  → puppeteer_tests/screenshots/CP-ADM-073_before.png  ✓
+DURING  → puppeteer_tests/screenshots/CP-ADM-073_during.png  ✓
+AFTER   → undefined   ✓
+─────────────────────────────────────
+RESULTADO ESPERADO: Dropdown carga rápido.
+RESULTADO OBTENIDO: El dropdown cargó rápido; se verifica visualmente que no bloquea el UI.
+ESTADO: ✅ Exitoso
+TIEMPO: 2286ms
+─────────────────────────────────────
+─────────────────────────────────────
+CASO: CP-ADM-074
+MÓDULO: Seguridad
+FUNCIONALIDAD: Interceptar ID Notificación ajena
+─────────────────────────────────────
+BEFORE  → puppeteer_tests/screenshots/CP-ADM-074_before.png  ✓
+DURING  → undefined  ✓
+AFTER   → undefined   ✓
+─────────────────────────────────────
+RESULTADO ESPERADO: 403 Forbidden.
+RESULTADO OBTENIDO: El servidor denegó la operación con HTTP 404.
+ESTADO: ✅ Exitoso
+TIEMPO: 269ms
+─────────────────────────────────────
+─────────────────────────────────────
+CASO: CP-ADM-075
+MÓDULO: Notificaciones
+FUNCIONALIDAD: Referencia a recurso eliminado
+─────────────────────────────────────
+BEFORE  → puppeteer_tests/screenshots/CP-ADM-075_before.png  ✓
+DURING  → undefined  ✓
+AFTER   → puppeteer_tests/screenshots/CP-ADM-075_after.png   ✓
+─────────────────────────────────────
+RESULTADO ESPERADO: Manejo controlado (404).
+RESULTADO OBTENIDO: Se mostró página 404 limpia.
+ESTADO: ✅ Exitoso
+TIEMPO: 2181ms
+─────────────────────────────────────
+─────────────────────────────────────
+CASO: CP-ADM-076
+MÓDULO: Sesión
+FUNCIONALIDAD: Expiración de sesión
+─────────────────────────────────────
+BEFORE  → puppeteer_tests/screenshots/CP-ADM-076_before.png  ✓
+DURING  → undefined  ✓
+AFTER   → puppeteer_tests/screenshots/CP-ADM-076_after.png   ✓
+─────────────────────────────────────
+RESULTADO ESPERADO: Redirección login.
+RESULTADO OBTENIDO: Redirección automática a /login tras perder la sesión.
+ESTADO: ✅ Exitoso
+TIEMPO: 2464ms
+─────────────────────────────────────
+─────────────────────────────────────
+CASO: CP-ADM-077
+MÓDULO: Sesión
+FUNCIONALIDAD: Rotación de password
+─────────────────────────────────────
+BEFORE  → puppeteer_tests/screenshots/CP-ADM-077_before.png  ✓
+DURING  → undefined  ✓
+AFTER   → undefined   ✓
+─────────────────────────────────────
+RESULTADO ESPERADO: Otras sesiones invalidas.
+RESULTADO OBTENIDO: La Sesión B sigue activa tras el cambio de password.
+ESTADO: ❌ Fallido
+TIEMPO: 14128ms
+─────────────────────────────────────
+─────────────────────────────────────
+CASO: CP-ADM-078
+MÓDULO: Seguridad
+FUNCIONALIDAD: Reuso de cookies post-logout
+─────────────────────────────────────
+BEFORE  → puppeteer_tests/screenshots/CP-ADM-078_before.png  ✓
+DURING  → undefined  ✓
+AFTER   → puppeteer_tests/screenshots/CP-ADM-078_after.png   ✓
+─────────────────────────────────────
+RESULTADO ESPERADO: Acceso denegado.
+RESULTADO OBTENIDO: Acceso denegado incluso reinyectando cookies antiguas tras logout.
+ESTADO: ✅ Exitoso
+TIEMPO: 4148ms
+─────────────────────────────────────

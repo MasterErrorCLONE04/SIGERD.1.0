@@ -1,0 +1,20 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:8000",
+  "loginUser": "instructor1@sigerd.com",
+  "loginPassword": "password",
+  "executionArgs": {
+    "projectName": "SIGERD.1.0",
+    "projectPath": "c:\\laragon\\www\\SIGERD.1.0",
+    "testIds": [],
+    "additionalInstruction": "",
+    "serverMode": "development",
+    "envs": {
+      "API_KEY": "sk-user-iFtrkIMPm3zasWBirEq91C4ZOk2Hciitoto6jCp06ht2dHvRUdNx7O5Mvbk2UCoPirjurKyf2Ra_Eln35QQLCRO0eHay1hujR5b6l6O29eAPykrZ3-G2XUPm_4wJA2C_x9M"
+    }
+  },
+  "serverPort": 51691,
+  "proxy": "http://9c20e51f-b1e8-4a07-872a-ee666c893b2f:waxAYHO33uAm0v4FAEwSWj9JqsJZAfpf@tun.testsprite.com:8080"
+}

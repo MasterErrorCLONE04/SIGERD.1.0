@@ -1,0 +1,1219 @@
+[
+  {
+    "id": "TC001",
+    "title": "Admin is redirected from /dashboard to /admin/dashboard and sees overview metrics",
+    "description": "Verifies an Admin user lands on the Admin dashboard after login and can see overview metrics.",
+    "category": "Role-Based Dashboards",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Log in\" button"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/admin/dashboard\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Overview\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"overview metrics\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "Instructor is redirected from /dashboard to /instructor/dashboard and sees overview metrics",
+    "description": "Verifies an Instructor user lands on the Instructor dashboard after login and can see overview metrics.",
+    "category": "Role-Based Dashboards",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Log in\" button"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/instructor/dashboard\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Overview\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"overview metrics\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Worker is redirected from /dashboard to /worker/dashboard and sees overview metrics",
+    "description": "Verifies a Worker user lands on the Worker dashboard after login and can see overview metrics.",
+    "category": "Role-Based Dashboards",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Log in\" button"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/worker/dashboard\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Overview\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"overview metrics\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Instructor cannot access /admin/dashboard (access blocked)",
+    "description": "Verifies a non-admin user is blocked from the Admin dashboard via 403 or redirected away.",
+    "category": "Role-Based Dashboards",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Log in\" button"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /admin/dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"403\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Forbidden\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Instructor blocked from /admin/dashboard results in redirect back to role dashboard",
+    "description": "Verifies that when access is blocked, the user is redirected back to their allowed dashboard instead of seeing admin content.",
+    "category": "Role-Based Dashboards",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Log in\" button"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /admin/dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/dashboard\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/instructor/dashboard\""
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Admin dashboard shows overview metrics content is visible on load",
+    "description": "Verifies the Admin dashboard page renders and shows overview/metric content after successful login.",
+    "category": "Role-Based Dashboards",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Log in\" button"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /admin/dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Overview\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"overview metrics\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Instructor dashboard shows overview metrics content is visible on load",
+    "description": "Verifies the Instructor dashboard page renders and shows overview/metric content after successful login.",
+    "category": "Role-Based Dashboards",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Log in\" button"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /instructor/dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Overview\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"overview metrics\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "Worker dashboard shows overview metrics content is visible on load",
+    "description": "Verifies the Worker dashboard page renders and shows overview/metric content after successful login.",
+    "category": "Role-Based Dashboards",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Log in\" button"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /worker/dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Overview\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"overview metrics\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "Admin creates a new user and sees it in the users list",
+    "description": "Verifies an admin can create a new user from the Admin Users page and the new user appears in the list.",
+    "category": "User Management (Admin)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Log in\" button"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Users\" item in the admin navigation menu"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Create New User\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Create User\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Type \"e2e.admin.create.user@example.com\" into the Email field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Save\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"e2e.admin.create.user@example.com\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Instructor is denied access to Admin Users page",
+    "description": "Verifies a non-admin (Instructor) cannot access the Admin Users page and sees an access denied message.",
+    "category": "User Management (Admin)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"instructor@example.invalid\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"WrongPassword123!\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Log in\" button"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /admin/users"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"403\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Forbidden\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Admin sees validation errors when creating a user with missing required fields",
+    "description": "Verifies the create user form enforces required fields and shows validation errors when submitting blank.",
+    "category": "User Management (Admin)",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Log in\" button"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Users\" item in the admin navigation menu"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Create New User\" button"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Save\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"required\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Admin Users page loads and shows expected list UI",
+    "description": "Verifies the Admin Users page is reachable for an admin and displays the users list and create action.",
+    "category": "User Management (Admin)",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Log in\" button"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Users\" item in the admin navigation menu"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify page title contains \"Users\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Create New User\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "Instructor cannot submit an incident without an image",
+    "description": "Verifies image attachment is required and the UI blocks creation when no image is provided.",
+    "category": "Incident Management (Instructor & Admin)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/dashboard\""
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Incidents\" navigation item to go to the Instructor Incidents page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/instructor/incidents\""
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Report Incident\" button"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Broken window\" into the Title field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Room 203\" into the Location field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Submit\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Must provide at least one image\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Broken window\" is not visible"
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "Instructor incident list shows only the logged-in instructor’s incidents",
+    "description": "Verifies the incidents list is scoped to the current instructor (no other users’ incidents are shown).",
+    "category": "Incident Management (Instructor & Admin)",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/dashboard\""
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Incidents\" navigation item to go to the Instructor Incidents page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/instructor/incidents\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Incidents\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that no incident entries display another user’s name as the owner (for example, an \"Owner\" or \"Reported by\" value not matching the logged-in instructor)"
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "Admin converts an incident to a task and sees status updated to Assigned",
+    "description": "Verifies an admin can convert an incident into a task, assign it to a worker, and the UI reflects the new task and updated incident status.",
+    "category": "Incident Management (Instructor & Admin)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/dashboard\""
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Tasks\" navigation item to go to the Admin Tasks page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/admin/tasks\""
+      },
+      {
+        "type": "action",
+        "description": "Click an incident entry in the list to open its details"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Convert to Task\" button"
+      },
+      {
+        "type": "action",
+        "description": "Select a Worker from the \"Assign to\" dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Save\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Task created\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Assigned\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC016",
+    "title": "Admin creates a task from an incident and assigns it to a worker",
+    "description": "Verifies an Admin can create/convert a task from an incident, assign it to a worker, and see it listed as Assigned.",
+    "category": "Task Management (Admin & Worker)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Log in\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/admin\""
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Tasks\" in the admin navigation"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Create\" or \"Convert to Task\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Select incident\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC017",
+    "title": "Admin assigns an incident to a worker and saves the task",
+    "description": "Verifies the task creation form supports selecting an incident, assigning a worker, saving, and showing the new task as Assigned in the list.",
+    "category": "Task Management (Admin & Worker)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Log in\" button"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /admin/tasks"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Create\" or \"Convert to Task\""
+      },
+      {
+        "type": "action",
+        "description": "Select the first available incident from the incident dropdown/list"
+      },
+      {
+        "type": "action",
+        "description": "Select a worker from the \"Assign to\" dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Save\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Assigned\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC018",
+    "title": "Worker views their assigned tasks list",
+    "description": "Verifies a Worker can access the tasks page and see a list of tasks assigned to the authenticated worker.",
+    "category": "Task Management (Admin & Worker)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Log in\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/worker\""
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Tasks\" in the worker navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Tasks\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC019",
+    "title": "Worker marks an assigned task as In-Progress",
+    "description": "Verifies a Worker can open a task detail from their list and mark it In-Progress with an updated visible status.",
+    "category": "Task Management (Admin & Worker)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Log in\" button"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /worker/tasks"
+      },
+      {
+        "type": "action",
+        "description": "Click the first task in the list"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Mark In-Progress\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"In-Progress\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC020",
+    "title": "Worker marks an in-progress task as Completed",
+    "description": "Verifies a Worker can complete an in-progress task and sees the status updated to Completed on the UI.",
+    "category": "Task Management (Admin & Worker)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Log in\" button"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /worker/tasks"
+      },
+      {
+        "type": "action",
+        "description": "Click a task that is labeled \"In-Progress\" in the list"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Mark Completed\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Completed\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC021",
+    "title": "Worker is prevented from updating a task not assigned to them",
+    "description": "Verifies authorization/validation prevents a Worker from updating a task that is not assigned to their account.",
+    "category": "Task Management (Admin & Worker)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Log in\" button"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /worker/tasks"
+      },
+      {
+        "type": "action",
+        "description": "Click a task that appears to be assigned to a different worker (e.g., shows another assignee name)"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Mark In-Progress\" or \"Mark Completed\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Forbidden\" or \"403\" or \"not authorized\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC022",
+    "title": "Admin filters tasks to show Completed items",
+    "description": "Verifies Admin can apply a Completed status filter and see completed tasks displayed.",
+    "category": "Task Management (Admin & Worker)",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Log in\" button"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /admin/tasks"
+      },
+      {
+        "type": "action",
+        "description": "Select \"Completed\" from the status filter dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Apply\" or \"Filter\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Completed\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC023",
+    "title": "Update profile personal information and save successfully",
+    "description": "Verifies a logged-in user can update personal profile fields and sees a visible confirmation plus updated values on the profile page.",
+    "category": "Profile & Settings",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/dashboard\""
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Profile\" link"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Save\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Saved\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC024",
+    "title": "Change password with valid current password",
+    "description": "Verifies a logged-in user can change their password by entering current and new password and receives a visible success confirmation.",
+    "category": "Profile & Settings",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/dashboard\""
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Profile\" link"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the current password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Save\" button"
+      }
+    ]
+  },
+  {
+    "id": "TC025",
+    "title": "Reject password change when current password is incorrect",
+    "description": "Verifies the UI shows a visible error and does not show success when the current password is wrong.",
+    "category": "Profile & Settings",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/dashboard\""
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Profile\" link"
+      },
+      {
+        "type": "action",
+        "description": "Type \"not-the-real-current-password\" into the current password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Save\" button"
+      }
+    ]
+  },
+  {
+    "id": "TC026",
+    "title": "Validate new password required before saving password change",
+    "description": "Verifies the form blocks saving and shows a visible validation message when new password is left empty.",
+    "category": "Profile & Settings",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/dashboard\""
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Profile\" link"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the current password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Save\" button"
+      }
+    ]
+  },
+  {
+    "id": "TC027",
+    "title": "Attempt to change role via hidden role field is ignored",
+    "description": "Verifies that attempting to modify the role value does not result in any visible role change after saving profile settings.",
+    "category": "Profile & Settings",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/dashboard\""
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Profile\" link"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Save\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/dashboard\""
+      }
+    ]
+  },
+  {
+    "id": "TC028",
+    "title": "Toggle appearance preference (light/dark) persists on the page",
+    "description": "Verifies the user can toggle appearance preference and sees a visible indication the preference changed.",
+    "category": "Profile & Settings",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/dashboard\""
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Profile\" link"
+      },
+      {
+        "type": "action",
+        "description": "Click the appearance toggle (Light/Dark) control"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Dark\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC029",
+    "title": "Profile page loads for different role dashboards via /dashboard redirect",
+    "description": "Verifies that after login and role-based redirect to /dashboard, the Profile link is available and opens the profile/settings page.",
+    "category": "Profile & Settings",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email/username field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/dashboard\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Profile\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Profile\" link"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Save\" is visible"
+      }
+    ]
+  }
+]
