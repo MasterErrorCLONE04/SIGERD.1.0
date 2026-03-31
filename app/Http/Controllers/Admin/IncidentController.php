@@ -26,9 +26,10 @@ class IncidentController extends Controller
                     ->orWhere('description', 'like', "%{$search}%")
                     ->orWhere('location', 'like', "%{$search}%")
                     ->orWhereHas('reportedBy', function ($userQuery) use ($search) {
-                        $userQuery->where('name', 'like', "%{$search}%")
-                            ->orWhere('email', 'like', "%{$search}%");
-                    });
+                    $userQuery->where('name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%");
+                }
+                );
             });
         }
 
@@ -115,14 +116,17 @@ class IncidentController extends Controller
                     // Mover archivo
                     if (move_uploaded_file($fileTmpName, $destinationPath)) {
                         $initialEvidenceImagePaths[] = 'incident-evidence/' . $newFileName;
-                    } else {
+                    }
+                    else {
                         return back()->withErrors(['initial_evidence_images' => "Error al subir el archivo '{$fileName}'."])->withInput();
                     }
-                } elseif ($files['error'][$i] !== UPLOAD_ERR_NO_FILE) {
+                }
+                elseif ($files['error'][$i] !== UPLOAD_ERR_NO_FILE) {
                     return back()->withErrors(['initial_evidence_images' => "Error al subir el archivo: código de error {$files['error'][$i]}."])->withInput();
                 }
             }
-        } else {
+        }
+        else {
             return back()->withErrors(['initial_evidence_images' => 'Debe subir al menos una imagen de evidencia.'])->withInput();
         }
 

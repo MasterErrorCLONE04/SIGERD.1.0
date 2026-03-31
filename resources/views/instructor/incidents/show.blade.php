@@ -107,7 +107,7 @@
                                 Fecha de Reporte
                             </h4>
                             <p class="text-gray-900 dark:text-gray-100 dark:text-white font-medium">
-                                {{ $incident->created_at->format('d/m/Y H:i') }}
+                                {{ $incident->created_at->format('d/m/Y h:i A') }}
                             </p>
                         </div>
 

@@ -88,7 +88,7 @@
                                 </svg>
                                 Fecha de Reporte
                             </h4>
-                            <p class="text-gray-900 dark:text-gray-100 dark:text-white font-medium">{{ $incident->created_at->format('d/m/Y H:i') }}</p>
+                            <p class="text-gray-900 dark:text-gray-100 dark:text-white font-medium">{{ $incident->created_at->format('d/m/Y h:i A') }}</p>
                         </div>
 
                         {{-- Reportado por --}}
@@ -304,6 +304,7 @@
                                                       class="mt-1 w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400" 
                                                       type="date" 
                                                       name="deadline_at" 
+                                                      min="{{ date('Y-m-d') }}"
                                                       :value="old('deadline_at')" 
                                                       required />
                                         <x-input-error :messages="$errors->get('deadline_at')" class="mt-2" />

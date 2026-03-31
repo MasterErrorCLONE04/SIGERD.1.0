@@ -92,7 +92,7 @@
                             <label for="edit_task_deadline"
                                 class="block text-sm font-bold text-gray-700 dark:text-gray-200 dark:text-gray-300">Fecha
                                 Límite *</label>
-                            <input id="edit_task_deadline" name="deadline_at" type="date" required
+                            <input id="edit_task_deadline" name="deadline_at" type="date" required min="{{ date('Y-m-d') }}"
                                 class="block w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-[#242526] dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:text-white focus:ring-2 focus:ring-blue-500/50 focus:border-blue-400 transition-all duration-200 shadow-sm">
                         </div>
                         <div class="space-y-2">

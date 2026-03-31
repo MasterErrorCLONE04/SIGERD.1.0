@@ -447,7 +447,7 @@
                             </div>
                         </a>
 
-                        <a href="#"
+                        <a href="{{ route('settings.index') }}"
                             class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 p-5 bg-white dark:bg-[#242526] border border-slate-200/60 dark:border-[#3A3B3C] hover:border-purple-300 hover:shadow-md rounded-2xl transition-all group">
                             <div
                                 class="w-12 h-12 bg-[#F4F6FF] dark:bg-[#3A3B3C] rounded-xl flex items-center justify-center group-hover:bg-[#F4F6FF] group-hover:dark:bg-indigo-900/30 transition-colors shrink-0">

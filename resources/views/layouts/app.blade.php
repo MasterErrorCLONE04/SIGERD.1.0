@@ -233,7 +233,7 @@
                                                     Mi Perfil</p>
                                                 <p
                                                     class="text-[11px] font-medium text-slate-400 dark:text-[#B0B3B8] leading-tight mt-0.5">
-                                                    Ver e información</p>
+                                                    Ver información</p>
                                             </div>
                                         </a>
 
@@ -445,7 +445,8 @@
                         day: '2-digit',
                         month: 'short',
                         hour: '2-digit',
-                        minute: '2-digit'
+                        minute: '2-digit',
+                        hour12: true
                     });
                 }
             }

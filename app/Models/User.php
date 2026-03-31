@@ -7,14 +7,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * Modelo User: Gestiona la autenticación, perfiles y roles de los usuarios del sistema.
+ */
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
-     *
+     * Atributos que se pueden asignar masivamente (Mass Assignment).
      * @var array<int, string>
      */
     protected $fillable = [
@@ -26,14 +28,13 @@ class User extends Authenticatable
     ];
 
     /**
-     * The accessors to append to the model's array form.
-     *
+     * Atributos dinámicos (Accessors) que se añaden a las respuestas JSON.
      * @var array
      */
     protected $appends = ['profile_photo_url', 'initials'];
 
     /**
-     * Get the user's profile photo URL.
+     * Accessor: Genera la URL completa de la foto de perfil o un avatar por defecto.
      */
     public function getProfilePhotoUrlAttribute()
     {
@@ -41,12 +42,11 @@ class User extends Authenticatable
             return asset('storage/' . $this->profile_photo);
         }
         
-        // Retornar una imagen por defecto si no tiene foto
         return $this->generateAvatarUrl();
     }
 
     /**
-     * Get the user's initials for avatar fallback.
+     * Accessor: Obtiene las iniciales del nombre para el avatar fallback.
      */
     public function getInitialsAttribute()
     {
@@ -63,19 +63,18 @@ class User extends Authenticatable
     }
 
     /**
-     * Generate a default avatar URL using a service like UI Avatars
+     * Genera una URL de avatar externa (UI Avatars) basada en las iniciales.
      */
     private function generateAvatarUrl()
     {
         $name = urlencode($this->name);
         $initials = urlencode($this->initials);
         
-        // Usar UI Avatars como servicio de avatares por defecto
         return "https://ui-avatars.com/api/?name={$initials}&color=ffffff&background=6366f1&size=200&font-size=0.5";
     }
 
     /**
-     * Check if user has a profile photo
+     * Verifica físicamente si el usuario tiene una foto en el servidor.
      */
     public function hasProfilePhoto()
     {
@@ -83,7 +82,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Delete the user's profile photo
+     * Elimina el archivo de la foto de perfil y actualiza la base de datos.
      */
     public function deleteProfilePhoto()
     {
@@ -93,10 +92,8 @@ class User extends Authenticatable
         }
     }
 
-
     /**
-     * The attributes that should be hidden for serialization.
-     *
+     * Atributos ocultos en serialización por seguridad (Contraseñas, tokens).
      * @var array<int, string>
      */
     protected $hidden = [
@@ -105,8 +102,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
-     *
+     * Casting de tipos para atributos específicos.
      * @return array<string, string>
      */
     protected function casts(): array
@@ -116,6 +112,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Validaciones de Roles (Control de Acceso)
+    |--------------------------------------------------------------------------
+    */
 
     public function isAdmin()
     {
@@ -132,25 +134,31 @@ class User extends Authenticatable
         return $this->role === 'instructor';
     }
 
-    // Tareas que tiene asignadas este usuario
+    /*
+    |--------------------------------------------------------------------------
+    | Relaciones de Eloquent
+    |--------------------------------------------------------------------------
+    */
+
+    // Tareas que le han sido asignadas para ejecutar
     public function assignedTasks()
     {
         return $this->hasMany(\App\Models\Task::class, 'assigned_to');
     }
 
-    // Tareas que este usuario creó
+    // Tareas que este usuario (usualmente Admin) ha creado
     public function createdTasks()
     {
         return $this->hasMany(\App\Models\Task::class, 'created_by');
     }
 
-    // Incidentes que este usuario reportó
+    // Reportes de daño realizados (Instructores/Manual)
     public function reportedIncidents()
     {
         return $this->hasMany(\App\Models\Incident::class, 'reported_by');
     }
 
-    // Notificaciones del usuario
+    // Alertas y avisos del sistema dirigidos a este usuario
     public function notifications()
     {
         return $this->hasMany(\App\Models\Notification::class);

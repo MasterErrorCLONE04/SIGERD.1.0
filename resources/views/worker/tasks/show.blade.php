@@ -127,7 +127,7 @@
                             <span class="text-xs font-medium uppercase tracking-wider">Fecha Límite</span>
                         </div>
                         <p class="font-semibold text-slate-800 dark:text-gray-100 dark:text-white">
-                            {{ $task->deadline_at ? $task->deadline_at->format('d/m/Y H:i') : 'No establecida' }}
+                            {{ $task->deadline_at ? $task->deadline_at->format('d/m/Y h:i A') : 'No establecida' }}
                         </p>
                     </div>
                     @if($task->incident)
