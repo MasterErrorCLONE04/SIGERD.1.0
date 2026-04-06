@@ -56,7 +56,7 @@ Route::middleware(['auth', 'role:administrador'])->prefix('admin')->name('admin.
 
 Route::middleware(['auth', 'role:instructor'])->prefix('instructor')->name('instructor.')->group(function () {
     Route::get('/dashboard', [InstructorDashboardController::class, 'index'])->name('dashboard');
-    Route::resource('/incidents', \App\Http\Controllers\Instructor\IncidentController::class);
+    Route::resource('/incidents', \App\Http\Controllers\Instructor\IncidentController::class)->only(['index', 'show', 'store']);
 });
 
 Route::middleware(['auth', 'role:trabajador'])->prefix('worker')->name('worker.')->group(function () {

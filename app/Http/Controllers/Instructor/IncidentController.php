@@ -37,13 +37,6 @@ class IncidentController extends Controller
         return view('instructor.incidents.index', compact('incidents'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('instructor.incidents.create');
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -146,27 +139,4 @@ class IncidentController extends Controller
         return view('instructor.incidents.show', compact('incident'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
